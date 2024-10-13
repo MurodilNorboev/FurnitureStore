@@ -1,0 +1,8 @@
+.error_images {
+    background-image: url(https://cdn.dribbble.com/users/1818132/screenshots/4264991/404_space.gif);
+    background-position:center;
+    background-repeat: no-repeat;
+    block-size:cover;
+    width: 100vw; 
+    background-color: #afa29c;
+}

@@ -1,0 +1,21 @@
+.wraps {
+    margin: 50px 0px 20px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+} .wraps h2 {
+    width: 42px;
+    height: 2px;
+    background-color: #DBA514;
+} .wraps h4 {
+    margin-top: 30px;
+    color: var(--main, #32324D);
+    font-feature-settings: 'liga' off, 'clig' off;
+    font-family: Prompt;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 38px; /* 126.667% */
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}

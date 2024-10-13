@@ -1,0 +1,101 @@
+import React from 'react'
+import una from '../../assets/Logo.svg'
+import CircleBtn from '../../assets/CircleBtn.svg'
+import FSBK from '../../assets/facebook.svg'
+import TwTr from '../../assets/twitter.svg'
+import Circle2 from '../../assets/CircleBtn2.svg'
+import { FooterCon } from '../styles/footer'
+import { IconButton } from '@mui/material'
+import { AnimatedButton, BtnWrap } from '../styles/navbar'
+
+const FooterComponent = () => {
+  return ( //// BtnWrap
+    <> 
+    <FooterCon>
+
+      <div className="footer_0">
+          <div className="footer_menus_0">
+            <img src={una} alt="" />
+          </div>
+          <div className="footer_menus_01"> 
+          <div className='tt'>
+          <AnimatedButton>
+            <h5>about</h5>
+            </AnimatedButton>
+          </div>
+          <div className='tt'>
+           <AnimatedButton>
+            <h5>blog</h5>
+            </AnimatedButton>
+          </div>
+          <div className='tt'>
+           <AnimatedButton>
+            <h5>discounts</h5>
+            </AnimatedButton>
+          </div>
+          <div className='tt'>
+           <AnimatedButton>
+            <h5>for partners</h5>
+            </AnimatedButton>
+          </div>
+          <div className='tt'>
+           <AnimatedButton>
+            <h5>contacts</h5>
+            </AnimatedButton>
+          </div>
+          </div> 
+        </div>
+
+        <div className="footer_2">
+          <div className='footer_3'>
+            <div className="footer_three">
+              <h5>information</h5>
+              <h6>Shipping</h6>
+              <h6>Payment options</h6>
+              <h6>Terms and Conditions</h6>
+              <h6>FAQ</h6>
+            </div>
+            <div className="footer_three">
+                <div className='footer_menus_2'>
+                  <h5>schedule</h5>
+                  <h6>We accept orders <br /> from 9:00 to 22:00</h6>
+                </div>
+                <div className='footer_menus_2' style={{marginTop:"20px"}}>
+                  <h5>Shipping orders</h5>
+                  <h6>Mon-Sat – 9:00-19:00 <br /> Sun – weekend</h6>
+                </div>
+            </div>
+            <div className="footer_three a">
+              <h5>stay in touch</h5>
+              <h6>siteemail@gmail.com</h6>
+              <h6>(406) 555-0120</h6>
+              <h6>(480) 555-0103</h6>
+              <div className='imglar'><img src={FSBK} alt="facebook" /><img src={TwTr} alt="twitter" /></div> 
+            </div>
+          </div>
+
+          <div className='booter4_wrap'>
+            <div className="footer_4">
+               <h5>SUBSCRIBE</h5>
+               <h6>Get the latest news and promotions <br /> on your inbox</h6>
+              <div className='input_wrap'><input type='email' placeholder='Email address' /><IconButton className="buttons" ><img src={Circle2} alt="Btn_img" /></IconButton></div>
+            </div>
+            <div className="footer_three b">
+                <h5>stay in touch</h5>
+                <h6>siteemail@gmail.com</h6>
+                <h6>(406) 555-0120</h6>
+                <h6>(480) 555-0103</h6>
+                <div className='imglar'><img src={FSBK} alt="facebook" /><img src={TwTr} alt="twitter" /></div> 
+            </div>
+          </div>
+        </div> 
+        <div className="footer_bottom">
+        <div className="bottom"><h6>2022©All rights reserved</h6></div>
+        <div className="bottom"><IconButton><img src={CircleBtn} alt="" /></IconButton></div>
+        </div> 
+
+    </FooterCon>
+    </>
+  )
+}
+export default FooterComponent
