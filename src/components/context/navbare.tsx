@@ -4,9 +4,9 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 // import search from '../../assets/search.svg'
 import user from '../../assets/user.svg'
 import Menus_Icon from '../hook/menus';
-import MultiCarousel from '../page/main_pages/lupa';
-import BasicMenu from '../page/main_pages/cart';
-import Tajriba from '../page/main_pages/dropdownmenus';
+import MultiCarousel from '../page/1main_pages/lupa';
+import BasicMenu from '../page/1main_pages/cart';
+import Tajriba from '../page/1main_pages/dropdownmenus';
 // import Tajriba from '../page/main_pages/menusdropdown';
 
 const NavbareComponent = () => {
