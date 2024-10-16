@@ -25,7 +25,7 @@ const NavbareComponent = () => {
       <div></div>
 
       <div className="right_menus_wrap">
-        <h5 className='h5_wrap' style={{paddingBottom:"8px",margin:"0px 0px 0px 0px"}}>(704) 555-0127</h5>
+        <h5 className='h5_wrap' style={{paddingBottom:"8px",margin:"0px 0px 0px 0px"}}>(8210) 5714-7887</h5>
 
            <div style={{width:"30px"}}>
             <MultiCarousel />

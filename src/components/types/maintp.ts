@@ -1,3 +1,12 @@
+export type SofasData = {
+  id: number;
+  images: string;
+  name: string;
+}
+export interface Types { 
+  name: string;
+  contentes: boolean;
+}
 export interface T {
   name1: string,
   name2: string,

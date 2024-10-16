@@ -2,7 +2,9 @@ import React, { useEffect, useReducer, useState } from 'react';
 import { SofasType } from '../../types/maintp';
 import { useParams } from 'react-router-dom';
 import { SofasDatail } from '../../mock/1sofas.datail';
-import { Datail_container } from './main.datail';
+import { Datail_1, Datail_2, Datail_3, Datail_4, Datail_container, LeftCon, MidlCon, RightCon } from './main.datail';
+import { IconButton } from '@mui/joy';
+import car from '../../../assets/car.svg'
 
 interface Tprops {
   count: number; 
@@ -24,14 +26,8 @@ function reducer(state: Tprops, action: Ttype): Tprops {
       return state;
   }
 }
-
 const DatailComponent: React.FC = () => {
   const [ state, dispatch ] = useReducer( reducer, initialState );
-  const [liked, setLiked] = useState(false);
-  const handleLikeClick = () => {
-    setLiked(!liked); 
-  };
-
   const { id } = useParams();
   const [data, setData] = useState<SofasType[] | null>(null);
   useEffect(() => {
@@ -42,50 +38,16 @@ const DatailComponent: React.FC = () => {
 
   return (
     <Datail_container>
-      {filterData?.map((value) => (
-        <div key={value.id}>
-          <img src={value.images} alt="" />
-        </div>
-      ))}
-    </Datail_container>
-  );
-};
 
-export default DatailComponent;
-
-
-    // const { id } = useParams();
-    // const [data, setData] = useState<SofasType[] | null>(null);
-    // useEffect(() => { setData(SofasDatail); }, []); 
-    // const parsedId = id ? parseInt(id) : 0;
-    // const filterDatas = data ? data.filter(value => value.id === parsedId ) : [];
-
-
-// interface Tprops {
-//   count: number; 
-// }
-// interface Ttype {
-//   type: 'increment' | 'decrement' | 'refresh'; 
-//   payload?: number;
-// }
-// const initialState: Tprops = { count: 0 }; 
-// function reducer(state: Tprops, action: Ttype): Tprops {
-//   switch (action.type) {
-//     case 'increment':
-//       return { count: state.count + (action.payload || 0 ) };
-//     case 'decrement':
-//       return { count: Math.max(0, state.count - (action.payload || 1)) };
-//     case 'refresh':
-//       return { count: 0 }; break
-//     default:
-//       return state;
-//   }
-// }
-
-    {/* <Datail_container>
+      <Datail_container>
 
       <Datail_1>
         <div className='wrape'>
+        {/* {filterData?.map((value) => (
+              <MidlCon key={value.id}>
+                <img src={value.images2} alt="" />
+              </MidlCon>
+          ))} */}
           <LeftCon>
           <div className="left_datail"></div>
           <div className="left_datail"></div>
@@ -94,9 +56,13 @@ export default DatailComponent;
           <div className="left_datail"></div>
         </LeftCon>
 
-        < MidlCon>
-          <img src="https://imgcomfort.com.au/wp-content/uploads/2024/04/Zani-End-Table-Stool.jpg" alt="" />
-        </ MidlCon>
+        <>
+          {filterData?.map((value) => (
+              <MidlCon key={value.id}>
+                <img src={value.images2} alt="" />
+              </MidlCon>
+          ))}
+        </>
         </div>
         
         <RightCon>
@@ -167,8 +133,8 @@ export default DatailComponent;
                 <div className="bottom_Con">
                   <div className='cons_btn'><button>add to cart</button></div>
                   <div className='cons_btn_like'>
-                        <button onClick={handleLikeClick} >
-                           {liked ? '❤️' : <img src={like} alt="" />}
+                        <button >
+                          images
                         </button>
                     </div>
                 </div>
@@ -182,4 +148,9 @@ export default DatailComponent;
 
       <Datail_4></Datail_4>
 
-    </Datail_container> */}
+    </Datail_container>
+    </Datail_container>
+  );
+};
+
+export default DatailComponent;

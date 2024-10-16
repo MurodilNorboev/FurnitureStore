@@ -2,6 +2,7 @@
 export const DecorDatail = [
     {
       id: 1,
+      Name: "",
       images: "https://rukminim2.flixcart.com/image/850/1000/kzogn0w0/living-room-chair/u/z/z/460-black-600-foam-5-chair-set-of-1-black-smilemindia-black-850-original-imagbn3aqaudckhh.jpeg?q=20&crop=false",
       images2: "https://i.ebayimg.com/images/g/91oAAOSwg1lf7cRO/s-l400.jpg",
       images3: "",
@@ -33,6 +34,7 @@ export const DecorDatail = [
     },
     {
       id: 2,
+      Name: "",
       images: "https://example.com/chair2.jpg",
       images2: "https://example.com/chair2_2.jpg",
       images3: "",
@@ -64,6 +66,7 @@ export const DecorDatail = [
     },
     {
       id: 3,
+      Name: "",
       images: "https://example.com/chair3.jpg",
       images2: "https://example.com/chair3_2.jpg",
       images3: "",
@@ -95,6 +98,7 @@ export const DecorDatail = [
     },
     {
       id: 4,
+      Name: "",
       images: "https://example.com/chair4.jpg",
       images2: "https://example.com/chair4_2.jpg",
       images3: "",
@@ -126,6 +130,7 @@ export const DecorDatail = [
     },
     {
       id: 5,
+      Name: "",
       images: "https://example.com/chair5.jpg",
       images2: "https://example.com/chair5_2.jpg",
       images3: "",
@@ -157,6 +162,7 @@ export const DecorDatail = [
     },
     {
       id: 6,
+      Name: "",
       images: "https://example.com/chair6.jpg",
       images2: "https://example.com/chair6_2.jpg",
       images3: "",
@@ -188,6 +194,7 @@ export const DecorDatail = [
     },
     {
       id: 7,
+      Name: "",
       images: "https://example.com/chair7.jpg",
       images2: "https://example.com/chair7_2.jpg",
       images3: "",
@@ -219,6 +226,7 @@ export const DecorDatail = [
     },
     {
       id: 8,
+      Name: "",
       images: "https://example.com/chair8.jpg",
       images2: "https://example.com/chair8_2.jpg",
       images3: "",
@@ -250,6 +258,7 @@ export const DecorDatail = [
     },
     {
       id: 9,
+      Name: "",
       images: "https://example.com/chair9.jpg",
       images2: "https://example.com/chair9_2.jpg",
       images3: "",
@@ -281,6 +290,7 @@ export const DecorDatail = [
     },
     {
       id: 10,
+      Name: "",
       images: "https://example.com/chair10.jpg",
       images2: "https://example.com/chair10_2.jpg",
       images3: "",
@@ -312,6 +322,7 @@ export const DecorDatail = [
     },
     {
       id: 11,
+      Name: "",
       images: "https://example.com/chair11.jpg",
       images2: "https://example.com/chair11_2.jpg",
       images3: "",
@@ -343,6 +354,7 @@ export const DecorDatail = [
     },
     {
       id: 12,
+      Name: "",
       images: "https://example.com/chair12.jpg",
       images2: "https://example.com/chair12_2.jpg",
       images3: "",

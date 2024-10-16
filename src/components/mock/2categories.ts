@@ -1,6 +1,6 @@
 
 
-  export const Datailes = [
+export const Datailes = [
     {
       id: 1,
       Name: 'sofas',

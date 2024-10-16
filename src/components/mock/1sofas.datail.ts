@@ -2,20 +2,22 @@
 
 export const SofasDatail = [
     {
-      id: 1,
+      id: 1,  /// sofas
       Name: 'furniture',
-      images: "https://i.pinimg.com/736x/74/b1/23/74b123ff9916cfcdc6ef9cd19ab9442d.jpg",
-      images2: "https://i.ebayimg.com/images/g/91oAAOSwg1lf7cRO/s-l400.jpg",
-      images3: "",
-      images4: "",
-      images5: "",
-      images6: "",
-      images7: "",
-      images8: "",
-      images9: "",
+      images: "https://i.pinimg.com/736x/74/b1/23/74b123ff9916cfcdc6ef9cd19ab9442d.jpg", 
+      images2: "https://cdn.shopify.com/s/files/1/0840/3795/9961/files/Micadoni-MIC_3S_192_F1_DIANA2-1_1920x1437_crop_center.jpg?v=1728635201",
+      images3: "https://cdn.shopify.com/s/files/1/0840/3795/9961/files/Micadoni-MIC_3S_192_F1_DIANA2-3_960x720_crop_center.jpg?v=1728635201",
+      images4: "https://cdn.shopify.com/s/files/1/0840/3795/9961/files/Micadoni-MIC_3S_192_F1_DIANA2-5_960x720_crop_center.jpg?v=1728635201", 
+      images5: "https://cdn.shopify.com/s/files/1/0840/3795/9961/files/Micadoni-MIC_3S_192_F1_DIANA2-6_960x720_crop_center.jpg?v=1728635201", 
+      images6: "https://cdn.shopify.com/s/files/1/0781/8425/1702/files/Micadoni-MIC_03S_2_F1_BELLIS3-1_1920x1437_crop_center.jpg?v=1728391603",///
+      images7: "https://cdn.shopify.com/s/files/1/0781/8425/1702/files/Micadoni-MIC_03S_2_F1_BELLIS3-3_960x720_crop_center.jpg?v=1728391603",
+      images8: "https://cdn.shopify.com/s/files/1/0781/8425/1702/files/Micadoni-MIC_03S_2_F1_BELLIS3-5_960x720_crop_center.jpg?v=1728391603",
+      images9: "https://cdn.shopify.com/s/files/1/0781/8425/1702/files/Micadoni-MIC_03S_2_F1_BELLIS3-6_960x720_crop_center.jpg?v=1728391603",
       images10: "",
       images11: "",
-      images12: "https://m.media-amazon.com/images/I/61EfEUYaPNL._AC_SL1500_.jpg",
+      images12: "",
+      videos1: "https://player.vimeo.com/progressive_redirect/playback/972938832/rendition/720p/file.mp4?loc=external&oauth2_token_id=1767324892&signature=34a778817dfeb6570e52f93368294d4b8cbe26f2cd0c4c1418c9decc6fabfdb0",
+      video2: "https://player.vimeo.com/progressive_redirect/playback/871088375/rendition/720p/file.mp4?loc=external&oauth2_token_id=1767324892&signature=15da4b935c1f524851f31bd48d9fdd2752618ad750f73eea916996769178f600",
       Height: 82,
       Width: 75,
       ArmDimensions_HWD: "53 x 7 x 69 cm",
@@ -34,10 +36,10 @@ export const SofasDatail = [
       cost: "$280",
     },
     {
-      id: 2,
+      id: 2, /// chair
       Name: 'furniture',
       images: "https://target.scene7.com/is/image/Target/GUEST_10960559-bd22-42b2-8a17-7f4fef713e26?wid=488&hei=488&fmt=pjpeg",
-      images2: "https://example.com/chair2_2.jpg",
+      images2: "https://m.media-amazon.com/images/I/51V8SkSuOAL._AC_UF1000,1000_QL80_.jpg",
       images3: "",
       images4: "",
       images5: "",
@@ -48,6 +50,8 @@ export const SofasDatail = [
       images10: "",
       images11: "",
       images12: "https://example.com/chair2_3.jpg",
+      videos1: "https://player.vimeo.com/progressive_redirect/playback/972938832/rendition/720p/file.mp4?loc=external&oauth2_token_id=1767324892&signature=34a778817dfeb6570e52f93368294d4b8cbe26f2cd0c4c1418c9decc6fabfdb0",
+      video2: "",
       Height: 90,
       Width: 80,
       ArmDimensions_HWD: "60 x 8 x 75 cm",
@@ -66,7 +70,7 @@ export const SofasDatail = [
       cost: "$350",
     },
     {
-      id: 3,
+      id: 3, /// table 
       Name: 'furniture',
       images: "https://www.oslodeco.no/cdn/shop/products/20130001_740x740_crop_center.png?v=1672924893",
       images2: "https://example.com/chair3_2.jpg",
@@ -80,6 +84,8 @@ export const SofasDatail = [
       images10: "",
       images11: "",
       images12: "https://example.com/chair3_3.jpg",
+      videos1: "https://player.vimeo.com/progressive_redirect/playback/972938832/rendition/720p/file.mp4?loc=external&oauth2_token_id=1767324892&signature=34a778817dfeb6570e52f93368294d4b8cbe26f2cd0c4c1418c9decc6fabfdb0",
+      video2: "",
       Height: 85,
       Width: 70,
       ArmDimensions_HWD: "55 x 9 x 70 cm",
@@ -98,7 +104,7 @@ export const SofasDatail = [
       cost: "$230",
     },
     {
-      id: 4,
+      id: 4, /// storage
       Name: 'furniture',
       images: "https://mebel54.com/images/shkaf-kupe-20-27-m-dub-sonoma-v-novosibirske-6522001.jpg",
       images2: "https://example.com/chair4_2.jpg",
@@ -112,6 +118,8 @@ export const SofasDatail = [
       images10: "",
       images11: "",
       images12: "https://example.com/chair4_3.jpg",
+      videos1: "https://player.vimeo.com/progressive_redirect/playback/972938832/rendition/720p/file.mp4?loc=external&oauth2_token_id=1767324892&signature=34a778817dfeb6570e52f93368294d4b8cbe26f2cd0c4c1418c9decc6fabfdb0",
+      video2: "",
       Height: 92,
       Width: 78,
       ArmDimensions_HWD: "57 x 7 x 73 cm",
@@ -130,7 +138,7 @@ export const SofasDatail = [
       cost: "$420",
     },
     {
-      id: 5,
+      id: 5,  /// beds
       Name: 'furniture',
       images: "https://img.edilportale.com/product-thumbs/h_PLUME-Bed-double-bed-ESTEL-GROUP-68486-reldada7c4d.jpg",
       images2: "https://example.com/chair5_2.jpg",
@@ -144,6 +152,8 @@ export const SofasDatail = [
       images10: "",
       images11: "",
       images12: "https://example.com/chair5_3.jpg",
+      videos1: "https://player.vimeo.com/progressive_redirect/playback/972938832/rendition/720p/file.mp4?loc=external&oauth2_token_id=1767324892&signature=34a778817dfeb6570e52f93368294d4b8cbe26f2cd0c4c1418c9decc6fabfdb0",
+      video2: "",
       Height: 80,
       Width: 74,
       ArmDimensions_HWD: "50 x 6 x 68 cm",
@@ -162,7 +172,7 @@ export const SofasDatail = [
       cost: "$180",
     },
     {
-      id: 6,
+      id: 6, /// linghting 
       Name: 'furniture',
       images: "https://alicelanehome.com/cdn/shop/files/lamp-0.jpg?v=1698850937",
       images2: "https://example.com/chair6_2.jpg",
@@ -176,6 +186,8 @@ export const SofasDatail = [
       images10: "",
       images11: "",
       images12: "https://example.com/chair6_3.jpg",
+      videos1: "https://player.vimeo.com/progressive_redirect/playback/972938832/rendition/720p/file.mp4?loc=external&oauth2_token_id=1767324892&signature=34a778817dfeb6570e52f93368294d4b8cbe26f2cd0c4c1418c9decc6fabfdb0",
+      video2: "",
       Height: 88,
       Width: 72,
       ArmDimensions_HWD: "52 x 8 x 71 cm",
@@ -194,7 +206,7 @@ export const SofasDatail = [
       cost: "$380",
     },
     {
-      id: 7,
+      id: 7,  ////textils
       Name: 'furniture',
       images: "https://www.ikea.com/us/en/images/products/ektandvinge-duvet-cover-and-pillowcase-s-anthracite-white-check__1315699_pe940532_s5.jpg?f=xxs",
       images2: "https://example.com/chair7_2.jpg",
@@ -208,6 +220,8 @@ export const SofasDatail = [
       images10: "",
       images11: "",
       images12: "https://example.com/chair7_3.jpg",
+      videos1: "https://player.vimeo.com/progressive_redirect/playback/972938832/rendition/720p/file.mp4?loc=external&oauth2_token_id=1767324892&signature=34a778817dfeb6570e52f93368294d4b8cbe26f2cd0c4c1418c9decc6fabfdb0",
+      video2: "",
       Height: 89,
       Width: 77,
       ArmDimensions_HWD: "58 x 10 x 72 cm",
@@ -226,7 +240,7 @@ export const SofasDatail = [
       cost: "$330",
     },
     {
-      id: 8,
+      id: 8, //// decor
       Name: 'furniture',
       images: "https://target.scene7.com/is/image/Target/GUEST_366101fd-82ac-40bd-b38e-bfed86e3ded2?wid=488&hei=488&fmt=pjpeg",
       images2: "https://example.com/chair8_2.jpg",
@@ -240,6 +254,8 @@ export const SofasDatail = [
       images10: "",
       images11: "",
       images12: "https://example.com/chair8_3.jpg",
+      videos1: "https://player.vimeo.com/progressive_redirect/playback/972938832/rendition/720p/file.mp4?loc=external&oauth2_token_id=1767324892&signature=34a778817dfeb6570e52f93368294d4b8cbe26f2cd0c4c1418c9decc6fabfdb0",
+      video2: "",
       Height: 85,
       Width: 80,
       ArmDimensions_HWD: "55 x 7 x 75 cm",
@@ -258,7 +274,7 @@ export const SofasDatail = [
       cost: "$275",
     },
     {
-      id: 9,
+      id: 9,  /// kitchen
       Name: 'furniture',
       images: "https://www.heathceramics.com/cdn/shop/products/MoonstoneBasic_web_440x440_crop_center.jpg?v=1617606271",
       images2: "https://example.com/chair9_2.jpg",
@@ -272,6 +288,8 @@ export const SofasDatail = [
       images10: "",
       images11: "",
       images12: "https://example.com/chair9_3.jpg",
+      videos1: "https://player.vimeo.com/progressive_redirect/playback/972938832/rendition/720p/file.mp4?loc=external&oauth2_token_id=1767324892&signature=34a778817dfeb6570e52f93368294d4b8cbe26f2cd0c4c1418c9decc6fabfdb0",
+      video2: "",
       Height: 80,
       Width: 74,
       ArmDimensions_HWD: "50 x 6 x 68 cm",

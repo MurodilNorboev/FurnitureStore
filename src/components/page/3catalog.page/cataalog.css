@@ -1,0 +1,4 @@
+.img_con_wrap {
+    border: 1px solid red;
+    display: flex;
+}
