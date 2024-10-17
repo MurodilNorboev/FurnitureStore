@@ -255,7 +255,6 @@ width: 420px;
  }
 `;
 
-
 // datail 2 chisi !
 export const Datail_2 = styled.div`
 height: 484px;

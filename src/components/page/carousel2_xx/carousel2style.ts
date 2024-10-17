@@ -4,8 +4,10 @@ import styled from "styled-components";
 export const CarouselContainer = styled.div`
 position: relative;
 width: 100%;
+max-height: auto;
 max-height: 614px;
 /* height: 614vmin; */
+border: 1px solid red;
 overflow: hidden;
 `;
 export const CarouselWrapper = styled.div<{ translate: number }>`

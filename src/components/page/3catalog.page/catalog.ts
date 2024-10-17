@@ -2,35 +2,22 @@ import styled from "styled-components";
 
 export const Catalog_con = styled.div`
 background: var(--main, #F9F6F5);
-/* padding-top: 181px; */
-/* display: flex;
+padding: 181px 30px 50px 30px;
+display: flex;
 justify-content: center;
 align-items: start;
-gap: 20px; */
-.cart_wrap {
-    display: grid;
-    grid-template-areas: "a a a ";
-    gap: 20px;
-}
-.img_cons {
-    border: 1px solid red;
-    width: 380px;
-    height: 530px;
-    img {
-        width: 370px;
-        height: 200px; 
-    }
-}
+gap: 30px;
 
 @media only screen and (max-width: 1440px){
     .Saidbar {
         display: none;
-    } .CarouselContainerBig {
-        width: 100%;
-    } .CarouselContainer {
-        width: 100%;
-    }
+    } 
 }
+`;
+export const SlaiderContainer = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
 `;
 export const Saidbar = styled.div`
 border-radius: 5px;
@@ -127,118 +114,109 @@ flex-direction: column;
     width: 90px;
 }
 `;
+export const ImageGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
 
-/// 
-export const CarouselContainerBig = styled.div`
-  /* padding-top: 90px; */
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(3, 1fr); 
+  }
+
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2, 1fr); 
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: repeat(1, 1fr); // 1 ustunli grid
+  }
 `;
-export const CarouselContainer = styled.div`
+export const ImageContainer = styled.div`
   position: relative;
-  width: 1100px;
+  width: 100%;
+  height: auto;
   overflow: hidden;
-  margin-bottom: 40px;
 `;
-export const CarouselTrack = styled.div<{ slideIndex: number,     slidesToShow: number}>`
-  display: flex;
-  transition: transform 0.5s ease;
-  transform: ${({ slideIndex, slidesToShow }) => `translateX(-${(slideIndex * 100) / slidesToShow}%)`};
-  width: 100%;
-`;
-export const CarouselItem = styled.div`
-background-color: transparent;
-  z-index: 10;
-  padding: 0px 10px;
-  height: 340px;
-  max-width: 350px;
-  width: 100%;
+export const Imagecontent = styled.div`
+border-radius: 5px;
+display: flex;
+flex-direction: column;
+align-items: center;
+max-height: 500px;
+height: 100%;
+background-color: #FFF;
+h6 {
+  margin-top: 20px;
+  width: 30px;
+  height: 1px;
   flex-shrink: 0;
-  transition: transform 0.3s ease;
-  .img_wrap {
-    padding: 5px;
-    background-color: #FFF;
-    width: 100%;    
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    h4 {
-        margin-top: 15px;
-        color: var(--dark-grey, #666);
-        text-align: center;
-        font-feature-settings: 'liga' off, 'clig' off;
-        font-family: Prompt;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 20px; /* 125% */
-        letter-spacing: 2px;
-        text-transform: uppercase;
-    } h5 {
-        color: var(--accent, #DBA514);
-        text-align: center;
-        font-feature-settings: 'liga' off, 'clig' off;
-        font-family: Prompt;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 16px; /* 100% */
-        letter-spacing: 1px;
-    } tr {
-    margin-top: 15px;
-    width: 30px;
-    height: 1px;
-    flex-shrink: 0;
-    background: var(--pastel, #D1BCB2);
-    }
-  }
-  img {
-    max-width: 300px;
-    width: 100%;    
-    height: 100%;
-  }
-  width: 25%;
-  @media (max-width: 1024px) {
-    width: 33.33%;
-  }
-  @media (max-width: 768px) {
-    width: 50%;
-  }
-  @media (max-width: 480px) {
-    width: 100%;
-  }
-`;
-export const PrevButton = styled.button`
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 50%;
-  cursor: pointer;
-`;
-export const NextButton = styled.button`
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 50%;
-  cursor: pointer;
-`;
-export const DotsContainer = styled.div`
-margin-top: 40px;
-  gap: 20px;
+  background: var(--pastel, #D1BCB2);
+} h5 {
+  color: var(--dark-grey, #666);
+  text-align: center;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-family: Prompt;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 125% */
+  letter-spacing: 2px;
+  text-transform: uppercase;
+} h4 {
   display: flex;
-  justify-content: center;
   align-items: center;
+  color: var(--accent, #DBA514);
+  text-align: center;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-family: Prompt;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px; /* 100% */
+  letter-spacing: 1px;
+}
 `;
-export const Dot = styled.div<{ active: boolean }>`
-  width: 10px;
+export const Image = styled.img`
+  width: 100%;
+  height: 100%;
+  max-height: 400px;
+  padding: 7px;
+  object-fit: cover;
+  transition: transform 0.3s;
+`;
+export const PagesName = styled.div`
+position: absolute;
+z-index: 10;
+gap: 5px;
+top: 15%;
+left: 2%;
+display: flex;
+align-items: center;
+h3 {
+  margin-bottom: -0%;
+  color: var(--dark, #AD8775);
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-family: Prompt;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px; /* 123.077% */
+} img {
+  display: flex;
+  align-items: center;
+  width: 7px;
   height: 10px;
-  border-radius: 50%;
-  background-color: ${({ active }) => (active ? 'black' : 'lightgray')};
-  margin: 0 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+} h4 {
+  margin-bottom: -0%;
+  color: var(--main, #32324D);
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-family: Prompt;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px; /* 123.077% */
+}
 `;
+
 
 

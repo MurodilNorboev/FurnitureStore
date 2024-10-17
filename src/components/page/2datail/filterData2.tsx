@@ -1,14 +1,17 @@
 import React, { useEffect, useReducer, useState } from 'react';
-import { SofasType } from '../../types/maintp';
+import { SofasType, Tname } from '../../types/maintp';
 import { useParams } from 'react-router-dom';
 import { SofasDatail } from '../../mock/1sofas.datail';
 import { Datail_1, Datail_2, Datail_3, Datail_4, Datail_container, LeftCon, MidlCon, RightCon } from './main.datail';
 import { IconButton } from '@mui/joy';
 import car from '../../../assets/car.svg'
+import { PagesName } from '../3catalog.page/catalog';
+import home from '../../../assets/home.svg'
 
 interface Tprops {
   count: number; 
 }
+
 interface Ttype {
   type: 'increment' | 'decrement' | 'refresh'; 
   payload?: number;
@@ -26,7 +29,7 @@ function reducer(state: Tprops, action: Ttype): Tprops {
       return state;
   }
 }
-const DatailComponent: React.FC = () => {
+const DatailComponent: React.FC<Tname> = ( { name } ) => {
   const [ state, dispatch ] = useReducer( reducer, initialState );
   const { id } = useParams();
   const [data, setData] = useState<SofasType[] | null>(null);
@@ -38,16 +41,13 @@ const DatailComponent: React.FC = () => {
 
   return (
     <Datail_container>
-
+      <PagesName>
+        <h3>Home</h3><img src={home} alt="img" /><h3>{id}</h3><img src={home} alt="img" /><h4>{name}</h4> 
+      </PagesName>
       <Datail_container>
 
       <Datail_1>
         <div className='wrape'>
-        {/* {filterData?.map((value) => (
-              <MidlCon key={value.id}>
-                <img src={value.images2} alt="" />
-              </MidlCon>
-          ))} */}
           <LeftCon>
           <div className="left_datail"></div>
           <div className="left_datail"></div>

@@ -1,11 +1,12 @@
+import path from "path";
+
 export type SofasData = {
   id: number;
   images: string;
   name: string;
 }
-export interface Types { 
+export interface Tname { 
   name: string;
-  contentes: boolean;
 }
 export interface T {
   name1: string,

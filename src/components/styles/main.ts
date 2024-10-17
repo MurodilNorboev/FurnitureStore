@@ -1,18 +1,151 @@
 import styled from "styled-components";
 
-
-
-export const ImgConWrap = styled.div`
+/// Main con 
+export const MainCon = styled.div`
 display: flex;
+padding-top: 81px;
 flex-direction: column;
+justify-content: center;
 align-items: center;
-overflow: scroll;
-.imgswrap {
-  overflow-x: scroll;
-  border: 1px solid red;
+background-color: #F9F6F5;
+padding-bottom: 100px;
+.carousel22 {
+    display: none;
+  }
+  @media only screen and (max-width: 1200px){
+    .carousel22 {
+      display: flex;
+    } .carousel11 {
+      display: none;
+    }
+  }
+`;
+// carousel 1
+export const CarouselContainers = styled.div`
+position: relative;
+width: 100%;
+max-height: 614px;
+overflow: hidden;
+`;
+export const CarouselWrapper = styled.div<{ translate: number }>`
+display: flex;
+height: 100%;
+transform: translateX(${({ translate }) => translate}%);
+transition: transform 1.5s ease-in-out;
+`;
+export const CarouselItems = styled.div`
+min-width: 100%;
+width: 100%;
+height: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+.imgaes {
+  border-bottom: 10px solid white;
+  border-left: 5px solid white;
+} .images {
+  border-bottom: 10px solid white;
+  border-right: 5px solid white;
+} .line {
+  background: var(--accent, #DBA514);
+  width: 40px;
+  height: 2px;
+} .cost_wrap {
+display: flex;
+gap: 10px;
+} .testse {
+  height: 104px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  width: 100%;
+  color: white;
+  margin-right: 50%;
+  margin-top: 25%;
+  z-index: 2;
+  h4 {
+      color: var(--main, #32324D);
+      text-align: center;
+      font-feature-settings: 'liga' off, 'clig' off;
+      font-family: Prompt;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 30px; /* 125% */
+      letter-spacing: 3px;
+      text-transform: uppercase;
+  } h5 {
+      color: var(--red, #F66);
+      font-feature-settings: 'liga' off, 'clig' off;
+      font-family: Prompt;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 26px; /* 130% */
+      letter-spacing: 2px;
+      text-transform: uppercase;
+  } h6 {
+      color: var(--pastel, #D1BCB2);
+      font-feature-settings: 'liga' off, 'clig' off;
+      font-family: Prompt;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 26px; /* 130% */
+      letter-spacing: 2px;
+      text-decoration-line: strikethrough;
+      text-transform: uppercase;
+  }
 }
-`
-// button reverse
+`;
+export const NavButton = styled.button`
+position: absolute;
+top: 50%;
+transform: translateY(-50%);
+background: none;
+border: none;
+cursor: pointer;
+color: white;
+z-index: 1;
+font-size: 30px;
+
+&:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+&.prev {
+  left: 20px;
+}
+
+&.next {
+  right: 20px;
+}
+`;
+export const DotsContainers = styled.div`
+position: absolute;
+bottom: 20px;
+left: 50%;
+transform: translateX(-50%);
+display: flex;
+gap: 10px;
+`;
+export const Dots = styled.button<{ active: boolean }>`
+width: 10px;
+height: 10px;
+border-radius: 50%;
+background-color: ${({ active }) =>
+  active ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.6)'};
+border: none;
+cursor: pointer;
+transition: background-color 0.3s ease;
+
+&:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+`;
+// button reverse    //categories
 export const BtnWrap2 = styled.div`
 height: 150px;
 display: flex;
@@ -34,150 +167,6 @@ align-items: end;
  width: 100%;
  border: none;
  `;
-export const MainCon = styled.div`
-display: flex;
-padding-top: 81px;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-background-color: #F9F6F5;
-padding-bottom: 100px;
-.carousel22 {
-    display: none;
-  }
-  @media only screen and (max-width: 1200px){
-    .carousel22 {
-      display: flex;
-    } .carousel11 {
-      display: none;
-    }
-  }
-`;
-// carousel
-  export const CarouselContainer = styled.div`
-    position: relative;
-    width: 100%;
-    max-height: 614px;
-    overflow: hidden;
-  `;
-  export const CarouselWrapper = styled.div<{ translate: number }>`
-    display: flex;
-    height: 100%;
-    transform: translateX(${({ translate }) => translate}%);
-    transition: transform 1.5s ease-in-out;
-  `;
-  export const CarouselItem = styled.div`
-    min-width: 100%;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    .imgaes {
-      border-bottom: 10px solid white;
-      border-left: 5px solid white;
-  } .images {
-      border-bottom: 10px solid white;
-      border-right: 5px solid white;
-  } .line {
-      background: var(--accent, #DBA514);
-      width: 40px;
-      height: 2px;
-  } .cost_wrap {
-    display: flex;
-    gap: 10px;
-  } .testse {
-      height: 104px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      position: fixed;
-      width: 100%;
-      color: white;
-      margin-right: 50%;
-      margin-top: 25%;
-      z-index: 2;
-      h4 {
-          color: var(--main, #32324D);
-          text-align: center;
-          font-feature-settings: 'liga' off, 'clig' off;
-          font-family: Prompt;
-          font-size: 24px;
-          font-style: normal;
-          font-weight: 500;
-          line-height: 30px; /* 125% */
-          letter-spacing: 3px;
-          text-transform: uppercase;
-      } h5 {
-          color: var(--red, #F66);
-          font-feature-settings: 'liga' off, 'clig' off;
-          font-family: Prompt;
-          font-size: 20px;
-          font-style: normal;
-          font-weight: 500;
-          line-height: 26px; /* 130% */
-          letter-spacing: 2px;
-          text-transform: uppercase;
-      } h6 {
-          color: var(--pastel, #D1BCB2);
-          font-feature-settings: 'liga' off, 'clig' off;
-          font-family: Prompt;
-          font-size: 20px;
-          font-style: normal;
-          font-weight: 400;
-          line-height: 26px; /* 130% */
-          letter-spacing: 2px;
-          text-decoration-line: strikethrough;
-          text-transform: uppercase;
-      }
-  }
-  `;
-  export const NavButton = styled.button`
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: white;
-    z-index: 1;
-    font-size: 30px;
-  
-    &:hover {
-      color: rgba(255, 255, 255, 0.8);
-    }
-  
-    &.prev {
-      left: 20px;
-    }
-  
-    &.next {
-      right: 20px;
-    }
-  `;
-  export const DotsContainer = styled.div`
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 10px;
-  `;
-  export const Dot = styled.button<{ active: boolean }>`
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: ${({ active }) =>
-      active ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.6)'};
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.8);
-    }
-  `;
   // Categorie
   export const Categorie = styled.div`
   display: grid;
@@ -248,173 +237,7 @@ padding-bottom: 100px;
     grid-template-areas: " a ";
   }
   `;
-  // imgComponent 
-
-  export const BtnWrap3 = styled.div`
-  display: flex;
-  align-items: end;
-    cursor: pointer;
-
-    transition: transform 0.2s ease; 
-  
-    &:active {
-      transform: scale(0.98); 
-    }
-
-    .image-bottom {
-      padding: 0px;
-      background: white;
-      height: 340px;
-      .img_hei {
-        box-shadow: none;
-      }
-      img {
-        padding: 5px;
-        box-shadow: none;
-      }
-    }
-  `;
-// multicarousel 
-export const Carousel = styled.div`
-  overflow-x: scroll;
-  max-width: 1310px;
-  padding: 15px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 50px;
-  width: 100%;
-  margin-bottom: 40px;
-   .btnwrap {
-    height: 60px;
-    border: 2px solid red;
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    z-index: 99;
-  }
-  @media only screen and (max-width: 1400px){
-    padding: 0px 200px 0px 200px;
-    max-width: 1110px;
-  }
-`;
-// multicarousel buttons
-export const CarouselContainers = styled.div`
-  max-width: 1310px;
-  position: relative;
-`;
-export const CarouselWrappers = styled.div<{ translate: number }>`
-  display: flex;
-  gap: 40px;
-  transition: transform 0.5s ease;
-  transform: translateX(${({ translate }) => translate}%);
-  button {
-    display: none;
-  }
-`;
-export const CarouselItems = styled.div`
-  padding: 5px;
-  background: #FFF !important;
-  transition: transform 0.5s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  img {
-    width: 285px;
-    height: 280px;
-    object-fit: cover;
-  }
-  .bottom {
-    z-index: 11;
-    width: 285px;
-  }
-  .images2 {
-    margin-bottom: 30px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    h2 {
-      margin-top: 30px;
-      margin-bottom: 20px;
-      width: 40px;
-      height: 2px;
-      background: var(--pastel, #D1BCB2);
-    }
-    h4 {
-      color: var(--dark-grey, #666);
-      text-align: center;
-      font-feature-settings: 'liga' off, 'clig' off;
-      font-family: Prompt;
-      font-size: 20px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: 30px; 
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-    h6 {
-      color: var(--accent, #DBA514);
-      text-align: center;
-      font-feature-settings: 'liga' off, 'clig' off;
-      font-family: Prompt;
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: 16px; /* 100% */
-      letter-spacing: 1px;
-    }
-  }
-`;
-export const ButtonContainer = styled.div`
-  height: auto;
-  margin-top: 100px;
-  padding-right: 80px;
-  width: 100%;
-  display: flex;
-  justify-content: end;
-  gap: 20px;
- .bottom{
-        display: flex;
-        button {
-        cursor: pointer;
-        height: 50px;
-        width: 50px;
-        border-radius: 50px;
-        border: 1px solid var(--pastel, #D1BCB2);
-        background: var(--white, #FFF);
-        }
-        img {
-            width: 24px;
-            height: 24px;
-        }
-        h6 {
-            cursor: pointer;
-            color: var(--middle-grey, #999);
-            font-feature-settings: 'liga' off, 'clig' off;
-            font-family: Prompt;
-            font-size: 16px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: 20px; 
-        }
-    }
-`;
-export const Button = styled.button`
-  color: white;
-  display: flex;
-  width: 46px;
-  height: 46px;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  border-radius: 23px;
-  border: 1px solid var(--pastel, #D1BCB2);
-  background: var(--white, #FFF);
-`;
-
+///// ======buttons======
 export const ButtonL = styled.button`
   border: none;
   width: 299px;
@@ -456,13 +279,37 @@ img {
 `;
 export const ImgCons3 = styled.div`
   max-width: 1370px;
+  min-width: 370px;
   gap: 0px;
   padding: 0px 30px;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  overflow-x: scroll;
+  .btn_wraps {
+    display: flex;
+    gap: 30px;
+    overflow: scroll;
+  }
+  /* @media only screen and (max-width: 1380px) {
+    .btn_wraps {
+      border: 1px solid red;
+    display: grid;
+    grid-template-areas: " a a ";
+    }
+  } */
+  @media only screen and (max-width: 1050px) {
+    .btn_wraps {
+    display: grid;
+    grid-template-areas: " a ";
+    } .images_big {
+      width: 50%;
+      border: 1px solid red;
+      img {
+        width: 300px;
+      }
+    }
+  }
   .img_wrap_con2 {
     padding: 5px 0px;
     display: flex;
@@ -554,15 +401,14 @@ export const ImgCons3 = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    /* max-width: 670px; */
-    min-width: 300px;
-    height: 470px;
+    min-width: 320px;
+    max-width: 610px;
+    max-height: 470px;
     width: 100%;
-    background: var(--white, #FFF);
-    padding: 5px;
   } .img_heis {
     display: flex;
     height: 340px;
+    
     min-width: 300px;
     img {
       width: 40vw;
@@ -588,10 +434,32 @@ export const ImgCons3 = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    width: 300px;
+    max-width: 330px;
+    width: 23rem;
     height: 470px;
     padding: 5px;
   }
+`;
+export const BtnWrap3 = styled.div`
+  display: flex;
+  align-items: end;
+    cursor: pointer;
+    transition: transform 0.2s ease; 
+    &:active {
+      transform: scale(0.98); 
+    }
+    .image-bottom {
+      padding: 0px;
+      background: white;
+      height: 340px;
+      .img_hei {
+        box-shadow: none;
+      }
+      img {
+        padding: 5px;
+        box-shadow: none;
+      }
+    }
 `;
 export const ImgCons = styled.div`
   max-width: 1470px;
@@ -739,5 +607,149 @@ export const ImgCons = styled.div`
     height: 470px;
     padding: 5px;
   }
+`;
+////// =========multi carousel========= !!!
+export const CarouselContainer = styled.div`
+background-color: transparent;
+  max-width: 1300px;
+  padding: 20px 5px 20px 5px;
+  height: auto;
+  overflow: scroll;
+
+  @media only screen and (max-width: 680px) {
+    width: 100%;
+  }
+`;
+export const CarouselTrack = styled.div<{ slideIndex: number, slidesToShow: number}>`
+  display: flex;
+  
+  transition: transform 0.5s ease;
+  transform: ${({ slideIndex, slidesToShow }) => `translateX(-${(slideIndex * 100) / slidesToShow}%)`};
+  background-color: transparent;
+  width: 100%;
+`;
+export const CarouselItem = styled.div`
+  background-color: transparent;
+  z-index: 10;
+  padding: 0px 10px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease;
+  img {
+    padding: 2px;
+    max-height: 300px;
+    max-width: 300px;
+    width: 100%;    
+    height: 100%;
+  }
+  width: 25%;
+  &:hover {
+    transform: scale(1.1);
+  }
+  @media (max-width: 1024px) {
+    width: 33.33%;
+  }
+  @media (max-width: 768px) {
+    width: 50%;
+  }
+  @media (max-width: 480px) {
+    width: 100%;
+  }
+`;
+export const PrevButton = styled.button`
+  cursor: pointer;
+  display: flex;
+  border: none;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  background: var(--white, #FFF);
+  color: #D1BDB2;
+`;
+export const NextButton = styled.button`
+  cursor: pointer;
+  display: flex;
+  width: 46px;
+  height: 46px;
+  justify-content: center;
+  align-items: center;
+  color: #D1BDB2;
+`;
+export const DotsContainer = styled.div`
+display: flex;
+width: 100%;
+padding: 0px 6.80%;
+justify-content: space-between;
+align-items: center;
+gap: 10px;
+margin-top: 100px;
+margin-bottom: 40px;
+width: 100%;
+ .bottom{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 46px;
+        height: 46px;
+        border-radius: 50px;
+        border: 1px solid #D1BCB2;
+        background: var(--white, #FFF);
+        .name {
+          padding: 6px 15px;
+          color:  #D1BCB2;
+        }
+    }
+`;
+export const Dot = styled.div<{ active: boolean }>`
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: ${({ active }) => (active ? 'black' : 'lightgray')};
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+`;
+export const Carouselimgwrapp = styled.div`
+height: auto;
+width: auto;
+border: 1px solid darkblue;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: space-between;
+h6 {
+  margin-top: 20px;
+  width: 30px;
+  height: 1px;
+  flex-shrink: 0;
+  background: var(--pastel, #D1BCB2);
+} h5 {
+  margin-top: 10px;
+  color: var(--dark-grey, #666);
+  text-align: center;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-family: Prompt;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 125% */
+  letter-spacing: 2px;
+text-transform: uppercase;
+} h4 {
+  margin-top: 7px;
+  color: var(--accent, #DBA514);
+  text-align: center;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-family: Prompt;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px; /* 100% */
+  letter-spacing: 1px;
+}
 `;
 

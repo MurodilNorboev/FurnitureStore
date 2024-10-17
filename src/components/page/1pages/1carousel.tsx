@@ -6,7 +6,7 @@ import stul from '../../../assets/stul.webp';
 import stul2 from '../../../assets/stul2.jpg';
 import stul3 from '../../../assets/stul3.webp';
 import { Images } from '../../types/maintp';
-import { CarouselContainer, CarouselItem, CarouselWrapper, Dot, DotsContainer, NavButton, } from '../../styles/main';
+import { CarouselContainers, CarouselItems, CarouselWrapper, Dots, DotsContainers, NavButton, } from '../../styles/main';
 
 const slides = [
     {
@@ -76,10 +76,10 @@ const Carousel: React.FC<Images> = (props) => {
   return (
     <>
       
-    <CarouselContainer>
+    <CarouselContainers>
       <CarouselWrapper translate={translate}>
         {allSlides.map((slide, index) => (
-          <CarouselItem key={index}>
+          <CarouselItems key={index}>
   
             <img className='images'
               style={{ height: '614px', width: '50%' }}
@@ -98,7 +98,7 @@ const Carousel: React.FC<Images> = (props) => {
 
        
 
-          </CarouselItem>
+          </CarouselItems>
         ))}
       </CarouselWrapper>
 
@@ -109,16 +109,16 @@ const Carousel: React.FC<Images> = (props) => {
         &#10095;
       </NavButton>
 
-      <DotsContainer>
+      <DotsContainers>
         {allSlides.map((_, index) => (
-          <Dot
+          <Dots
             key={index}
             active={index === currentIndex}
             onClick={() => goToSlide(index)}
           />
         ))}
-      </DotsContainer>
-    </CarouselContainer>
+      </DotsContainers>
+    </CarouselContainers>
     
     </>
   );

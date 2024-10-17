@@ -91,7 +91,9 @@ const FooterComponent = () => {
         </div> 
         <div className="footer_bottom">
         <div className="bottom"><h6>2022©All rights reserved</h6></div>
-        <div className="bottom"><IconButton><img src={CircleBtn} alt="" /></IconButton></div>
+        <div className="bottom">
+          <IconButton><img src={CircleBtn} alt="" /></IconButton>
+        </div>
         </div> 
 
     </FooterCon>

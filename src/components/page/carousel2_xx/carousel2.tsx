@@ -7,7 +7,6 @@ import stul2 from '../../../assets/stul2.jpg';
 import stul3 from '../../../assets/stul3.webp';
 import { Images } from '../../types/maintp';
 import { CarouselContainer, CarouselItem, CarouselWrapper, Dot, DotsContainer, NavButton } from './carousel2style';
-// import { CarouselContainer, CarouselItem, CarouselWrapper, Dot, DotsContainer, NavButton } from '../../styles/main';
 
 const slides = [
   {
