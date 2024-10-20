@@ -9,6 +9,12 @@ import DatailComponent from './components/page/2datail/filterData2'
 import MainComponent from './components/page/main'
 import Ssofar from './components/page/3catalog.page/catalog_cart'
 import SimpleSlider from './components/test/test.tse'
+import ShopBYroom from './components/page/1pages/3shopBYroom'
+import CartDatail from './components/page/0pages.datail/cart.datail'
+import Checkout from './components/page/0pages.datail/checkout'
+import ProfilePersonal from './components/page/profile/profile.personal'
+import ProfilePersonal2page from './components/page/profile/profile.2page'
+import ProfilePassword from './components/page/profile/profile.password'
 
 const RouterComponent = () => {
   const loginin = useLocation();
@@ -28,6 +34,12 @@ const filterCon = loginin.pathname === "/login" || loginin.pathname === "/regLog
         <Route path='*' element={<ErrComponent />}/> 
         
         <Route path='/u' element={<SimpleSlider />}/> 
+        <Route path='/cart' element={<CartDatail name='Cart' />}/>
+        <Route path='/chekout' element={<Checkout name='Checkout' />}/>
+
+        <Route path='/profile' element={<ProfilePersonal name='profile' />}/>
+        <Route path='/profile2' element={<ProfilePersonal2page name='profile' />}/>
+        <Route path='/profilePassword' element={<ProfilePassword name='profile' />}/>
     </Routes>
 
     {!filterCon && <FooterComponent />}

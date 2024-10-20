@@ -1,0 +1,53 @@
+/* Checkbox container */
+.checkbox-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Custom checkbox */
+  input[type="checkbox"] {
+    display: none; /* Hide default checkbox */
+  }
+  
+  /* Checkbox label */
+  .checkbox-label {
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border: 2px solid #DBA514;
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+  
+  /* Checkbox hover effect */
+  .checkbox-label:hover {
+    box-shadow: 0 0 8px #DBA514;
+  }
+  
+  /* To'lqin effekti */
+  .checkbox-label::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    background-color: rgba(219, 165, 20, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s ease-out;
+  }
+  
+  /* Checked (active) state */
+  input[type="checkbox"]:checked + .checkbox-label {
+    background-color: #DBA514;
+  }
+  
+  /* Checked state to'lqin effekti */
+  input[type="checkbox"]:checked + .checkbox-label::after {
+    transform: translate(-50%, -50%) scale(1.5);
+    background-color: rgba(219, 165, 20, 0.6);
+  }
+  

@@ -1,57 +1,58 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { AnimatedButton, BtnWrap } from '../../styles/navbar';
-import cart from '../../../assets/cart.svg'
+import cart from '../../../assets/cart.svg';
 
 const Overlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 999;
+height: 100%;
+  box-shadow: rgba(237, 228, 224, 0.25) 0px 14px 28px, 
+            rgba(237, 228, 224, 0.22) 0px 10px 10px !important;
 `;
-
 const ModalContainer = styled.div`
   position: fixed;
   background: white;
-  width: 468px;
+  max-width: 468px;
+  width: 70vw;
   height: 400px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  top: 80px;
-  left: 10;
-  right: 0;
-  margin-right: 50px;
+  top: 54px;
+  padding-top: 25px;
+  right: 50px;
   z-index: 1000;
 `;
-
 const BasicMenu: React.FC = () => {
-  const [showModal, setShowModal] = useState(false);
-
-  const handleClick = () => {
-    setShowModal(!showModal); // Modal ochilishi/yopilishi holatini almashtirish
+  const [isVisible, setIsVisible] = useState(false);
+  const handleMouseEnter = () => {
+    setIsVisible(true); 
   };
-
-  // Modal tashqarisiga bosilganda uni yopish uchun funksiyani yaratamiz
-  const handleOverlayClick = () => {
-    setShowModal(false);
+  const handleMouseLeave = () => {
+    setIsVisible(false); 
   };
-
   return (
-    <div style={{ position: 'relative' }}>
-      <BtnWrap onClick={handleClick}>
-        <AnimatedButton><img src={cart} alt="" style={{paddingBottom:"8px"}}/></AnimatedButton>
+    <div 
+      style={{ position: 'relative' }} 
+    >
+      <BtnWrap 
+        onMouseEnter={handleMouseEnter}  
+        onMouseLeave={handleMouseLeave} >
+        <AnimatedButton>
+          <img src={cart} alt="" style={{ paddingBottom: "8px" }} />
+        </AnimatedButton>
       </BtnWrap>
-
-      {showModal && (
-        <Overlay onClick={handleOverlayClick}>
-          <ModalContainer onClick={(e) => e.stopPropagation()}>
-            <div style={{border:"3px solid  #DBA514"}}></div>
-            <button onClick={() => setShowModal(false)} style={{display:"flex",width:"100%",justifyContent:"end",paddingRight:"10px"}}>X</button>
-            <h4>Popup Title</h4>
-            <p>This is a modal container!</p>
-          </ModalContainer>
-        </Overlay>
+      {isVisible && (
+        <ModalContainer 
+        onMouseLeave={handleMouseLeave}
+          onMouseEnter={handleMouseEnter}>
+            <Overlay>
+              <div style={{ border: "3px solid #DBA514" }}></div>
+          <button        onClick={handleMouseLeave}
+            style={{ display: "flex", width: "100%", justifyContent: "end", paddingRight: "10px" }}
+          >
+            X
+          </button>
+          <h4>Popup Title</h4>
+          <p>This is a modal container!</p>
+            </Overlay>
+        </ModalContainer>
       )}
     </div>
   );

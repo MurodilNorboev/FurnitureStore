@@ -12,46 +12,15 @@ const images = [
   ];
 
 const ImgComponent: React.FC = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [translate, setTranslate] = useState(0);
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null); 
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      goToNext();
-    }, 7000); 
 
-    return () => clearInterval(interval); 
-  }, [currentIndex]);
-  useEffect(() => {
-    setTranslate(-currentIndex * 25); 
-  }, [currentIndex]);
-  const goToNext = () => {
-    if (currentIndex < images.length - 4) {
-      setCurrentIndex(currentIndex + 1);
-    } else {
-      setCurrentIndex(0); 
-    }
-  };
-  const goToPrev = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
-    } else {
-      setCurrentIndex(images.length - 4); 
-    }
-  };
-  const handleMouseEnter = (index: number) => {
-    setHoveredIndex(index); 
-  };
-  const handleMouseLeave = () => {
-    setHoveredIndex(null);
-  };
+
 
   return (
     <>
-        <div className='wraps'>
-                    <h2 ></h2>
-                  <h4>blog</h4>
+        <div className='wraps sd'>
+            <h2 ></h2>
+            <h4>blog</h4>
         </div>
         <ImgCons>
           <div className="img_wrap_con2">

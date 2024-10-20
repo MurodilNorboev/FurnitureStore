@@ -1,4 +1,4 @@
-import { MainCon } from '../styles/main';
+import { BtnWrap3, BtnWrap4, ImgCons3, MainCon } from '../styles/main';
 import Carousel2 from './carousel2_xx/carousel2';
 import Carousel from './1pages/1carousel';
 import CategorieComponent from './1pages/2categorie';
@@ -13,53 +13,54 @@ import { ButtonL, CarouselContainer, CarouselItem, CarouselTrack, Carouselimgwra
 import circle3 from '../../assets/leftwhite.svg';
 import { IconButton } from '@mui/material';
 
+
 const datatest = [
   {
     img: 'https://cdn.shopify.com/s/files/1/0781/8425/1702/files/Micadoni-MIC_3S_192_F1_DIANA1-1_1920x1437_crop_center.jpg?v=1728635185',
     text: 'ebro bedside table',
-    cost: 'ebro bedside table',
+    cost: '$250',
     seil: 'ebro bedside table'
   },
   {
     img: 'https://cdn.shopify.com/s/files/1/0781/8425/1702/files/Micadoni-MIC_3S_192_F1_DIANA1-1_1920x1437_crop_center.jpg?v=1728635185',
     text: 'Tirado chair',
-    cost: 'ebro bedside table',
+    cost: '$280',
     seil: 'ebro bedside table',
   },
   {
     img: 'https://cdn.shopify.com/s/files/1/0781/8425/1702/files/Micadoni-MIC_3S_192_F1_DIANA1-1_1920x1437_crop_center.jpg?v=1728635185',
     text: 'caleido lamp',
-    cost: 'ebro bedside table',
+    cost: '$355',
     seil: 'ebro bedside table',
   },
   {
     img: 'https://cdn.shopify.com/s/files/1/0781/8425/1702/files/Micadoni-MIC_3S_192_F1_DIANA1-1_1920x1437_crop_center.jpg?v=1728635185',
     text: 'caleido lamp',
-    cost: 'ebro bedside table',
+    cost: '$240',
     seil: 'ebro bedside table',
   },
   {
     img: 'https://cdn.shopify.com/s/files/1/0781/8425/1702/files/Micadoni-MIC_3S_192_F1_DIANA1-1_1920x1437_crop_center.jpg?v=1728635185',
     text: 'emmi set',
-    cost: 'ebro bedside table',
+    cost: '$200',
     seil: 'ebro bedside table',
   },
   {
     img: 'https://cdn.shopify.com/s/files/1/0781/8425/1702/files/Micadoni-MIC_3S_192_F1_DIANA1-1_1920x1437_crop_center.jpg?v=1728635185',
     text: 'textiles',
-    cost: 'ebro bedside table',
+    cost: '$260',
     seil: 'ebro bedside table',
   },
   {
     img: 'https://cdn.shopify.com/s/files/1/0781/8425/1702/files/Micadoni-MIC_3S_192_F1_DIANA1-1_1920x1437_crop_center.jpg?v=1728635185',
     text: 'Sofas set',
-    cost: 'ebro bedside table',
+    cost: '$230',
     seil: 'ebro bedside table',
   },
   {
     img: 'https://cdn.shopify.com/s/files/1/0781/8425/1702/files/Micadoni-MIC_3S_192_F1_DIANA1-1_1920x1437_crop_center.jpg?v=1728635185',
     text: 'beds set',
-    cost: 'ebro bedside table',
+    cost: '$210',
     seil: 'ebro bedside table',
   },
 ];
@@ -71,6 +72,7 @@ interface datatestT {
 }
 
 const MainComponent: React.FC = () => {
+
   const [ data, setdata ] = useState<datatestT[] | null>(null);
   useEffect(() => {setdata(datatest)},[])
   const [slideIndex, setSlideIndex] = useState<number>(0);
@@ -159,8 +161,11 @@ const MainComponent: React.FC = () => {
           <Carousel />
       </div>
       <CategorieComponent/>
+
       <ShopBYroom />
+      
       <Room />
+
       <DotsContainer>
         <div><h2>popular products</h2></div>
            <div style={{display:"flex",gap:"10px",alignItems:"center"}}>
@@ -186,15 +191,19 @@ const MainComponent: React.FC = () => {
           <>
         {data?.map((val, ind) => (
             <CarouselItem key={ind}>
+              <BtnWrap4>
               <Carouselimgwrapp>
-                <img src={val.img} alt="" />
+               
+               <img src={val.img} alt="" />
                 <h6></h6>
                 <h5>{val.text}</h5>
                 <div style={{display:"flex",alignItems:"center"}}>
                   <h4>{val.cost}</h4>
                   <h3></h3>
                 </div>
+              
               </Carouselimgwrapp>
+              </BtnWrap4>
             </CarouselItem>
         ))} 
         </>
@@ -208,8 +217,11 @@ const MainComponent: React.FC = () => {
        </ButtonL>
        </BtnWrap>
       </div>
+
       <HotDisc />
+
       <ImgComponent />
+      
     </MainCon>
   );
 };

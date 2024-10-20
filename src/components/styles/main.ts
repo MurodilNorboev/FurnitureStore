@@ -24,6 +24,7 @@ padding-bottom: 100px;
 export const CarouselContainers = styled.div`
 position: relative;
 width: 100%;
+max-width: 1480px;
 max-height: 614px;
 overflow: hidden;
 `;
@@ -278,8 +279,6 @@ img {
 }
 `;
 export const ImgCons3 = styled.div`
-  max-width: 1370px;
-  min-width: 370px;
   gap: 0px;
   padding: 0px 30px;
   width: 100%;
@@ -298,7 +297,7 @@ export const ImgCons3 = styled.div`
     grid-template-areas: " a a ";
     }
   } */
-  @media only screen and (max-width: 1050px) {
+  /* @media only screen and (max-width: 1050px) {
     .btn_wraps {
     display: grid;
     grid-template-areas: " a ";
@@ -309,7 +308,7 @@ export const ImgCons3 = styled.div`
         width: 300px;
       }
     }
-  }
+  } */
   .img_wrap_con2 {
     padding: 5px 0px;
     display: flex;
@@ -439,10 +438,16 @@ export const ImgCons3 = styled.div`
     height: 470px;
     padding: 5px;
   }
+  .slider {
+    border: 1px solid red;
+    max-width: 1300px;
+
+  }
 `;
 export const BtnWrap3 = styled.div`
   display: flex;
-  align-items: end;
+  align-items: center;
+  justify-content: center;
     cursor: pointer;
     transition: transform 0.2s ease; 
     &:active {
@@ -454,6 +459,7 @@ export const BtnWrap3 = styled.div`
       height: 340px;
       .img_hei {
         box-shadow: none;
+        width: 330px;
       }
       img {
         padding: 5px;
@@ -461,6 +467,12 @@ export const BtnWrap3 = styled.div`
       }
     }
 `;
+export const BtnWrap4 = styled.div`
+  transition: transform 0.2s ease; 
+  &:active {
+      transform: scale(0.98); 
+    }
+`
 export const ImgCons = styled.div`
   max-width: 1470px;
   gap: 0px;
@@ -512,13 +524,11 @@ export const ImgCons = styled.div`
         text-transform: uppercase;
     }
   } .img_wrap_con {
-    margin-top: 54px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 40px;
   } .img_wrap_con2 {
-    margin-top: 54px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -622,7 +632,8 @@ background-color: transparent;
 `;
 export const CarouselTrack = styled.div<{ slideIndex: number, slidesToShow: number}>`
   display: flex;
-  
+  height: auto;
+  padding: 5px 0px;
   transition: transform 0.5s ease;
   transform: ${({ slideIndex, slidesToShow }) => `translateX(-${(slideIndex * 100) / slidesToShow}%)`};
   background-color: transparent;
@@ -631,18 +642,17 @@ export const CarouselTrack = styled.div<{ slideIndex: number, slidesToShow: numb
 export const CarouselItem = styled.div`
   background-color: transparent;
   z-index: 10;
-  padding: 0px 10px;
+  padding: 0px 10px 0px 10px;
   flex-shrink: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   transition: transform 0.3s ease;
   img {
-    padding: 2px;
-    max-height: 300px;
+    padding: 7px;
+    height: 300px;
     max-width: 300px;
     width: 100%;    
-    height: 100%;
   }
   width: 25%;
   &:hover {
@@ -682,7 +692,7 @@ export const NextButton = styled.button`
 export const DotsContainer = styled.div`
 display: flex;
 width: 100%;
-padding: 0px 6.80%;
+max-width: 1275px;
 justify-content: space-between;
 align-items: center;
 gap: 10px;
@@ -716,11 +726,12 @@ export const Dot = styled.div<{ active: boolean }>`
 export const Carouselimgwrapp = styled.div`
 height: auto;
 width: auto;
-border: 1px solid darkblue;
 display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: space-between;
+background-color: #FFF;
+
 h6 {
   margin-top: 20px;
   width: 30px;
@@ -741,6 +752,7 @@ h6 {
 text-transform: uppercase;
 } h4 {
   margin-top: 7px;
+  margin-bottom: 20px;
   color: var(--accent, #DBA514);
   text-align: center;
   font-feature-settings: 'liga' off, 'clig' off;

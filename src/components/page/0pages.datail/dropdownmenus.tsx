@@ -30,15 +30,6 @@ const ModalContainer = styled.div`
   z-index: 1000; 
 `;
 
-const Button = styled.button`
-  display: flex;
-  background: transparent;
-  color: white;
-  border: none;
-  cursor: pointer;
-  position: relative; 
-`;
-
 const Tajriba: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const [activeData, setActiveData] = useState<ButtonData | null>(null);

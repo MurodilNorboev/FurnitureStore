@@ -11,13 +11,13 @@ import home from '../../../assets/home.svg'
 interface Tprops {
   count: number; 
 }
-
 interface Ttype {
   type: 'increment' | 'decrement' | 'refresh'; 
   payload?: number;
 }
 const initialState: Tprops = { count: 0 }; 
-function reducer(state: Tprops, action: Ttype): Tprops {
+
+function reducer(state: Tprops, action: Ttype) {
   switch (action.type) {
     case 'increment':
       return { count: state.count + (action.payload || 0 ) };
