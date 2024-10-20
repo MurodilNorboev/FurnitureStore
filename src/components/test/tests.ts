@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+
+export const Todo = styled.div`
+display: grid;
+grid-template-areas: "a a a a";
+`
 // Simple Carousel Container
 export const CarouselContainer = styled.div`
   position: relative;
