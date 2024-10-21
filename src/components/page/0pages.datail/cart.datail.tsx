@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer, useState } from 'react'
 import { Bottom_Container, CartContainer, CartContainerWrapper, CartContent, DatailCart, LeftContent, RightContent, Right_Container, Top_Container } from './datail';
 import dlete from '../../../assets/delete.svg'
-import { Checkbox, IconButton } from '@mui/material';
+import { IconButton } from '@mui/material';
 import { PagesName } from '../3catalog.page/catalog';
 import home from '../../../assets/home.svg'
 import './cartc.css'

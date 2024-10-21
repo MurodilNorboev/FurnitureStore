@@ -4,20 +4,11 @@ import user from '../../assets/user.svg'
 import Menus_Icon from '../hook/menus';
 import MultiCarousel from '../page/0pages.datail/lupa';
 import BasicMenu from '../page/0pages.datail/cart';
-import Tajriba from '../page/0pages.datail/dropdownmenus';
+import Tajriba from './dropdownmenus';
 import { Navlink } from '../styles/LINK';
 import { useState } from 'react';
 
 const NavbareComponent = () => {
-  const [showModal, setShowModal] = useState(false);
-
-  const handleMouseEnter = () => {
-    setShowModal(true);
-  };
-  
-  const handleMouseLeave = () => {
-    setShowModal(false);
-  };
   return (
     <NavbarCon>
       <div className='leftCon_wrap'>

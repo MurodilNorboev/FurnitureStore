@@ -15,6 +15,7 @@ import Checkout from './components/page/0pages.datail/checkout'
 import ProfilePersonal from './components/page/profile/profile.personal'
 import ProfilePersonal2page from './components/page/profile/profile.2page'
 import ProfilePassword from './components/page/profile/profile.password'
+import DatailMenusID from './components/navber menus/menus.datail'
 
 const RouterComponent = () => {
   const loginin = useLocation();
@@ -40,6 +41,7 @@ const filterCon = loginin.pathname === "/login" || loginin.pathname === "/regLog
         <Route path='/profile' element={<ProfilePersonal name='profile' />}/>
         <Route path='/profile2' element={<ProfilePersonal2page name='profile' />}/>
         <Route path='/profilePassword' element={<ProfilePassword name='profile' />}/>
+        <Route path='/datail' element={<DatailMenusID name='furniture'/>}/>
     </Routes>
 
     {!filterCon && <FooterComponent />}
