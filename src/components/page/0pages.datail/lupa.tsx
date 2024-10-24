@@ -16,6 +16,10 @@ const SearchIcon = styled.div<{ $isOpen: boolean }>`
   margin-left: 10px; 
   display: ${({ $isOpen }) => ($isOpen ? 'none' : 'block')}; 
 `;
+// const SearchIcon = styled.div<{ $active?: boolean }>`
+//     background-color: ${({ $active }) => ($active ? 'blue' : 'gray')};
+// `;
+
 
 const Input = styled.input<{ $isOpen: boolean }>`
   opacity: ${({ $isOpen }) => ($isOpen ? 1 : 0)};

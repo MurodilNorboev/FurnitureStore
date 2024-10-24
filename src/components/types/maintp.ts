@@ -8,6 +8,10 @@ export type SofasData = {
 export interface Tname { 
   name: string;
 }
+export interface Tnames { 
+  name: string;
+  names: string
+}
 export interface T {
   name1: string,
   name2: string,
@@ -32,19 +36,13 @@ export type Images = {
   };
   export type SofasType = {
       id: number;
-      Name: string;
+      label: string;
       images: string;
       images2: string;
       images3: string;
       images4: string;
-      images5: string;
-      images6: string;
-      images7: string;
-      images8: string;
-      images9: string;
-      images10: string;
-      images11: string;
-      images12: string;
+      image5: string;
+      videos1: string;
       Height: number;
       Width: number;
       ArmDimensions_HWD: string;
@@ -62,3 +60,4 @@ export type Images = {
       chair: string;
       cost: string;
   }
+ 

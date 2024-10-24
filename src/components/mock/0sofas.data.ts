@@ -17,7 +17,7 @@ export const SofasData_mock = [
      },
      {
         id: 4,
-        images: "https://mebel54.com/images/shkaf-kupe-20-27-m-dub-sonoma-v-novosibirske-6522001.jpg",
+        images: "https://arborgardensolutions.co.uk/media/catalog/product/cache/c3cdcbbd27085b3f902073216a01f945/m/i/midifex-cupboard-birch-.jpg",
         name: "storage"
      },
      {

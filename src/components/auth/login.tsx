@@ -1,13 +1,16 @@
 
 import { Navlink } from "../styles/LINK"
 import { LoginCon, LoginWraps } from "../styles/login"
+import google from '../../assets/gogle.svg';
+import fasebook from '../../assets/facebook.svg';
+import tvitter from '../../assets/tvitter.svg';
 
 
 const LoginComponent = () => {
   return (
     <LoginCon>
     <LoginWraps className='LoginWrap'>
-                <h2>Sign in</h2>
+                <h2>Login</h2>
                 <div className="loginis1">
                     <label>Email</label>
                     <input type="email" placeholder='Your email' />
@@ -22,25 +25,34 @@ const LoginComponent = () => {
                        <label>Keep mee logged in</label>
                      </div>
                     <h3>Forget your password?</h3>
-                </div>
-                <Navlink to={'/'}>
-                <div className="loginis4">
-                    {/* <button onClick={onLogin}>SIGN IN</button> */}
-                    <button>SIGN IN</button>
-                </div>
-                </Navlink>
-                <div className="loginis5">
-                <div className='lang'></div><h4>or </h4><div className='lang'></div>
-                    </div>
-                <div className="loginis6">
-                    {/* <img src={naver} alt="naver-img" />
-                    <img src={googling} alt="google-img" />
-                    <img src={talk} alt="talk-img" /> */}
-                </div> <Navlink  to={'/regLogin'}>
+                </div> 
+                <Navlink  to={'/regLogin'}>
                 <div className="loginis7">
-                    <button>CREATE ACCOUNT</button>
+                    <h3 className="buttons">CREATE ACCOUNT</h3>
                 </div> 
                 </Navlink>
+
+                <Navlink to={'/'}>
+                <div className="loginis4">
+                    <button>login</button>
+                </div>
+                </Navlink>
+
+                <div className="loginis5">
+                <div className='lang'></div><h4>or </h4><div className='lang'></div>
+                </div>
+
+                <div className="loginis6">
+                  <div className="text_wrapp">
+                    <h2>sign in by social profiles</h2>
+                  </div>
+                  <div className="img_wrappp">
+                    <img src={google} alt="naver-img" />
+                    <img src={fasebook} alt="google-img" />
+                    <img src={tvitter} alt="talk-img" />
+                  </div>
+                    
+                </div> 
     </LoginWraps>
        
     </LoginCon>

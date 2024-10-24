@@ -6,7 +6,6 @@ import MultiCarousel from '../page/0pages.datail/lupa';
 import BasicMenu from '../page/0pages.datail/cart';
 import Tajriba from './dropdownmenus';
 import { Navlink } from '../styles/LINK';
-import { useState } from 'react';
 
 const NavbareComponent = () => {
   return (
@@ -17,9 +16,11 @@ const NavbareComponent = () => {
       < Menus_Icon />
       </div>
 
+      <Navlink to={"/"}>
       <div>
         <img className='ab' src={UNA} alt="Logo" />
       </div>
+      </Navlink>
 
       <div className="left_menus_wrap">
           <Tajriba />

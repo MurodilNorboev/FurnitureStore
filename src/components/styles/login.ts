@@ -4,9 +4,10 @@ import styled from "styled-components";
 export const LoginCon = styled.div`
 display: flex;
 justify-content: center;
-align-items: center;
-height: 100%;
-padding: 64px 0px 64px 0px;
+align-items: start;
+height: 100svb;
+padding-top: 100px;
+background-color: #F9F6F5;
 `;
 export const LoginWraps = styled.div`
 display: flex;
@@ -15,35 +16,38 @@ flex-direction: column;
 align-items: flex-start;
 justify-content: center;
 max-width: 500px;
-max-height: 614px;
-border-radius: 20px;
-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.30);
+background-color: #FFF;
 
 h2 {
-    color: var(--text, #373737);
-    font-family: "Open Sans";
-    font-size: 27px;
-    font-weight: 700;
+    width: 100%;
+    color: var(--main, #32324D);
+    text-align: center;
+    font-feature-settings: 'liga' off, 'clig' off;
+    font-family: Prompt;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 38px; /* 126.667% */
+    letter-spacing: 3px;
+    text-transform: uppercase;
 } .loginis1 {
+    color: #AD8775;
     padding-top: 25px;
     display: flex;
     flex-direction: column;
 } .loginis1 label {
-    color: rgba(55, 55, 55, 0.80);
     font-family: "Open Sans";
     font-size: 16px;
     font-weight: 600;
     padding-bottom: 10px;
 } .loginis1 input {
-    border: none;
+    border: 1px solid #D1BCB2;
+    background-color: transparent;
     width: 59.5vmin;
     max-width: 434px;
-    padding: 17px 20px;
-    border-radius: 10px;
-    background: rgba(55, 55, 55, 0.10);
+    padding: 10px 20px;
 } 
 .loginis3 {
-
     padding-top: 15px;
     display: flex;
     width: 100%;
@@ -52,23 +56,30 @@ h2 {
     display: flex;
     gap: 5px;
     align-items: center;
-} .intut {
-    border: 2px solid green;
+} 
+/* .intut {
     width: 23px;
     height: 22px;
     border-radius: 5px;
     border: none;
     background: rgba(55, 55, 55, 0.15);
-} .loginis3 label {
-    color: #373737;
-    font-family: "Open Sans";
-    font-size: 14px;
+}  */
+.loginis3 label {
+    color: #666;
+    font-feature-settings: 'liga' off, 'clig' off;
+    font-family: Prompt;
+    font-size: 16px;
+    font-style: normal;
     font-weight: 400;
+    line-height: 20px; /* 125% */
 } .loginis3 h3 {
-    color: #373737;
-    font-family: "Open Sans";
-    font-size: 14px;
+    color: var(--dark, #AD8775);
+    font-feature-settings: 'liga' off, 'clig' off;
+    font-family: Prompt;
+    font-size: 16px;
+    font-style: normal;
     font-weight: 400;
+    line-height: 20px; /* 125% */
 } 
 .loginis4 {
     padding-top: 25px;
@@ -79,17 +90,19 @@ h2 {
     width: 59.5vmin;
     max-width: 434px;
     height: 50px;
-    border-radius: 10px;
-    background: var(--blue, #006DAB);
+    background: #D1BCB2;
     color: white;
     font-size: 15px;
     font-weight: 700;
+    transform: translate(4s);
 } .loginis4 :hover {
-    background: var(--blue, #005DAB);
+    background: #ada099;
+    &:active {
+        transform: scale(0.98);
+    }
 } 
 .loginis5 {
     margin-top: 25px;
-
     width: 100%;
     display: flex;
     justify-content: center;
@@ -97,141 +110,268 @@ h2 {
 
 } .loginis5 h4 {
     padding: 0px 10px;
-    display: flex;
-    color: #6D6D6D;
-    font-family: "Open Sans";
+    color: var(--dark, #AD8775);
+    font-feature-settings: 'liga' off, 'clig' off;
+    font-family: Prompt;
     font-size: 16px;
-    font-weight: 700;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
 } .lang {
     max-width: 120px;
     width: 100%;
-    border: 0.5px solid  rgba(55, 55, 55, 0.15);
+    border: 0.5px solid  #D1BCB2;
 
 }
 .loginis6 {
     padding-top: 29px;
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
     gap: 10px;
 } .loginis6 img {
-    width: 46px;
-    height: 46px;
+    width: 24px;
+    height: 24px;
     border: 50%;
+} .text_wrapp {
+    display: flex;
+    align-items: center;
+    h2 {
+        margin-bottom: -1px;
+        color: var(--dark-grey, #666);
+        font-feature-settings: 'liga' off, 'clig' off;
+        font-family: Prompt;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 20px; /* 125% */
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+} .img_wrappp {
+    display: flex;
+    align-items: center;
+    gap: 16px;
 }
 .loginis7 {
-    padding-top: 25px;
+    padding-top: 5px;
     width: 100%;
-} .loginis7 button {
+} .buttons {
+    display: flex;
+    align-items: center;
     cursor: pointer;
-    border: 2px solid var(--blue, #006DAB);
-    color: var(--blue, #006DAB);
-    background-color: transparent;
-    width: 59.5vmin;
-    max-width: 434px;
-    max-height: 50px;
-    height: 100vw;
-    /* width: 100vw;  */
-    border-radius: 10px;
-    font-size: 15px;
+    color: var(--dark, #AD8775);
+    font-feature-settings: 'liga' off, 'clig' off;
+    font-family: Prompt;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; 
+    height: 15px;
+    font-size: 12px;
     font-weight: 700;
-} .loginis7 :hover {
-    background: var(--blue, #005DAB);
-    color: white;
-}
+    transform: translate(6ms);
+} 
 @media only screen and (max-width: 1300px){
     .LoginWrap {
         padding: 0px;
         margin: 0px;
     }
 }
+@media only screen and (max-width: 900px) {
+    .loginis6 {
+        display: grid;
+        justify-content: center;
+    }
+    .img_wrappp {
+        display: flex;
+        justify-content: center;
+    }
+}
 `;
 // login reg
 export const LoginRegCon = styled.div`
-padding-top: 84px;
 display: flex;
 justify-content: center;
-align-items: center;
-padding: 100px 0px 64px 0px;
+align-items: start;
+height: 100svb;
+padding-top: 100px;
+background-color: #F9F6F5;
 `;
 export const LoginWrap = styled.div`
-max-width: 500px;
 display: flex;
 padding: 33px;
 flex-direction: column;
 align-items: flex-start;
 justify-content: center;
-/* width: 68vmin; */
-max-height: 614px;
-border-radius: 20px;
-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.30);
+max-width: 500px;
+background-color: #FFF;
 
 h2 {
-    color: var(--text, #373737);
-    font-family: "Open Sans";
-    font-size: 27px;
-    font-weight: 700;
+    width: 100%;
+    color: var(--main, #32324D);
+    text-align: center;
+    font-feature-settings: 'liga' off, 'clig' off;
+    font-family: Prompt;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 38px; /* 126.667% */
+    letter-spacing: 3px;
+    text-transform: uppercase;
 } .loginis1 {
-    padding-top: 25px;
+    color: #AD8775;
+    padding-top: 15px;
     display: flex;
     flex-direction: column;
-    padding-top: 25px;
 } .loginis1 label {
-    color: rgba(55, 55, 55, 0.80);
     font-family: "Open Sans";
     font-size: 16px;
     font-weight: 600;
-    padding-bottom: 10px;
+    padding-bottom: 4px;
 } .loginis1 input {
-    max-width: 434px;
-    border: none;
+    border: 1px solid #D1BCB2;
+    background-color: transparent;
     width: 59.5vmin;
-    padding: 17px 20px;
-    border-radius: 10px;
-    background: rgba(55, 55, 55, 0.10);
+    max-width: 434px;
+    padding: 10px 20px;
 } 
 .loginis3 {
     padding-top: 15px;
     display: flex;
     width: 100%;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 } .chackbox1 {
     display: flex;
     gap: 5px;
     align-items: center;
-} .intut {
-    border: 2px solid green;
-    width: 23px;
-    height: 22px;
-    border-radius: 5px;
-    border: none;
-    background: rgba(55, 55, 55, 0.15);
-} .loginis3 label {
-    color: #373737;
-    font-family: "Open Sans";
-    font-size: 14px;
-    font-weight: 400;
-} .loginis3 h3 {
-    color: #373737;
-    font-family: "Open Sans";
-    font-size: 14px;
-    font-weight: 400;
 } 
-.loginis8 {
+.loginis3 label {
+    color: #666;
+    font-feature-settings: 'liga' off, 'clig' off;
+    font-family: Prompt;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; /* 125% */
+} .loginis3 h3 {
+    color: var(--dark, #AD8775);
+    font-feature-settings: 'liga' off, 'clig' off;
+    font-family: Prompt;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; /* 125% */
+} 
+.loginis4 {
     padding-top: 25px;
     width: 100%;
-} .loginis8 button {
+} .loginis4 button {
     cursor: pointer;
-    max-width: 434px;
     border: none;
     width: 59.5vmin;
+    max-width: 434px;
     height: 50px;
-    border-radius: 10px;
-    background: var(--blue, #006DAB);
+    background: #D1BCB2;
     color: white;
     font-size: 15px;
     font-weight: 700;
-} .loginis8 :hover {
-    background: var(--blue, #005DAB);
+    transform: translate(4s);
+} .loginis4 :hover {
+    background: #ada099;
+    &:active {
+        transform: scale(0.98);
+    }
 } 
+.loginis5 {
+    margin-top: 25px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+} .loginis5 h4 {
+    padding: 0px 10px;
+    color: var(--dark, #AD8775);
+    font-feature-settings: 'liga' off, 'clig' off;
+    font-family: Prompt;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+} .lang {
+    max-width: 120px;
+    width: 100%;
+    border: 0.5px solid  #D1BCB2;
+
+}
+.loginis6 {
+    padding-top: 29px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+} .loginis6 img {
+    width: 24px;
+    height: 24px;
+    border: 50%;
+} .text_wrapp {
+    display: flex;
+    align-items: center;
+    h2 {
+        margin-bottom: -1px;
+        color: var(--dark-grey, #666);
+        font-feature-settings: 'liga' off, 'clig' off;
+        font-family: Prompt;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 20px; /* 125% */
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+} .img_wrappp {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.loginis7 {
+    padding-top: 5px;
+    width: 100%;
+} .buttons {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: var(--dark, #AD8775);
+    font-feature-settings: 'liga' off, 'clig' off;
+    font-family: Prompt;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; 
+    height: 15px;
+    font-size: 12px;
+    font-weight: 700;
+    transform: translate(6ms);
+} 
+@media only screen and (max-width: 1300px){
+    .LoginWrap {
+        padding: 0px;
+        margin: 0px;
+    }
+}
+@media only screen and (max-width: 900px) {
+    .loginis6 {
+        display: grid;
+        justify-content: center;
+    }
+    .img_wrappp {
+        display: flex;
+        justify-content: center;
+    }
+}
 `;

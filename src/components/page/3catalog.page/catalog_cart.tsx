@@ -23,29 +23,34 @@ import home from '../../../assets/home.svg'
 const ITEMS_PER_PAGE = 16;
 
 export default function Ssofar( Props: Tname ) {
+
   const [value, setValue] = useState<number[]>([20, 37]);
-  const [data, setData] = useState<SofasType[]>([]);
-  const { id } = useParams();
   const [page, setPage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(ITEMS_PER_PAGE);
-
-  const handleChangeSlider = (event: Event, newValue: number | number[]) => {
-    setValue(newValue as number[]);
-  };
-  useEffect(() => {
-    const allData: SofasType[] = [
-      ...SofasDatail,
-      ...Datailes,
-      ...TAbleDatail,
-      ...StorageDatail,
-      ...BedsDatail,
-      ...LightDatail,
-      ...TextilDatail,
-      ...DecorDatail,
-      ...KitchenDatail,
-    ];
-    setData(allData);
+  const [data, setData] = useState<SofasType[] | null>(null);
+  const { id } = useParams();
+  
+  useEffect(() => {    
+    const allData = [
+      SofasDatail,
+      Datailes,
+      TAbleDatail,
+      StorageDatail,
+      BedsDatail,
+      LightDatail,
+      TextilDatail,
+      DecorDatail,
+      KitchenDatail,
+    ].flat(); 
+  
+    setData(allData); 
+    console.log(allData); 
   }, [id]);
+  const startIdx = (page - 1) * itemsPerPage;
+  const endIdx = startIdx + itemsPerPage;
+  const displayedImages = data ? data.slice(startIdx, endIdx) : [];
+
+
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
@@ -67,19 +72,17 @@ export default function Ssofar( Props: Tname ) {
 
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+  const handleChangeSlider = (event: Event, newValue: number | number[]) => {
+    setValue(newValue as number[]);
+  };
   const handleChangePagination = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
-
   const valueText = (value: number) => `${value}°C`; 
   if (!data || data.length === 0) {
     return <div>Loading...</div>;
   }
-
-  const startIdx = (page - 1) * itemsPerPage;
-  const endIdx = startIdx + itemsPerPage;
-  const displayedImages = data.slice(startIdx, endIdx);
-
+  
   return (
     <Catalog_con>
 
@@ -89,23 +92,27 @@ export default function Ssofar( Props: Tname ) {
 
       <SlaiderContainer>
       <ImageGrid>
-        {displayedImages.map((item, index) => (
-          <ImageContainer key={index}>
-            <Navlink to={`/stul/${item.id}`}>
-              <Imagecontent>
-              <Image
-                src={item.images}
-                alt={`img-${index + startIdx}`}
-                onMouseOver={(e) => (e.currentTarget.src = data[(index + 1) % data.length].images)}
-                onMouseOut={(e) => (e.currentTarget.src = item.images)}
-              />
-              <h6></h6>
-              <h5>{item.Name}</h5>
-              <h4>{item.cost} {item.cost}</h4>
-              </Imagecontent>
-            </Navlink>
-          </ImageContainer>
-        ))}
+      {displayedImages.map((item, ind) => (
+        <ImageContainer key={ind}>
+          <Navlink to={`/stul/${item.id}`}>
+            <Imagecontent>
+              {item.images ? (
+                <Image
+                  src={item.images}
+                  alt={`img-${ind + startIdx}`}
+                  onMouseOver={(e) => (e.currentTarget.src = item.images2)}
+                  onMouseOut={(e) => (e.currentTarget.src = item.images)}
+                />
+              ) : (
+                <p>No Image Available</p>
+              )}
+              <h5>{item.label}</h5>
+              <h4>{item.cost}</h4>
+            </Imagecontent>
+          </Navlink>
+        </ImageContainer>
+      ))}
+
       </ImageGrid>
       
 
@@ -206,8 +213,6 @@ export default function Ssofar( Props: Tname ) {
     </Catalog_con>
   );
 }
-
-
 
 
 

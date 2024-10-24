@@ -31,7 +31,7 @@ const filterCon = loginin.pathname === "/login" || loginin.pathname === "/regLog
         <Route path='/regLogin' element={< RegloginComponent />}/>  
         <Route path='/' element={<MainComponent />}/>  
         <Route path='/stol/:id' element={<Ssofar name='furniture' />} />
-        <Route path='/stul/:id' element={<DatailComponent name='Armchair, fleece' />} /> 
+        <Route path='/stul/:id' element={<DatailComponent names='furniture' name='Armchair, fleece' />} /> 
         <Route path='*' element={<ErrComponent />}/> 
         
         <Route path='/u' element={<SimpleSlider />}/> 
@@ -41,7 +41,7 @@ const filterCon = loginin.pathname === "/login" || loginin.pathname === "/regLog
         <Route path='/profile' element={<ProfilePersonal name='profile' />}/>
         <Route path='/profile2' element={<ProfilePersonal2page name='profile' />}/>
         <Route path='/profilePassword' element={<ProfilePassword name='profile' />}/>
-        <Route path='/datail' element={<DatailMenusID name='furniture'/>}/>
+        <Route path='/datail/:id' element={<DatailMenusID />}/>
     </Routes>
 
     {!filterCon && <FooterComponent />}

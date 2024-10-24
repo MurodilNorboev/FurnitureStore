@@ -26,6 +26,10 @@ justify-content: space-between;
 width: 100px;
 height: 100px;
 border: 1px solid blue;
+img, iframe {
+   width: 100px;
+height: 100px;
+}
 }
 `;
 export const MidlCon = styled.div`
