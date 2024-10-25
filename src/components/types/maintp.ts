@@ -11,6 +11,7 @@ export interface Tname {
 export interface Tnames { 
   name: string;
   names: string
+  propse: Boolean;
 }
 export interface T {
   name1: string,

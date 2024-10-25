@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from 'react'
+import React, { useReducer, useState } from 'react'
 import { Bottom_Container, CartContainer, CartContainerWrapper, CartContent, DatailCart, LeftContent, RightContent, Right_Container, Top_Container } from './datail';
 import dlete from '../../../assets/delete.svg'
 import { IconButton } from '@mui/material';

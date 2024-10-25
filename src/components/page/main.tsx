@@ -12,6 +12,7 @@ import { BtnWrap } from '../styles/navbar';
 import { ButtonL, CarouselContainer, CarouselItem, CarouselTrack, Carouselimgwrapp, Dot, DotsContainer } from '../styles/main';
 import circle3 from '../../assets/leftwhite.svg';
 import { IconButton } from '@mui/material';
+import { Navlink } from '../styles/LINK';
 
 
 const datatest = [
@@ -154,6 +155,9 @@ const MainComponent: React.FC = () => {
 
   return (
     <MainCon>
+      <Navlink to={`/u`}>
+      <h2>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vero nulla sit tenetur saepe. Unde eaque dolor quam nulla, id officiis ducimus magnam quas cumque reprehenderit quos numquam commodi laboriosam sit.</h2>
+      </Navlink>
       <div className='carousel22'>
           <Carousel2 />
       </div>

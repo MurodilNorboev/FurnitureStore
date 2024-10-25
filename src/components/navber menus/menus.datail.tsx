@@ -1,40 +1,37 @@
-import { useEffect, useState } from "react";
-import { mockDatail, mockDatailType } from "../mock/navbarDatail/navbar.mock";
-import { useNavigate, useParams } from "react-router-dom";
-import { Navlink } from "../styles/LINK";
+import React, { useEffect, useState } from 'react';
+import { mockDatail, mockDatailType } from '../mock/navbarDatail/navbar.mock';
+import '../context/ss.css'
+import { useParams } from 'react-router-dom';
 
-const DatailMenusID = () => {
-    const { id } = useParams(); 
-    const [data, setData] = useState<mockDatailType | null>(null);
+const DatailMenus = () => {
 
-    useEffect(() => {
-      const alldatail = mockDatail.find(item => item.id === Number(id)); 
-      setData(alldatail || null); 
-    }, [id]);
+  const [data, setdata] = useState<mockDatailType[] | null>(null);
+  const { id } = useParams();
+
+  const parsent = id ? parseInt(id) : 0;
+  
+  const datas = data ? data.filter(val => val.id === parsent): [];
+  useEffect(() => {
+    setdata(mockDatail);
+  }, []);
 
   return (
-    <div style={{ paddingTop: "90px" }}>
-        {data ? ( 
-          <>
-            <h1>{data.label}</h1>
-            <Navlink to={`/datail/${data.id}`}>
-              <img src={data.img} alt={data.label} />
-            </Navlink>
-            <img src={data.imgURL} alt={data.label} />
-            {/* <ul>
-                {data.description.map((descItem) => (
-                    <li key={descItem.id}>{descItem.desc}</li>
-                ))}
-            </ul> */}
-          </>
-        ) : (
-          <p>Loading...</p> 
-        )}
+    <div className="modal" style={{paddingTop:"90px", border:"1px solid red"}}>
+      <div className="modal-content">
+        {datas.map((val) => (
+          <div key={val.id}>
+            <div>{val.label}</div>
+          </div>
+        ))}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default DatailMenusID;
+export default DatailMenus;
+
+
+
 
 
 

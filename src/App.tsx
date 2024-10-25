@@ -1,4 +1,5 @@
 import Menus_Icon from "./components/hook/menus";
+import DatailMenus from "./components/navber menus/menus.datail";
 import RouterComponent from "./router";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ToastContainer } from "react-toastify";
@@ -17,9 +18,10 @@ export const data = [
 
 function App() {
     return (
-        <div className="App">
+        <div className="App"><DatailMenus />
           <RouterComponent />
           <ToastContainer />
+          
         </div>
     );
 }
