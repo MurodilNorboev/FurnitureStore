@@ -1,4 +1,4 @@
-import path from "path";
+
 
 export type SofasData = {
   id: number;

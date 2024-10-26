@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { mockDatail, mockDatailType } from '../mock/navbarDatail/navbar.mock';
-import '../context/ss.css'
 import { useParams } from 'react-router-dom';
+// import './ss.css'
+import { mockDatail, mockDatailType } from '../mock/navbarDatail/navbar.mock';
 
 const DatailMenus = () => {
 

@@ -14,9 +14,9 @@ import Checkout from './components/page/0pages.datail/checkout'
 import ProfilePersonal from './components/page/profile/profile.personal'
 import ProfilePersonal2page from './components/page/profile/profile.2page'
 import ProfilePassword from './components/page/profile/profile.password'
-import DatailMenus from './components/navber menus/menus.datail'
 import DatailMenusID from './components/context/dropdownmenus'
-import MenusComponent from './components/page/jjj/menus'
+import MenusComponent from './components/page/menusfolder/menus'
+import DatailMenus from './components/navber menus/menus.datail'
 
 const RouterComponent = () => {
   const loginin = useLocation();
@@ -32,14 +32,13 @@ const filterCon = loginin.pathname === "/login" || loginin.pathname === "/regLog
         <Route path='/regLogin' element={< RegloginComponent />}/>  
         <Route path='/' element={<MainComponent />}/>  
         <Route path='/stol/:id' element={<Ssofar name='furniture' />} />
-        <Route path='/stul/:id' element={<DatailComponent names='furniture' name='Armchair, fleece' propse={true} />} /> 
-
+        <Route path='/stul/:id' element={<DatailComponent  names='furniture' name='Armchair, fleece' propse={true} />} /> 
         <Route path='*' element={<ErrComponent />}/>  
-
-        <Route path='/m/:id' element={<DatailMenus />}/> 
+        <Route path='/menu/:id' element={<DatailMenusID/>} />
+        <Route path='/data/:id' element={<DatailMenus />}/>
+        <Route path='/ul/:id' element={<MenusComponent/>} />
         
         <Route path='/u' element={<SimpleSlider />}/> 
-        <Route path='/ul/:id' element={<MenusComponent />}/>
         <Route path='/cart' element={<CartDatail name='Cart' />}/>
         <Route path='/chekout' element={<Checkout name='Checkout' />}/>
 

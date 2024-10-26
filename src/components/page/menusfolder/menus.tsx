@@ -37,37 +37,3 @@ const MenusComponent: React.FC = () => {
 
 export default MenusComponent;
 
-;
-
-
-
-
-
-// const DatailMenus = () => {
-
-//   const [data, setdata] = useState<mockDatailType[] | null>(null);
-//   const { id } = useParams();
-
-//   const parsent = id ? parseInt(id) : 0;
-//   console.log(parsent);
-  
-//   const datas = data ? data.filter(val => val.id === parsent): [];
-//   console.log(mockDatail);
-//   useEffect(() => {
-//     setdata(mockDatail);
-//   }, []);
-
-//   return (
-//     <div className="modal" style={{paddingTop:"90px", border:"1px solid red"}}>
-//       <div className="modal-content">
-//         {datas.map((val) => (
-//           <div key={val.id}>
-//             <div>{val.label}</div>
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default DatailMenus;

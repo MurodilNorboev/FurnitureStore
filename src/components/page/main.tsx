@@ -134,11 +134,11 @@ const MainComponent: React.FC = () => {
       setNumDots(Math.min(dots, 8)); 
     };
 
-    updateNumDots(); // Boshlang'ich holatni o'rnatish
-    window.addEventListener('resize', updateNumDots); // Ekran o'lchami o'zgarganda yangilash
+    updateNumDots();
+    window.addEventListener('resize', updateNumDots); 
 
     return () => {
-      window.removeEventListener('resize', updateNumDots); // O'chirish
+      window.removeEventListener('resize', updateNumDots);
     };
   }, []);
 
@@ -156,7 +156,7 @@ const MainComponent: React.FC = () => {
   return (
     <MainCon>
       <Navlink to={`/u`}>
-      <h2>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vero nulla sit tenetur saepe. Unde eaque dolor quam nulla, id officiis ducimus magnam quas cumque reprehenderit quos numquam commodi laboriosam sit.</h2>
+      <h2>Lorem</h2>
       </Navlink>
       <div className='carousel22'>
           <Carousel2 />
