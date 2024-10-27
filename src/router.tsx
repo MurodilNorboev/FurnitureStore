@@ -5,21 +5,19 @@ import NavbareComponent from './components/context/navbare'
 import FooterComponent from './components/context/footer'
 import ScrollToTop from './components/context/scollTotop'
 import ErrComponent from './components/error/err'
-// import DatailComponent from './components/MainPage2/2datail/filterData2'
-// import MainComponent from './components/page/main'
 import Ssofar from './components/MainPage2/catalog.page/catalog_cart'
 import SimpleSlider from './components/test/test.tse'
-import CartDatail from './components/page/Cart/cart.datail'
-import Checkout from './components/page/Cart/checkout'
-import ProfilePersonal from './components/page/profile/profile.personal'
-import ProfilePersonal2page from './components/page/profile/profile.2page'
-import ProfilePassword from './components/page/profile/profile.password'
-import DatailMenusID from './components/context/dropdownmenus'
-import MenusComponent from './components/MainPage2/navbar.menus.datail/menus'
-import DatailMenus from './components/MainPage2/menus.datail'
-import { Data } from './components/mock/mockDatail'
+import CartDatail from './components/Navbar/Cart/cart.datail'
+import Checkout from './components/Navbar/Cart/checkout'
+import ProfilePersonal from './components/Navbar/profile/profile.personal'
+import ProfilePersonal2page from './components/Navbar/profile/profile.2page'
+import ProfilePassword from './components/Navbar/profile/profile.password'
+import MenusComponent from './components/Navbar/navbar.menus.datail/menus'
+// import DatailMenus from './components/Navbar/menus.datail'
 import MainComponent from './components/MainPage/main'
 import DatailComponent from './components/filterDatail/2datail/filterData2'
+import DatailMenusID from './components/Navbar/dropdownmenus'
+import DatailMenus from './components/Navbar/MenusNavbar/menus.datail'
 
 const RouterComponent = () => {
   const loginin = useLocation();
@@ -38,7 +36,7 @@ const filterCon = loginin.pathname === "/login" || loginin.pathname === "/regLog
 
         <Route path='/stul/:id' element={<DatailComponent  names='furniture' name='Armchair, fleece' propse={true} />} /> 
         <Route path='*' element={<ErrComponent />}/>  
-        <Route path='/menu/:id' element={<DatailMenusID/>} />
+        <Route path='/menu/:id' element={<DatailMenusID />} />
         <Route path='/data/:id' element={<DatailMenus />}/>
         <Route path='/ul/:label' element={<MenusComponent name='New In'/>} />
         {/* <Route path='/ul/:label' element={<MenusComponent name='new In'/>} /> */}

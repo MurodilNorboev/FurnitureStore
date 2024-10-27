@@ -156,9 +156,11 @@ const MainComponent: React.FC = () => {
 
   return (
     <MainCon>
-      <Navlink to={`/u`}>
-      <h2>Lorem</h2>
+
+      <Navlink to={`/u`} style={{position:"fixed",zIndex:999,top:"1%",left:"1%",color:"white"}}>
+      <h2>X</h2>
       </Navlink>
+
       <div className='carousel22'>
           <Carousel2 />
       </div>

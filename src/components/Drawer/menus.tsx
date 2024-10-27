@@ -3,7 +3,7 @@ import * as React from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import { AnimatedButton, BtnWrap } from '../styles/navbar';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import Tajriba from '../context/dropdownmenus';
+import Tajriba from '../Navbar/dropdownmenus';
 
 type Anchor =  'left'  | 'right';
 

@@ -2,9 +2,9 @@ import { AnimatedButton, BtnWrap, NavbarCon } from '../styles/navbar';
 import UNA from '../../assets/Logo.svg';
 import user from '../../assets/user.svg'
 import Menus_Icon from '../Drawer/menus';
-import MultiCarousel from '../page/Cart/lupa';
-import BasicMenu from '../page/Cart/cart';
-import Tajriba from './dropdownmenus';
+import MultiCarousel from '../Navbar/Cart/lupa';
+import BasicMenu from '../Navbar/Cart/cart';
+import Tajriba from '../Navbar/dropdownmenus';
 import { Navlink } from '../styles/LINK';
 
 const NavbareComponent = () => {
