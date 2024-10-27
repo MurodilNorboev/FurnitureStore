@@ -1,44 +1,46 @@
 
 import React, { useEffect, useReducer, useState } from 'react';
-import { SofasType, Tnames } from '../../types/maintp';
+import { DataType, Tnames } from '../../types/maintp';
 import { useParams } from 'react-router-dom';
-import { SofasDatail } from '../../mock/1sofas.datail';
+// import { SofasDatail } from '../../mock/1sofas.datail';
 import { Datail_1, Datail_2, Datail_3, Datail_4, Datail_container, LeftCon, MidlCon, RightCon } from './main.datail';
 import { IconButton } from '@mui/joy';
 import car from '../../../assets/car.svg';
-import { PagesName } from '../3catalog.page/catalog';
+// import { PagesName } from '../catalog.page/catalog';
 import home from '../../../assets/home.svg';
-import { mockDatail, mockDatailType } from '../../mock/navbarDatail/navbar.mock';
-import { Datailes } from '../../mock/2categories';
-import { TAbleDatail } from '../../mock/3table.datail';
-import { StorageDatail } from '../../mock/4storage.datail';
-import { BedsDatail } from '../../mock/5beds.datail';
-import { LightDatail } from '../../mock/6lighting.datail';
-import { TextilDatail } from '../../mock/7textiles.datail';
-import { DecorDatail } from '../../mock/8decor.datail';
-import { KitchenDatail } from '../../mock/9kitchen.datail';
-import styled from 'styled-components';
+// import { mockDatail, mockDatailType } from '../../mock/navbarDatail/navbar.mock';
+// import { Datailes } from '../../mock/2categories';
+// import { TAbleDatail } from '../../mock/3table.datail';
+// import { StorageDatail } from '../../mock/4storage.datail';
+// import { BedsDatail } from '../../mock/5beds.datail';
+// import { LightDatail } from '../../mock/6lighting.datail';
+// import { TextilDatail } from '../../mock/7textiles.datail';
+// import { DecorDatail } from '../../mock/8decor.datail';
+// import { KitchenDatail } from '../../mock/9kitchen.datail';
+// import styled from 'styled-components';
+import { Data } from '../../mock/mockDatail';
+import { PagesName } from '../../MainPage2/catalog.page/catalog';
 
-interface FilterDataProps {
-  optionOne: boolean;
-  optionTwo: boolean;
-}
+// interface FilterDataProps {
+//   optionOne: boolean;
+//   optionTwo: boolean;
+// }
 
-const Filterdata = styled.div<FilterDataProps>`
-  display: flex;
-  flex-direction: column;
+// const Filterdata = styled.div<FilterDataProps>`
+//   display: flex;
+//   flex-direction: column;
   
-  // Option 1: If optionOne is true, apply this style
-  ${({ optionOne }) => optionOne && `
-    background-color: red;
-  `}
+//   // Option 1: If optionOne is true, apply this style
+//   ${({ optionOne }) => optionOne && `
+//     background-color: red;
+//   `}
   
-  // Option 2: If optionTwo is true, apply this style
-  ${({ optionTwo }) => optionTwo && `
-    border: 2px solid green;
-    background-color: green;
-  `}
-`;
+//   // Option 2: If optionTwo is true, apply this style
+//   ${({ optionTwo }) => optionTwo && `
+//     border: 2px solid green;
+//     background-color: green;
+//   `}
+// `;
 
 
 interface Tprops {
@@ -62,100 +64,60 @@ function reducer(state: Tprops, action: Ttype) {
       return state;
   }
 }
-const DatailComponent: React.FC<Tnames> = ({ name, names, propse }) => {
+
+
+const DatailComponent: React.FC<Tnames> = ({ name, names }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-
-  const [datas, setDatas] = useState<mockDatailType[]>([]);
-  const { id } = useParams<{ id: string }>(); 
-  const parsedId = id ? parseInt(id, 10) : 0; 
-
+  const [ data, setData ] = useState<DataType[] | null>(null);
+  const { id } = useParams();  
+  const parsedId = id ? parseInt(id) : 0;
   useEffect(() => {
-    setDatas(mockDatail); 
-  }, []);
-  const items = datas.find(i => i.id === parsedId); 
-
-
-  
-  const [data, setData] = useState<SofasType[]>([]);
-  useEffect(() => {
-    const allData = [
-      SofasDatail,
-      Datailes,
-      TAbleDatail,
-      StorageDatail,
-      BedsDatail,
-      LightDatail,
-      TextilDatail,
-      DecorDatail,
-      KitchenDatail,
-    ].flat();
-    setData(allData); 
-  }, []);
-  const item = data.find(i => i.id === parsedId); 
-  if (!item) return <p>Item not found</p>;
+    const filterData = Data.filter(item => item.id === parsedId);
+    setData(filterData)
+  }, [])
 
   return (
     <Datail_container>
       <PagesName>
         <h3>Home</h3>
         <img src={home} alt="Home icon" />
-        <h3>{names}</h3>
+            {data ? 
+            (<h3>{data[0].label}</h3>) 
+              : 
+            (<h3>Ma'lumotlar yuklanmoqda...</h3>)}
+
         <img src={home} alt="Home icon" />
         <h4>{name}</h4>
       </PagesName>
       
-      <Datail_1>
-        {/* <div className='wrape'>
-          {!propse ?
-          <>
+       <Datail_1>
+        <div className='wrape'>
           <LeftCon>
-            <div className="left_datail">
-              <img src={item.images2} alt="" />
-              <img src={item.images3} alt="" />
-              <img src={item.images4} alt="" />
-              <img src={item.image5} alt="" />
-              <iframe src={item.videos1} title="Video" />
+            {data?.map((val) => (
+              <div key={val.id} className="left_datail">
+              <img src={val.images2} alt="" />
+              <img src={val.images3} alt="" />
+              <img src={val.images4} alt="" />
+              <img src={val.image5} alt="" />
+              <iframe src={val.videos1} title="Video" />
             </div>
+            ))}
+            
           </LeftCon>
 
            
           <MidlCon>
-            <img src={item.images} alt={item.label} />
-          </MidlCon>
-          </>
-          : 
-          <>
-          <LeftCon>
-            <div className="left_datail">
-              <img src={items?.imgURL} alt="" />
-            </div>
-          </LeftCon>
-          <MidlCon>
-            <img src={items?.img} alt={item.label} />
-          </MidlCon>
-          </>
-          }
-        </div> */}
-
-        {!items ? (
-        <Filterdata optionOne={false} optionTwo={true} >
-          <h3>Filter Options - No Items Found</h3>
-          <img src={item.images} alt="" />
-        </Filterdata>
-      ) : (
-        <Filterdata optionOne={true} optionTwo={false}>
-          <h3>Filter Options - Item Found</h3>
-          <div>
-            <h4>{items.label}</h4>
-            <img src={items.img} alt="" />
+            {data?.map((val) => (<img key={val.id} src={val.images} alt={val.label} />))}
             
-          </div>
-        </Filterdata>
-      )}
-        
+          </MidlCon>
+
+        </div>
+       </Datail_1>
+
+        <Datail_1>
         <RightCon>
           <div className="right_cart">
-            <h3>{item.label}</h3>
+           {data?.map((val) => (<h3 key={val.id}>{val.label}</h3>))}
             <div className='wrap_text'>
               <img src="" alt="" /> <h5>3 reviews</h5>
             </div>
@@ -190,7 +152,7 @@ const DatailComponent: React.FC<Tnames> = ({ name, names, propse }) => {
           <div className="right_cart">
             <div className="bottom_Con">
               <div className='cost'>
-                <div className='h3'>${item.cost}</div>
+                {data?.map((val) => (<div key={val.id} className='h3'>${val.cost}</div>))}
                 <div className='h2'>$675</div>
               </div>
               <div className='row_line'></div>
@@ -210,18 +172,22 @@ const DatailComponent: React.FC<Tnames> = ({ name, names, propse }) => {
             </div>
           </div>
         </RightCon>
-      </Datail_1>
+        </Datail_1>
 
       <Datail_2>
 
       </Datail_2>
+
       <Datail_3></Datail_3>
       <Datail_4></Datail_4>
+
     </Datail_container>
   );
 };
 
 export default DatailComponent;
+
+
 
 
 

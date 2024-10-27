@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { DataType } from '../../types/maintp';
+import { Data } from '../../mock/mockDatail';
 // import './ss.css'
-import { mockDatail, mockDatailType } from '../mock/navbarDatail/navbar.mock';
 
 const DatailMenus = () => {
 
-  const [data, setdata] = useState<mockDatailType[] | null>(null);
+  const [data, setdata] = useState<DataType[] | null>(null);
   const { id } = useParams();
 
   const parsent = id ? parseInt(id) : 0;
   
   const datas = data ? data.filter(val => val.id === parsent): [];
   useEffect(() => {
-    setdata(mockDatail);
+    setdata(Data);
   }, []);
 
   return (

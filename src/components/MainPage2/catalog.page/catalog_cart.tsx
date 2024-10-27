@@ -1,55 +1,29 @@
-import React, { useEffect, useState } from 'react';
 import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
 import Stack from '@mui/material/Stack';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { useParams } from 'react-router-dom';
-import { SofasDatail } from '../../mock/1sofas.datail';
-import { Datailes } from '../../mock/2categories';
-import { TAbleDatail } from '../../mock/3table.datail';
-import { StorageDatail } from '../../mock/4storage.datail';
-import { BedsDatail } from '../../mock/5beds.datail';
-import { LightDatail } from '../../mock/6lighting.datail';
-import { TextilDatail } from '../../mock/7textiles.datail';
-import { DecorDatail } from '../../mock/8decor.datail';
-import { KitchenDatail } from '../../mock/9kitchen.datail';
-import { SofasType, Tname } from '../../types/maintp';
-import { Navlink } from '../../styles/LINK';
 import { Catalog_con, Image, ImageContainer, ImageGrid, Imagecontent, PagesName, Saidbar, SlaiderContainer } from './catalog';
 import { Box, Checkbox, Slider } from '@mui/joy';
-import home from '../../../assets/home.svg'
+import home from '../../../assets/home.svg';
+import { Data } from '../../mock/mockDatail';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { Navlink } from '../../styles/LINK';
+import { DataType, Tname } from '../../types/maintp';
 
 const ITEMS_PER_PAGE = 16;
 
-export default function Ssofar( Props: Tname ) {
-
+export default function Ssofar(Props: Tname) {
   const [value, setValue] = useState<number[]>([20, 37]);
   const [page, setPage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(ITEMS_PER_PAGE);
-  const [data, setData] = useState<SofasType[] | null>(null);
-  const { id } = useParams();
-  
-  useEffect(() => {    
-    const allData = [
-      SofasDatail,
-      Datailes,
-      TAbleDatail,
-      StorageDatail,
-      BedsDatail,
-      LightDatail,
-      TextilDatail,
-      DecorDatail,
-      KitchenDatail,
-    ].flat(); 
-  
-    setData(allData); 
-    console.log(allData); 
-  }, [id]);
-  const startIdx = (page - 1) * itemsPerPage;
-  const endIdx = startIdx + itemsPerPage;
-  const displayedImages = data ? data.slice(startIdx, endIdx) : [];
+  const { label } = useParams<{ label: string }>();
+  const [data, setData] = useState<DataType[]>([]);
 
+  useEffect(() => {
+    setData(Data); 
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -68,75 +42,85 @@ export default function Ssofar( Props: Tname ) {
     };
 
     window.addEventListener('resize', handleResize);
-    handleResize(); // Initial resize check
+    handleResize();
 
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  const filteredData = data.filter(item => item.label === label);
+  const startIdx = (page - 1) * itemsPerPage;
+  const endIdx = startIdx + itemsPerPage;
+  const displayeddata = filteredData.slice(startIdx, endIdx);
+
+  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+
   const handleChangeSlider = (event: Event, newValue: number | number[]) => {
     setValue(newValue as number[]);
   };
+
   const handleChangePagination = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
+
   const valueText = (value: number) => `${value}°C`; 
+
   if (!data || data.length === 0) {
     return <div>Loading...</div>;
   }
-  
+
   return (
     <Catalog_con>
-
       <PagesName>
-        <h3>Home</h3><img src={home} alt="" /><h4>{Props.name}</h4>
+        <h3>Home</h3>
+        <img src={home} alt="" />
+        {displayeddata.length > 0 && <h3>{displayeddata[0].label}</h3>}
       </PagesName>
 
       <SlaiderContainer>
-      <ImageGrid>
-      {displayedImages.map((item, ind) => (
-        <ImageContainer key={ind}>
-          <Navlink to={`/stul/${item.id}`}>
-            <Imagecontent>
-              {item.images ? (
-                <Image
-                  src={item.images}
-                  alt={`img-${ind + startIdx}`}
-                  onMouseOver={(e) => (e.currentTarget.src = item.images2)}
-                  onMouseOut={(e) => (e.currentTarget.src = item.images)}
+        <ImageGrid>
+          {displayeddata.map((item, ind) => (
+            <ImageContainer key={`${item.id} || ${item.label}`}>
+              <Navlink to={`/stul/${item.id}`}>
+                <Imagecontent>
+                  {item.images ? (
+                    <Image
+                      src={item.images}
+                      alt={`img-${ind + startIdx}`}
+                      onMouseOver={(e) => (e.currentTarget.src = item.images2)}
+                      onMouseOut={(e) => (e.currentTarget.src = item.images)}
+                    />
+                  ) : (
+                    <p>No Image Available</p>
+                  )}
+                  <h5>{item.label}</h5>
+                  <h4>{item.cost}</h4>
+                </Imagecontent>
+              </Navlink>
+            </ImageContainer>
+          ))}
+        </ImageGrid>
+
+          <Stack spacing={2} style={{ marginTop: '20px' }}>
+            <Pagination
+              count={totalPages}
+              page={page}
+              onChange={handleChangePagination}
+              renderItem={(item) => (
+                <PaginationItem
+                  slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
+                  {...item}
                 />
-              ) : (
-                <p>No Image Available</p>
               )}
-              <h5>{item.label}</h5>
-              <h4>{item.cost}</h4>
-            </Imagecontent>
-          </Navlink>
-        </ImageContainer>
-      ))}
-
-      </ImageGrid>
-      
-
-      <Stack spacing={2} style={{ marginTop: '20px' }}>
-        <Pagination
-          count={Math.ceil(data.length / itemsPerPage)}
-          page={page}
-          onChange={handleChangePagination}
-          renderItem={(item) => (
-            <PaginationItem
-              slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
-              {...item}
             />
-          )}
-        />
-      </Stack>
+          </Stack>
       </SlaiderContainer>
 
-        <Saidbar className='Saidbar'>
-          <div className="cart_con">
-            <h2>Price</h2>
-            <hr />
-            <Box sx={{ width: '100%' }}>
-              <Slider
+         <Saidbar className='Saidbar'>
+             <div className="cart_con">
+               <h2>Price</h2>
+               <hr />
+               <Box sx={{ width: '100%' }}>
+                 <Slider
                 getAriaLabel={() => 'Price range'}
                 value={value}
                 onChange={handleChangeSlider}
@@ -209,10 +193,11 @@ export default function Ssofar( Props: Tname ) {
             <h5>Show 8 more</h5>
           </div>
         </Saidbar>
-
     </Catalog_con>
   );
 }
+
+
 
 
 

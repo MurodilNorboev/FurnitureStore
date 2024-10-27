@@ -1,11 +1,11 @@
 import { BtnWrap3, BtnWrap4, ImgCons3, MainCon } from '../styles/main';
-import Carousel2 from './carousel2_xx/carousel2';
-import Carousel from './1pages/1carousel';
-import CategorieComponent from './1pages/2categorie';
-import ImgComponent from './1pages/7Blog'
-import ShopBYroom from './1pages/3shopBYroom';
-import Room from './1pages/4Room';
-import HotDisc from './1pages/6HotDisc';
+// import Carousel2 from './carousel2_xx/carousel2';
+import Carousel from '../Carousel/1carousel';
+import CategorieComponent from './main.datails/2categorie';
+import ImgComponent from './main.datails/7Blog'
+import ShopBYroom from './main.datails/3shopBYroom';
+import Room from './main.datails/4Room';
+import HotDisc from './main.datails/6HotDisc';
 
 import React, { useState, useEffect } from 'react'; 
 import { BtnWrap } from '../styles/navbar';
@@ -13,6 +13,7 @@ import { ButtonL, CarouselContainer, CarouselItem, CarouselTrack, Carouselimgwra
 import circle3 from '../../assets/leftwhite.svg';
 import { IconButton } from '@mui/material';
 import { Navlink } from '../styles/LINK';
+import Carousel2 from '../Carousel/carousel2';
 
 
 const datatest = [

@@ -1,9 +1,9 @@
 import { AnimatedButton, BtnWrap, NavbarCon } from '../styles/navbar';
 import UNA from '../../assets/Logo.svg';
 import user from '../../assets/user.svg'
-import Menus_Icon from '../hook/menus';
-import MultiCarousel from '../page/0pages.datail/lupa';
-import BasicMenu from '../page/0pages.datail/cart';
+import Menus_Icon from '../Drawer/menus';
+import MultiCarousel from '../page/Cart/lupa';
+import BasicMenu from '../page/Cart/cart';
 import Tajriba from './dropdownmenus';
 import { Navlink } from '../styles/LINK';
 

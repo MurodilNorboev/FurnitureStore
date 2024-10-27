@@ -1,5 +1,5 @@
-import Menus_Icon from "./components/hook/menus";
-import DatailMenus from "./components/navber menus/menus.datail";
+import Menus_Icon from "./components/Drawer/menus";
+import DatailMenus from "./components/MainPage2/menus.datail";
 import RouterComponent from "./router";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ToastContainer } from "react-toastify";

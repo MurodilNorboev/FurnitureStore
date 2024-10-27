@@ -1,7 +1,7 @@
-import { PagesName } from "../3catalog.page/catalog"
-import { Chescout_Bottom, Chescout_Top, Chescout_containerWrapper, Chescout_one, Container_Chescout, Containre_Chescout_Content, Content_chesckout } from "../0pages.datail/checkoutt"
+import { PagesName } from "../../MainPage2/catalog.page/catalog"
+import { Chescout_Bottom, Chescout_Top, Chescout_containerWrapper, Chescout_one, Container_Chescout, Containre_Chescout_Content, Content_chesckout } from "../Cart/checkoutt"
 import home from '../../../assets/home.svg'
-import { Bottom_Container, DatailCart, Right_Container, Top_Container } from "../0pages.datail/datail"
+import { Bottom_Container, DatailCart, Right_Container, Top_Container } from "../Cart/datail"
 import { Navlink } from "../../styles/LINK"
 import Accordion from '@mui/material/Accordion';
 import AccordionActions from '@mui/material/AccordionActions';

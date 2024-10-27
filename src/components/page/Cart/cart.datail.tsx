@@ -2,7 +2,7 @@ import React, { useReducer, useState } from 'react'
 import { Bottom_Container, CartContainer, CartContainerWrapper, CartContent, DatailCart, LeftContent, RightContent, Right_Container, Top_Container } from './datail';
 import dlete from '../../../assets/delete.svg'
 import { IconButton } from '@mui/material';
-import { PagesName } from '../3catalog.page/catalog';
+import { PagesName } from '../../MainPage2/catalog.page/catalog';
 import home from '../../../assets/home.svg'
 import './cartc.css'
 import { Navlink } from '../../styles/LINK';

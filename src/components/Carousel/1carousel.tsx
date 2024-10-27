@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import mebel from '../../../assets/mebel9.jpg';
-import mebels from '../../../assets/mebel7.avif';
-import mebelse from '../../../assets/mebel5.jpg';
-import stul from '../../../assets/stul.webp';
-import stul2 from '../../../assets/stul2.jpg';
-import stul3 from '../../../assets/stul3.webp';
-import { Images } from '../../types/maintp';
-import { CarouselContainers, CarouselItems, CarouselWrapper, Dots, DotsContainers, NavButton, } from '../../styles/main';
+import mebel from '../../assets/mebel9.jpg';
+import mebels from '../../assets/mebel7.avif';
+import mebelse from '../../assets/mebel5.jpg';
+import stul from '../../assets/stul.webp';
+import stul2 from '../../assets/stul2.jpg';
+import stul3 from '../../assets/stul3.webp';
+import { Images } from '../types/maintp';
+import { CarouselContainers, CarouselItems, CarouselWrapper, Dots, DotsContainers, NavButton, } from '../styles/main';
 
 const slides = [
     {
