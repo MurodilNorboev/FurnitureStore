@@ -1,5 +1,5 @@
 import { PagesName } from "../../MainPage2/catalog.page/catalog"
-import { Chescout_Bottom, Chescout_Top, Chescout_containerWrapper, Chescout_one, Container_Chescout, Containre_Chescout_Content, Content_chesckout } from "../Cart/checkoutt"
+import { Chescout_Bottom, Chescout_containerWrapper, Container_Chescout, Containre_Chescout_Content, Content_chesckout } from "../Cart/checkoutt"
 import home from '../../../assets/home.svg'
 import { Bottom_Container, DatailCart, Right_Container, Top_Container } from "../Cart/datail"
 import { Navlink } from "../../styles/LINK"
@@ -10,7 +10,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/joy/Checkbox';
-import { ContainerP, Content } from "./profle.1"
+import { BottomBtn, Chescout_one, Chescout_Top, ContainerP, Content } from "./profle.1"
 import { useState } from "react";
 
 interface NameT {
@@ -158,112 +158,59 @@ const ProfilePersonal = ( Props: NameT) => {
                     <Content_chesckout>
                     <div className="h22"><h2>personal info</h2></div>
 
-                        <Chescout_Top className="Chescout_Top">
+                        <Chescout_Top className="Chescout_Top top">
                             <Chescout_one className="Chescout_one">
-                                <div className="LasName_Con d">
-                                    <label htmlFor="first name">first name</label>
-                                    <input type="text" placeholder="Johnathan" />
-                                </div>
-                                <div className="LasName_Con d">
-                                    <label htmlFor="phone">phone</label>
-                                    <input type="text" placeholder="+4 098 677 67 26" />
-                                </div>
-                            </Chescout_one>
-                            <Chescout_one className="Chescout_one">
-                                <div className="LasName_Con d">
-                                    <label htmlFor="last name">last name</label>
-                                    <input type="text" placeholder="Doeherty" />
-                                </div>
-                                <div className="LasName_Con d">
-                                    <label htmlFor="email">email</label>
-                                    <input type="text" placeholder="customer_1995@gmail.com" />
-                                </div>
-                            </Chescout_one>
-                        </Chescout_Top>
-                        <Chescout_Bottom>
-                                <Checkbox label="Warning" color="warning" />
-                                <h4>don’t call me</h4>
-                        </Chescout_Bottom>
-                    <tr />
-                    <div className="h22"><h2>delivery</h2></div>
-                        <Chescout_Top className="Chescout_Top">
-                            <Chescout_one className="Chescout_one">
-                                <div className="LasName_Con">
-                                    <Accordion className="Accordion" sx={{
-                                        boxShadow:"none",
-                                        maxWidth:"380px",
-                                        padding:"1px 0px",
-                                        color:"#999",
-                                        border: "1px solid #D1BCB2",
-                                        background: "#FFF",
-                                     }}>
-                                       <AccordionSummary
-                                         expandIcon={<ExpandMoreIcon sx={{
-                                            color:"#999"
-                                         }} />}
-                                         aria-controls="panel3-content"
-                                         id="panel3-header"
-                                       >
-                                         Select country*
-                                       </AccordionSummary>
-                                       <AccordionDetails>
-                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                         malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                       </AccordionDetails>
-                                       <AccordionActions>
-                                         <Button>Cancel</Button>
-                                         <Button>Agree</Button>
-                                       </AccordionActions>
-                                     </Accordion>
+                                <div className="LasName_Con" style={{marginBottom:"10px"}}>
+                                <input type="text" placeholder="Personal"  className="Accordion aa"/>
                                 </div>
                                 <div className="LasName_Con">
-                                    <input type="text" placeholder="Street name*" />
+                                    <input type="text" placeholder="First name" />
+                                     <h6>Andre</h6>
+                                </div>
+                                <div className="LasName_Con">
+                                    <input type="text" placeholder="Last name" />
+                                     <h5>Labadie</h5>
+                                </div>
+                                <div className="LasName_Con">
+                                    <input type="text" placeholder="Email" />
+                                     <h4>angrealabadie@gmail.com</h4>
+                                </div>
+                                <div className="LasName_Con">
+                                    <input type="text" placeholder="Phone" />
+                                     <h6>–</h6>
                                 </div>
                             </Chescout_one>
+
                             <Chescout_one className="Chescout_one">
-                                <div className="LasName_Con">
-                                     <Accordion className="Accordion" sx={{
-                                        maxWidth:"380px",
-                                        boxShadow:"none",
-                                        padding:"1px 0px",
-                                        color:"#999",
-                                        border: "1px solid #D1BCB2",
-                                        background: "#FFF",
-                                     }}>
-                                       <AccordionSummary
-                                         expandIcon={<ExpandMoreIcon sx={{
-                                            color:"#999"
-                                         }} />}
-                                         aria-controls="panel3-content"
-                                         id="panel3-header"
-                                       >
-                                         Town/city*
-                                       </AccordionSummary>
-                                       <AccordionDetails>
-                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                         malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                       </AccordionDetails>
-                                       <AccordionActions>
-                                         <Button>Cancel</Button>
-                                         <Button>Agree</Button>
-                                       </AccordionActions>
-                                     </Accordion>
+                                <div className="LasName_Con" style={{marginBottom:"10px"}}>
+                                     <input type="text" placeholder="Address" className="Accordion aa" />
                                 </div>
                                 <div className="LasName_Con_code">
-                                    <input type="text" placeholder="Appartment" />
-                                    <input type="text" placeholder="ZIP Code" />
+                                  <div className="inputwraps">
+                                     <div className="LasName_Con"><input type="text" placeholder="Country" /><h6>–</h6></div>
+                                     <div className="LasName_Con"><input type="text" placeholder="Town/city" /><h6>–</h6></div>
+                                     <div className="LasName_Con"><input type="text" placeholder="Street" /><h6>–</h6></div>
+                                     <div className="LasName_Con"><input type="text" placeholder="Appartment" /><h6>–</h6></div>
+                                  </div> 
+                                  <div className="inputwraps">
+                                     <div className="LasName_Con"><input type="text" placeholder="ZIP Code" /><h6>–</h6></div>
+                                     <div className="LasName_Con"><input type="text" placeholder="Comment" /><h6>–</h6></div>
+                                  </div>
+                                    
                                 </div>
                             </Chescout_one>
+
+                            
                         </Chescout_Top>
-                        <Chescout_Bottom>
-                               <input type="text" placeholder="Your comment"/>
-                        </Chescout_Bottom>
+
+                            <BottomBtn>
+                              <Navlink to={'/profile2'}><div className="buttonbtn"><button>edit information</button></div></Navlink>
+                              <Navlink to={'/profilePassword'}><div className="btns"><button>change password</button></div></Navlink>
+                            </BottomBtn>
 
                     </Content_chesckout>
 
                 </Containre_Chescout_Content>
-
-                 
 
                 </Chescout_containerWrapper>
         </DatailCart>

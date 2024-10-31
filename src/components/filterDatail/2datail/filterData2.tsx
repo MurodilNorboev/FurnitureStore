@@ -107,8 +107,10 @@ const DatailComponent: React.FC<Tnames> = ({ name, names }) => {
 
            
           <MidlCon>
-            {data?.map((val) => (<img key={val.id} src={val.images} alt={val.label} />))}
-            
+            {data?.map((val) => (<img 
+            key={val.id} 
+            src={val.images}
+            alt={val.label} />))}
           </MidlCon>
 
         </div>

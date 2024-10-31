@@ -1,7 +1,7 @@
 import { PagesName } from "../../MainPage2/catalog.page/catalog"
-import { Chescout_Bottom, Chescout_Top, Chescout_containerWrapper, Chescout_one, Container_Chescout, Containre_Chescout_Content, Content_chesckout } from "./checkoutt"
+import { Chescout_Bottom, Chescout_Top, Chescout_containerWrapper, Chescout_one, Container_Chescout, Containre_Chescout_Content, Content_chesckout, Right_Container } from "./checkoutt"
 import home from '../../../assets/home.svg'
-import { Bottom_Container, DatailCart, Right_Container, Top_Container } from "./datail"
+import { Bottom_Container, DatailCart, Top_Container } from "./datail"
 import { Navlink } from "../../styles/LINK"
 import Accordion from '@mui/material/Accordion';
 import AccordionActions from '@mui/material/AccordionActions';
@@ -21,6 +21,7 @@ const Checkout = ( Props: NameT) => {
         <PagesName style={{marginLeft:"15px"}}>
         <h3>Home</h3><img src={home} alt="img" /><h4>{Props.name}</h4> 
         </PagesName>
+
        <div className='cart_name'>Checkout</div>
                 <Chescout_containerWrapper className="Chescout_containerWrapper">
                 
@@ -134,7 +135,9 @@ const Checkout = ( Props: NameT) => {
 
                 </Containre_Chescout_Content>
 
+                <div style={{width:"100%",display:"flex",justifyContent:"center"}} >
                   <Right_Container className='Right_Container'>
+                    <div className="nn">
                     <Top_Container>
                       <h2>Cart totals</h2>
                     </Top_Container>
@@ -171,14 +174,16 @@ const Checkout = ( Props: NameT) => {
                     <div className="cost"><h5>Delivery (Self Pickup)</h5><h5>$0</h5></div>
                     <div className="cost"><h5>Delivery (Self Pickup)</h5><h5>$11 500</h5></div>
                     <div className="cost"><h4>total</h4><h4>$11 500</h4></div>
-                    <Navlink to={"/chekout"}>
+                    <Navlink to={"/order"}>
                     <div className="btn_wrape">
                       <button>place order<img src="" alt="" /></button>
                     </div>
                     </Navlink>
                     </div>
                     </Bottom_Container>
+                    </div>
                   </Right_Container>
+                </div>
 
                 </Chescout_containerWrapper>
         </DatailCart>

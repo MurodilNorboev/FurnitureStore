@@ -53,6 +53,7 @@ const CartDatail = (Props: Name) => {
 
       <CartContainerWrapper>
         <CartContainer className='CartContainer'>
+          <div className='CartContainterwrap'>
 
         <CartContent className='CartContent'>
           <LeftContent><img src="" alt="cart-img" /></LeftContent>
@@ -138,7 +139,7 @@ const CartDatail = (Props: Name) => {
 
        <h3 className='trs'></h3>
 
-        <CartContent className='CartContent'>
+        <CartContent className='CartContent aa'>
 
           <div className="content_input_wrap">
           <input type="text" placeholder='Coupon' className='inputt'/>
@@ -149,7 +150,7 @@ const CartDatail = (Props: Name) => {
             <button>update cart</button>
           </div>
         </CartContent>
-
+</div>
         </CartContainer>
 
         <Right_Container className='Right_Container'>

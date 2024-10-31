@@ -19,8 +19,7 @@ export const ModalContainer = styled.div`
   position: fixed;
   background: white;
   width: 100vw;
-  height: 400px;
-  padding: 20px;
+  padding: 40px;
   margin-top: 20px;
   box-shadow: rgba(237, 228, 224, 0.25) 0px 14px 28px, 
   rgba(237, 228, 224, 0.22) 0px 10px 10px;
@@ -32,20 +31,89 @@ export const ModalContainer = styled.div`
 `;
 export const ModalMenusWrap = styled.div`
 display: flex;
+justify-content: center;
+gap: 150px;
+
 `;
 export const ModalMenus = styled.div`
-border: 1px solid red;
-img {
-    width: 40px;
-    height: 42px;  
+display: grid;
+grid-template-areas: "a a";
+align-items: start;
+justify-content: space-between;
+height: 150px;
+gap: 30px;
+h5 {
+  cursor: pointer;
+  height: 20px;
+  color: #32324D;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  width: auto;
+  &:active{
+    color: #AD8775;
+  }
+  &:hover{
+  border-bottom: 1px solid #AD8775;
+}
+}
+.textwrap {
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
 }
 `;
 export const ModalIMG = styled.div`
-border: 1px solid rebeccapurple;
- 
-img {
-    width: 40px;
-    height: 42px;
+display: flex;
+align-items: start;
+justify-content: center;
+gap: 50px;
+ .imgContainer {
+  border: 0.30px solid gray;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  height: 300px;
+  width: 200px;
+  
+ }
+ img {
+    padding: 5px;
+    width: 200px;
+    height: 200px;  
+}
+h6 {
+  margin-top: 20px;
+  width: 30px;
+  height: 1px;
+  flex-shrink: 0;
+  background: var(--pastel, #D1BCB2);
+} h5 {
+  margin-top: 5px;
+  color: var(--dark-grey, #666);
+  text-align: center;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-family: Prompt;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 125% */
+  letter-spacing: 2px;
+  text-transform: uppercase;
+} h4 {
+  display: flex;
+  align-items: center;
+  color: var(--accent, #DBA514);
+  text-align: center;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-family: Prompt;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px; /* 100% */
+  letter-spacing: 1px;
 }
 `;
 export const Buttones = styled.button`

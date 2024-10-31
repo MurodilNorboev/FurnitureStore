@@ -34,7 +34,7 @@ const BasicMenu: React.FC = () => {
       <BtnWrap 
         onMouseEnter={handleMouseEnter}  
         onMouseLeave={handleMouseLeave} >
-        <AnimatedButton>
+        <AnimatedButton >
           <img src={cart} alt="" style={{ paddingBottom: "8px" }} />
         </AnimatedButton>
       </BtnWrap>
@@ -44,11 +44,6 @@ const BasicMenu: React.FC = () => {
           onMouseEnter={handleMouseEnter}>
             <Overlay>
               <div style={{ border: "3px solid #DBA514" }}></div>
-          <button        onClick={handleMouseLeave}
-            style={{ display: "flex", width: "100%", justifyContent: "end", paddingRight: "10px" }}
-          >
-            X
-          </button>
           <h4>Popup Title</h4>
           <p>This is a modal container!</p>
             </Overlay>

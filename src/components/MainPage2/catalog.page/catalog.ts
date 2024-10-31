@@ -20,7 +20,6 @@ flex-direction: column;
 align-items: center;
 `;
 export const Saidbar = styled.div`
-border-radius: 5px;
 background-color:  #FFF;
 display: flex;
 flex-direction: column;
@@ -116,19 +115,34 @@ flex-direction: column;
 `;
 export const ImageGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 30px;
+  .Image {
+    height: 300px;
+  }
+  @media (max-width: 1440px){
+    grid-template-columns: repeat(4, 1fr);
+  }
 
   @media (max-width: 1200px) {
     grid-template-columns: repeat(3, 1fr); 
+    .Image {
+      height: 330px;
+    }
   }
 
   @media (max-width: 900px) {
     grid-template-columns: repeat(2, 1fr); 
+    .Image {
+      height: 320px;
+    }
   }
 
   @media (max-width: 600px) {
-    grid-template-columns: repeat(1, 1fr); // 1 ustunli grid
+    grid-template-columns: repeat(1, 1fr); 
+    .Image {
+      height: 330px;
+    }
   }
 `;
 export const ImageContainer = styled.div`
@@ -138,20 +152,20 @@ export const ImageContainer = styled.div`
   overflow: hidden;
 `;
 export const Imagecontent = styled.div`
-border-radius: 5px;
 display: flex;
 flex-direction: column;
 align-items: center;
-max-height: 500px;
+max-height: 450px;
 height: 100%;
 background-color: #FFF;
 h6 {
-  margin-top: 20px;
+  margin-top: 30px;
   width: 30px;
   height: 1px;
   flex-shrink: 0;
   background: var(--pastel, #D1BCB2);
 } h5 {
+  margin-top: 5px;
   color: var(--dark-grey, #666);
   text-align: center;
   font-feature-settings: 'liga' off, 'clig' off;
@@ -163,6 +177,7 @@ h6 {
   letter-spacing: 2px;
   text-transform: uppercase;
 } h4 {
+  margin-bottom: 35px;
   display: flex;
   align-items: center;
   color: var(--accent, #DBA514);
@@ -178,11 +193,10 @@ h6 {
 `;
 export const Image = styled.img`
   width: 100%;
-  height: 100%;
-  max-height: 400px;
+  height: auto;
+  aspect-ratio: 3/3;
   padding: 7px;
-  object-fit: cover;
-  transition: transform 0.3s;
+  transition: transform 1ms ease;
 `;
 export const PagesName = styled.div`
 position: absolute;

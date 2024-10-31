@@ -2,13 +2,13 @@ import styled from "styled-components";
 
 export const DatailCart = styled.div`
 background-color: #F9F6F5;
-padding: 250px 0px 100px 0px;
+padding: 180px 0px 100px 0px;
 display: flex;
 justify-content: center;
 .cart_name {
     position: absolute;
-    margin-top: -50px;
-    left: 3%;
+    margin-top: -120px;
+    left: 45%;
     top: 30%;
     color: var(--main, #32324D);
     font-feature-settings: 'liga' off, 'clig' off;
@@ -70,14 +70,23 @@ gap: 50px;
         
     } .CartContainer {
         height: auto;
-    }
+    } .aa {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
 }
 `;
 export const CartContainer = styled.div`
-background-color: #FFF;
+/* background-color: #FFF; */
 width: 1000px;
-padding: 30px 30px 30px 30px;
+/* padding: 30px 30px 30px 30px; */
 height: auto;
+.CartContainterwrap {
+    width: 100%;
+    background-color: #FFF;
+    padding: 40px;
+} 
 .tr {
     width: 100%;
     background-color: #D1BCB2;
@@ -97,6 +106,7 @@ display: flex;
 justify-content: space-between;
 align-items: center;
 gap: 25px;
+/* border: 1px solid red; */
 .content_input_wrap {
     display: flex;
     .inputt {
@@ -255,6 +265,7 @@ border-top: 2px solid #DBA514;
 box-shadow: 0px 10px 20px 0px rgba(209, 188, 178, 0.25);
 width: 100%;
 background-color: #FFF;
+/* background-color: #FFF; */
 `;
 export const Top_Container = styled.div`
 max-height: 110px;

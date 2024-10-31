@@ -11,7 +11,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/joy/Checkbox';
 import { useState } from "react"
-import { ContainerP, Content } from "./profle.1"
+import { BottomBtn, ContainerP, Content } from "./profle.1"
 
 interface NameT {
     name: string
@@ -156,108 +156,37 @@ const ProfilePassword = ( Props: NameT ) => {
                 <Containre_Chescout_Content className="Containre_Chescout_Content">
 
                     <Content_chesckout>
-                    <div className="h22"><h2>personal info</h2></div>
-
+                    {/* <div className="h22"><h2>change password</h2></div> */}
+                        <Chescout_Bottom>
+                               <input className="labelvs" type="text" placeholder="change password"/>
+                        </Chescout_Bottom>
                         <Chescout_Top className="Chescout_Top">
                             <Chescout_one className="Chescout_one">
                                 <div className="LasName_Con d">
-                                    <label htmlFor="first name">first name</label>
+                                    <label className="labelv" htmlFor="first name">old password</label>
                                     <input type="text" placeholder="Johnathan" />
                                 </div>
                                 <div className="LasName_Con d">
-                                    <label htmlFor="phone">phone</label>
-                                    <input type="text" placeholder="+4 098 677 67 26" />
+                                    <label className="labels" htmlFor="phone">Forgot password?</label>
+                                    <h3 className="texts">The strong password must contain <br /> uppercase and lowercase Latin letters <br /> and numbers. At least 6 characters</h3>
                                 </div>
                             </Chescout_one>
                             <Chescout_one className="Chescout_one">
                                 <div className="LasName_Con d">
-                                    <label htmlFor="last name">last name</label>
+                                    <label className="labelv" htmlFor="last name">new password</label>
                                     <input type="text" placeholder="Doeherty" />
                                 </div>
                                 <div className="LasName_Con d">
-                                    <label htmlFor="email">email</label>
+                                    <label className="labelv" htmlFor="email">repeat password</label>
                                     <input type="text" placeholder="customer_1995@gmail.com" />
                                 </div>
                             </Chescout_one>
                         </Chescout_Top>
-                        <Chescout_Bottom>
-                                <Checkbox label="Warning" color="warning" />
-                                <h4>don’t call me</h4>
-                        </Chescout_Bottom>
-                    <tr />
-                    <div className="h22"><h2>delivery</h2></div>
-                        <Chescout_Top className="Chescout_Top">
-                            <Chescout_one className="Chescout_one">
-                                <div className="LasName_Con">
-                                    <Accordion className="Accordion" sx={{
-                                        boxShadow:"none",
-                                        maxWidth:"380px",
-                                        padding:"1px 0px",
-                                        color:"#999",
-                                        border: "1px solid #D1BCB2",
-                                        background: "#FFF",
-                                     }}>
-                                       <AccordionSummary
-                                         expandIcon={<ExpandMoreIcon sx={{
-                                            color:"#999"
-                                         }} />}
-                                         aria-controls="panel3-content"
-                                         id="panel3-header"
-                                       >
-                                         Select country*
-                                       </AccordionSummary>
-                                       <AccordionDetails>
-                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                         malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                       </AccordionDetails>
-                                       <AccordionActions>
-                                         <Button>Cancel</Button>
-                                         <Button>Agree</Button>
-                                       </AccordionActions>
-                                     </Accordion>
-                                </div>
-                                <div className="LasName_Con">
-                                    <input type="text" placeholder="Street name*" />
-                                </div>
-                            </Chescout_one>
-                            <Chescout_one className="Chescout_one">
-                                <div className="LasName_Con">
-                                     <Accordion className="Accordion" sx={{
-                                        maxWidth:"380px",
-                                        boxShadow:"none",
-                                        padding:"1px 0px",
-                                        color:"#999",
-                                        border: "1px solid #D1BCB2",
-                                        background: "#FFF",
-                                     }}>
-                                       <AccordionSummary
-                                         expandIcon={<ExpandMoreIcon sx={{
-                                            color:"#999"
-                                         }} />}
-                                         aria-controls="panel3-content"
-                                         id="panel3-header"
-                                       >
-                                         Town/city*
-                                       </AccordionSummary>
-                                       <AccordionDetails>
-                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                         malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                       </AccordionDetails>
-                                       <AccordionActions>
-                                         <Button>Cancel</Button>
-                                         <Button>Agree</Button>
-                                       </AccordionActions>
-                                     </Accordion>
-                                </div>
-                                <div className="LasName_Con_code">
-                                    <input type="text" placeholder="Appartment" />
-                                    <input type="text" placeholder="ZIP Code" />
-                                </div>
-                            </Chescout_one>
-                        </Chescout_Top>
-                        <Chescout_Bottom>
-                               <input type="text" placeholder="Your comment"/>
-                        </Chescout_Bottom>
+
+                        <BottomBtn>
+                        <div className="buttonbtn"><button>change password</button></div>
+                        <div className="btns is_btns"><button>cancel</button></div>
+                    </BottomBtn>
 
                     </Content_chesckout>
 

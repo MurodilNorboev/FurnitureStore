@@ -1,4 +1,4 @@
-import DatailMenus from "./components/Navbar/MenusNavbar/menus.datail";
+
 import RouterComponent from "./router";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ToastContainer } from "react-toastify";
@@ -17,7 +17,7 @@ export const data = [
 
 function App() {
     return (
-        <div className="App"><DatailMenus />
+        <div className="App">
           <RouterComponent />
           <ToastContainer />
           

@@ -12,12 +12,11 @@ import Checkout from './components/Navbar/Cart/checkout'
 import ProfilePersonal from './components/Navbar/profile/profile.personal'
 import ProfilePersonal2page from './components/Navbar/profile/profile.2page'
 import ProfilePassword from './components/Navbar/profile/profile.password'
-import MenusComponent from './components/Navbar/navbar.menus.datail/menus'
-// import DatailMenus from './components/Navbar/menus.datail'
 import MainComponent from './components/MainPage/main'
 import DatailComponent from './components/filterDatail/2datail/filterData2'
 import DatailMenusID from './components/Navbar/dropdownmenus'
-import DatailMenus from './components/Navbar/MenusNavbar/menus.datail'
+import MenusDatailComponent from './components/Navbar/menus/menus.datail'
+import OrderComponent from './components/Navbar/Cart/order'
 
 const RouterComponent = () => {
   const loginin = useLocation();
@@ -26,7 +25,7 @@ const filterCon = loginin.pathname === "/login" || loginin.pathname === "/regLog
    <>
        < ScrollToTop/>
 
-    {!filterCon &&  <NavbareComponent />}
+    {!filterCon &&  <NavbareComponent />} 
 
     <Routes>
         <Route path='/login' element={<LoginComponent />}/>
@@ -37,13 +36,12 @@ const filterCon = loginin.pathname === "/login" || loginin.pathname === "/regLog
         <Route path='/stul/:id' element={<DatailComponent  names='furniture' name='Armchair, fleece' propse={true} />} /> 
         <Route path='*' element={<ErrComponent />}/>  
         <Route path='/menu/:id' element={<DatailMenusID />} />
-        <Route path='/data/:id' element={<DatailMenus />}/>
-        <Route path='/ul/:label' element={<MenusComponent name='New In'/>} />
-        {/* <Route path='/ul/:label' element={<MenusComponent name='new In'/>} /> */}
+        <Route path='/menu-datail/:label' element={<MenusDatailComponent name='New In'/>} />
         
         <Route path='/u' element={<SimpleSlider />}/> 
         <Route path='/cart' element={<CartDatail name='Cart' />}/>
         <Route path='/chekout' element={<Checkout name='Checkout' />}/>
+        <Route path='/order' element={<OrderComponent name='Message' />}/>
 
         <Route path='/profile' element={<ProfilePersonal name='profile' />}/>
         <Route path='/profile2' element={<ProfilePersonal2page name='profile' />}/>

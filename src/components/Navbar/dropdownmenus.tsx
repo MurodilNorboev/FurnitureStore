@@ -1,83 +1,3 @@
-// import React, { useEffect, useState } from 'react'
-// import { DataType } from '../types/maintp'
-// import { Data } from '../mock/mockDatail';
-// import { Buttones, ContainerModalEnter, Contant, ModalContainer, ModalIMG, ModalMenus, ModalMenusWrap } from './dropodownstyle';
-// import { Navlink } from '../styles/LINK';
-
-// const DatailMenusID = () => {
-//   const [ data, setdata ] = useState<DataType[] | null>(null);
-//   const [selectedItem, setSelectedItem] = useState<DataType | null>(null);
-//   const [showModal, setShowModal] = useState<boolean>(false);
-
-//   useEffect(() => {
-//     const filterdata = Data.filter((i: DataType) => {
-//       switch(i.label) {
-//         case "new in": return i.id === 0;
-//         case "sofas": return i.id === 1;
-//         case "table": return i.id === 19;
-//         case "beds": return i.id === 36;
-//         case "linghting": return i.id === 45;
-//         case "kitchen": return i.id === 73;
-//         case "storage": return i.id === 118;
-//         default: return false;
-//       }
-//     });
-//     console.log(filterdata);
-    
-//     setdata(filterdata)
-//   }, [])
-
-//   const handleEnter = (item: DataType) => {
-//     setSelectedItem(item);
-//     setShowModal(true); 
-//   };
-//   const handleClose = () => {
-//     setShowModal(false); 
-//   };
-//   return (
-//     <ContainerModalEnter onMouseLeave={handleClose}>
-//          <Contant className='grid2'>
-//            {data?.map((item) => (
-//           <Navlink to={`/ul/${item.id && item.label}`} key={item.id}>
-//             <Buttones
-//               className='grid'
-//               onMouseEnter={() => handleEnter(item)}  
-//               style={{ cursor: 'pointer', marginBottom: '10px' }} 
-//             >
-//               {item.label}
-//             </Buttones>
-//           </Navlink>
-//         ))}
-//       </Contant>
-
-//       {showModal && selectedItem && (
-//         <ModalContainer onMouseLeave={handleClose}>
-//           <ModalMenusWrap>
-//             <ModalMenus>
-//               <p>{selectedItem.description}</p>
-//               <ul>
-//                 <li>{selectedItem.desc1}</li>
-//                 <li>{selectedItem.desc2}</li>
-//                 <li>{selectedItem.desc3}</li>
-//                 <li>{selectedItem.desc4}</li>
-//                 <li>{selectedItem.desc5}</li>
-//                 <li>{selectedItem.desc6}</li>
-//                 <li>{selectedItem.desc7}</li>
-//                 <li>{selectedItem.desc8}</li>
-//               </ul>
-//             </ModalMenus>
-//             <h2>{selectedItem.label}</h2>
-//             <ModalIMG>
-//               <img src={selectedItem.imgURL} alt={selectedItem.label} style={{ width: '100px' }} />
-//             </ModalIMG>
-//           </ModalMenusWrap>
-//         </ModalContainer>
-//       )}
-//     </ContainerModalEnter>
-//   )
-// }
-
-// export default DatailMenusID
 import React, { useEffect, useState } from 'react';
 import { DataType } from '../types/maintp';
 import { Data } from '../mock/mockDatail';
@@ -120,8 +40,9 @@ const DatailMenusID: React.FC = () => {
         <ContainerModalEnter onMouseLeave={handleClose}>
           <Contant className="grid2">
             {data.map((item, ind) => (
-              <Navlink to={`/ul/${item.id && item.label}`} key={ind}>
+              <Navlink to={`/menu-datail/${item.id && item.label}`} key={ind}>
                 <Buttones
+                  onClick={handleClose}
                   className="grid"
                   onMouseEnter={() => handleEnter(item)}
                   style={{ cursor: 'pointer', marginBottom: '10px' }}
@@ -135,23 +56,46 @@ const DatailMenusID: React.FC = () => {
           {showModal && selectedItem && (
             <ModalContainer onMouseLeave={handleClose}>
               <ModalMenusWrap>
+
                 <ModalMenus>
-                  <p>{selectedItem.description}</p>
-                  <ul>
-                    <li>{selectedItem.desc1}</li>
-                    <li>{selectedItem.desc2}</li>
-                    <li>{selectedItem.desc3}</li>
-                    <li>{selectedItem.desc4}</li>
-                    <li>{selectedItem.desc5}</li>
-                    <li>{selectedItem.desc6}</li>
-                    <li>{selectedItem.desc7}</li>
-                    <li>{selectedItem.desc8}</li>
-                  </ul>
+                 
+                    <div className='textwrap' onClick={handleClose}>
+                        <h5>{selectedItem.desc1}</h5>
+                        <h5>{selectedItem.desc2}</h5>
+                        <h5>{selectedItem.desc3}</h5>
+                        <h5>{selectedItem.desc4}</h5>
+                    </div>
+
+                    <div className='textwrap' onClick={handleClose}>
+                        <h5>{selectedItem.desc5}</h5>
+                        <h5>{selectedItem.desc6}</h5>
+                        <h5>{selectedItem.desc7}</h5>
+                        <h5>{selectedItem.desc8}</h5>
+                      </div>
+                 
                 </ModalMenus>
-                <h2>{selectedItem.label}</h2>
+
                 <ModalIMG>
-                  <img src={selectedItem.imgURL} alt={selectedItem.label} style={{ width: '100px' }} />
+                    <Navlink to={`/stul/${selectedItem.id}`}>
+                      <div className='imgContainer' onClick={handleClose}>
+                          <img src={selectedItem.imgURL} alt={selectedItem.label} />
+                          <h6></h6>
+                          <h5>{selectedItem.label}</h5>
+                          <h4>{selectedItem.cost}</h4>
+                      </div>
+                    </Navlink>
+
+                    <Navlink to={`/stul/${selectedItem.id}`}>
+                      <div className='imgContainer' onClick={handleClose}>
+                          <img src={selectedItem.img} alt={selectedItem.label} />
+                          <h6></h6>
+                          <h5>{selectedItem.label}</h5>
+                          <h4>{selectedItem.cost}</h4>
+                      </div>
+                    </Navlink>
+
                 </ModalIMG>
+
               </ModalMenusWrap>
             </ModalContainer>
           )}

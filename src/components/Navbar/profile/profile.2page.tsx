@@ -11,7 +11,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/joy/Checkbox';
 import { useState } from "react"
-import { ContainerP, Content } from "./profle.1"
+import { BottomBtn, ContainerP, Content } from "./profle.1"
 
 interface NameT {
     name: string
@@ -261,6 +261,10 @@ const ProfilePersonal2page = ( Props: NameT) => {
 
                     </Content_chesckout>
 
+                    <BottomBtn>
+                        <div className="buttonbtn"><button>save changes</button></div>
+                        <div className="btns is_btns"><button>cancel</button></div>
+                    </BottomBtn>
                 </Containre_Chescout_Content>
 
                  

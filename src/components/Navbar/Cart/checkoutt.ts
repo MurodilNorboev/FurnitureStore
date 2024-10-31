@@ -2,6 +2,10 @@ import styled from "styled-components";
 
 export const Container_Chescout = styled.div`
 padding-top: 0px;
+.nn {
+    background-color: #FFF;
+    box-shadow: 0px 10px 20px 0px rgba(209, 188, 178, 0.25);
+}
 `;
 export const Chescout_containerWrapper = styled.div`
 display: flex;
@@ -120,6 +124,35 @@ gap: 20px;
     gap: 10px;
     display: flex;
     flex-direction: column;
+    .labelv {
+        color: var(--middle-grey, #999);
+        font-feature-settings: 'liga' off, 'clig' off;
+        font-family: Prompt;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 14px; /* 116.667% */
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+    .labels {
+        color: var(--dark, #AD8775);
+        font-feature-settings: 'liga' off, 'clig' off;
+        font-family: Prompt;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px; /* 125% */
+    }
+    .texts {
+        color: var(--middle-grey, #999);
+        font-feature-settings: 'liga' off, 'clig' off;
+        font-family: Prompt;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px; /* 125% */
+    }
     input {
         padding: 10px 15px;
         width: 380px;
@@ -132,6 +165,7 @@ gap: 20px;
         padding: 10px 15px;
         width: 175px;
     }
+    
 }
 `;
 export const Chescout_Bottom = styled.div`
@@ -139,6 +173,19 @@ display: flex;
 align-items: center;
 width: 100%;
 gap: 10px;
+.labelvs {
+    border: none;
+    border-bottom: 1px solid #D1BCB2;
+        color: var(--main, #32324D);
+        font-feature-settings: 'liga' off, 'clig' off;
+        font-family: Prompt;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 20px; /* 125% */
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
 .chesbox_wrap {
     display: flex;
 }
@@ -157,4 +204,10 @@ h4 {
     width: 100%;
     padding: 10px 15px;
 }
+`;
+export const Right_Container = styled.div`
+max-width: 530px;
+border-top: 2px solid #DBA514;
+width: 100%;
+/* background-color: #FFF; */
 `;
