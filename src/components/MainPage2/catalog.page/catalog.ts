@@ -7,7 +7,6 @@ display: flex;
 justify-content: center;
 align-items: start;
 gap: 30px;
-
 @media only screen and (max-width: 1440px){
     .Saidbar {
         display: none;

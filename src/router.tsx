@@ -17,6 +17,7 @@ import DatailComponent from './components/filterDatail/2datail/filterData2'
 import DatailMenusID from './components/Navbar/dropdownmenus'
 import MenusDatailComponent from './components/Navbar/menus/menus.datail'
 import OrderComponent from './components/Navbar/Cart/order'
+import CatalogPagecomponent from './components/MainPage2/catalog.page/categories.pages'
 
 const RouterComponent = () => {
   const loginin = useLocation();
@@ -32,6 +33,7 @@ const filterCon = loginin.pathname === "/login" || loginin.pathname === "/regLog
         <Route path='/regLogin' element={< RegloginComponent />}/>  
         <Route path='/' element={<MainComponent />}/>  
         <Route path='/stol/:label' element={<Ssofar  name='furniture'/>} />
+        <Route path='/categorie' element={<CatalogPagecomponent  name='categorie'/>} />
 
         <Route path='/stul/:id' element={<DatailComponent  names='furniture' name='Armchair, fleece' propse={true} />} /> 
         <Route path='*' element={<ErrComponent />}/>  

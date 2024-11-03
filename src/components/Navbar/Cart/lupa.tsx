@@ -10,17 +10,11 @@ const Container = styled.div<{ $isOpen: boolean }>`
   width: ${({ $isOpen }) => ($isOpen ? '220px' : 'auto')}; 
   transition: width 0.5s ease; 
 `;
-
 const SearchIcon = styled.div<{ $isOpen: boolean }>`
   cursor: pointer;
   margin-left: 10px; 
   display: ${({ $isOpen }) => ($isOpen ? 'none' : 'block')}; 
 `;
-// const SearchIcon = styled.div<{ $active?: boolean }>`
-//     background-color: ${({ $active }) => ($active ? 'blue' : 'gray')};
-// `;
-
-
 const Input = styled.input<{ $isOpen: boolean }>`
   opacity: ${({ $isOpen }) => ($isOpen ? 1 : 0)};
   width: ${({ $isOpen }) => ($isOpen ? '200px' : '0')};
@@ -34,7 +28,6 @@ const Input = styled.input<{ $isOpen: boolean }>`
   margin-right: 180px;
   margin-left: -170px;
 `;
-
 const MultiCarousel: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 

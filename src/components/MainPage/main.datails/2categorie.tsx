@@ -50,7 +50,7 @@ const CategorieComponent: React.FC = () => {
                 </div>
               ))}
         
-              <Navlink to={"/datail"}>
+              <Navlink to={"/categorie"}>
                 <BtnWrap2>
                   <AnimatedButton2>
                     <div className="catcontan">
