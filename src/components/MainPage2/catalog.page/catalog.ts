@@ -202,7 +202,7 @@ position: absolute;
 z-index: 10;
 gap: 5px;
 top: 15%;
-left: 2%;
+left: 6.10%;
 display: flex;
 align-items: center;
 h3 {

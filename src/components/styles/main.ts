@@ -472,7 +472,7 @@ export const BtnWrap4 = styled.div`
   &:active {
       transform: scale(0.98); 
     }
-`
+`;
 export const ImgCons = styled.div`
   max-width: 1470px;
   gap: 0px;

@@ -1,47 +1,12 @@
-
 import React, { useEffect, useReducer, useState } from 'react';
 import { DataType, Tnames } from '../../types/maintp';
 import { useParams } from 'react-router-dom';
-// import { SofasDatail } from '../../mock/1sofas.datail';
 import { Datail_1, Datail_2, Datail_3, Datail_4, Datail_container, LeftCon, MidlCon, RightCon } from './main.datail';
 import { IconButton } from '@mui/joy';
 import car from '../../../assets/car.svg';
-// import { PagesName } from '../catalog.page/catalog';
 import home from '../../../assets/home.svg';
-// import { mockDatail, mockDatailType } from '../../mock/navbarDatail/navbar.mock';
-// import { Datailes } from '../../mock/2categories';
-// import { TAbleDatail } from '../../mock/3table.datail';
-// import { StorageDatail } from '../../mock/4storage.datail';
-// import { BedsDatail } from '../../mock/5beds.datail';
-// import { LightDatail } from '../../mock/6lighting.datail';
-// import { TextilDatail } from '../../mock/7textiles.datail';
-// import { DecorDatail } from '../../mock/8decor.datail';
-// import { KitchenDatail } from '../../mock/9kitchen.datail';
-// import styled from 'styled-components';
 import { Data } from '../../mock/mockDatail';
 import { PagesName } from '../../MainPage2/catalog.page/catalog';
-
-// interface FilterDataProps {
-//   optionOne: boolean;
-//   optionTwo: boolean;
-// }
-
-// const Filterdata = styled.div<FilterDataProps>`
-//   display: flex;
-//   flex-direction: column;
-  
-//   // Option 1: If optionOne is true, apply this style
-//   ${({ optionOne }) => optionOne && `
-//     background-color: red;
-//   `}
-  
-//   // Option 2: If optionTwo is true, apply this style
-//   ${({ optionTwo }) => optionTwo && `
-//     border: 2px solid green;
-//     background-color: green;
-//   `}
-// `;
-
 
 interface Tprops {
   count: number; 
@@ -51,7 +16,6 @@ interface Ttype {
   payload?: number;
 }
 const initialState: Tprops = { count: 0 }; 
-
 function reducer(state: Tprops, action: Ttype) {
   switch (action.type) {
     case 'increment':

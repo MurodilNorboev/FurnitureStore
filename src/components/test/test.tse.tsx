@@ -10,7 +10,6 @@ interface Todo {
   desc: string;
 
 }
-
 const SimpleSlider = () => {
   const [ todo, settodo ] = useState<Todo[]>([]); 
   const [ search, setsearch ] = useState('');

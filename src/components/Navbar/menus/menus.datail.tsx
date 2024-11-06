@@ -73,7 +73,7 @@ export default function MenusDatailComponent(Props: Tname) {
       <PagesName>
         <h3>Home</h3>
         <img src={home} alt="" />
-        {displayeddata.length > 0 && <h3>{displayeddata[0].label}</h3>}
+        {displayeddata.length > 0 && <h4>{displayeddata[0].label}</h4>}
       </PagesName>
 
       <SlaiderContainer>

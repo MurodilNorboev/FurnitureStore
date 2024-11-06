@@ -1,12 +1,13 @@
 import React from 'react'
-import una from '../../assets/Logo.svg'
-import CircleBtn from '../../assets/CircleBtn.svg'
-import FSBK from '../../assets/facebook.svg'
-import TwTr from '../../assets/twitter.svg'
-import Circle2 from '../../assets/CircleBtn2.svg'
-import { FooterCon } from '../styles/footer'
+import una from '../assets/Logo.svg'
+import CircleBtn from '../assets/CircleBtn.svg'
+import FSBK from '../assets/facebook.svg'
+import TwTr from '../assets/twitter.svg'
+import Circle2 from '../assets/CircleBtn2.svg'
+import { FooterCon } from '../components/styles/footer'
 import { IconButton } from '@mui/material'
-import { AnimatedButton, BtnWrap } from '../styles/navbar'
+import { AnimatedButton, BtnWrap } from '../components/styles/navbar'
+import { Navlink } from '../components/styles/LINK'
 
 const FooterComponent = () => {
   return ( //// BtnWrap
@@ -18,31 +19,47 @@ const FooterComponent = () => {
             <img src={una} alt="" />
           </div>
           <div className="footer_menus_01"> 
+
+            <Navlink to={'/about'}>
           <div className='tt'>
-          <AnimatedButton>
+            <AnimatedButton>
             <h5>about</h5>
             </AnimatedButton>
           </div>
+          </Navlink>
+
+          <Navlink to={'/blog'}>
           <div className='tt'>
            <AnimatedButton>
             <h5>blog</h5>
             </AnimatedButton>
           </div>
+          </Navlink>
+
+            <Navlink to={'/discount'}>
           <div className='tt'>
            <AnimatedButton>
             <h5>discounts</h5>
             </AnimatedButton>
           </div>
+            </Navlink>
+
+          <Navlink to={'/for_partners'}>
           <div className='tt'>
            <AnimatedButton>
             <h5>for partners</h5>
             </AnimatedButton>
           </div>
+          </Navlink>
+
+          <Navlink to={'/contacts'}>
           <div className='tt'>
            <AnimatedButton>
             <h5>contacts</h5>
             </AnimatedButton>
           </div>
+          </Navlink>
+
           </div> 
         </div>
 
