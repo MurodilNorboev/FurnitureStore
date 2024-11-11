@@ -4,17 +4,19 @@ export const ContainerP = styled.div`
 display: flex;
 `;
 export const Content = styled.div`
-padding: 40px 60px 60px 60px ;
+padding: 60px 60px 60px 60px ;
 width: 400px;
 height: 191px;
+display: flex;
+flex-direction: column;
+align-items: start;
+justify-content: center;
 background-color: #FFF;
 .checkbox_wrap {
     margin-top: 20px;
 }
 `;
 export const Chescout_one = styled.div`
-/* display: grid;
-grid-template-areas: "a a "; */
 display: flex;
 flex-direction: column;
 gap: 20px;
@@ -37,6 +39,17 @@ gap: 20px;
     gap: 10px;
     display: flex;
     justify-content: space-between;
+    .top {
+        color: var(--main, #32324D);
+        font-feature-settings: 'liga' off, 'clig' off;
+        font-family: Prompt;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 26px; /* 130% */
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
     h6 {
         position: relative;
         margin: 0px 0px -5px -55px;
@@ -229,4 +242,27 @@ gap: 20px;
     }
     }
 }
+`;
+/// acrive button 
+export const Tab = styled.div<{ active: boolean}>`
+width: auto;
+padding-bottom: 10px;
+margin-bottom: 20px;
+display: flex;
+flex-direction: column;
+color: #AD8775;
+font-size: 16px;
+font-weight: 400;
+line-height: 18px; /* 112.5% */
+letter-spacing: 2px;
+text-transform: uppercase;
+
+${(props) => props.active && `
+font-wight: bold;
+color: #32324D;
+border-bottom: 2px solid #DBA514;
+`}
+`;
+export const Contents = styled.div<{ active: boolean }>`
+display: ${(props) => (props.active ? 'block' : 'none')};
 `;

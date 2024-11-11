@@ -6,8 +6,6 @@ position: relative;
 width: 100%;
 max-height: auto;
 max-height: 614px;
-/* height: 614vmin; */
-border: 1px solid red;
 overflow: hidden;
 `;
 export const CarouselWrapper = styled.div<{ translate: number }>`
@@ -23,11 +21,12 @@ display: flex;
 justify-content: center;
 align-items: center;
 .imgaes {
-  border-bottom: 10px solid white;
-  border-left: 5px solid white;
+  /* border-bottom: 10px solid white; */
+  /* border-left: 5px solid white; */
 } .images {
-  border-bottom: 10px solid white;
-  border-right: 5px solid white;
+  border: 5px solid white;
+  /* border-bottom: 10px solid white; */
+  /* border-right: 5px solid white; */
 } .line {
   color: var(--accent, #DBA514);
   width: 40px;

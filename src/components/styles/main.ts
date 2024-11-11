@@ -664,7 +664,7 @@ export const CarouselItem = styled.div`
   @media (max-width: 768px) {
     width: 50%;
   }
-  @media (max-width: 480px) {
+  @media (max-width: 550px) {
     width: 100%;
   }
 `;

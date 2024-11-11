@@ -157,6 +157,8 @@ align-items: center;
 max-height: 450px;
 height: 100%;
 background-color: #FFF;
+
+
 h6 {
   margin-top: 30px;
   width: 30px;
@@ -190,19 +192,26 @@ h6 {
   letter-spacing: 1px;
 }
 `;
+
+
 export const Image = styled.img`
   width: 100%;
   height: auto;
   aspect-ratio: 3/3;
   padding: 7px;
   transition: transform 1ms ease;
+  @media screen and (max-width: 1440px) {
+  padding-left: 40px;
+}
 `;
 export const PagesName = styled.div`
 position: absolute;
 z-index: 10;
 gap: 5px;
-top: 15%;
-left: 6.10%;
+top: 120px;
+padding-left: 80px;
+max-width: 1450px;
+width: 100vw;
 display: flex;
 align-items: center;
 h3 {

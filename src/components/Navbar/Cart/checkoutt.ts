@@ -84,6 +84,7 @@ input {
 export const Containre_Chescout_Content = styled.div`
 background-color: #FFF;
 max-width: 1000px;
+width: 100vw;
 padding: 80px;
 `;
 export const Content_chesckout = styled.div`

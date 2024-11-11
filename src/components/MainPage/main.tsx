@@ -1,12 +1,10 @@
-import { BtnWrap3, BtnWrap4, ImgCons3, MainCon } from '../styles/main';
-// import Carousel2 from './carousel2_xx/carousel2';
+import { BtnWrap4, MainCon } from '../styles/main';
 import Carousel from '../Carousel/1carousel';
 import CategorieComponent from './main.datails/2categorie';
 import ImgComponent from './main.datails/7Blog'
 import ShopBYroom from './main.datails/3shopBYroom';
 import Room from './main.datails/4Room';
 import HotDisc from './main.datails/6HotDisc';
-
 import React, { useState, useEffect } from 'react'; 
 import { BtnWrap } from '../styles/navbar';
 import { ButtonL, CarouselContainer, CarouselItem, CarouselTrack, Carouselimgwrapp, Dot, DotsContainer } from '../styles/main';
@@ -85,14 +83,14 @@ const MainComponent: React.FC = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth <= 480) {
-        setSlidesToShow(1); // 1 image per slide on mobile
+      if (window.innerWidth <= 550) {
+        setSlidesToShow(1); 
       } else if (window.innerWidth <= 768) {
-        setSlidesToShow(2); // 2 images per slide on tablets
+        setSlidesToShow(2);
       } else if (window.innerWidth <= 1024) {
-        setSlidesToShow(3); // 3 images per slide on medium screens
+        setSlidesToShow(3); 
       } else {
-        setSlidesToShow(4); // 4 images per slide on larger screens
+        setSlidesToShow(4); 
       }
     };
 

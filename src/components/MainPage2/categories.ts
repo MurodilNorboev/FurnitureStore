@@ -98,22 +98,6 @@ margin-bottom: 40px;
     align-items: center;
     gap: 12px;
   }
-  /* @media only screen and (max-width: 1440px){
-    display: grid;
-    grid-template-areas: "a ";
-  }
-  @media only screen and (max-width: 1300px){
-    display: grid;
-    grid-template-areas: "a a a ";
-  }
-  @media only screen and (max-width: 1100px){
-    display: grid;
-    grid-template-areas: "a a ";
-  }
-  @media only screen and (max-width: 760px){
-    display: grid;
-    grid-template-areas: " a ";
-  } */
 `;
 export const TopContent2 = styled.div`
 display: grid;

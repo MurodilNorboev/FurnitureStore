@@ -1,9 +1,8 @@
 import styled from "styled-components";
 
 export const Datail_container = styled.div`
-border: 1px solid red;
 background-color: #F9F6F5;
-padding: 150px 0px 100px 0px;
+padding: 80px 0px 100px 0px;
 display: flex;
 flex-direction: column;
 gap: 100px;
@@ -16,31 +15,114 @@ background-color: #F9F6F5;
  .wrape {
     display: flex;
  }
+ @media screen and (max-width: 1440px) {
+        display: grid;
+        justify-content: center;
+        .wrape {
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+        } .MidlCon {
+            display: flex;
+            justify-content: center;
+            margin: 0px;
+        } .LeftCon {
+            display: flex;
+            width: 100%;
+            overflow: scroll;
+            .left_datail {
+                gap: 30px;
+                display: grid;
+                grid-template-areas: "a a a a a";
+            }
+        }
+        /////
+        .RightCon {
+            display: flex;
+            max-width: 900px;
+            width: 100%;
+            .right_cart {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+                max-width: 900px;
+
+                .midl_wrap {
+                    display: flex;
+                    justify-content: center;
+                    width: 100%;
+                    max-width: 900px;
+                .div1 {
+                        width: 100%;
+                        max-width: 900px;
+                        display: flex;
+                        justify-content: center;
+                    }
+                }
+            }
+            .bottom_Con {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+                max-width: 900px;
+            }
+        }
+ }
+ @media screen and (max-width: 550px) {
+    .right_cart {
+        display: flex;
+        margin-top: 10px;
+        .div1 {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .row_line {
+            margin-top: 10px;
+            height: 1px;
+            max-width: 200px;
+            width: 100%;
+        }
+        .bottom2 {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+ }
 `;
 export const LeftCon = styled.div`
 display: flex;
 flex-direction: column;
 justify-content: space-between;
-
+padding: 0px;
 .left_datail {
-width: 100px;
-height: 100px;
-border: 1px solid blue;
+   gap: 7px;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   height: 100%;
+   width: 120px;
 img, iframe {
-   width: 100px;
-height: 100px;
+   background-color: transparent;
+   padding: 3px;
+   width: 120px;
+   height: 120px;
+   &:hover {
+      background-color: #FFF;
+      box-shadow: 0px 10px 20px 0px rgba(209, 188, 178, 0.25);
+   }
 }
 }
 `;
 export const MidlCon = styled.div`
-padding: 0px 60px 0px 30px;
+margin: 0px 60px 0px 30px;
 max-width: 750px;
 height: 50vw;
 width: 100%;
 max-height: 630px;
    img {
     background-color: #FFF;
-    padding: 5px;
+    padding: 10px;
     max-width: 900px;
     width: 100%;
     height: 100%;
@@ -60,6 +142,8 @@ width: 420px;
     justify-content: center;
  } .wrap_text {
         display: flex;
+        flex-direction: column;
+        align-items: center;
  } h6 {
         margin-top: 40px;
         width: 40px;
@@ -108,7 +192,7 @@ width: 420px;
             justify-content: center;
             width: 36px;
             height: 36px;
-            padding-bottom: 13px;
+            padding-bottom: 3px;
             border-radius: 50%;
             background-color: #FFF;
         } .p_count {
@@ -135,9 +219,8 @@ width: 420px;
         height: 55px;
     }   
     } .texte1 {
+      background: #FFF;
         padding: 6px 8px;
-        background: #FFF;
-        box-shadow: 0px 10px 20px 0px rgba(209, 188, 178, 0.25);
         color: var(--accent, #DBA514);
         font-feature-settings: 'liga' off, 'clig' off;
         font-family: Prompt;
@@ -145,10 +228,16 @@ width: 420px;
         font-style: normal;
         font-weight: 500;
         line-height: 16px;
+        &:active {
+           transform: scale(0.98);
+        }
+        &:hover {
+         background: #FFF;
+         box-shadow: 0px 10px 20px 0px rgba(209, 188, 178, 0.25);
+        }
     } .texte2 {
         padding: 6px 8px;
         background: #FFF;
-        box-shadow: 0px 10px 20px 0px rgba(209, 188, 178, 0.25);
         color: var(--pastel, #D1BCB2);
         font-feature-settings: 'liga' off, 'clig' off;
         font-family: Prompt;
@@ -156,7 +245,14 @@ width: 420px;
         font-style: normal;
         font-weight: 500;
         line-height: 16px;
-    }
+        &:active {
+          transform: scale(0.98);
+        }
+        &:hover {
+         background: #FFF;
+         box-shadow: 0px 10px 20px 0px rgba(209, 188, 178, 0.25);
+        }
+    } 
  } .h2 {
         color: var(--dark-grey, #666);
         font-feature-settings: 'liga' off, 'clig' off;
@@ -169,7 +265,31 @@ width: 420px;
         text-transform: uppercase;
  } .img_wrap_colorCon :hover {
         background-color: #FFF;
+ } .str {
+   display: flex;
+   align-items: center;
+   gap: 2px;
+   img {
+      margin-top: -8px;
+      background-color: linear-gradient(rgba(0, 0, 0, 0.10), #D1BCB2);
+   }
  }
+ .imgwrapmini {
+   display: flex;
+   gap: 10px;
+   img {
+      padding: 4px;
+      background-color: transparent;
+      width: 60px;
+      height: 60px;
+      &:hover {
+         background-color: #FFF;
+      }
+      &:active {
+         transform: scale(0.98);
+      }
+   }
+ } 
  ////
  .bottom_Con {
     margin-bottom: 30px;
@@ -239,6 +359,9 @@ width: 420px;
     color: var(--text-white, #FFF);
     font-size: 14px;
     text-transform: uppercase;
+    &:active {
+      transform: scale(0.98);
+    }
     }
  } .cons_btn_like {
     display: flex;
@@ -259,18 +382,319 @@ width: 420px;
  }
 `;
 
+////
+export const Chescout_containerWrapper = styled.div`
+background-color: transparent !important;
+display: flex;
+gap: 25px;
+.dropdown {
+    margin: 35px 0px 0px 0px;
+    border: 1px solid #D1BCB2;
+    border-left: none;
+    border-right: none;
+}
+@media only screen and (max-width: 1420px){
+    padding: 0px;
+    .Containre_Chescout_Content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    .Chescout_Top {
+        display: grid;
+        grid-template-areas: "a";
+        justify-content: center;
+        align-items: center;
+        max-width: 1270px;
+    } .Chescout_one {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .h1 {
+            width: 80vw;
+        }
+    .inputs {
+            width: 80vw;
+            box-sizing: border-box;
+        } 
+    }
+    }
+}
+
+`;
+export const Containre_Chescout_Content = styled.div`
+padding: 0px 110px;
+`;
+export const Chescout_one = styled.div`
+display: flex;
+flex-direction: column;
+gap: 20px;
+
+.h1 {
+    color: var(--dark-grey, #666);
+    font-feature-settings: 'liga' off, 'clig' off;
+    font-family: Prompt;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 133.333% */ 
+} 
+.h22 {
+    position: absolute;
+    width: 100%;
+    h2 {
+    color: var(--main, #32324D);
+    font-feature-settings: 'liga' off, 'clig' off;
+    font-family: Prompt;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 30px; /* 125% */
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    }
+}
+.LasName_Con {
+    gap: 10px;
+    display: flex;
+    justify-content: space-between;
+    .inputs {
+        width: 380px;
+        border-bottom: 1px solid #D1BCB2;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        h4 {
+            color: var(--main, #32324D);
+            font-weight: 500;
+            font-size: 20px;
+            font-feature-settings: 'liga' off, 'clig' off;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        } h5 {
+            color: var(--main, #32324D);
+            font-feature-settings: 'liga' off, 'clig' off;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 20px; /* 125% */
+        } h6 {
+            color: var(--dark-grey, #666);
+            text-align: right;
+            font-feature-settings: 'liga' off, 'clig' off;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 20px; /* 125% */
+        }
+    }
+
+} 
+`;
+// datail 0_2 chisi !
+export const Datail_0_2 = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
+.Containre_Chescout_Content {
+    display: flex;
+    padding: 0px;
+}
+
+`;
 // datail 2 chisi !
 export const Datail_2 = styled.div`
-height: 484px;
-border: 1px solid rebeccapurple;
+display: flex;
+flex-direction: column;
+width: 100%;
+align-items: center;
+
+@media screen  and (max-width: 1440px){
+    .DotsContainer {
+        display: flex;
+        padding: 0px 20px;
+    }
+}
 `;
 // datil 3 chisi ! 
 export const Datail_3 = styled.div`
-height: 730px;
-border: 1px solid rebeccapurple;
-`;
-// datail 4 tinchisi ! 
-export const Datail_4 = styled.div`
-height: 566px;
-border: 1px solid rebeccapurple;
+display: flex;
+justify-content: center;
+gap: 90px;
+width: 100%;
+.datail3_menus {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+} .a {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    width: 780px;
+    gap: 60px;
+    h6 {
+        width: 100%;
+        height: 1px;
+        border-top: 1px solid #D1BCB2;
+    }
+    .wrap_text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+        h6 {
+            width: 40px;
+            height: 2px;
+            background: var(--accent, #DBA514);
+        } h3 {
+            color: var(--main, #32324D);
+            font-feature-settings: 'liga' off, 'clig' off;
+            font-size: 30px;
+            font-weight: 500;
+            line-height: 38px; 
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        } h2 {
+            color: var(--dark-grey, #666);
+            text-align: center;
+            font-feature-settings: 'liga' off, 'clig' off;
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 28px; /* 155.556% */
+        } 
+    } 
+} .b {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    width: 400px;
+    gap: 30px;
+    .wrap_text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+        h6 {
+            width: 40px;
+            height: 2px;
+            background: var(--accent, #DBA514);
+        } h3 {
+            color: var(--main, #32324D);
+            font-feature-settings: 'liga' off, 'clig' off;
+            font-size: 30px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 38px; /* 126.667% */
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+    } .str {
+        display: flex;
+        width: 100%;
+        justify-content: start;
+        align-items: center;
+        h5 {
+            margin-bottom: -1px;
+            margin-left: 5px;
+            color: var(--main, #32324D);
+            font-feature-settings: 'liga' off, 'clig' off;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 16px; /* 114.286% */
+        } img {
+            width: 30px;
+            height: 30px;
+        }
+    } .add {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 40px;
+        .tt {
+            height: 80px;
+        } input {
+            border: 1px solid var(--pastel, #D1BCB2);
+            background: var(--white, #FFF);
+            padding: 0px 50px 0px 5px;
+            height: 46px;
+        }
+    } .btnwrap {
+        display: flex;
+        width: 100%;
+        button {
+            border: none;
+            background: var(--pastel, #D1BCB2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            width: 100%;
+            height: 60px;
+            color: var(--secondary, #EDE4E0);
+            font-feature-settings: 'liga' off, 'clig' off;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: transform 0.3s ease;
+            &:active {
+                transform: scale(0.98);
+            }
+        }
+    }
+} 
+@media screen and (max-width: 1440px){
+    display: grid;
+    margin: 0px;
+    width: 100%;
+    .datail3_menus {
+        max-width: 940px;
+        width: 100vw;
+        gap: 30px;
+        h6 {
+            max-width: 900px;
+        }
+        .wrap {
+            br {
+                display: none;
+            }
+        }
+    } 
+    ////
+    .str {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+    } .inputwrap {
+        display: flex;
+        flex-direction: column;
+        max-width: 900px;
+        width: 100%;
+        input {
+            width: 100%;
+        }
+    } .str {
+        display: flex;
+        max-width: 940px;
+        width: 100%;
+        padding: 0px 20px;
+    } .add {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0px 20px;
+        input {
+            max-width: 900px;
+            width: 100%;
+        }
+    } .btnwrap {
+        display: flex;
+        width: 100%;
+        max-width: 940px;
+        padding: 0px 20px;
+        button {
+            width: 100%;
+            max-width: 900px;
+        }
+    }
+}
 `;

@@ -13,6 +13,7 @@ import { Image } from './catalog';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import home from '../../../assets/home.svg'
 import SortComponents from '../sort.catalog';
+import { Navlink } from '../../styles/LINK';
 
 export const StyledPagination = styled(Stack)`
   margin-top: 20px;
@@ -31,7 +32,6 @@ export default function CatalogPagecomponent(Props: Tname) {
   const [selectedLabel, setSelectedLabel] = useState<string | null>('mirrors');
 
   const ITEMS_PER_PAGE = isMobile ? 4 : isMobaile1 ? 8 : isTablet ? 12 : 16;
-  const columns = isMobile ? 1 : isMobaile1 ? 2 : isTablet ? 3 : 4;
   const desiredLabels = ['mirrors', 'wall art', 'clocks', 'vases', 'storage'];
   const desiredLabels2 = ['candles', 'Shelves', 'Plant Pots', 'Bathroom Accessories'];
 
@@ -158,18 +158,23 @@ export default function CatalogPagecomponent(Props: Tname) {
         </Sorts>
 
         <SlaiderContainer className='SlaiderContainer'>
-          <ImageGrid >
-            {selectedLabel && displayedData.map((item) => (
+          <ImageGrid>
+            {selectedLabel && displayedData.map((item, ind) => (
               <ImageContainer key={item.id}>
-                <Imagecontent>
-                  <Image 
-                  className='Image'
-                  src={item.images} alt="" />
-                  <h6></h6>
-                  <h5>{item.label}</h5>
-                  <h4>{item.cost}</h4>
-                  </Imagecontent>
-              </ImageContainer>
+                <Navlink to={`/stul/${item.id}`}>
+                  <Imagecontent>
+                      <Image 
+                      onMouseOver={(e) => (e.currentTarget.src = item.images2)}
+                      onMouseOut={(e) => (e.currentTarget.src = item.images)}
+                      className='Image h'
+                      src={item.images} 
+                      alt={`img-${ind + startIdx}`} />
+                      <h6></h6>
+                      <h5>{item.label}</h5>
+                      <h4>{item.cost}</h4>
+                    </Imagecontent>
+                  </Navlink>
+              </ImageContainer> 
             ))}
           </ImageGrid>
         </SlaiderContainer>
@@ -192,8 +197,3 @@ export default function CatalogPagecomponent(Props: Tname) {
     </TopContainer>
   );
 }
-
-
-
-
-

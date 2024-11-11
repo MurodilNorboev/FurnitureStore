@@ -11,13 +11,14 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/joy/Checkbox';
 import { useState } from "react"
-import { BottomBtn, ContainerP, Content } from "./profle.1"
+import { BottomBtn, ContainerP, Content, Contents, Tab } from "./profle.1"
 
 interface NameT {
     name: string
 }
 
 const ProfilePersonal2page = ( Props: NameT) => {
+  const [ active, setactive ] = useState(1);
     const [selected, setSelected] = useState('');
     const [rippleEffect, setRippleEffect] = useState(false);
   
@@ -40,121 +41,19 @@ const ProfilePersonal2page = ( Props: NameT) => {
                 <Chescout_containerWrapper className="Chescout_containerWrapper">
                     
                  <ContainerP className='Right_Container'>
-
                     <Content>
-                    <div className='checkbox_wrap'>
-                  <label style={{height:"30px"}}>
-                 <input
-                   type="radio"
-                   name="customRadio"
-                   value="option1"
-                   checked={selected === 'option1'}
-                   onChange={() => handleChange('option1')}
-                   style={{
-                     opacity: 0,
-                     position: "absolute",
-                   }}
-                    />
-                  <span
-                     style={{
-                        zIndex: 1,
-                       width: "70px",
-                       height: "20px",
-                       display: "inline-block",
-                       position: "relative",
-                     }}
-                     className=
-                     {rippleEffect && selected === 'option1' ? "ripple-container rippl" : "ripple-container"} >
-                     {selected === 'option1' && (
-                    <span/>
-                     )}
-                  </span>
-                  {selected === 'option1' && (
-                     <h4 style={{
-                        marginTop:"-25px",
-                      color:"#32324D",
-                      borderBottom:"2px solid #DBA514",
-                      paddingBottom:"7px",
-                      fontSize: 18,
-                      fontWeight: 400,
-                      lineHeight: "18px",
-                      letterSpacing: "2px",
-                      textTransform: "uppercase",
-                     }}>Personal</h4>
-                  )}
-                  {selected === 'option1' || (
-                     <h4 style={{
-                        marginTop:"-25px",
-                      color:"#AD8775",
-                      fontSize: 18,
-                      fontWeight: 400,
-                      lineHeight: "18px",
-                      letterSpacing: "2px",
-                      textTransform: "uppercase",
-                     }}>Personal</h4>
-                  )}
-                 
-                  </label>
-                    </div>
-
-                    <div className='checkbox_wrap'>
-                  <label style={{height:"30px"}}>
-                  <input
-                    type="radio"
-                    name="customRadio"
-                    value="option2"
-                    checked={selected === 'option2'}
-                    onChange={() => handleChange('option2')}
-                    style={{
-                      opacity: 0,
-                      position: "absolute",
-                    }}
-                  />
-                  <span
-                    className={rippleEffect && selected === 'option2' ? "ripple-container rippl" : "ripple-container"}
-                  >
-                    {selected === 'option2' && (
-                      <span
-                        style={{
-                          position: "absolute",
-                          top: "50%",
-                          left: "50%",
-                        }}
-                      />
-                    )}
-                  </span>
-                  {selected === 'option2' && (
-                     <h4 style={{
-                      marginTop:"-25px",
-                      color:" #32324D",
-                      paddingBottom:"7px",
-                      borderBottom:"2px solid #DBA514",
-                      fontSize: 18,
-                      fontWeight: 400,
-                      lineHeight: "18px",
-                      letterSpacing: "2px",
-                      textTransform: "uppercase",
-                     }}>logout</h4>
-                  )}
-                  {selected === 'option2' || (
-                     <h4 style={{
-                      marginTop:"-25px",
-                      color:"#AD8775",
-                      fontSize: 18,
-                      fontWeight: 400,
-                      lineHeight: "18px",
-                      letterSpacing: "2px",
-                      textTransform: "uppercase",
-                     }}>logout</h4>
-                  )}
-                  </label>
-                    </div>
+                    <Tab active={active === 1} onClick={() => setactive(1)}>
+                      Personal
+                    </Tab>
+                    <Tab active={active === 2} onClick={() => setactive(2)}>
+                     Logaut
+                    </Tab>
                     </Content>
-
                   </ContainerP>
 
                 <Containre_Chescout_Content className="Containre_Chescout_Content">
 
+                    <Contents active={active === 1}>
                     <Content_chesckout>
                     <div className="h22"><h2>personal info</h2></div>
 
@@ -260,11 +159,15 @@ const ProfilePersonal2page = ( Props: NameT) => {
                         </Chescout_Bottom>
 
                     </Content_chesckout>
-
                     <BottomBtn>
                         <div className="buttonbtn"><button>save changes</button></div>
                         <div className="btns is_btns"><button>cancel</button></div>
                     </BottomBtn>
+                    </Contents>
+                    <Contents active={active === 2}>
+                      content 2
+                    </Contents>
+
                 </Containre_Chescout_Content>
 
                  

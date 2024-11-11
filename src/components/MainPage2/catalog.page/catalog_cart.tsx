@@ -89,7 +89,6 @@ export default function Ssofar(Props: Tname) {
                       alt={`img-${ind + startIdx}`}
                       onMouseOver={(e) => (e.currentTarget.src = item.images2)}
                       onMouseOut={(e) => (e.currentTarget.src = item.images)}
-                      
                     />
                   ) : (
                     <p>No Image Available</p>

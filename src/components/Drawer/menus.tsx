@@ -1,14 +1,33 @@
-import { Box, Button, ButtonGroup, Divider, Drawer, List, ListItem, ListItemButton } from '@mui/material';
+import { Box, Button, ButtonGroup, Divider, Drawer, List } from '@mui/material';
 import * as React from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import { AnimatedButton, BtnWrap } from '../styles/navbar';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import Tajriba from '../Navbar/dropdownmenus';
+import { DataType } from '../types/maintp';
+import { Data } from '../mock/mockDatail';
+import { Navlink } from '../styles/LINK';
 
 type Anchor =  'left'  | 'right';
 
-export default function 
-Menus_Icon() {
+export default function Menus_Icon() {
+
+  const [data, setData] = React.useState<DataType[]>([]);
+  React.useEffect(() => {
+    const filterdata = Data.filter((i: DataType) => {
+      switch (i.label) {
+        case "new in": return i.id === 1;
+        case "sofas": return i.id === 10;
+        case "table": return i.id === 28;
+        case "beds": return i.id === 46;
+        case "linghting": return i.id === 55;
+        case "kitchen": return i.id === 82;
+        case "storage": return i.id === 127;
+        default: return false;
+      }
+    });
+    setData(filterdata);
+  }, []);
+
   const [state, setState] = React.useState({
     left: false,
     right: false,
@@ -35,54 +54,28 @@ Menus_Icon() {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <List>
-  
-      
-      <BtnWrap style={{width:"76px"}}>
-      <AnimatedButton>
-      sofas
-      <KeyboardArrowDownIcon className='icon' />
-      </AnimatedButton>
-      </BtnWrap>
-
-      <BtnWrap style={{width:"88px"}}>
-      <AnimatedButton>
-      tables
-      <KeyboardArrowDownIcon className='icon' />
-      </AnimatedButton>
-      </BtnWrap>
-
-      <BtnWrap style={{width:"68px"}}>
-      <AnimatedButton>
-      beds
-      <KeyboardArrowDownIcon className='icon' />
-      </AnimatedButton>
-      </BtnWrap>
-
-      <BtnWrap style={{width:"110px"}}>
-      <AnimatedButton>
-      lighting
-      <KeyboardArrowDownIcon className='icon' />
-      </AnimatedButton>
-      </BtnWrap>
-
-      <BtnWrap style={{width:"100px"}}>
-      <AnimatedButton>
-      kitchen
-      <KeyboardArrowDownIcon className='icon' />
-      </AnimatedButton>
-      </BtnWrap>
-
-      <BtnWrap style={{width:"104px"}}>
-      <AnimatedButton>
-      storage
-      <KeyboardArrowDownIcon className='icon' />
-      </AnimatedButton>
-      </BtnWrap>
-
+      {data.length > 0 ? (
+      <List sx={{
+        display:"flex",
+        flexDirection:"column",
+        alignItems:"start",
+        justifyContent:"center"
+      }}>
+        {data.map((val, ind) => (
+          <Navlink to={`/menu-datail/${val.id && val.label}`} key={ind}>
+              <BtnWrap>
+                  <AnimatedButton>
+                    {val.label}
+                    <KeyboardArrowDownIcon className='icon' />
+                  </AnimatedButton>
+              </BtnWrap>
+          </Navlink>
+        ))}
       </List>
 
-
+    ) : (
+      <p>Loading...</p>
+    )}
 
       <Divider />
 
@@ -103,7 +96,7 @@ Menus_Icon() {
       </ButtonGroup>
 
       {(['right'] as const).map((anchor) => (
-        <Drawer sx={{border:"1px solid red",}}
+        <Drawer
           key={anchor}
           anchor={anchor}
           open={state[anchor]}
@@ -111,6 +104,7 @@ Menus_Icon() {
         >
            
           {list(anchor)}
+          
         </Drawer>
        
       ))}
@@ -127,7 +121,7 @@ Menus_Icon() {
 </ButtonGroup>
 
 {(['left'] as const).map((anchor) => (
-  <Drawer sx={{border:"1px solid red",}}
+  <Drawer 
     key={anchor}
     anchor={anchor}
     open={state[anchor]}
@@ -142,6 +136,9 @@ Menus_Icon() {
 </>
   );
 }
+
+
+
  
 
 
