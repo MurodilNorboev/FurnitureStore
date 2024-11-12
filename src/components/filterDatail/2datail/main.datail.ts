@@ -12,28 +12,81 @@ export const Datail_1 = styled.div`
 display: flex;
 justify-content: center;
 background-color: #F9F6F5;
+gap: 0px;
+.wrape2 {
+    display: none;
+}
  .wrape {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    max-width: 890px;
+    width: 100vw;
  }
  @media screen and (max-width: 1440px) {
         display: grid;
         justify-content: center;
-        .wrape {
+        .wrape2 {
+            gap: 30px;
             display: flex;
             flex-direction: column-reverse;
             align-items: center;
+            .LeftCon {
+            width: auto;
+            overflow: scroll;
+            grid-template-areas: "a a a a a";
+            justify-content: space-between;
+            .left_datail {
+                display: grid;
+                grid-template-areas: "a a a a a";
+                gap: 30px;
+                justify-content: space-between;
+                padding: 15px; 
+                height: 140px;
+                max-width: 780px;
+                width: 100vw; 
+            } 
+            } .MidlCon {
+                max-width: 750px;
+                img, iframe{
+                    padding: 10px;
+                    max-width: 750px;
+                    max-height: 500px;
+                    height: 100%;
+                    aspect-ratio: 20/15;
+                    width: 100vw;
+                }
+            }
+        }
+        .wrape {
+            display: none;
+            flex-direction: column-reverse;
+            align-items: center;
+            gap: 20px;
         } .MidlCon {
             display: flex;
             justify-content: center;
             margin: 0px;
+            width: auto;
+            height: auto;
+            max-width: auto;
+            max-height: auto;
+            .imgwrap {
+                height: 950px;
+            }
         } .LeftCon {
-            display: flex;
-            width: 100%;
+            gap: 30px;
             overflow: scroll;
+            grid-template-areas: "a a a a a";
+            .lefta_datail_wrap {
+                width: 90px;
             .left_datail {
-                gap: 30px;
-                display: grid;
-                grid-template-areas: "a a a a a";
+                width: 90px;
+                .Thumb {
+                    width: 90px;
+                }
+            } 
             }
         }
         /////
@@ -68,7 +121,7 @@ background-color: #F9F6F5;
             }
         }
  }
- @media screen and (max-width: 550px) {
+ /* @media screen and (max-width: 550px) {
     .right_cart {
         display: flex;
         margin-top: 10px;
@@ -89,45 +142,96 @@ background-color: #F9F6F5;
         }
     }
  }
+ @media screen and (max-width: 450px) {
+    .LeftCon {
+            display: flex;
+            width: 100%;
+            max-width: 350px;
+            overflow: scroll;
+            .left_datail {
+                gap: 30px;
+                display: grid;
+                grid-template-areas: "a a a a a";
+                justify-content: space-between;
+            }
+        }
+ }
+ @media screen and (max-width: 750px) {
+    .LeftCon {
+            display: flex;
+            width: 100%;
+            max-width: 420px;
+            min-width: 350px;
+            overflow: scroll;
+            .left_datail {
+                gap: 30px;
+                display: grid;
+                grid-template-areas: "a a a a a";
+                justify-content: space-between;
+            }
+        }
+ } */
 `;
 export const LeftCon = styled.div`
 display: flex;
 flex-direction: column;
 justify-content: space-between;
 padding: 0px;
+max-width: 900px;
+height: 100%;
+
 .left_datail {
-   gap: 7px;
    display: flex;
    flex-direction: column;
+   align-items: center;
    justify-content: space-between;
-   height: 100%;
-   width: 120px;
+   overflow: scroll;
 img, iframe {
    background-color: transparent;
    padding: 3px;
-   width: 120px;
-   height: 120px;
-   &:hover {
-      background-color: #FFF;
-      box-shadow: 0px 10px 20px 0px rgba(209, 188, 178, 0.25);
-   }
+   width: 90px;
+   height: 90px;
+   transition: transform 200ms ease-in-out;
 }
 }
 `;
 export const MidlCon = styled.div`
 margin: 0px 60px 0px 30px;
-max-width: 750px;
-height: 50vw;
+max-width: 725px;
+height: 35vw;
+background-color: transparent;
 width: 100%;
 max-height: 630px;
-   img {
-    background-color: #FFF;
-    padding: 10px;
+    iframe, .imges, img {
+     transition: "transform 0.3s ease";
+     background-color: #FFF;
+     padding: 10px;
+     max-width: 700px;
+     max-height: 510px;
+     width: 100vw; 
+     height: 100vw;
+    }
+.wrape2 {
+    .imgwrap, iframe, .imges, img {
+     transition: "transform 0.3s ease";
+     background-color: transparent;
+     padding: 10px;
+     max-width: 700px;
+     max-height: 515px;
+     min-width: 350px;
+     min-height: 150px;
+     width: 100vw; 
+     height: 100vw;
+    }
+}
+@media screen and (max-width: 1440px) {
+    /* img, iframe {
     max-width: 900px;
-    width: 100%;
+    max-height: 640px;
+    width: 100%; 
     height: 100%;
-    max-height: 730px;
-   }
+   } */
+}
 `;
 export const RightCon = styled.div`
 display: flex;
@@ -381,7 +485,43 @@ width: 420px;
     
  }
 `;
+//// ===== imglar almashinuvchi div ====== 
+export const Thumb = styled.img<{ active?: boolean }>`
+  width: 120px;
+  height: 120px;
+  background-color: #FFF !important;
+  padding: 7px;
+  padding: ${(props) => (props.active ? '6px' : 'none')};
+  box-shadow: ${(props) => (props.active ? 'rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;' : 'none')};
+  border: ${(props) => (props.active ? '0.10px solid gray' : 'none')};
+  cursor: pointer;
+`;
+export const Thumbs = styled.iframe<{ actives?: boolean }>`
+  width: 120px;
+  height: 120px;
+  background-color: #FFF !important;
+  padding: 3px;
+  padding: ${(props) => (props.actives ? '7px' : 'none')};
+  box-shadow: ${(props) => (props.actives ? 'rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px' : 'none' )};
+  border: ${(props) => (props.actives ? '0.10px solid gray' : 'none')};
+  cursor: pointer;
+`;
+export const Tab = styled.div<{ active: boolean }>`
+  padding: 3px;
+  background-color: #FFF;
+  cursor: pointer;
 
+  ${(props) => props.active && `
+    color: #32324D; 
+    border: 0.10px solid gray;
+    height: 96px;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    padding: 2px;
+  `}
+`;
+export const Content = styled.div<{ active: boolean }>`
+  display: ${(props) => (props.active ? 'block' : 'none')};
+`;
 ////
 export const Chescout_containerWrapper = styled.div`
 background-color: transparent !important;

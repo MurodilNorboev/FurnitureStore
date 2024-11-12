@@ -118,6 +118,7 @@ export const ImageGrid = styled.div`
   gap: 30px;
   .Image {
     height: 300px;
+    padding: 5px;
   }
   @media (max-width: 1440px){
     grid-template-columns: repeat(4, 1fr);
@@ -125,6 +126,7 @@ export const ImageGrid = styled.div`
 
   @media (max-width: 1200px) {
     grid-template-columns: repeat(3, 1fr); 
+    padding: 0px;
     .Image {
       height: 330px;
     }

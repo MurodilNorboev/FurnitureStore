@@ -24,6 +24,7 @@ import For_PartnerComponent from './FOOTER/for_partners/for_partners.con'
 import Contactcomponent from './FOOTER/contacts/contacts.con'
 import DatailComponent from './components/filterDatail/2datail/filterData2'
 import BlogdatailComponent from './FOOTER/blog/blog.datail'
+import DatailNavbarFilterComponent from './components/filterDatail/2datail/filterData.Navbar'
 
 const RouterComponent = () => {
   const loginin = useLocation();
@@ -42,6 +43,8 @@ const filterCon = loginin.pathname === "/login" || loginin.pathname === "/regLog
         <Route path='/categorie' element={<CatalogPagecomponent  name='categorie'/>} />
 
         <Route path='/stul/:id' element={<DatailComponent  names='furniture' name='Armchair, fleece' propse={true} />} /> 
+        <Route path='/stul2/:id' element={<DatailNavbarFilterComponent  names='furniture' name='Armchair, fleece' propse={true} />} />
+
         <Route path='*' element={<ErrComponent />}/>  
         <Route path='/menu/:id' element={<DatailMenusID />} />
         <Route path='/menu-datail/:label' element={<MenusDatailComponent name='New In'/>} />

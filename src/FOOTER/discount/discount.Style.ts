@@ -37,21 +37,6 @@ justify-content: start;
 padding: 60px;
 gap: 30px;
 background: var(--white, #FFF);
-    /* h2 {
-  color: var(--dark, #AD8775);  
-  font-feature-settings: 'liga' off, 'clig' off; 
-  font-size: 16px;  
-  font-weight: 400;  
-  letter-spacing: 2px;  
-  text-transform: uppercase; 
-  &::before {
-    content: "❖";  
-    color: var(--main, #32324D);  
-    font-size: 20px;  
-    margin-right: 8px;  
-  }
-} */
-
 `;
 export const DiscountLeft = styled.div`
 width: 900px;

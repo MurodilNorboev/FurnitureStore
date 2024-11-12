@@ -76,7 +76,7 @@ const DatailMenusID: React.FC = () => {
                 </ModalMenus>
 
                 <ModalIMG>
-                    <Navlink to={`/stul/${selectedItem.id}`}>
+                    <Navlink to={`/stul2/${selectedItem.id}`}>
                       <div className='imgContainer' onClick={handleClose}>
                           <img src={selectedItem.imgURL} alt={selectedItem.label} />
                           <h6></h6>
@@ -85,7 +85,7 @@ const DatailMenusID: React.FC = () => {
                       </div>
                     </Navlink>
 
-                    <Navlink to={`/stul/${selectedItem.id}`}>
+                    <Navlink to={`/stul2/${selectedItem.id}`}>
                       <div className='imgContainer' onClick={handleClose}>
                           <img src={selectedItem.img} alt={selectedItem.label} />
                           <h6></h6>

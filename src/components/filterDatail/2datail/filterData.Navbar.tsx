@@ -99,7 +99,7 @@ function reducer(state: Tprops, action: Ttype) {
   }
 }
 
-const DatailComponent: React.FC<Tnames> = ({ name }) => {
+const DatailNavbarFilterComponent: React.FC<Tnames> = ({ name }) => {
   const [activeTab, setactiveTab] = useState(1);
   const [currentImage, setCurrentImage] = useState<string>(''); 
   const [imagesArray, setImagesArray] = useState<string[]>([]); 
@@ -119,10 +119,10 @@ const DatailComponent: React.FC<Tnames> = ({ name }) => {
     const selectedProduct = Data.find(i => i.id === parsent);
     if (selectedProduct) {
       const imageArray = [
-        selectedProduct.images,
+        selectedProduct.imgURL,
+        selectedProduct.img,
         selectedProduct.images2,
         selectedProduct.images3,
-        selectedProduct.images4,
         selectedProduct.videos1,
       ].filter(Boolean); 
       const flatImages = imageArray.flat(); 
@@ -130,8 +130,11 @@ const DatailComponent: React.FC<Tnames> = ({ name }) => {
       const firstImage = flatImages.find(image => !image.endsWith('.mp4') && !image.includes('youtube.com'));
       setCurrentImage(firstImage || ''); 
 
-      if (selectedProduct.images) {
-        setCurrentImage(selectedProduct.images)
+      if (selectedProduct.imgURL) {
+        setCurrentImage(selectedProduct.imgURL)
+      } 
+      else if (selectedProduct.img) {
+        setCurrentImage(selectedProduct.img); 
       }
       else if (selectedProduct.videos1) {
         setCurrentVideo(selectedProduct.videos1); 
@@ -208,6 +211,7 @@ const DatailComponent: React.FC<Tnames> = ({ name }) => {
            <h4>{name}</h4>
          </PagesName>
       </div>
+
       <Datail_1>
         <div className="wrape">
           <LeftCon className="LeftCon">
@@ -604,4 +608,4 @@ const DatailComponent: React.FC<Tnames> = ({ name }) => {
   );
 };
 
-export default DatailComponent;
+export default DatailNavbarFilterComponent;

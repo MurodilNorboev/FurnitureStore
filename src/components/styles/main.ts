@@ -238,7 +238,7 @@ align-items: end;
     grid-template-areas: " a ";
   }
   `;
-///// ======buttons======
+///// ====== buttons ======
 export const ButtonL = styled.button`
   border: none;
   width: 299px;
@@ -618,7 +618,7 @@ export const ImgCons = styled.div`
     padding: 5px;
   }
 `;
-////// =========multi carousel========= !!!
+////// ========= multi carousel ========= !!!
 export const CarouselContainer = styled.div`
 background-color: transparent;
   max-width: 1300px;
