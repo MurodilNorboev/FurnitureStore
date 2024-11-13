@@ -624,7 +624,8 @@ background-color: transparent;
   max-width: 1300px;
   padding: 20px 5px 20px 5px;
   height: auto;
-  overflow: scroll;
+  /* overflow: scroll; */
+  overflow: hidden;
 
   @media only screen and (max-width: 680px) {
     width: 100%;

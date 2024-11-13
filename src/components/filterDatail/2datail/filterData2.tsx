@@ -20,6 +20,7 @@ import { Data } from '../../mock/mockDatail';
 import ReactImageZoom from 'react-image-zoom';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
+import { Height } from '@mui/icons-material';
 
 
 const datatest = [

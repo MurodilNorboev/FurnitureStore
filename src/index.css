@@ -19,3 +19,24 @@ code {
 .splide__arrow {
   display: none !important; /* Kutubxona tugmalarini yashiradi */
 }
+.react-image-zoom-container {
+  box-shadow: none !important; 
+  transition: none !important; /* animatsiyalarni olib tashlash */
+}
+
+.react-image-zoom-img {
+  box-shadow: none !important;
+  transition: none !important;
+}
+.js-image-zoom__zoomed-image {
+  z-index: 1;
+}
+/* .js-image-zoom__zoomed-area {
+  border: 1px solid red;
+} */
+.js-image-zoom__zoomed-area {
+display: none;
+background-color: transparent !important;
+}
+
+
