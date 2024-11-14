@@ -22,10 +22,10 @@ import DiscountComponent from './FOOTER/discount/discount.con'
 import BlogContainter from './FOOTER/blog/blog.con'
 import For_PartnerComponent from './FOOTER/for_partners/for_partners.con'
 import Contactcomponent from './FOOTER/contacts/contacts.con'
-import DatailComponent from './components/filterDatail/2datail/filterData2'
 import BlogdatailComponent from './FOOTER/blog/blog.datail'
-import DatailNavbarFilterComponent from './components/filterDatail/2datail/filterData.Navbar'
+import DatailNavbarFilterComponent from './components/filterDatail/filterData.Navbar'
 import ImageSlider from './components/test/tests2'
+import DatailComponent from './components/filterDatail/filterData2'
 
 const RouterComponent = () => {
   const loginin = useLocation();
@@ -67,7 +67,7 @@ const filterCon = loginin.pathname === "/login" || loginin.pathname === "/regLog
         <Route path='/for_partners' element={<For_PartnerComponent />} />
         <Route path='/contacts' element={<Contactcomponent />} />
 
-        <Route path='/c' element={<ImageSlider />} />
+        <Route path='/c/:id' element={<ImageSlider />} />
     </Routes>
 
     {!filterCon && <FooterComponent />}

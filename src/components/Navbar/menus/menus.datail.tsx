@@ -81,6 +81,7 @@ export default function MenusDatailComponent(Props: Tname) {
           {displayeddata.map((item, ind) => (
             <ImageContainer key={`${item.id} || ${item.label}`}>
               <Navlink to={`/stul/${item.id}`}>
+              {/* <Navlink to={`/c/${item.id}`}> */}
                 <Imagecontent>
                   {item.images ? (
                     <Image 

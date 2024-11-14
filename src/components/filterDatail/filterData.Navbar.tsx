@@ -1,160 +1,32 @@
-import { IconButton } from '@mui/joy';
-import car from '../../../assets/car.svg';
-import star from '../../../assets/Star.svg'
-import star1 from '../../../assets/Star (1).svg'
-import love from '../../../assets/love.svg'
-import miniimg1 from '../../../assets/stul.webp'
-import miniimg2 from '../../../assets/stul2.jpg'
-import miniimg3 from '../../../assets/stul3.webp'
-import { PagesName } from "../../MainPage2/catalog.page/catalog"
-import home from '../../../assets/home.svg'
-import { Chescout_Top, } from "../../Navbar/profile/profle.1"
-import { Chescout_containerWrapper, Chescout_one, Containre_Chescout_Content, Content, Datail_0_2, Datail_1, Datail_2, Datail_3, Datail_container, LeftCon, MidlCon, RightCon, Tab, Thumb, Thumbs } from './main.datail';
-import { BtnWrap4, ButtonL } from '../../styles/main';
-import { CarouselContainer, CarouselItem, CarouselTrack, Carouselimgwrapp,DotsContainer } from '../../styles/main';
-import circle3 from '../../../assets/leftwhite.svg';
-import { BtnWrap } from '../../styles/navbar';
 import React, { useEffect, useReducer, useState } from 'react';
-import { DataType, Tnames } from '../../types/maintp';
-import { Data } from '../../mock/mockDatail';
-import ReactImageZoom from 'react-image-zoom';
-import styled from 'styled-components';
+import { DataType, Tnames } from '../types/maintp';
+import { Data } from '../mock/mockDatail';
 import { useParams } from 'react-router-dom';
-import { Height } from '@mui/icons-material';
+import { IconButton } from '@mui/joy';
+import { PagesName } from "../MainPage2/catalog.page/catalog"
+import { Chescout_Top, } from "../Navbar/profile/profle.1"
+import { Chescout_containerWrapper, Chescout_one, Container, Containre_Chescout_Content, Content, Datail_0_2,Datail_2, Datail_3, Iframe, Image, ImageWrapper, Lens, RightCon, Tab, ZoomedContainer } from './main.datail';
+import { BtnWrap4, ButtonL } from '../styles/main';
+import { CarouselContainer, CarouselItem, CarouselTrack, Carouselimgwrapp,DotsContainer } from '../styles/main';
+import { BtnWrap } from '../styles/navbar';
+import { datatest, datatestT, initialState, reducer } from './main.mock.types';
+import car from '../../assets/car.svg';
+import star from '../../assets/Star.svg'
+import star1 from '../../assets/Star (1).svg'
+import love from '../../assets/love.svg'
+import miniimg1 from '../../assets/stul.webp'
+import miniimg2 from '../../assets/stul2.jpg'
+import miniimg3 from '../../assets/stul3.webp'
+import home from '../../assets/home.svg'
+import circle3 from '../../assets/leftwhite.svg';
 
-
-const datatest = [
-  {
-    img: 'https://cdn.shopify.com/s/files/1/0781/8425/1702/files/Micadoni-MIC_3S_192_F1_DIANA1-1_1920x1437_crop_center.jpg?v=1728635185',
-    text: 'ebro bedside table',
-    cost: '$250',
-    seil: 'ebro bedside table'
-  },
-  {
-    img: 'https://cdn.shopify.com/s/files/1/0781/8425/1702/files/Micadoni-MIC_3S_192_F1_DIANA1-1_1920x1437_crop_center.jpg?v=1728635185',
-    text: 'Tirado chair',
-    cost: '$280',
-    seil: 'ebro bedside table',
-  },
-  {
-    img: 'https://cdn.shopify.com/s/files/1/0781/8425/1702/files/Micadoni-MIC_3S_192_F1_DIANA1-1_1920x1437_crop_center.jpg?v=1728635185',
-    text: 'caleido lamp',
-    cost: '$355',
-    seil: 'ebro bedside table',
-  },
-  {
-    img: 'https://cdn.shopify.com/s/files/1/0781/8425/1702/files/Micadoni-MIC_3S_192_F1_DIANA1-1_1920x1437_crop_center.jpg?v=1728635185',
-    text: 'caleido lamp',
-    cost: '$240',
-    seil: 'ebro bedside table',
-  },
-  {
-    img: 'https://cdn.shopify.com/s/files/1/0781/8425/1702/files/Micadoni-MIC_3S_192_F1_DIANA1-1_1920x1437_crop_center.jpg?v=1728635185',
-    text: 'emmi set',
-    cost: '$200',
-    seil: 'ebro bedside table',
-  },
-  {
-    img: 'https://cdn.shopify.com/s/files/1/0781/8425/1702/files/Micadoni-MIC_3S_192_F1_DIANA1-1_1920x1437_crop_center.jpg?v=1728635185',
-    text: 'textiles',
-    cost: '$260',
-    seil: 'ebro bedside table',
-  },
-  {
-    img: 'https://cdn.shopify.com/s/files/1/0781/8425/1702/files/Micadoni-MIC_3S_192_F1_DIANA1-1_1920x1437_crop_center.jpg?v=1728635185',
-    text: 'Sofas set',
-    cost: '$230',
-    seil: 'ebro bedside table',
-  },
-  {
-    img: 'https://cdn.shopify.com/s/files/1/0781/8425/1702/files/Micadoni-MIC_3S_192_F1_DIANA1-1_1920x1437_crop_center.jpg?v=1728635185',
-    text: 'beds set',
-    cost: '$210',
-    seil: 'ebro bedside table',
-  },
-];
-interface datatestT {
-  img: string;
-  text: string;
-  cost: string;
-  seil: string;
-}
-interface Tprops {
-  count: number; 
-}
-interface Ttype {
-  type: 'increment' | 'decrement' | 'refresh'; 
-  payload?: number;
-}
-const initialState: Tprops = { count: 0 }; 
-function reducer(state: Tprops, action: Ttype) {
-  switch (action.type) {
-    case 'increment':
-      return { count: state.count + (action.payload || 0) };
-    case 'decrement':
-      return { count: Math.max(1, state.count - (action.payload || 1)) };
-    case 'refresh':
-      return { count: 0 }; 
-    default:
-      return state;
-  }
-}
-
-const DatailComponent: React.FC<Tnames> = ({ name }) => {
-  const [activeTab, setactiveTab] = useState(1);
-  const [currentImage, setCurrentImage] = useState<string>(''); 
-  const [imagesArray, setImagesArray] = useState<string[]>([]); 
-  const [currentVideo, setCurrentVideo] = useState<string>(''); /// ^ hoverninki !
+//{ name }
+const DatailNavbarFilterComponent: React.FC<Tnames> = ({ name }) => {
   const [ datas, setdatas ] = useState<datatestT[] | null>(null);
   useEffect(() => {setdatas(datatest)},[])
   const [slideIndex, setSlideIndex] = useState<number>(0);
   const [slidesToShow, setSlidesToShow] = useState<number>(4); 
   const [isHovered, setIsHovered] = useState<boolean>(false); //// ^ carouselninki !
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const [ data, setData ] = useState<DataType[] | null>(null); //// ^ resuserniki !
-  const { id } = useParams<{ id: string }>(); 
-
-  //// hover ishlashi
-  const parsent = id ? parseInt(id) : 0; 
-  useEffect(() => {
-    const selectedProduct = Data.find(i => i.id === parsent);
-    if (selectedProduct) {
-      const imageArray = [
-        selectedProduct.images,
-        selectedProduct.images2,
-        selectedProduct.images3,
-        selectedProduct.images4,
-        selectedProduct.videos1,
-      ].filter(Boolean); 
-      const flatImages = imageArray.flat(); 
-      setImagesArray(flatImages); 
-      const firstImage = flatImages.find(image => !image.endsWith('.mp4') && !image.includes('youtube.com'));
-      setCurrentImage(firstImage || ''); 
-
-      if (selectedProduct.images) {
-        setCurrentImage(selectedProduct.images)
-      }
-      else if (selectedProduct.videos1) {
-        setCurrentVideo(selectedProduct.videos1); 
-      }
-    }
-  }, [id]);
-  const handleImageChange = (imageUrl: string) => {
-    if (imageUrl.endsWith('.mp4') || imageUrl.includes('youtube.com')) {
-      setCurrentVideo(imageUrl); 
-      setCurrentImage(''); 
-    } else {
-      setCurrentImage(imageUrl); 
-      setCurrentVideo(''); 
-    }
-  };
-  const zoomProps = {
-    width: 700, 
-    height: 510, 
-    zoomWidth: 500, 
-    zoomHeight: 100, 
-    img: currentImage,
-  };
 
   /// carousel aylanishi 
   const totalSlides = 8; 
@@ -190,135 +62,130 @@ const DatailComponent: React.FC<Tnames> = ({ name }) => {
   const prevSlide = () => {
     setSlideIndex((prevIndex) => (prevIndex - 1 + totalSlides - slidesToShow + 1) % (totalSlides - slidesToShow + 1));
   };
-  /// datalarni olish label !!!!!!
+
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const [activeTab, setActiveTab] = useState(1);
+  const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
+  const [isZoomEnabled, setIsZoomEnabled] = useState(true); 
+  const [data, setData] = useState<DataType[]>([]);
+  const { id } = useParams();
+  const parsent = id ? parseInt(id) : 0;
+
   useEffect(() => {
-    const filterData = Data.filter(item => item.id === parsent);
-    setData(filterData)
-  }, [])
+    const filterData = Data.filter(i => i.id === parsent);
+    setData(filterData);
+
+    const checkZoomStatus = () => {
+      if (window.innerWidth > 1200) {
+        setIsZoomEnabled(true); 
+      } else {
+        setIsZoomEnabled(false); 
+      }
+    };
+    window.addEventListener('resize', checkZoomStatus);
+    checkZoomStatus();
+    return () => {
+      window.removeEventListener('resize', checkZoomStatus);
+    };
+  }, [id]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLImageElement>) => {
+    const { left, top } = e.currentTarget.getBoundingClientRect();
+    setCursorPos({
+      x: Math.max(50, Math.min(e.clientX - left, 550)), 
+      y: Math.max(50, Math.min(e.clientY - top, 450)),  
+    });
+  };
   return (
-    <Datail_container>
-       <div style={{display:"flex",width:"100%",justifyContent:"center"}}>
+    <Container>
+
+      <div style={{display:"flex",width:"100%",justifyContent:"center"}}>
          <PagesName>
            <h3>Home</h3>
              <img src={home} alt="Home icon" />
-               {data ? 
-               (<h3>{data[0].label}</h3>) 
-                 : 
-               (<h3>Ma'lumotlar yuklanmoqda...</h3>)}
+               <h3>{data.map((val) => (<h3 key={val.id}>{val.label}</h3>))}</h3>
              <img src={home} alt="Home icon" />
            <h4>{name}</h4>
          </PagesName>
       </div>
-      <Datail_1>
-        <div className="wrape">
-          <LeftCon className="LeftCon">
-            {imagesArray.length > 0 && imagesArray.map((image, index) => (
-              <div key={index} onClick={() => handleImageChange(image)}>
-                {image.endsWith('.mp4') || image.includes('youtube.com') ? (
 
-                  <div className='left_datail'>
-                  <Thumbs
-                    src={image}
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    style={{ cursor: 'pointer',pointerEvents: 'none' }}
-                    actives={currentVideo === image}
-                  />
-
-                  </div>
-                ) : (
-                  <div className='left_datail'>
-                  <Thumb
-                    src={image}
-                    alt={`Thumbnail ${index + 1}`}
-                    style={{ cursor: 'pointer' }}
-                    active={currentImage === image}
-                  />
-                  </div>
-                )}
-              </div>
-            ))}
-          </LeftCon>
-
-          <MidlCon>
-            {currentVideo && currentVideo.includes('youtube.com') ? (
-              <iframe
-                src={currentVideo}
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
-            ) : (
-              currentImage && !currentImage.endsWith('.mp4') && (
-                <div className='imgwrap'>
-                  <ReactImageZoom {...zoomProps} className='imges' />
-                </div>
-              )
-            )}
-
-          </MidlCon>
-        </div>
-        <div className='wrape2'>
-     <LeftCon className='LeftCon'>
-       {data?.map((val) => (
-      <div key={val.id} className="left_datail">
-        <Tab active={activeTab === 1} onClick={() => setactiveTab(1)}>
-          <img src={val.images} alt={`Image for Tab 1`} />
-        </Tab>
-
-        <Tab active={activeTab === 2} onClick={() => setactiveTab(2)}>
-          <img src={val.images2} alt={`Image for Tab 2`} />
-        </Tab>
-
-        <Tab active={activeTab === 3} onClick={() => setactiveTab(3)}>
-          <img src={val.images3} alt={`Image for Tab 3`} />
-        </Tab>
-
-        <Tab active={activeTab === 4} onClick={() => setactiveTab(4)}>
-          <img src={val.images4} alt={`Image for Tab 4`} />
-        </Tab>
-
-        <Tab active={activeTab === 5} onClick={() => setactiveTab(5)} 
-          style={{zIndex:11}}>
-          <iframe src={val.videos1} frameBorder="0" title={`Video for Tab 5`} style={{    pointerEvents: "none"}} />
-        </Tab>
-      </div>
-    ))}
-  </LeftCon>
-
-  <MidlCon className='MidlCon'>
-    {data?.map((val) => (
-      <Content className='Content' key={val.id} active={activeTab === 1 || activeTab === 2 || activeTab === 3 || activeTab === 4 || activeTab === 5} 
-      style={{transformOrigin: "center center",objectFit: "contain",}}
-      
-      >
-        {activeTab === 1 && val.images && (
-          <img src={val.images} alt={`Image for ${val.id}`} />
-        )}
-        {activeTab === 2 && val.images2 && (
-          <img src={val.images2} alt={`Image for ${val.id}`} />
-        )}
-        {activeTab === 3 && val.images3 && (
-          <img src={val.images3} alt={`Image for ${val.id}`} />
-        )}
-        {activeTab === 4 && val.images4 && (
-          <img src={val.images4} alt={`Image for ${val.id}`} />
-        )}
-        {activeTab === 5 && val.videos1 && (
-          <>
-              <iframe 
-                 src={val.videos1} 
-                 frameBorder="0" 
-                 title={`Video for ${val.id}`} 
+      <div className='wrapper'>
+        <div className='imgwrap1'>
+        {data.map((val, ind) => (
+          <div key={ind} className="imgswrap">
+            <Tab active={activeTab === 1} onClick={() => setActiveTab(1)} className="imgs">
+              <img src={val.imgURL} alt={`Image for Tab 1`} />
+            </Tab>
+            <Tab active={activeTab === 2} onClick={() => setActiveTab(2)} className="imgs">
+              <img src={val.img} alt={`Image for Tab 2`} />
+            </Tab>
+            <Tab active={activeTab === 3} onClick={() => setActiveTab(3)} className="imgs">
+              <img src={val.images3} alt={`Image for Tab 3`} />
+            </Tab>
+            <Tab active={activeTab === 4} onClick={() => setActiveTab(4)} className="imgs">
+              <img src={val.images4} alt={`Image for Tab 4`} />
+            </Tab>
+            <Tab active={activeTab === 5} onClick={() => setActiveTab(5)} className="imgs">
+              <Iframe 
+                src={val.videos1} 
+                title={`Video for Tab 5`} 
+                style={{ pointerEvents: 'none' }} 
               />
-          </>
-
-        )}
-      </Content>
-    ))}
-  </MidlCon>
+            </Tab>
+          </div>
+        ))}
+        <div className="imageWrapperWrap">
+           <ImageWrapper
+             onMouseEnter={() => setIsHovering(true)}
+             onMouseLeave={() => setIsHovering(false)}
+             onMouseMove={handleMouseMove}
+           >
+             {data.map((val, ind) => (
+               <div key={ind}>
+                 {activeTab === 1 && val.imgURL && (
+                   <Image src={val.imgURL} alt="Zoomable" width={600} height={500} />
+                 )}
+                 {activeTab === 2 && val.img && (
+                   <Image src={val.img} alt="Zoomable" width={600} height={500} />
+                 )}
+                 {activeTab === 3 && val.images3 && (
+                   <Image src={val.images3} alt="Zoomable" width={600} height={500} />
+                 )}
+                 {activeTab === 4 && val.images4 && (
+                   <Image src={val.images4} alt="Zoomable" width={600} height={500} />
+                 )}
+                 {activeTab === 5 && val.videos1 && (
+                   <Iframe src={val.videos1} title="Zoomable" width={600} height={500} />
+                 )}
+               </div>
+             ))}
+             
+             {isHovering && activeTab !== 5 && isZoomEnabled && <Lens x={cursorPos.x} y={cursorPos.y} />} 
+           </ImageWrapper>
         </div>
-         <RightCon className='RightCon'>
+        </div>
+
+        <div className="zoomConWrap">
+          {isHovering && data.map((val, ind) => (
+            <Content className='Content' key={val.id} active={activeTab === 1 || activeTab === 2 || activeTab === 3 || activeTab === 4}>
+              {activeTab === 1 && val.imgURL && isZoomEnabled && (
+                <ZoomedContainer x={cursorPos.x} y={cursorPos.y} bgImage={val.imgURL} className='ZoomedContainer' />
+              )}
+              {activeTab === 2 && val.img && isZoomEnabled && (
+                <ZoomedContainer x={cursorPos.x} y={cursorPos.y} bgImage={val.img} className='ZoomedContainer' />
+              )}
+              {activeTab === 3 && val.images3 && isZoomEnabled && (
+                <ZoomedContainer x={cursorPos.x} y={cursorPos.y} bgImage={val.images3} className='ZoomedContainer' />
+              )}
+              {activeTab === 4 && val.images4 && isZoomEnabled && (
+                <ZoomedContainer x={cursorPos.x} y={cursorPos.y} bgImage={val.images4} className='ZoomedContainer' />
+              )}
+            </Content>
+          ))}
+        </div>
+
+        <RightCon className='RightCon'>
             <div className="right_cart">
               <div className='wrap_text'>
                 <h6></h6>
@@ -385,8 +252,8 @@ const DatailComponent: React.FC<Tnames> = ({ name }) => {
               </div>
             </div>
 
-          </RightCon>
-      </Datail_1>
+        </RightCon>
+      </div>
 
       <Datail_0_2>
         <Chescout_containerWrapper style={{maxWidth:"1270px"}}  className="Chescout_containerWrapper">
@@ -601,8 +468,8 @@ const DatailComponent: React.FC<Tnames> = ({ name }) => {
 
         </div>
       </Datail_3>
-    </Datail_container>
+    </Container>
   );
 };
 
-export default DatailComponent;
+export default DatailNavbarFilterComponent

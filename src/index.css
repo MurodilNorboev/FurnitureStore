@@ -36,7 +36,7 @@ code {
 } */
 .js-image-zoom__zoomed-area {
 display: none;
-background-color: transparent !important;
+/* background-color: transparent !important; */
 }
 
 
