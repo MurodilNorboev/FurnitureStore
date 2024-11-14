@@ -10,6 +10,7 @@ import { AnimatedButton, BtnWrap } from '../components/styles/navbar'
 import { Navlink } from '../components/styles/LINK'
 
 const FooterComponent = () => {
+  
   return ( //// BtnWrap
     <> 
     <FooterCon>
@@ -109,7 +110,9 @@ const FooterComponent = () => {
         <div className="footer_bottom">
         <div className="bottom"><h6>2022©All rights reserved</h6></div>
         <div className="bottom">
-          <IconButton><img src={CircleBtn} alt="" /></IconButton>
+         <a href={'#'}>
+            <IconButton><img src={CircleBtn} alt="" /></IconButton>
+         </a>
         </div>
         </div> 
 
