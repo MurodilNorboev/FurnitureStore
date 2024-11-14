@@ -177,6 +177,7 @@ export const ZoomedContainer = styled.div<{ x: number; y: number; bgImage: strin
   pointer-events: none;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
   background-image: url(${({ bgImage }) => bgImage});
+  background-color: #FFF !important;
   z-index: 1;
 `;
 /// === RightContainer ===
