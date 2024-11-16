@@ -12,9 +12,7 @@ const DiscountComponent = () => {
        <div style={{display:"flex",alignItems:"center",gap:"5px"}}>
        <h3>Home</h3>
         <img src={home} alt="Home icon" />
-        <h3>Textile</h3>
-        <img src={home} alt="Home icon" />
-        <h4>Rules</h4>
+        <h4>discounts</h4>
        </div>
       <div className='Blog'><h1>Service rules</h1></div>
       </PagesName>

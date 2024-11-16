@@ -187,19 +187,19 @@ const DatailComponent: React.FC<Tnames> = ({ name }) => {
         <div className='imgwrap1'>
         {data.map((val, ind) => (
           <div key={ind} className="imgswrap">
-            <Tab active={activeTab === 1} onClick={() => setActiveTab(1)} className="imgs">
+            <Tab active={activeTab === 1} onMouseEnter={() => setActiveTab(1)} className="imgs">
               <img src={val.images} alt={`Image for Tab 1`} />
             </Tab>
-            <Tab active={activeTab === 2} onClick={() => setActiveTab(2)} className="imgs">
+            <Tab active={activeTab === 2} onMouseEnter={() => setActiveTab(2)} className="imgs">
               <img src={val.images2} alt={`Image for Tab 2`} />
             </Tab>
-            <Tab active={activeTab === 3} onClick={() => setActiveTab(3)} className="imgs">
+            <Tab active={activeTab === 3} onMouseEnter={() => setActiveTab(3)} className="imgs">
               <img src={val.images3} alt={`Image for Tab 3`} />
             </Tab>
-            <Tab active={activeTab === 4} onClick={() => setActiveTab(4)} className="imgs">
+            <Tab active={activeTab === 4} onMouseEnter={() => setActiveTab(4)} className="imgs">
               <img src={val.images4} alt={`Image for Tab 4`} />
             </Tab>
-            <Tab active={activeTab === 5} onClick={() => setActiveTab(5)} className="imgs">
+            <Tab active={activeTab === 5} onMouseEnter={() => setActiveTab(5)} className="imgs">
               <Iframe 
                 src={val.videos1} 
                 title={`Video for Tab 5`} 

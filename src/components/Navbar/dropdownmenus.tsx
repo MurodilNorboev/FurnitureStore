@@ -29,7 +29,6 @@ const DatailMenusID: React.FC = () => {
     setSelectedItem(item);
     setShowModal(true); 
   };
-
   const handleClose = () => {
     setShowModal(false); 
   };

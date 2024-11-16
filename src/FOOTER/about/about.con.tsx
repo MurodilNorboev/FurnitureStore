@@ -155,7 +155,7 @@ return (
       <AboutContent>
         <div className='about'><h1>About</h1></div>
         <div className='imgwrap'>
-          <img src="https://scontent.ficn3-3.fna.fbcdn.net/v/t39.30808-6/464523648_8409081249190491_894432962941923591_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=5bbf69&_nc_ohc=enDK5__9Z1oQ7kNvgG-pD6H&_nc_zt=23&_nc_ht=scontent.ficn3-3.fna&_nc_gid=AhsC3xzKXRKOiKdv1ieYrvN&oh=00_AYAeFoEPGQ9rr_tEYeCCrgV6Fz4LUjq917OITidKXjW4dA&oe=672F8F63" alt="" />
+          <img src="https://scontent.ficn3-3.fna.fbcdn.net/v/t1.6435-9/119049245_2711115725779940_4780711629906655890_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=3a1ebe&_nc_ohc=NjRqnW_LlwEQ7kNvgGHaN8a&_nc_zt=23&_nc_ht=scontent.ficn3-3.fna&_nc_gid=AKgmG0i2HZYZxtlK6tTlWx-&oh=00_AYAzzuu9FukPbPUaRSkjOEoKnrzY_ItaLFIpFpr15GP_Kw&oe=675EB744" alt="" />
         </div>
       </AboutContent>
 
@@ -177,74 +177,101 @@ return (
       </AboutChief>
 
       <AboutContent className='AboutContent002'>
+
       <div className="wrap">
        <div className="catalog">
-          <div className="menus">
-              <img src={icon1} alt="" />
-              <h6>Best furniture shop in 2021</h6>
-          </div>
-          <div className="menus">
-              <img src={icon2} alt="" />
-              <h6>500+ happy clients</h6>
-          </div>
-          <div className="menus">
-              <img src={icon3} alt="" />
-              <h6>rich assortment</h6>
-          </div>
-          <div className="menus">
-              <img src={icon4} alt="" />
-              <h6>100% natural and quality</h6>
-          </div>
+          <BtnWrap4>
+            <div className="menus">
+                <img src={icon1} alt="" />
+                <h6>Best furniture shop in 2021</h6>
+            </div>
+          </BtnWrap4>
+          <BtnWrap4>
+            <div className="menus">
+                <img src={icon2} alt="" />
+                <h6>500+ happy clients</h6>
+            </div>
+          </BtnWrap4>
+          <BtnWrap4>
+            <div className="menus">
+                <img src={icon3} alt="" />
+                <h6>rich assortment</h6>
+            </div>
+          </BtnWrap4>
+          <BtnWrap4>
+            <div className="menus">
+                <img src={icon4} alt="" />
+                <h6>100% natural and quality</h6>
+            </div>
+          </BtnWrap4>
        </div>
 
        <div className="catalog">
-          <div className="menus">
-              <img src={icon5} alt="" />
-              <h6>10+ years of experience</h6>
-          </div>
-          <div className="menus">
-              <img src={icon6} alt="" />
-              <h6>modern design</h6>
-          </div>
-          <div className="menus">
-              <img src={icon7} alt="" />
-              <h6>profitable prices</h6>
-          </div>
+          <BtnWrap4>
+            <div className="menus">
+                <img src={icon5} alt="" />
+                <h6>10+ years of experience</h6>
+            </div>
+          </BtnWrap4>
+          <BtnWrap4>
+            <div className="menus">
+                <img src={icon6} alt="" />
+                <h6>modern design</h6>
+            </div>
+          </BtnWrap4>
+          <BtnWrap4>
+            <div className="menus">
+                <img src={icon7} alt="" />
+                <h6>profitable prices</h6>
+            </div>
+          </BtnWrap4>
        </div>
        </div>
+
        <div className="p2">
-       
-          <div className="menus">
-              <img src={icon1} alt="" />
-              <h6>Best furniture shop in 2021</h6>
-          </div>
-          <div className="menus">
-              <img src={icon2} alt="" />
-              <h6>500+ happy clients</h6>
-          </div>
-          <div className="menus">
-              <img src={icon3} alt="" />
-              <h6>rich assortment</h6>
-          </div>
-          <div className="menus">
-              <img src={icon4} alt="" />
-              <h6>100% natural and quality</h6>
-          </div>
-      
+          <BtnWrap4>
+            <div className="menus">
+                <img src={icon1} alt="" />
+                <h6>Best furniture shop in 2021</h6>
+            </div>
+          </BtnWrap4>
+          <BtnWrap4>
+            <div className="menus">
+                <img src={icon2} alt="" />
+                <h6>500+ happy clients</h6>
+            </div>
+          </BtnWrap4>
+          <BtnWrap4>
+            <div className="menus">
+                <img src={icon3} alt="" />
+                <h6>rich assortment</h6>
+            </div>
+          </BtnWrap4>
+          <BtnWrap4>
+            <div className="menus">
+                <img src={icon4} alt="" />
+                <h6>100% natural and quality</h6>
+            </div>
+          </BtnWrap4>
 
-
-          <div className="menus">
-              <img src={icon5} alt="" />
-              <h6>10+ years of experience</h6>
-          </div>
-          <div className="menus">
-              <img src={icon6} alt="" />
-              <h6>modern design</h6>
-          </div>
-          <div className="menus">
-              <img src={icon7} alt="" />
-              <h6>profitable prices</h6>
-          </div>
+          <BtnWrap4>
+            <div className="menus">
+                <img src={icon5} alt="" />
+                <h6>10+ years of experience</h6>
+            </div>
+          </BtnWrap4>
+          <BtnWrap4>
+            <div className="menus">
+                <img src={icon6} alt="" />
+                <h6>modern design</h6>
+            </div>
+          </BtnWrap4>
+          <BtnWrap4>
+            <div className="menus">
+                <img src={icon7} alt="" />
+                <h6>profitable prices</h6>
+            </div>
+          </BtnWrap4>
       
        </div>
       </AboutContent>

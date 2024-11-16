@@ -160,7 +160,6 @@ max-height: 450px;
 height: 100%;
 background-color: #FFF;
 
-
 h6 {
   margin-top: 30px;
   width: 30px;

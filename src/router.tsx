@@ -24,8 +24,8 @@ import For_PartnerComponent from './FOOTER/for_partners/for_partners.con'
 import Contactcomponent from './FOOTER/contacts/contacts.con'
 import BlogdatailComponent from './FOOTER/blog/blog.datail'
 import DatailNavbarFilterComponent from './components/filterDatail/filterData.Navbar'
-import ImageSlider from './components/test/tests2'
 import DatailComponent from './components/filterDatail/filterData2'
+import Apps from './components/test/tests/tests2'
 
 const RouterComponent = () => {
   const loginin = useLocation();
@@ -34,13 +34,13 @@ const filterCon = loginin.pathname === "/login" || loginin.pathname === "/regLog
    <>
        < ScrollToTop/>
 
-    {!filterCon &&  <NavbareComponent />} 
+    {!filterCon && <NavbareComponent />} 
 
     <Routes>
         <Route path='/login' element={<LoginComponent />}/>
         <Route path='/regLogin' element={< RegloginComponent />}/>  
         <Route path='/' element={<MainComponent />}/>  
-        <Route path='/stol/:label' element={<Ssofar  name='furniture'/>} />
+        <Route path='/stol/:label' element={<Ssofar name='furniture' />} />  
         <Route path='/categorie' element={<CatalogPagecomponent  name='categorie'/>} />
 
         <Route path='/stul/:id' element={<DatailComponent  names='furniture' name='Armchair, fleece' propse={true} />} /> 
@@ -67,7 +67,7 @@ const filterCon = loginin.pathname === "/login" || loginin.pathname === "/regLog
         <Route path='/for_partners' element={<For_PartnerComponent />} />
         <Route path='/contacts' element={<Contactcomponent />} />
 
-        <Route path='/c/:id' element={<ImageSlider />} />
+        <Route path='/c/:id' element={<Apps />} />
     </Routes>
 
     {!filterCon && <FooterComponent />}

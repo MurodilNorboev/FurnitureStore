@@ -483,7 +483,7 @@ export const ImgCons = styled.div`
   justify-content: flex-start;
   overflow-x: scroll;
   .img_wrap_con2 {
-    padding: 5px 0px;
+    padding: 15px 0px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -693,13 +693,19 @@ export const NextButton = styled.button`
 export const DotsContainer = styled.div`
 display: flex;
 width: 100%;
-max-width: 1275px;
+max-width: 1350px;
 justify-content: space-between;
 align-items: center;
 gap: 10px;
 margin-top: 100px;
 margin-bottom: 40px;
+padding: 0px 20px;
 width: 100%;
+.btnwrap {
+  display: flex;
+  gap: 20px;
+  margin-right: -3px;
+}
  .bottom{
         display: flex;
         align-items: center;
@@ -720,7 +726,7 @@ export const Dot = styled.div<{ active: boolean }>`
   height: 10px;
   border-radius: 50%;
   background-color: ${({ active }) => (active ? 'black' : 'lightgray')};
-  margin: 0 5px;
+  /* margin: 0 5px; */
   cursor: pointer;
   transition: background-color 0.3s;
 `;

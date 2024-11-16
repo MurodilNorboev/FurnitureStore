@@ -2,16 +2,28 @@ import styled from "styled-components";
 
 export const NavbarCon = styled.div`
 display: flex;
-position: fixed;
 width: 100%;
-background-color: white;
-align-items: center;
-justify-content: space-around;
-height: 80px;
-box-shadow: rgba(237, 228, 224, 0.25) 0px 14px 28px, 
+    align-items: center;
+    justify-content: space-around;
+    height: 80px;
+    width: 100%;
+    background-color: white;
+    position: fixed;
+    z-index: 999; 
+    box-shadow: rgba(237, 228, 224, 0.25) 0px 14px 28px, 
             rgba(237, 228, 224, 0.22) 0px 10px 10px !important;
-z-index: 999; 
-/* position: relative;  */
+.motionDiv {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 80px;
+    width: 100%;
+    background-color: white;
+    position: fixed;
+    z-index: 999; 
+    box-shadow: rgba(237, 228, 224, 0.25) 0px 14px 28px, 
+            rgba(237, 228, 224, 0.22) 0px 10px 10px !important;
+}
 
 .menu_icon_wrap {
     display: none;

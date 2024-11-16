@@ -48,6 +48,8 @@ export const Container = styled.div`
     height: 100vw;
     width: 100vw;
     background-color: #FFF;
+    box-shadow: rgba(237, 228, 224, 0.25) 0px 24px 38px, 
+            rgba(237, 228, 224, 0.22) 0px 20px 20px !important;
   }
   @media screen and (max-width: 1440px) {
     .imgwrap1 {
@@ -112,6 +114,7 @@ export const ImageWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 `;
 export const Tab = styled.div<{ active: boolean }>`
   display: flex;
@@ -139,7 +142,6 @@ export const Image = styled.img`
   height: 100vw; 
   max-width: 600px;  
   max-height: 500px; 
-  cursor: zoom-in; 
 `;
 export const Iframe = styled.iframe`
   display: block;
@@ -154,13 +156,12 @@ export const Lens = styled.div<{ x: number; y: number }>`
   height: 100px; 
   border: 0.01px solid rgba(43, 74, 26, 0.7);
   background-color: rgba(108, 186, 87, 0.3);
+  background-image: radial-gradient(circle, rgba(108, 186, 87, 0.2) 1%, transparent 80%);
   pointer-events: none;
   transform: translate(-50%, -50%);
-  cursor: crosshair;
-  box-shadow: 0 0 10px rgba(64, 109, 5, 0.4);
-  background-image: radial-gradient(circle, rgba(108, 186, 87, 0.4) 1%, transparent 80%);
   background-size: 2px 2px;
   background-position: 0 0;
+  cursor: pointer;
 
   top: ${({ y }) => `${(y / 500) * 100}%`}; 
   left: ${({ x }) => `${(x / 600) * 100}%`}; 
