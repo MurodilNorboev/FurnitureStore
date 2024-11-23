@@ -68,6 +68,7 @@ const filterCon = loginin.pathname === "/login" || loginin.pathname === "/regLog
         <Route path='/contacts' element={<Contactcomponent />} />
 
         <Route path='/c/:id' element={<Apps />} />
+        <Route path='/d' element={<SimpleSlider />} />
     </Routes>
 
     {!filterCon && <FooterComponent />}

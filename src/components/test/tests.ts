@@ -62,3 +62,14 @@ export const NextButton = styled.button`
   padding: 10px;
   cursor: pointer;
 `;
+
+interface DataType {
+  detail: {
+    id: number;
+    person: {
+      img: string;
+      name: string;
+      position: string;
+    }
+  }
+}

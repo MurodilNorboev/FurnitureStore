@@ -139,7 +139,7 @@ const DatailComponent: React.FC<Tnames> = ({ name }) => {
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [activeTab, setActiveTab] = useState(1);
+  const [activeTab, setActiveTab] = useState(1); 
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const [isZoomEnabled, setIsZoomEnabled] = useState(true); 
@@ -174,6 +174,7 @@ const DatailComponent: React.FC<Tnames> = ({ name }) => {
   };
   return (
     <Container>
+
       <div style={{display:"flex",width:"100%",justifyContent:"center"}}>
          <PagesName>
            <h3>Home</h3>
@@ -183,6 +184,7 @@ const DatailComponent: React.FC<Tnames> = ({ name }) => {
            <h4>{name}</h4>
          </PagesName>
       </div>
+
       <div className='wrapper'>
         <div className='imgwrap1'>
         {data.map((val, ind) => (
@@ -328,7 +330,9 @@ const DatailComponent: React.FC<Tnames> = ({ name }) => {
         </RightCon>
 
       </div>
+
       <Datail_0_2>
+        {data.map((val, ind) => (
         <Chescout_containerWrapper style={{maxWidth:"1270px"}}  className="Chescout_containerWrapper">
           <Containre_Chescout_Content className="Containre_Chescout_Content">
               <Chescout_Top className="Chescout_Top top">
@@ -340,9 +344,7 @@ const DatailComponent: React.FC<Tnames> = ({ name }) => {
                           </div>
                       </div>
                       <h1 className='h1'>
-                      The chair uses a safe, environmentally friendly filler, the special properties of which make the furniture not only soft and comfortable, but also orthopedic. Relaxes the muscles of the back and waist, adjusts to your body. <br />
-                      Made of mat - the most popular furniture fabric. Pleasant to the touch and at the same time durable and reliable fabric. Large selection of color shades.
-                      Prepayment on a bank card. Delivery by mail or by courier. Delivery of goods within 16 days, as goods are only by request.
+                      {val.description}
                       </h1>
                   </Chescout_one>
 
@@ -355,43 +357,43 @@ const DatailComponent: React.FC<Tnames> = ({ name }) => {
                       <div className="LasName_Con">
                       <div className="inputs">
                              <h5 className='top'>Height (cm)</h5>
-                             <h6>82</h6>
+                             <h6>{val.Height}</h6>
                           </div>
                       </div>
                       <div className="LasName_Con">
                           <div className="inputs">
                              <h5 className='top'>Width (cm)</h5>
-                             <h6>75</h6>
+                             <h6>{val.Width}</h6>
                           </div>
                       </div>
                       <div className="LasName_Con">
                           <div className="inputs">
                              <h5 className='top'>Arm dimensions (hwd)</h5>
-                           <h6>53 x 7 x 69 cm</h6>
+                           <h6>{val.ArmDimensions_HWD}</h6>
                           </div>
                       </div>
                       <div className="LasName_Con">
                           <div className="inputs">
                              <h5 className='top'>Seat dimensions (hwd)</h5>
-                           <h6>44 x 56 x 56 cm</h6>
+                           <h6>{val.SeatDimensions_HWD}</h6>
                           </div>
                       </div>
                       <div className="LasName_Con">
                           <div className="inputs">
                              <h5 className='top'>Leg height (cm)</h5>
-                           <h6>23</h6>
+                           <h6>{val.LegHeight_CM}</h6>
                           </div>
                       </div>
                       <div className="LasName_Con">
                           <div className="inputs">
                              <h5 className='top'>Packaging dimensions</h5>
-                           <h6>1:H86 x W79 x D84 cm</h6>
+                           <h6>{val.PackagingDimensions}</h6>
                           </div>
                       </div>
                       <div className="LasName_Con">
                            <div className="inputs">
                              <h5 className='top'>Weight (kg)</h5>
-                           <h6>17</h6>
+                           <h6>{val.Weight_KG}</h6>
                           </div>
                       </div>
                   </Chescout_one>
@@ -405,37 +407,37 @@ const DatailComponent: React.FC<Tnames> = ({ name }) => {
                       <div className="LasName_Con">
                           <div className="inputs">
                              <h5 className='top'>Assembly</h5>
-                           <h6>No assembly required</h6>
+                           <h6>{val.Assembly}</h6>
                           </div>
                       </div>
                       <div className="LasName_Con">
                           <div className="inputs">
                              <h5 className='top'>Number of seats</h5>
-                           <h6>1 seater</h6>
+                           <h6>{val.NumberOfSeats}</h6>
                           </div>
                       </div>
                       <div className="LasName_Con">
                           <div className="inputs">
                              <h5 className='top'>Caring instructions</h5>
-                           <h6>Professional cleaning only</h6>
+                           <h6>{val.CaringInstructions}</h6>
                           </div>
                       </div>
                       <div className="LasName_Con">
                           <div className="inputs">
                              <h5 className='top'>Material</h5>
-                           <h6>Micro velvet, wood</h6>
+                           <h6>{val.Material}</h6>
                           </div>
                       </div>
                       <div className="LasName_Con">
                           <div className="inputs">
                              <h5 className='top'>Assembly</h5>
-                           <h6>No assembly required</h6>
+                           <h6>{val.Assemblys}</h6>
                           </div>
                       </div>
                       <div className="LasName_Con">
                           <div className="inputs">
                              <h5 className='top'>Caring instructions</h5>
-                           <h6>Professional cleaning only</h6>
+                           <h6>{val.CaringInstructions}</h6>
                           </div>
                       </div>
                   </Chescout_one>
@@ -443,6 +445,7 @@ const DatailComponent: React.FC<Tnames> = ({ name }) => {
               </Chescout_Top>
           </Containre_Chescout_Content>
         </Chescout_containerWrapper>
+        ))}
       </Datail_0_2>
 
       <Datail_2>

@@ -399,6 +399,9 @@ import { IconButton } from '@mui/material';
 import { Navlink } from '../styles/LINK';
 import Carousel2 from '../Carousel/carousel2';
 import { motion } from 'framer-motion'; 
+import { DataType } from '../types/maintp';
+import { useParams } from 'react-router-dom';
+import { Data } from '../mock/mockDatail';
 
 const datatest = [
   {
@@ -450,7 +453,6 @@ const datatest = [
     seil: 'ebro bedside table',
   },
 ];
-
 interface datatestT {
   img: string;
   text: string;
@@ -486,7 +488,6 @@ const MainComponent: React.FC = () => {
 
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
   useEffect(() => {
     if (isHovered) return; 
     const intervalId = setInterval(() => {
@@ -494,34 +495,60 @@ const MainComponent: React.FC = () => {
     }, 3000); 
     return () => clearInterval(intervalId);
   }, [isHovered, slideIndex]);
-
   const nextSlide = () => {
     setSlideIndex((prevIndex) => (prevIndex + 1) % (totalSlides - slidesToShow + 1));
   };
-
   const prevSlide = () => {
     setSlideIndex((prevIndex) => (prevIndex - 1 + totalSlides - slidesToShow + 1) % (totalSlides - slidesToShow + 1));
   };
 
+  const [selectedItem, setSelectedItem] = useState<DataType | null>(null);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [datas, setDatas] = useState<DataType[]>([]);
+  useEffect(() => {
+    const filterdata = Data.filter((i: DataType) => {
+      switch (i.label) {
+        case "new in": return i.id === 1;
+        case "sofas": return i.id === 10;
+        case "table": return i.id === 28;
+        case "beds": return i.id === 46;
+        case "linghting": return i.id === 55;
+        case "kitchen": return i.id === 82;
+        case "storage": return i.id === 127;
+        case "textils": return i.id === 64;
+        default: return false;
+      }
+    });
+    setDatas(filterdata);
+  }, []);
+  const handleEnter = (item: DataType) => {
+    setSelectedItem(item);
+    setShowModal(true); 
+  };
+  const handleClose = () => {
+    setShowModal(false); 
+  };
+  
+console.log(datas);
+
   return (
     <MainCon>
+
       <Navlink to={`/u`} style={{position:"fixed",zIndex:999,top:"1%",left:"1%",color:"white"}}>
         <h2>X</h2>
       </Navlink>
 
-      {/* Carousel */}
       <motion.div
         initial={{ opacity: 0, y: -50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
-        viewport={{ once: true }} // Bu yerda "once" xususiyatini qo'shish animatsiyaning faqat birmarta ishlashini ta'minlaydi
+        viewport={{ once: true }} 
       >
         <div className='carousel22'>
             <Carousel2 />
         </div>
       </motion.div>
 
-      {/* Another Carousel */}
       <motion.div
         initial={{ opacity: 0, y: -50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -533,7 +560,6 @@ const MainComponent: React.FC = () => {
         </div>
       </motion.div>
 
-      {/* Categories Section */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -543,7 +569,6 @@ const MainComponent: React.FC = () => {
         <CategorieComponent />
       </motion.div>
 
-      {/* Shop by Room */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -553,7 +578,6 @@ const MainComponent: React.FC = () => {
         <ShopBYroom />
       </motion.div>
 
-      {/* Room */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -563,7 +587,6 @@ const MainComponent: React.FC = () => {
         <Room />
       </motion.div>
 
-      {/* Popular Products Section */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -592,8 +615,10 @@ const MainComponent: React.FC = () => {
           onMouseLeave={() => setIsHovered(false)} 
         >
           <CarouselTrack slideIndex={slideIndex} slidesToShow={slidesToShow} className='CarouselTrack'>
-            {data?.map((val, ind) => (
-              <CarouselItem key={ind}>
+            {datas.map((val, ind) => (
+              // <CarouselItem key={ind}>
+              <CarouselItem key={`${val.id} || ${val.label}`}>
+                <Navlink to={`/stul/${val.id}`}>
                 <BtnWrap4>
                 <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}  
@@ -602,15 +627,16 @@ const MainComponent: React.FC = () => {
                     viewport={{ once: true }}
                   >
                   <Carouselimgwrapp>
-                    <img src={val.img} alt="" />
+                    <img src={val.images} alt='' />
                     <h6></h6>
-                    <h5>{val.text}</h5>
+                    <h5>{val.desc1}</h5>
                     <div style={{display:"flex",alignItems:"center"}}>
                       <h4>{val.cost}</h4>
                     </div>
                   </Carouselimgwrapp>
                   </motion.div>
                 </BtnWrap4>
+                </Navlink>
               </CarouselItem>
             ))}
           </CarouselTrack>
@@ -625,7 +651,6 @@ const MainComponent: React.FC = () => {
         </div>
       </motion.div>
 
-      {/* Hot Disc */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -635,7 +660,6 @@ const MainComponent: React.FC = () => {
         <HotDisc />
       </motion.div>
 
-      {/* Blog Component */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}

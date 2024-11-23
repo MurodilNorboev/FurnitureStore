@@ -8,7 +8,6 @@ interface Todo {
   _id: string;
   title: string;
   desc: string;
-
 }
 const SimpleSlider = () => {
   const [ todo, settodo ] = useState<Todo[]>([]); 
@@ -52,8 +51,8 @@ const SimpleSlider = () => {
     } catch (error) {
       console.log(error);
     }
-  }
-
+  } 
+ 
   useEffect(() => {
     getAllTodo('');
   }, [])

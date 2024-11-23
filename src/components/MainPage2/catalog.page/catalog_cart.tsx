@@ -219,9 +219,9 @@ import React, { useState, useEffect } from 'react';
    const [value, setValue] = useState<number[]>([20, 37]);
    const [page, setPage] = useState<number>(1);
    const [itemsPerPage, setItemsPerPage] = useState<number>(ITEMS_PER_PAGE);
-   const { label } = useParams<{ label: string }>();
-   const [data, setData] = useState<DataType[]>([]);
    const [imageVisible, setImageVisible] = useState<boolean>(false); 
+   const [data, setData] = useState<DataType[]>([]);
+   const { label } = useParams<{ label: string }>();
 
    useEffect(() => {
      setData(Data);
