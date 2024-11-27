@@ -3,7 +3,7 @@ import PaginationItem from '@mui/material/PaginationItem';
 import Stack from '@mui/material/Stack';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { Catalog_con, Image, ImageContainer, ImageGrid, Imagecontent, PagesName, Saidbar, SlaiderContainer } from '../../MainPage2/catalog.page/catalog';
+import { Catalog_con, Image, ImageContainer, ImageGrid, Imagecontent, PagesName, Saidbar, SlaiderContainer } from '../../main.all_categorie/catalog.page/catalog';
 import { Box, Checkbox, Slider } from '@mui/joy';
 import home from '../../../assets/home.svg';
 import { Data } from '../../mock/mockDatail';

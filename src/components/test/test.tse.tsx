@@ -94,3 +94,5 @@ const SimpleSlider = () => {
 
 export default SimpleSlider
 
+
+

@@ -91,6 +91,8 @@ export type Images = {
 
 export type DataType = {
   id: number;
+  Popular: string;
+  new: string;
   label: string;
   name: string;
   img: string;

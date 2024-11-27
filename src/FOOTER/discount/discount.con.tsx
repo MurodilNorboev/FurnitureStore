@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Content, DiscountConataiter, DiscountConent, DiscountLeft, DiscountRight, Tab } from './discount.Style'
-import { PagesName } from '../../components/MainPage2/catalog.page/catalog'
+import { PagesName } from '../../components/main.all_categorie/catalog.page/catalog'
 import home from '../../assets/home.svg'
 
 

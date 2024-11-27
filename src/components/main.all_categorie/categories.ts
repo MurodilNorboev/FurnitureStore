@@ -8,51 +8,19 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 gap: 30px;
-.TopContent2 {
-  display: none;
-}
 .left_right_wrapper {
   display: flex;
   justify-content: center;
   gap: 30px;
   width: 100%;
 }
-@media only screen and (max-width: 1450px){
-  .TopContent {
-    display: none;
-  }
-  .TopContent2 {
-    display: grid;
-    grid-template-areas: "a a a a";
-  }
-  .SlaiderContainer {
-    padding: 0px 15px;
-  }
-}
-@media screen and (max-width: 1200px){
-  .TopContent2 {
-    display: grid;
-    grid-template-areas: "a a a";
-  }
-}
-@media screen and (max-width: 900px){
-  .TopContent2 {
-    display: grid;
-    grid-template-areas: "a a ";
-  }
-}
-@media screen and (max-width: 600px){
-  .TopContent2 {
-    display: grid;
-    grid-template-areas: "a";
-  }
-}
 `;
 export const TopContent = styled.div`
 display: flex;
-flex-direction: column;
-justify-content: center;
+flex-wrap: wrap;
 align-items: center;
+justify-content: center;
+gap: 20px;
 margin-bottom: 40px;
 .catContainer {
     background: var(--white, #FFF);
@@ -62,7 +30,8 @@ margin-bottom: 40px;
     gap: 10px;
     align-self: stretch;
     height: 146px;
-    max-width: 364px; 
+    max-width: 300px; 
+    width: 100vw;
     h5 {
         color: var(--dark-grey, #666);
         font-feature-settings: 'liga' off, 'clig' off;
@@ -98,84 +67,16 @@ margin-bottom: 40px;
     align-items: center;
     gap: 12px;
   }
-`;
-export const TopContent2 = styled.div`
-display: grid;
-grid-template-areas: "a a a a a";
-justify-content: center;
-align-items: center;
-margin-bottom: 40px;
-.catContainer {
-    background: var(--white, #FFF);
-    display: flex;
-    padding: 13px 10px 10px 10px;
-    align-items: center;
-    gap: 10px;
-    align-self: stretch;
-    height: 146px;
-    max-width: 364px; 
-    h5 {
-        color: var(--dark-grey, #666);
-        font-feature-settings: 'liga' off, 'clig' off;
-        font-family: Prompt;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 20px;
-        letter-spacing: 1px;
-    }
-  } .cat_con_wrap {
-    width: 160px;
-    height: 120px;
-    img {
-      width: 160px;
-      height: 120px;
-    }
-  } .all_wrap {
-    display: flex;
-    width: 90px;
-    height: 120px;
-    padding: 25px 40px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
-    img {
-        width: 60px;
-        height: 60px;
-    }
-  } .all_icon {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  /* @media only screen and (max-width: 1440px){
-    display: grid;
-    grid-template-areas: "a ";
-  }
-  @media only screen and (max-width: 1300px){
-    display: grid;
-    grid-template-areas: "a a a ";
-  }
-  @media only screen and (max-width: 1100px){
-    display: grid;
-    grid-template-areas: "a a ";
-  }
-  @media only screen and (max-width: 760px){
-    display: grid;
-    grid-template-areas: " a ";
-  } */
 `;
 export const SlaiderContainer = styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
-/* @media (max-width: 1450px){
-    padding: 0px 50px;
-  } */
 `;
 export const BtnWrap2 = styled.div`
 height: 150px;
+max-width: 300px; 
+width: 100vw;
 display: flex;
 align-items: end;
 margin: 5px 5px;
@@ -202,9 +103,13 @@ export const ImageGrid = styled.div`
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
   .Image {
-    height: 300px;
+    max-height: 300px;
+    height: 100vw;
   }
-  @media (max-width: 1500px){
+  @media (max-width: 5000px){
+    grid-template-columns: repeat(5, 1fr);
+  }
+  @media (max-width: 1920px){
     grid-template-columns: repeat(4, 1fr);
   }
   @media (max-width: 1300px) {
@@ -245,6 +150,28 @@ h2 {
   line-height: 38px; /* 126.667% */
   letter-spacing: 3px;
   text-transform: uppercase;
+} button {
+  max-width: 118px;
+  width: 100vw;
+  height: 55px;
+  color: #FFF;
+  font-size: 16;
+  font-weight: 600;
+  background: var(--pastel, #D1BCB2);
+  border: none;
+  &:active {
+    transform: scale(0.98);
+  }
+  &:hover {
+    background: var(--pastel, #bba89f);
+  }
+} .FormControl {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+} 
+.MuiSvgIcon-root  {
+  color: #D1BCB2;
 }
 @media screen  and (max-width: 1450px){
   padding: 0px 15px;
@@ -262,11 +189,13 @@ h2 {
   padding: 0px 20px;
 }
   @media (max-width: 730px) {
-    padding: 0%;
+  padding: 0%;
   display: grid;
   justify-content: center;
+  align-items: center;
+  h2 {
+    display: flex;
+    justify-content: center;
   }
-`;
-export const SortContainer = styled.div`
-display: flex;
+  }
 `;

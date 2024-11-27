@@ -1,6 +1,6 @@
 import React from 'react'
 import { BottomBtn, Chescout_containerWrapper, Chescout_one, Chescout_Top, Content_chesckout, For_PartnerCon, For_PartnerConetent, For_PartnerContainter } from './for_partner.Style'
-import { PagesName } from '../../components/MainPage2/catalog.page/catalog'
+import { PagesName } from '../../components/main.all_categorie/catalog.page/catalog'
 import home from '../../assets/home.svg'
 import circlebtn from '../../assets/circlewhite.svg'
 

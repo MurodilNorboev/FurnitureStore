@@ -1,4 +1,4 @@
-import { PagesName } from "../../MainPage2/catalog.page/catalog"
+import { PagesName } from "../../main.all_categorie/catalog.page/catalog"
 import { Chescout_Bottom, Chescout_Top, Chescout_containerWrapper, Chescout_one, Container_Chescout, Containre_Chescout_Content, Content_chesckout, Right_Container } from "./checkoutt"
 import home from '../../../assets/home.svg'
 import { Bottom_Container, DatailCart, Top_Container } from "./datail"

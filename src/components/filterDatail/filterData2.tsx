@@ -3,7 +3,7 @@ import { DataType, Tnames } from '../types/maintp';
 import { Data } from '../mock/mockDatail';
 import { useParams } from 'react-router-dom';
 import { IconButton } from '@mui/joy';
-import { PagesName } from "../MainPage2/catalog.page/catalog"
+import { PagesName } from "../main.all_categorie/catalog.page/catalog"
 import { Chescout_Top, } from "../Navbar/profile/profle.1"
 import { Chescout_containerWrapper, Chescout_one, Container, Containre_Chescout_Content, Content, Datail_0_2,Datail_2, Datail_3, Iframe, Image, ImageWrapper, Lens, RightCon, Tab, ZoomedContainer } from './main.datail';
 import { BtnWrap4, ButtonL } from '../styles/main';

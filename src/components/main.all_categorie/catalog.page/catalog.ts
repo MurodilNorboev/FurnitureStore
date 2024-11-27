@@ -117,8 +117,15 @@ export const ImageGrid = styled.div`
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
   .Image {
-    height: 300px;
+    max-height: 300px;
+    height: 100vw;
     padding: 5px;
+  }
+  @media (max-width: 5000px){
+    grid-template-columns: repeat(5, 1fr);
+  }
+  @media (max-width: 1500px){
+    grid-template-columns: repeat(3, 1fr);
   }
   @media (max-width: 1440px){
     grid-template-columns: repeat(4, 1fr);
@@ -193,17 +200,12 @@ h6 {
   letter-spacing: 1px;
 }
 `;
-
-
 export const Image = styled.img`
   width: 100%;
   height: auto;
   aspect-ratio: 3/3;
   padding: 7px;
   transition: transform 1ms ease;
-  @media screen and (max-width: 1440px) {
-  padding-left: 40px;
-}
 `;
 export const PagesName = styled.div`
 position: absolute;

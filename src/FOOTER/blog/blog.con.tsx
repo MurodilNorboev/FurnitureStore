@@ -1,4 +1,4 @@
-import { PagesName } from '../../components/MainPage2/catalog.page/catalog'
+import { PagesName } from '../../components/main.all_categorie/catalog.page/catalog'
 import { BlogComponent, BlogConent, BlogContainerwrap } from './blog.Style'
 import home from '../../assets/home.svg'
 import { useEffect, useState } from 'react';

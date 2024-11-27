@@ -1,4 +1,4 @@
-import { PagesName } from '../../components/MainPage2/catalog.page/catalog'
+import { PagesName } from '../../components/main.all_categorie/catalog.page/catalog'
 import { BottomBtn, Chescout_containerWrapper, Chescout_one, Chescout_Top, ContactContainter, Content_chesckout, For_PartnerCon, For_PartnerConetent } from './contatct.Style'
 import circlebtn from '../../assets/circlewhite.svg'
 import home from '../../assets/home.svg'

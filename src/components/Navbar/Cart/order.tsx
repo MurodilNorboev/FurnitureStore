@@ -1,5 +1,5 @@
 import React from 'react'
-import { PagesName } from '../../MainPage2/catalog.page/catalog'
+import { PagesName } from '../../main.all_categorie/catalog.page/catalog'
 import { Tname } from '../../types/maintp'
 import home from '../../../assets/home.svg'
 import { ErrorCon, ErrorContent, ErrorMidl, OrderChesckout } from './orederStyle'
