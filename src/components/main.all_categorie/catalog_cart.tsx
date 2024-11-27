@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
  import Stack from '@mui/material/Stack';
  import ArrowBackIcon from '@mui/icons-material/ArrowBack';
  import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
- import { Catalog_con, Image, ImageContainer, ImageGrid, Imagecontent, PagesName, Saidbar } from './catalog.page/catalog';
+ import { Catalog_con, Image, ImageContainer, ImageGrid, Imagecontent, PagesName, Saidbar, SortContainer } from './catalog.page/catalog';
  import { Box, Checkbox, Slider } from '@mui/joy';
  import home from '../../assets/home.svg';
  import { Data } from '../mock/mockDatail';
@@ -24,6 +24,13 @@ import { SlaiderContainer } from './categories';
    const [imageVisible, setImageVisible] = useState<boolean>(false); 
    const [data, setData] = useState<DataType[]>([]);
    const { label } = useParams<{ label: string }>();
+   const [openModal, setOpenModal] = useState(false);
+   const handleClick = () => {
+    setOpenModal(true);
+   }
+   const handleSetClick = () => {
+    setOpenModal(false);
+   }
 
 
    useEffect(() => {
@@ -103,8 +110,97 @@ import { SlaiderContainer } from './categories';
        <PagesName>
          <h3>Home</h3>
          <img src={home} alt="" />
-         {displayeddata.length > 0 && <h4>{displayeddata[0].label}</h4>}
+         {filteredData.length > 0 && <h4>{filteredData[0].label}</h4>}
        </PagesName>
+
+       <SortContainer className='SortContainer'>
+        <button onClick={handleClick} className='inputs'>Sort by</button>
+        <button onClick={handleSetClick} className='closeInputs'>close</button>
+       </SortContainer>
+
+       {openModal && (
+       <Saidbar className="b">
+         <div className="cart_con a">
+           <h2>Price</h2>
+           <hr />
+           <Box sx={{ width: '100%' }}>
+             <Slider
+               value={values}
+               onChange={handleChange}
+               valueLabelDisplay="auto"
+               valueLabelFormat={(values) => `$${values}`}
+               min={50}
+               max={1000}
+               step={1}
+               getAriaLabel={() => 'Price range'}
+             />
+           </Box>
+           <div className="button_wrap">
+             <div className="btn_wrap">
+               <button onClick={() => alert(`Min Price: $${values[0]}`)}>${values[0]}</button>
+             </div>
+             <div className="btn_wrap">
+               <button onClick={() => alert(`Min Price: $${values[1]}`)}>${values[1]}</button>
+             </div>
+             <div className="btn_wrap_b" onClick={handleSetClick}>
+               <button onClick={handleFilterByCost}>OK</button>
+             </div>
+           </div>
+         </div>
+
+         <div className="cart_con g">
+           <h2>Material</h2>
+           <hr />
+           <Box sx={{ display: 'grid', flexWrap: 'wrap', gap: 3, marginTop: 3 }}>
+             <Checkbox label="Metal" color="warning" defaultChecked />
+             <Checkbox label="Plastic" color="warning" defaultChecked />
+             <Checkbox label="Leather" color="warning" defaultChecked />
+             <Checkbox label="Marble" color="warning" defaultChecked />
+             <Checkbox label="Glass" color="warning" defaultChecked />
+             <Checkbox label="Rattan" color="warning" defaultChecked />
+           </Box>
+         </div>
+
+         <div className="cart_con c">
+           <h2>Color</h2>
+           <hr />
+           <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3, marginTop: 3 }}>
+             <Checkbox label="Primary" color="primary" defaultChecked />
+             <Checkbox label="Neutral" color="neutral" defaultChecked />
+             <Checkbox label="Danger" color="danger" defaultChecked />
+             <Checkbox label="Success" color="success" defaultChecked />
+             <Checkbox label="Warning" color="warning" defaultChecked />
+           </Box>
+           <h5>Show 8 more</h5>
+         </div>
+
+         <div className="cart_con d">
+           <h2>Collection</h2>
+           <hr />
+           <Box sx={{ display: 'grid', flexWrap: 'wrap', gap: 3, marginTop: 3 }}>
+             <Checkbox label="Minimalism" color="warning" defaultChecked />
+             <Checkbox label="Eco Style" color="warning" defaultChecked />
+             <Checkbox label="Glam" color="warning" defaultChecked />
+             <Checkbox label="Royal" color="warning" defaultChecked />
+             <Checkbox label="Pink Rose" color="warning" defaultChecked />
+             <Checkbox label="Hi Tech" color="warning" defaultChecked />
+           </Box>
+           <h5>Show 8 more</h5>
+         </div>
+
+         <div className="cart_con e">
+           <h2>Additional</h2>
+           <hr />
+           <Box sx={{ display: 'grid', flexWrap: 'wrap', gap: 3, marginTop: 3 }}>
+             <Checkbox label="Set" color="warning" defaultChecked />
+             <Checkbox label="Eco Combined" color="warning" defaultChecked />
+             <Checkbox label="Transformer" color="warning" defaultChecked />
+             <Checkbox label="Frameless" color="warning" defaultChecked />
+           </Box>
+           <h5>Show 8 more</h5>
+         </div>
+       </Saidbar>
+       )}
 
        <SlaiderContainer style={{padding:"0px"}}>
          <ImageGrid>
@@ -146,7 +242,7 @@ import { SlaiderContainer } from './categories';
               ))
               ) : (
                 <div className='Errors' style={{ textAlign: 'center', marginTop: '20px', fontSize: '18px', color: 'red' }}>
-                  You not sort!
+                  hechnima yo !
                 </div>
               )}
 
@@ -167,7 +263,7 @@ import { SlaiderContainer } from './categories';
          </Stack>
 
        </SlaiderContainer>
-
+       
        <Saidbar className="Saidbar">
          <div className="cart_con">
            <h2>Price</h2>
@@ -249,6 +345,7 @@ import { SlaiderContainer } from './categories';
            <h5>Show 8 more</h5>
          </div>
        </Saidbar>
+       
      </Catalog_con>
    );
  }

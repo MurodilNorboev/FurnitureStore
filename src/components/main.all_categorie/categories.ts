@@ -74,8 +74,8 @@ flex-direction: column;
 align-items: center;
 justify-content: space-between;
 max-width: 1200px;
-max-height: 2000px;
-height: 132vw;
+/* max-height: 2000px; */
+height: 120rem;
 width: 100vw;
 padding: 0px;
 .Errors {
