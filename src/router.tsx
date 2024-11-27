@@ -5,7 +5,6 @@ import NavbareComponent from './components/context/navbare'
 import FooterComponent from './FOOTER/footer'
 import ScrollToTop from './components/context/scollTotop'
 import ErrComponent from './components/error/err'
-import SimpleSlider from './components/test/test.tse'
 import CartDatail from './components/Navbar/Cart/cart.datail'
 import Checkout from './components/Navbar/Cart/checkout'
 import ProfilePersonal from './components/Navbar/profile/profile.personal'
@@ -24,8 +23,8 @@ import Contactcomponent from './FOOTER/contacts/contacts.con'
 import BlogdatailComponent from './FOOTER/blog/blog.datail'
 import DatailNavbarFilterComponent from './components/filterDatail/filterData.Navbar'
 import DatailComponent from './components/filterDatail/filterData2'
-import Apps from './components/test/tests/tests2'
 import Ssofar from './components/main.all_categorie/catalog_cart'
+import MyComponent from './components/test/test'
 
 const RouterComponent = () => {
   const loginin = useLocation();
@@ -50,7 +49,6 @@ const filterCon = loginin.pathname === "/login" || loginin.pathname === "/regLog
         <Route path='/menu/:id' element={<DatailMenusID />} />
         <Route path='/menu-datail/:label' element={<MenusDatailComponent name='New In'/>} />
         
-        <Route path='/u' element={<SimpleSlider />}/> 
         <Route path='/cart' element={<CartDatail name='Cart' />}/>
         <Route path='/chekout' element={<Checkout name='Checkout' />}/>
         <Route path='/order' element={<OrderComponent name='Message' />}/>
@@ -67,8 +65,9 @@ const filterCon = loginin.pathname === "/login" || loginin.pathname === "/regLog
         <Route path='/for_partners' element={<For_PartnerComponent />} />
         <Route path='/contacts' element={<Contactcomponent />} />
 
-        <Route path='/c/:id' element={<Apps />} />
-        <Route path='/d' element={<SimpleSlider />} />
+
+        <Route path='/t' element={<MyComponent />} />
+
     </Routes>
 
     {!filterCon && <FooterComponent />}

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
  import Stack from '@mui/material/Stack';
  import ArrowBackIcon from '@mui/icons-material/ArrowBack';
  import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
- import { Catalog_con, Image, ImageContainer, ImageGrid, Imagecontent, PagesName, Saidbar, SlaiderContainer } from './catalog.page/catalog';
+ import { Catalog_con, Image, ImageContainer, ImageGrid, Imagecontent, PagesName, Saidbar } from './catalog.page/catalog';
  import { Box, Checkbox, Slider } from '@mui/joy';
  import home from '../../assets/home.svg';
  import { Data } from '../mock/mockDatail';
@@ -11,21 +11,24 @@ import React, { useState, useEffect } from 'react';
  import { Navlink } from '../styles/LINK';
  import { DataType, Tname } from '../types/maintp';
  import Skeleton from '@mui/material/Skeleton';
+import { SlaiderContainer } from './categories';
 
  const ITEMS_PER_PAGE = 16;
 
  export default function Ssofar(Props: Tname) {
-   const [value, setValue] = useState<number[]>([20, 37]);
+  ///////// === slider range ===
+  const [values, setValues] = useState([50,1000]);
+  const getCostNumber = (cost: string) => parseFloat(cost.replace('$', '').trim());
    const [page, setPage] = useState<number>(1);
    const [itemsPerPage, setItemsPerPage] = useState<number>(ITEMS_PER_PAGE);
    const [imageVisible, setImageVisible] = useState<boolean>(false); 
    const [data, setData] = useState<DataType[]>([]);
    const { label } = useParams<{ label: string }>();
 
+
    useEffect(() => {
      setData(Data);
    }, []);
-
    useEffect(() => {
      const handleResize = () => {
        const width = window.innerWidth;
@@ -48,25 +51,51 @@ import React, { useState, useEffect } from 'react';
      return () => window.removeEventListener('resize', handleResize);
    }, []);
 
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     const width = window.innerWidth;
+  //     if (width <= 600) {
+  //       setItemsPerPage(4);
+  //     } else if (width <= 900) {
+  //       setItemsPerPage(6);
+  //     } else if (width <= 1200) {
+  //       setItemsPerPage(6);
+  //     } else if (width <= 1500) {
+  //       setItemsPerPage(6);
+  //     } else {
+  //       setItemsPerPage(6);
+  //     }
+  //   };
+
+  //   window.addEventListener('resize', handleResize);
+  //   handleResize();
+
+  //   return () => window.removeEventListener('resize', handleResize);
+  // }, []);
+
    const filteredData = data.filter(item => item.label === label);
+   const totalPages = Math.ceil(filteredData.length / itemsPerPage);
    const startIdx = (page - 1) * itemsPerPage;
    const endIdx = startIdx + itemsPerPage;
    const displayeddata = filteredData.slice(startIdx, endIdx);
 
-   const totalPages = Math.ceil(filteredData.length / itemsPerPage);
-
-   const handleChangeSlider = (event: Event, newValue: number | number[]) => {
-     setValue(newValue as number[]);
-   };
-
    const handleChangePagination = (event: React.ChangeEvent<unknown>, value: number) => {
      setPage(value);
    };
-
-   const valueText = (value: number) => `${value}°C`;
-
    if (!data || data.length === 0) {
      return <div>Loading...</div>;
+   }
+   ///////// === slider range ===
+   const handleFilterByCost = () => {
+    const [minCost, maxCost] = values;
+    const filteredArr = Data.filter(item => {
+      const costNumber = getCostNumber(item.cost);
+      return costNumber >= minCost && costNumber <= maxCost;
+    });
+    setData(filteredArr);
+   }
+   const handleChange = (event: Event, newValue: number | number[]) => {
+    setValues(newValue as number[]);
    }
 
    return (
@@ -77,46 +106,53 @@ import React, { useState, useEffect } from 'react';
          {displayeddata.length > 0 && <h4>{displayeddata[0].label}</h4>}
        </PagesName>
 
-       <SlaiderContainer>
+       <SlaiderContainer style={{padding:"0px"}}>
          <ImageGrid>
-           {displayeddata.map((item, ind) => (
-             <ImageContainer key={`${item.id} || ${item.label}`}>
-               <Navlink to={`/stul/${item.id}`}>
-                 <Imagecontent>
-                   {!imageVisible && (
-                     <Skeleton variant="rectangular" width="100%" height={200} animation="wave" />
-                   )}
-                   <div style={{ opacity: imageVisible ? 1 : 0, transition: 'opacity 1s ease' }}>
-                     {item.images ? (
-                       <Imagecontent>
-                       <Image
-                         className="Image"
-                         src={item.images}
-                         alt={`img-${ind + startIdx}`}
-                         onLoad={() => {
-                           setTimeout(() => setImageVisible(true), 1000);
-                         }}
-                         onMouseOver={(e) => (e.currentTarget.src = item.images2)}
-                         onMouseOut={(e) => (e.currentTarget.src = item.images)}
-                       />
-                       <h6></h6>
-                   <h5>{item.label}</h5>
-                   <h4>{item.cost}</h4>
-                       </Imagecontent>
-                     ) : (
-                       <Skeleton variant="rectangular" width="100%" height={200} animation="wave" />
-                     )}
-                   </div>
-                   <h6></h6>
-                   <h5>{item.label}</h5>
-                   <h4>{item.cost}</h4>
-                 </Imagecontent>
-               </Navlink>
-             </ImageContainer>
-           ))}
+           {displayeddata.length > 0 ? (
+              displayeddata.map((item, ind) => (
+                <ImageContainer key={`${item.id} || ${item.label}`}>
+                  <Navlink to={`/stul/${item.id}`}>
+                    <Imagecontent>
+                      {!imageVisible && (
+                        <Skeleton variant="rectangular" width="100%" height={200} animation="wave" />
+                      )}
+                      <div style={{ opacity: imageVisible ? 1 : 0, transition: 'opacity 1s ease' }}>
+                        {item.images ? (
+                          <Imagecontent>
+                            <Image
+                              className="Image"
+                              src={item.images}
+                              alt={`img-${ind + startIdx}`}
+                              onLoad={() => {
+                                setTimeout(() => setImageVisible(true), 1000);
+                              }}
+                              onMouseOver={(e) => (e.currentTarget.src = item.images2)}
+                              onMouseOut={(e) => (e.currentTarget.src = item.images)}
+                            />
+                            <h6></h6>
+                            <h5>{item.label}</h5>
+                            <h4>{item.cost}</h4>
+                          </Imagecontent>
+                        ) : (
+                          <Skeleton variant="rectangular" width="100%" height={200} animation="wave" />
+                        )}
+                      </div>
+                      <h6></h6>
+                      <h5>{item.label}</h5>
+                      <h4>{item.cost}</h4>
+                    </Imagecontent>
+                  </Navlink>
+                </ImageContainer>
+              ))
+              ) : (
+                <div className='Errors' style={{ textAlign: 'center', marginTop: '20px', fontSize: '18px', color: 'red' }}>
+                  You not sort!
+                </div>
+              )}
+
          </ImageGrid>
 
-         <Stack spacing={2} style={{ marginTop: '20px' }}>
+         <Stack spacing={1} style={{ marginTop: '20px' }}>
            <Pagination
              count={totalPages}
              page={page}
@@ -129,6 +165,7 @@ import React, { useState, useEffect } from 'react';
              )}
            />
          </Stack>
+
        </SlaiderContainer>
 
        <Saidbar className="Saidbar">
@@ -137,22 +174,25 @@ import React, { useState, useEffect } from 'react';
            <hr />
            <Box sx={{ width: '100%' }}>
              <Slider
-               getAriaLabel={() => 'Price range'}
-               value={value}
-               onChange={handleChangeSlider}
+               value={values}
+               onChange={handleChange}
                valueLabelDisplay="auto"
-               getAriaValueText={valueText}
+               valueLabelFormat={(values) => `$${values}`}
+               min={50}
+               max={1000}
+               step={1}
+               getAriaLabel={() => 'Price range'}
              />
            </Box>
            <div className="button_wrap">
              <div className="btn_wrap">
-               <button>$??</button>
+               <button onClick={() => alert(`Min Price: $${values[0]}`)}>${values[0]}</button>
              </div>
              <div className="btn_wrap">
-               <button>$??</button>
+               <button onClick={() => alert(`Min Price: $${values[1]}`)}>${values[1]}</button>
              </div>
              <div className="btn_wrap_b">
-               <button>OK</button>
+               <button onClick={handleFilterByCost}>OK</button>
              </div>
            </div>
          </div>

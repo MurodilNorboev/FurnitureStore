@@ -29,19 +29,14 @@ export const StyledPagination = styled(Stack)`
 `;
 
 const SimpleSlider = (Props: Tname) => {
-  const [age, setAge] = React.useState('');
-
-  const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value as string);
-  };
+  
   const isTablet = useMediaQuery('(max-width:1200px)');
   const isMobaile1 = useMediaQuery('(max-width:840px)');
   const isMobile = useMediaQuery('(max-width:550px)');
-
+  
   const [page, setPage] = useState<number>(1);
   const [selectedLabel, setSelectedLabel] = useState<string | null>('mirrors');
-  const [filteredData, setFilteredData] = useState<DataType[]>(Data); 
-  const [isFiltered, setIsFiltered] = useState<boolean>(false); 
+  
 
   const ITEMS_PER_PAGE = isMobile ? 4 : isMobaile1 ? 8 : isTablet ? 12 : 16;
   const desiredLabels = ['mirrors', 'wall art', 'clocks', 'vases', 'storage', 'candles', 'Shelves', 'Plant Pots', 'Bathroom Accessories'];
@@ -56,31 +51,8 @@ const SimpleSlider = (Props: Tname) => {
 
   const currentData = selectedLabel && groupedData[selectedLabel] ? groupedData[selectedLabel] : [];
   
-  const getCostNumber = (cost: string) => {
-    return parseFloat(cost.replace('$', '').trim());
-  };
-
   const handleChangePagination = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
-  };
-
-  const handleFilterAndSort = (filter: { popular?: string, new?: string, lowToHigh?: boolean, highToLow?: boolean }) => {
-    let filteredArr = [...Data];
-
-    if (filter.popular === 'popular') {
-      filteredArr = filteredArr.filter(item => item.Popular === 'Popular');
-    } else if (filter.new === 'new') {
-      filteredArr = filteredArr.filter(item => item.new === 'new');
-    }
-
-    if (filter.lowToHigh) {
-      filteredArr = filteredArr.sort((a, b) => getCostNumber(a.cost) - getCostNumber(b.cost));
-    } else if (filter.highToLow) {
-      filteredArr = filteredArr.sort((a, b) => getCostNumber(b.cost) - getCostNumber(a.cost));
-    }
-
-    setFilteredData(filteredArr);
-    setIsFiltered(true); 
   };
 
   const handleLabelSelection = (label: string) => {
@@ -92,6 +64,37 @@ const SimpleSlider = (Props: Tname) => {
     setIsFiltered(false); 
   };
 
+  /// cost filter
+  const [age, setAge] = React.useState('');
+  const [filteredData, setFilteredData] = useState<DataType[]>(Data); 
+  const [isFiltered, setIsFiltered] = useState<boolean>(false);
+
+  const getCostNumber = (cost: string) => {
+    return parseFloat(cost.replace('$', '').trim());
+  };  
+  const handleFilterAndSort = (filter: { popular?: string, new?: string, lowToHigh?: boolean, highToLow?: boolean }) => {
+    let filteredArr = [...Data];
+    
+    if (filter.popular === 'popular') {
+      filteredArr = filteredArr.filter(item => item.Popular === 'Popular');
+    } else if (filter.new === 'new') {
+      filteredArr = filteredArr.filter(item => item.new === 'new');
+    }
+    
+    if (filter.lowToHigh) {
+      filteredArr = filteredArr.sort((a, b) => getCostNumber(a.cost) - getCostNumber(b.cost));
+    } else if (filter.highToLow) {
+      filteredArr = filteredArr.sort((a, b) => getCostNumber(b.cost) - getCostNumber(a.cost));
+    }
+    
+    setFilteredData(filteredArr);
+    setIsFiltered(true); 
+  };
+  const handleChange = (event: SelectChangeEvent) => {
+    setAge(event.target.value as string);
+  };
+  
+  
   const displayedData = isFiltered ? filteredData : currentData;
   const totalPages = Math.ceil(displayedData.length / ITEMS_PER_PAGE); 
   const startIdx = (page - 1) * ITEMS_PER_PAGE;

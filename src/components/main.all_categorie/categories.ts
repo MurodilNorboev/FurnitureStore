@@ -72,6 +72,21 @@ export const SlaiderContainer = styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
+justify-content: space-between;
+max-width: 1200px;
+max-height: 2000px;
+height: 132vw;
+width: 100vw;
+padding: 0px;
+.Errors {
+  position: absolute;
+  left: 10;
+  right: 20;
+  @media screen and (max-width: 1440px){
+    right: 0;
+    left: 0;
+  }
+}
 `;
 export const BtnWrap2 = styled.div`
 height: 150px;

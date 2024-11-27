@@ -820,7 +820,7 @@ export const Data = [
     description: "This leather chair provides excellent support and comfort for two people. Ideal for your living room.",
     customerReviews: "Customers love the modern design and durability of this chair.",
     chair: "Modern leather chair",
-    cost: "$350",
+    cost: "$250",
   },
   {
     id: 22, /// chairs  
@@ -1298,7 +1298,7 @@ export const Data = [
     description: "This fabric chair is designed for comfort and is ideal for small spaces.",
     customerReviews: "Comfortable and space-saving design. Perfect for apartments.",
     chair: "Compact fabric chair",
-    cost: "$230",
+    cost: "$160",
   },
   {
     id: 34, /// table 
@@ -1338,7 +1338,7 @@ export const Data = [
     description: "This fabric chair is designed for comfort and is ideal for small spaces.",
     customerReviews: "Comfortable and space-saving design. Perfect for apartments.",
     chair: "Compact fabric chair",
-    cost: "$230",
+    cost: "$130",
   },
   {
     id: 35, /// table 
