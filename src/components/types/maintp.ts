@@ -93,6 +93,12 @@ export type DataType = {
   id: number;
   Popular: string;
   new: string;
+  HotNum: string;
+  Hot: string;
+  material: string;
+  Color: string;
+  Styles: string;
+  Feature: string;
   label: string;
   name: string;
   img: string;

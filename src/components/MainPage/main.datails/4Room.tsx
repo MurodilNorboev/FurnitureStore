@@ -1,60 +1,41 @@
 import { useEffect, useState } from 'react';
 import '../../styles/maine.css';
 import { BtnWrap3 } from '../../styles/main';
+import { Navlink } from '../../styles/LINK';
+import { DataType } from '../../types/maintp';
+import { Data } from '../../mock/mockDatail';
 
-const datas = [
-  {
-   imgUrl: 'https://server.orientbell.com/media/850x450_Pix_4_1_.jpg',
-   imgUrl2: 'https://static.vecteezy.com/system/resources/previews/023/132/472/non_2x/frame-over-white-cabinet-with-plant-next-to-grey-sofa-in-minimalist-living-room-interior-ai-generated-photo.jpg',
-   imgUrl3: 'https://lifebylee.com/wp-content/uploads/2019/01/walmart-guestroom-3.jpg',
-  }
- ];
- interface datasT {
-   imgUrl: string;
-   imgUrl2: string;
-   imgUrl3: string;
- }
 
 const Room = () => {
-  const [ data, setdata ] = useState<datasT[] | null>(null)
-  useEffect(() => {setdata(datas)})
+ const [data, setData] = useState<DataType[] | null>(null);
+
+  useEffect(() => {
+    const filterData = Data.filter((i: DataType) => {
+      switch (i.label) {
+        case "Living Room": return i.id === 199;
+        case "Dining Room": return i.id === 208;
+        case "Play Room": return i.id === 217;
+      }
+    });
+    setData(filterData)
+  }, [])
   return (
     <div className='imgc' style={{marginTop:"50px"}}>
       <div className="image-slider-container">
-      <div className="image-slider">
-
-         <BtnWrap3 className='shadov ml'>
-        {data?.map((val, ind) => (
-           <div key={ind} className="image-item large-image">
-           <img src={val.imgUrl2} alt="Image 1" />
-           <h6></h6>
-           <h5>living room</h5>
-         </div>
-         ))}
-         </BtnWrap3>
-
-         <BtnWrap3 className='shadov'>
-         {data?.map((val, ind) => (
-           <div key={ind} className="image-item">
-           <img src={val.imgUrl} alt="Image 1" />
-           <h6></h6>
-           <h5>dining room</h5>
-           </div>
-         ))}
-         </BtnWrap3>
-
-         <BtnWrap3 className='shadov sl'>
-        {data?.map((val, ind) => (
-           <div key={ind} className="image-item">
-           <img src={val.imgUrl3} alt="Image 1" />
-           <h6></h6>
-           <h5>playroom</h5>
-         </div>
-         ))}
-         </BtnWrap3>
-
+        <div className="image-slider">
+          {data?.map((val, ind) => (
+            <BtnWrap3 className='shadov ml' key={`${val.id} || ${val.label}`}>
+              <Navlink to={`/stol/${val.id && val.label}`}>
+                  <div key={ind} className={val.label === "Living Room" ? "image-item large-image" : "image-item"}>
+                     <img src={val.images} alt="Image 1" />
+                     <h6></h6>
+                     <h5>{val.label}</h5>
+                  </div>
+              </Navlink>
+            </BtnWrap3>
+          ))}
+        </div>
       </div>
-    </div>
     </div>
   );
 };

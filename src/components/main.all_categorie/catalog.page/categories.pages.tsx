@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
 import Stack from '@mui/material/Stack';
@@ -13,11 +13,14 @@ import { Image } from './catalog';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import home from '../../../assets/home.svg'
 import { Navlink } from '../../styles/LINK';
-import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import AspectRatio from '@mui/joy/AspectRatio';
+import Card from '@mui/joy/Card';
+import Typography from '@mui/joy/Typography';
+import Skeleton from '@mui/joy/Skeleton';
 
 export const StyledPagination = styled(Stack)`
   margin-top: 20px;
@@ -29,17 +32,22 @@ export const StyledPagination = styled(Stack)`
 `;
 
 const SimpleSlider = (Props: Tname) => {
-  
+  const [isImageVisible, setImageVisible] = useState<boolean>(false);
   const isTablet = useMediaQuery('(max-width:1200px)');
   const isMobaile1 = useMediaQuery('(max-width:840px)');
   const isMobile = useMediaQuery('(max-width:550px)');
-  
   const [page, setPage] = useState<number>(1);
-  const [selectedLabel, setSelectedLabel] = useState<string | null>('mirrors');
-  
-
+  const [selectedLabel, setSelectedLabel] = useState<string | null>('storage');
   const ITEMS_PER_PAGE = isMobile ? 4 : isMobaile1 ? 8 : isTablet ? 12 : 16;
   const desiredLabels = ['mirrors', 'wall art', 'clocks', 'vases', 'storage', 'candles', 'Shelves', 'Plant Pots', 'Bathroom Accessories'];
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setImageVisible(true);
+    }, 5000);  
+
+    return () => clearTimeout(timer);  
+  }, []);
 
   const groupedData: Record<string, DataType[]> = Data.reduce((acc, item) => {
     if (desiredLabels.includes(item.label)) {
@@ -50,7 +58,7 @@ const SimpleSlider = (Props: Tname) => {
   }, {} as Record<string, DataType[]>);
 
   const currentData = selectedLabel && groupedData[selectedLabel] ? groupedData[selectedLabel] : [];
-  
+
   const handleChangePagination = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
@@ -72,6 +80,7 @@ const SimpleSlider = (Props: Tname) => {
   const getCostNumber = (cost: string) => {
     return parseFloat(cost.replace('$', '').trim());
   };  
+
   const handleFilterAndSort = (filter: { popular?: string, new?: string, lowToHigh?: boolean, highToLow?: boolean }) => {
     let filteredArr = [...Data];
     
@@ -90,11 +99,11 @@ const SimpleSlider = (Props: Tname) => {
     setFilteredData(filteredArr);
     setIsFiltered(true); 
   };
+  
   const handleChange = (event: SelectChangeEvent) => {
     setAge(event.target.value as string);
   };
-  
-  
+
   const displayedData = isFiltered ? filteredData : currentData;
   const totalPages = Math.ceil(displayedData.length / ITEMS_PER_PAGE); 
   const startIdx = (page - 1) * ITEMS_PER_PAGE;
@@ -112,7 +121,7 @@ const SimpleSlider = (Props: Tname) => {
       <div>
         <TopContent className="TopContent">
           {Object.keys(groupedData).map((label) => (
-            <BtnWrap2 onClick={() => handleLabelSelection(label)} key={label}>
+            <BtnWrap2 onClick={() => handleLabelSelection(label)} key={label} className={selectedLabel === label ? 'active' : ''}>
               <AnimatedButton2>
                 <div className="catcontan">
                   <div className="catContainer">
@@ -166,6 +175,7 @@ const SimpleSlider = (Props: Tname) => {
               {paginatedData.map((item, ind) => (
                 <ImageContainer key={item.id}>
                   <Navlink to={`/stul/${item.id}`}>
+                  {isImageVisible ? (
                     <Imagecontent>
                       <Image 
                         onMouseOver={(e) => (e.currentTarget.src = item.images2)}
@@ -178,6 +188,31 @@ const SimpleSlider = (Props: Tname) => {
                       <h5>{item.label}</h5>
                       <h4>{item.cost}</h4>
                     </Imagecontent>
+                    )
+                    : 
+                    (
+                      <Imagecontent style={{width:"300px",height:"420px"}}>
+                        
+                      <Card variant="outlined" sx={{ width: 300,height:"30rem",position:"absolute",padding:"5px",border: "none" }}>
+                      <AspectRatio minHeight="290px" >
+                        <Skeleton>
+                        </Skeleton>
+                      </AspectRatio>
+                      <div style={{display:"flex",flexDirection:"column",alignItems:"center",marginTop:"20px"}}>
+                        <Typography level="h2" sx={{ height:"3px",marginBottom:"15px" }}>
+                          <Skeleton>Yo</Skeleton>
+                        </Typography>
+                        <Typography level="h2" sx={{ fontSize: 'md', mb: 0.5 }}>
+                          <Skeleton>Yosemit</Skeleton>
+                        </Typography>
+                        <Typography level="body-sm" >
+                          <Skeleton >April</Skeleton>
+                        </Typography>
+                      </div>
+                      </Card>
+                      </Imagecontent>
+                    )
+                    }
                   </Navlink>
                 </ImageContainer>
               ))}

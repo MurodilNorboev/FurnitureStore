@@ -89,24 +89,21 @@ padding: 0px;
 }
 `;
 export const BtnWrap2 = styled.div`
-height: 150px;
-max-width: 300px; 
-width: 100vw;
-display: flex;
-align-items: end;
-margin: 5px 5px;
+  height: 150px;
+  max-width: 300px; 
+  width: 100vw;
+  display: flex;
+  align-items: end;
+  margin: 5px 5px;
   cursor: pointer;
-  
-  &:hover {
-    border-top: 2px solid #DBA514;
-    z-index: 99;
-  }
-  
-  transition: transform 0.2s ease; 
+  border-top: 2px solid transparent; 
 
-  &:active {
-    transform: scale(0.9); 
+  &.active {
+    transform: scale(1.04); 
+    border-top: 2px solid #DBA514; 
   }
+
+  transition: border-top 0.2s ease, transform 0.2s ease;
 `;
 export const AnimatedButton2 = styled.button`
 border: none;

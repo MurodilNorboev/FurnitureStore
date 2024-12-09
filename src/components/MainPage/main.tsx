@@ -570,6 +570,7 @@ console.log(datas);
       </motion.div>
 
       <motion.div
+      style={{overflow:"scroll",maxWidth:"1460px",width:"100%",padding:"0px 20px"}}
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
@@ -579,6 +580,7 @@ console.log(datas);
       </motion.div>
 
       <motion.div
+      style={{overflow:"scroll",maxWidth:"1460px",width:"100%",padding:"0px 20px"}}
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
@@ -652,6 +654,7 @@ console.log(datas);
       </motion.div>
 
       <motion.div
+      style={{overflow:"scroll",maxWidth:"1460px",width:"100%",padding:"0px 20px"}}
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
@@ -661,6 +664,7 @@ console.log(datas);
       </motion.div>
 
       <motion.div
+      style={{overflow:"scroll",maxWidth:"1460px",width:"100%",padding:"0px 20px"}}
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}

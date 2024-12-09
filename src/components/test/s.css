@@ -1,0 +1,39 @@
+/* input[type="checkbox"] {
+    visibility: visible !important;
+    display: inline-block !important;
+  } */
+
+  /* s.css */
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border: 2px solid #ccc;
+    cursor: pointer;
+    border-radius: 4px;
+    visibility: visible !important;
+    display: inline-block !important;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+  }
+  
+  input[type="checkbox"]:checked {
+    background-color: #4caf50;
+    border-color: #4caf50;
+  }
+  
+  input[type="checkbox"]:hover {
+    border-color: #888;
+  }
+  
+  label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+  }
+  
+  label:hover {
+    background-color: #f1f1f1;
+  }
+  
+  

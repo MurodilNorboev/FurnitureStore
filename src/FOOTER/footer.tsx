@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import una from '../assets/Logo.svg'
 import CircleBtn from '../assets/CircleBtn.svg'
 import FSBK from '../assets/facebook.svg'
@@ -8,8 +8,34 @@ import { FooterCon } from '../components/styles/footer'
 import { IconButton } from '@mui/material'
 import { AnimatedButton, BtnWrap } from '../components/styles/navbar'
 import { Navlink } from '../components/styles/LINK'
+import emailjs from "emailjs-com";
+import { Box } from "@mui/joy";
 
 const FooterComponent = () => {
+  const [email, setEmail] = useState("");
+
+  const handleSend = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    emailjs
+      .send(
+        "service_m4t5v1d",
+        "template_ahjdy59",
+        {
+          user_email: email, 
+        },
+        "jSN7HYs8ebbzEF7Ox"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+          setEmail("");
+        },
+        (error) => {
+          console.error(error.text);
+        }
+      );
+  };
   
   return ( //// BtnWrap
     <> 
@@ -96,7 +122,22 @@ const FooterComponent = () => {
             <div className="footer_4">
                <h5>SUBSCRIBE</h5>
                <h6>Get the latest news and promotions <br /> on your inbox</h6>
-              <div className='input_wrap'><input type='email' placeholder='Email address' /><IconButton className="buttons" ><img src={Circle2} alt="Btn_img" /></IconButton></div>
+               <Box 
+               className="box"
+               component="form"
+               onSubmit={handleSend}>
+                <div className='input_wrap'>
+                  <input 
+                  type='email' 
+                  placeholder='Email address' 
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required />
+                    <IconButton className="buttons" type="submit">
+                      <img src={Circle2} alt="Btn_img" />
+                    </IconButton>
+                </div>
+              </Box>
             </div>
             <div className="footer_three b">
                 <h5>stay in touch</h5>

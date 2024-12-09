@@ -132,13 +132,18 @@ letter-spacing: 2px;
 height: 26px;
 text-transform: uppercase;
 margin-top: 9px;
-padding: 2px 3px 5px 3px;
-border-bottom: 2px solid red;
+/* border-bottom: 2px solid #DBA514; */
+border-top: none;
+border-left: none;
+border-right: none;
 transition: transform 200ms ease-in-out;
+
 &:hover {
   border-bottom: 2px solid #DBA514;
 }
 &:active {
   transform: scale(0.88);
+  border-bottom: 2px solid #DBA514;
 }
+transition: border-bottom 0.2s ease, transform 0.1s ease;
 `;

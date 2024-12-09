@@ -3,8 +3,40 @@ import { BottomBtn, Chescout_containerWrapper, Chescout_one, Chescout_Top, Conte
 import { PagesName } from '../../components/main.all_categorie/catalog.page/catalog'
 import home from '../../assets/home.svg'
 import circlebtn from '../../assets/circlewhite.svg'
+import emailjs from "emailjs-com";
+import { Box } from "@mui/joy";
 
 const For_PartnerComponent = () => {
+  const [text, setText] = React.useState(""); 
+  const [email, setEmail] = React.useState("");
+  const [question, setQuestion] = React.useState(""); 
+
+  const handleSend = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    emailjs
+      .send(
+        "service_m4t5v1d",
+        "template_ahjdy59",
+        {
+          user_name: text, 
+          user_email: email, 
+          user_comment: question, 
+        },
+        "jSN7HYs8ebbzEF7Ox"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+          setText("");
+          setEmail("");
+          setQuestion("");
+        },
+        (error) => {
+          console.error(error.text);
+        }
+      );
+  };
   return (
     <For_PartnerContainter>
       <PagesName style={{display:"grid",gap:"50px"}}>
@@ -27,35 +59,54 @@ const For_PartnerComponent = () => {
           <div className="menus a"></div>
 
           <Chescout_containerWrapper className="Chescout_containerWrapper">
-                       <Content_chesckout className='menus b'>
-                       <div className="h22"><h1>Request a partnership</h1></div>
-   
-                           <Chescout_Top className="Chescout_Top top">
-                               <Chescout_one className="Chescout_one">
-                                   <div className="LasName_Con">
-                                        <label>name*</label>
-                                       <input type="text" placeholder="Johnathan" />
-                                   </div>
-                                   <div className="LasName_Con">
-                                        <label>email*</label>
-                                       <input type="text" placeholder="customer_1995gmail.com" />
-                                   </div>
-                                   <div className="LasName_Con">
-                                        <label>Message</label>
-                                       <input className='message' type="text" placeholder="message" />
-                                   </div>
-                               </Chescout_one>
-                               
-                           </Chescout_Top>
-   
-                               <BottomBtn className='BottomBtn'>
-                                <div className="buttonbtn">
-                                  <button>send request <img src={circlebtn} alt="" /></button>
-                                </div>
-                               </BottomBtn>
-   
-                       </Content_chesckout>
-                   </Chescout_containerWrapper>
+              <Content_chesckout className='menus b'>
+                 <div className="h22"><h1>Request a partnership</h1></div>
+                    <Box
+                        className="box"
+                        component="form"
+                        onSubmit={handleSend}
+                      >
+                     <Chescout_Top className="Chescout_Top top">
+                         <Chescout_one className="Chescout_one">
+                             <div className="LasName_Con">
+                                  <label>name*</label>
+                                 <input type="text" placeholder="Johnathan"      
+                                    value={text}
+                                    onChange={(e) => setText(e.target.value)}
+                                    required/>
+                             </div>
+                             <div className="LasName_Con">
+                                  <label>email*</label>
+                                 <input 
+                                     placeholder="customer_1995gmail.com" 
+                                     type="email"
+                                     value={email}
+                                     onChange={(e) => setEmail(e.target.value)}
+                                     required />
+                             </div>
+                             <div className="LasName_Con">
+                                  <label>Message</label>
+                                 <input className='message' 
+                                     type="text" 
+                                     placeholder="message" 
+                                     value={question}
+                                     onChange={(e) => setQuestion(e.target.value)}
+                                     required />
+                             </div>
+                         </Chescout_one>
+                         
+                     </Chescout_Top>
+                         <BottomBtn className='BottomBtn'>
+                          <div className="buttonbtn">
+                            <button type="submit" >
+                              send request 
+                              <img src={circlebtn} alt="" />
+                            </button>
+                          </div>
+                         </BottomBtn>
+                    </Box>
+              </Content_chesckout>
+          </Chescout_containerWrapper>
    
         </For_PartnerCon>
       </For_PartnerConetent>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { DataType } from '../types/maintp';
 import { Data } from '../mock/mockDatail';
 import { Buttones, ContainerModalEnter, Contant, ModalContainer, ModalIMG, ModalMenus, ModalMenusWrap } from './dropodownstyle';
@@ -8,6 +8,9 @@ const DatailMenusID: React.FC = () => {
   const [selectedItem, setSelectedItem] = useState<DataType | null>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [data, setData] = useState<DataType[]>([]);
+  const [isFiltered, setIsFiltered] = useState<string | null>(null);
+
+
 
   useEffect(() => {
     const filterdata = Data.filter((i: DataType) => {
@@ -39,10 +42,10 @@ const DatailMenusID: React.FC = () => {
         <ContainerModalEnter onMouseLeave={handleClose}>
           <Contant className="grid2">
             {data.map((item, ind) => (
-              <Navlink to={`/menu-datail/${item.id && item.label}`} key={ind}>
+              <Navlink to={`/menu-datail/${item.id && item.label}`} key={ind}
+              >
                 <Buttones
-                  onClick={handleClose}
-                  className="grid"
+                  className={isFiltered === item.label ? "none" : "grid"}
                   onMouseEnter={() => handleEnter(item)}
                   style={{ cursor: 'pointer', marginBottom: '10px' }}
                 >
@@ -51,6 +54,7 @@ const DatailMenusID: React.FC = () => {
               </Navlink>
             ))}
           </Contant>
+
 
           {showModal && selectedItem && (
             <ModalContainer onMouseLeave={handleClose}>

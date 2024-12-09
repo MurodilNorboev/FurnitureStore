@@ -1,0 +1,4 @@
+input[type="checkbox"] {
+    visibility: visible !important;
+    display: inline-block !important;
+  }

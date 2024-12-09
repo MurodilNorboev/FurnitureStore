@@ -12,6 +12,14 @@ align-items: start;
 .b {
   display: none;
 }
+.aa {
+  gap: 4px;
+}
+.aaa {
+  &:active {
+    transform: scale(0.98);
+  }
+}
 @media only screen and (max-width: 1440px){
   display: flex;
   flex-direction: column;
@@ -77,6 +85,10 @@ gap: 50px;
 width: 100%;
 display: flex;
 flex-direction: column;
+.Checkbox {
+  visibility: visible !important;
+  display: inline-block !important;
+}
 } h2 {
     width: 100%;
     color: #32324D;
@@ -208,45 +220,62 @@ export const ImageContainer = styled.div`
   overflow: hidden;
 `;
 export const Imagecontent = styled.div`
-display: flex;
-flex-direction: column;
-align-items: center;
-max-height: 450px;
-height: 100%;
-background-color: #FFF;
-
-h6 {
-  margin-top: 30px;
-  width: 30px;
-  height: 1px;
-  flex-shrink: 0;
-  background: var(--pastel, #D1BCB2);
-} h5 {
-  margin-top: 5px;
-  color: var(--dark-grey, #666);
-  text-align: center;
-  font-feature-settings: 'liga' off, 'clig' off;
-  font-family: Prompt;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 20px; /* 125% */
-  letter-spacing: 2px;
-  text-transform: uppercase;
-} h4 {
-  margin-bottom: 35px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  color: var(--accent, #DBA514);
-  text-align: center;
-  font-feature-settings: 'liga' off, 'clig' off;
-  font-family: Prompt;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 16px; /* 100% */
-  letter-spacing: 1px;
-}
+  max-height: 450px;
+  height: 100%;
+  background-color: #FFF;
+
+  &:active img {
+    opacity: 0.5;  
+  }
+
+  &:active::after {
+    content: ''; 
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 10; 
+    background-color: rgba(0, 0, 0, 0.2); 
+  }
+
+  h6 {
+    margin-top: 30px;
+    width: 30px;
+    height: 1px;
+    flex-shrink: 0;
+    background: var(--pastel, #D1BCB2);
+  }
+
+  h5 {
+    margin-top: 5px;
+    color: var(--dark-grey, #666);
+    text-align: center;
+    font-feature-settings: 'liga' off, 'clig' off;
+    font-family: Prompt;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  h4 {
+    margin-bottom: 35px;
+    display: flex;
+    align-items: center;
+    color: var(--accent, #DBA514);
+    text-align: center;
+    font-feature-settings: 'liga' off, 'clig' off;
+    font-family: Prompt;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: 1px;
+  }
 `;
 export const Image = styled.img`
   width: 100%;

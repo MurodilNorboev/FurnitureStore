@@ -24,7 +24,7 @@ import BlogdatailComponent from './FOOTER/blog/blog.datail'
 import DatailNavbarFilterComponent from './components/filterDatail/filterData.Navbar'
 import DatailComponent from './components/filterDatail/filterData2'
 import Ssofar from './components/main.all_categorie/catalog_cart'
-import MyComponent from './components/test/test'
+import MyComponent from './components/test/tests'
 
 const RouterComponent = () => {
   const loginin = useLocation();
