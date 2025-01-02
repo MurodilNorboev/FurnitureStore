@@ -52,7 +52,7 @@ gap: 20px;
     }
     h6 {
         position: relative;
-        margin: 0px 0px -5px -55px;
+        margin: 0px 0px -5px -300px;
         bottom: -11px;
         color: var(--dark-grey, #666);
         text-align: right;
@@ -65,7 +65,7 @@ gap: 20px;
     }
     h5 {
         position: relative;
-        margin: 0px 0px -5px -90px;
+        margin: 0px 0px -5px -300px;
         bottom: -10px;
         color: var(--dark-grey, #666);
         text-align: right;
@@ -78,7 +78,7 @@ gap: 20px;
     }
     h4 {
         position: relative;
-        margin: 0px 0px -5px -290px;
+        margin: 0px 0px -5px -340px;
         bottom: -7px;
         color: var(--dark-grey, #666);
         text-align: right;
@@ -113,7 +113,13 @@ gap: 20px;
         font-size: 16px;
         font-style: normal;
         font-weight: 500;
-        line-height: 20px; /* 125% */
+        line-height: 20px;
+
+        pointer-events: none; 
+        outline: none;       
+        background-color: transparent;
+        color: black;         
+        outline: none;
     } 
 } .inputwraps {
     display: flex;
@@ -138,10 +144,11 @@ gap: 20px;
         font-size: 16px;
         font-style: normal;
         font-weight: 500;
-        line-height: 20px; /* 125% */
+        line-height: 20px; 
     } h6 {
         position: relative;
-        margin: 0px 0px -5px -55px;
+        margin: 0px 0px -5px -300px;
+        overflow: hidden;
         bottom: -11px;
         color: var(--dark-grey, #666);
         text-align: right;

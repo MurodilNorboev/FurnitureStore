@@ -185,7 +185,7 @@ export default function Ssofar(Props: Tname) {
                    <button onClick={() => alert(`Min Price: $${values[0]}`)}>${values[0]}</button>
                  </div>
                  <div className="btn_wrap">
-                   <button onClick={() => alert(`Min Price: $${values[1]}`)}>${values[1]}</button>
+                   <button onClick={() => alert(`Max Price: $${values[1]}`)}>${values[1]}</button>
                  </div>
                  <div className="btn_wrap_b aaa" onClick={handleCancelFilters}>
                    <button onClick={handleFilterByCost}>OK</button>
@@ -466,8 +466,8 @@ export default function Ssofar(Props: Tname) {
                  <div className="btn_wrap">
                    <button onClick={() => alert(`Min Price: $${values[1]}`)}>${values[1]}</button>
                  </div>
-                 <div className="btn_wrap_b aaa" onClick={handleCancelFilters}>
-                   <button onClick={handleFilterByCost}>OK</button>
+                 <div className="btn_wrap_b aaa">
+                   <button onClick={handleFilterByCost || handleCancelFilters }>OK</button> 
                  </div>
                </div>
              </div>

@@ -9,7 +9,7 @@ height: 100svb;
 padding-top: 100px;
 background-color: #F9F6F5;
 `;
-export const LoginWraps = styled.div`
+export const LoginWraps = styled.form`
 display: flex;
 padding: 33px;
 flex-direction: column;
@@ -57,13 +57,6 @@ h2 {
     gap: 5px;
     align-items: center;
 } 
-/* .intut {
-    width: 23px;
-    height: 22px;
-    border-radius: 5px;
-    border: none;
-    background: rgba(55, 55, 55, 0.15);
-}  */
 .loginis3 label {
     color: #666;
     font-feature-settings: 'liga' off, 'clig' off;
@@ -195,11 +188,10 @@ export const LoginRegCon = styled.div`
 display: flex;
 justify-content: center;
 align-items: start;
-height: 100svb;
-padding-top: 100px;
+padding: 100px 0px;
 background-color: #F9F6F5;
 `;
-export const LoginWrap = styled.div`
+export const LoginWrap = styled.form`
 display: flex;
 padding: 33px;
 flex-direction: column;
@@ -220,7 +212,24 @@ h2 {
     line-height: 38px; /* 126.667% */
     letter-spacing: 3px;
     text-transform: uppercase;
-} .loginis1 {
+} .loginis0 {
+    color: #AD8775;
+    padding-top: 15px;
+    display: flex;
+    gap: 10px;
+} .loginis0 label {
+    font-family: "Open Sans";
+    font-size: 16px;
+    font-weight: 600;
+    padding-bottom: 4px;
+} .loginis0 input {
+    border: 1px solid #D1BCB2;
+    background-color: transparent;
+    width: 59.5vmin;
+    max-width: 434px;
+    padding: 10px 20px;
+}
+.loginis1 {
     color: #AD8775;
     padding-top: 15px;
     display: flex;

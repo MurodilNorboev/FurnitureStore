@@ -3,7 +3,7 @@ export const Data = [
   { // new in
     id: 1,  /// sofas
     Popular: 'Popular',
-    new: "old",
+    new: "new",
     HotNum: "-50%",
     Hot: "hot",
     material: "metal", 

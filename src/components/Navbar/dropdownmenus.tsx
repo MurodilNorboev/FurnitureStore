@@ -3,14 +3,13 @@ import { DataType } from '../types/maintp';
 import { Data } from '../mock/mockDatail';
 import { Buttones, ContainerModalEnter, Contant, ModalContainer, ModalIMG, ModalMenus, ModalMenusWrap } from './dropodownstyle';
 import { Navlink } from '../styles/LINK';
+import { useParams } from 'react-router-dom';
 
 const DatailMenusID: React.FC = () => {
   const [selectedItem, setSelectedItem] = useState<DataType | null>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [data, setData] = useState<DataType[]>([]);
   const [isFiltered, setIsFiltered] = useState<string | null>(null);
-
-
 
   useEffect(() => {
     const filterdata = Data.filter((i: DataType) => {
@@ -32,6 +31,7 @@ const DatailMenusID: React.FC = () => {
     setSelectedItem(item);
     setShowModal(true); 
   };
+
   const handleClose = () => {
     setShowModal(false); 
   };
@@ -111,19 +111,5 @@ const DatailMenusID: React.FC = () => {
 };
 
 export default DatailMenusID;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

@@ -1,6 +1,6 @@
 import { Route, Routes, useLocation } from 'react-router-dom'
-import LoginComponent from './components/login/login'
-import RegloginComponent from './components/login/reglogin'
+import LoginComponent from './components/Form/login'
+import RegloginComponent from './components/Form/reglogin'
 import NavbareComponent from './components/context/navbare'
 import FooterComponent from './FOOTER/footer'
 import ScrollToTop from './components/context/scollTotop'
@@ -54,7 +54,7 @@ const filterCon = loginin.pathname === "/login" || loginin.pathname === "/regLog
         <Route path='/order' element={<OrderComponent name='Message' />}/>
 
         <Route path='/profile' element={<ProfilePersonal name='profile' />}/>
-        <Route path='/profile2' element={<ProfilePersonal2page name='profile' />}/>
+        <Route path='/profile2' element={<ProfilePersonal2page  name='profile' />}/> 
         <Route path='/profilePassword' element={<ProfilePassword name='profile' />}/>
 
 

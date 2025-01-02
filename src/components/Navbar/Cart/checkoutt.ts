@@ -7,7 +7,7 @@ padding-top: 0px;
     box-shadow: 0px 10px 20px 0px rgba(209, 188, 178, 0.25);
 }
 `;
-export const Chescout_containerWrapper = styled.div`
+export const Chescout_containerWrapper = styled.form`
 display: flex;
 gap: 25px;
 .dropdown {
@@ -20,6 +20,7 @@ input {
     border: 1px solid #D1BCB2;
 }
 @media only screen and (max-width: 1400px) {
+    margin: none;
     display: grid;
     width: 78.20vw;
     max-width: 1000px;
@@ -143,7 +144,7 @@ gap: 20px;
         font-size: 16px;
         font-style: normal;
         font-weight: 400;
-        line-height: 20px; /* 125% */
+        line-height: 20px;
     }
     .texts {
         color: var(--middle-grey, #999);
@@ -157,6 +158,18 @@ gap: 20px;
     input {
         padding: 10px 15px;
         width: 380px;
+    } 
+    select {
+        padding: 12px 15px;
+        width: 380px;
+        border: 1px solid #D1BCB2;
+        color: var(--dark-grey, #666);
+        font-feature-settings: 'liga' off, 'clig' off;
+        font-family: Prompt;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px;
     }
 }
 .LasName_Con_code {
@@ -212,3 +225,280 @@ border-top: 2px solid #DBA514;
 width: 100%;
 /* background-color: #FFF; */
 `;
+
+
+/// pk.4f1260517ad6abfdc84df4fde8e0b4dd
+
+// import axios from "axios";
+// import React, { useState, useEffect } from "react";
+// import { baseAPI } from "../../../utils/constanst";
+// import { toast } from "react-toastify";
+// import { jwtDecode } from "jwt-decode";
+
+// const ProfilePersonal2page = () => {
+//   const [full_name, setFull_name] = useState('');
+//   const [lastName, setLastName] = useState('');
+//   const [email, setEmail] = useState('');
+//   const [phone_number, setPhone_number] = useState('');
+//   const [address, setAddress] = useState({
+//     country: '', street: "", city: "", apartmant: "", zip_code: ""
+//   });
+//   const [comment, setComment] = useState('');
+//   const [selectID, setSelectID] = useState('');
+
+//   const initializeUser = () => {
+//     const token = localStorage.getItem('token');
+//     if (!token) return toast.error("Token mavjud emas.");
+//     try {
+//       const { id }: any = jwtDecode(token); // Token ichidan `id`ni olish
+//       setSelectID(id);
+//       console.log("Token ichidan ID:", id);
+//     } catch {
+//       toast.error("Token noto'g'ri yoki muddati o'tgan.");
+//     }
+//   };
+
+//   useEffect(() => {
+//     initializeUser();
+//   }, []);
+
+//   const updateProfile = async (e: React.FormEvent) => {
+//     e.preventDefault();
+//     try {
+//       const token = localStorage.getItem('token');
+//       const userData = { full_name, lastName, phone_number, email, address, comment };
+
+//       console.log("Bu ID:", selectID);
+//       console.log("Bu token:", token);
+
+//       const { data } = await axios.put<any>(
+//         `${baseAPI}/userFur/edit-user/${selectID}`,
+//         userData,
+//         {
+//           headers: { Authorization: `Bearer ${token}` },
+//         }
+//       );
+
+//       if (data.success) {
+//         toast.success("Profil muvaffaqiyatli yangilandi!");
+//         setFull_name("");
+//         setLastName("");
+//         setPhone_number("");
+//         setEmail("");
+//         setAddress({
+//           country: '', street: '', city: '', apartmant: '', zip_code: ''
+//         });
+//         setComment("");
+//       }
+//     } catch (error: any) {
+//       toast.error(error.response?.data?.error?.msg || 'Xatolik yuz berdi.');
+//     }
+//   };
+
+//   return (
+//     <div style={{ paddingTop: "90px" }}>
+//       <form onSubmit={updateProfile}>
+//         <input
+//           type="text"
+//           placeholder="Full Name"
+//           value={full_name}
+//           onChange={(e) => setFull_name(e.target.value)}
+//         />
+//         <input
+//           type="text"
+//           placeholder="Last Name"
+//           value={lastName}
+//           onChange={(e) => setLastName(e.target.value)}
+//         />
+//         <input
+//           type="email"
+//           placeholder="Email"
+//           value={email}
+//           onChange={(e) => setEmail(e.target.value)}
+//         />
+//         <input
+//           type="text"
+//           placeholder="Phone Number"
+//           value={phone_number}
+//           onChange={(e) => setPhone_number(e.target.value)}
+//         />
+//         <input
+//           type="text"
+//           placeholder="Country"
+//           value={address.country}
+//           onChange={(e) => setAddress((prev) => ({ ...prev, country: e.target.value }))}
+//         />
+//         <input
+//           type="text"
+//           placeholder="City"
+//           value={address.city}
+//           onChange={(e) => setAddress((prev) => ({ ...prev, city: e.target.value }))}
+//         />
+//         <input
+//           type="text"
+//           placeholder="Street"
+//           value={address.street}
+//           onChange={(e) => setAddress((prev) => ({ ...prev, street: e.target.value }))}
+//         />
+//         <input
+//           type="text"
+//           placeholder="Apartment"
+//           value={address.apartmant}
+//           onChange={(e) => setAddress((prev) => ({ ...prev, apartmant: e.target.value }))}
+//         />
+//         <input
+//           type="text"
+//           placeholder="ZIP Code"
+//           value={address.zip_code}
+//           onChange={(e) => setAddress((prev) => ({ ...prev, zip_code: e.target.value }))}
+//         />
+//         <input
+//           type="text"
+//           placeholder="Comment"
+//           value={comment}
+//           onChange={(e) => setComment(e.target.value)}
+//         />
+//         <button type="submit">Update Profile</button>
+//       </form>
+//     </div>
+//   );
+// };
+
+// export default ProfilePersonal2page;
+
+// import axios from "axios";
+// import React, { useState, useEffect } from "react";
+// import { baseAPI } from "../../../utils/constanst";
+// import { toast } from "react-toastify";
+// import { jwtDecode } from "jwt-decode"; 
+
+// const ProfilePersonal2page = () => {
+//   const [full_name, setFull_name] = useState('');
+//   const [lastName, setLastName] = useState('');
+//   const [email, setEmail] = useState('');
+//   const [phone_number, setPhone_number] = useState('');
+//   const [address, setAddress] = useState({
+//     country: '', street: "", city: "", apartmant: "", zip_code: ""
+//   });
+//   const [comment, setComment] = useState('');
+//   const [selectID, setSelectID] = useState(''); 
+
+//   useEffect(() => {
+//     const token = localStorage.getItem('token');
+//     if (token) {
+//       try {
+//         const decodedToken: any = jwtDecode(token); 
+//         setSelectID(decodedToken.id);
+//         console.log("Token ichidan ID:", decodedToken.id);
+//       } catch (error) {
+//         toast.error("Token noto'g'ri yoki muddati o'tgan.");
+//       }
+//     } else {
+//       toast.error("Token mavjud emas.");
+//     }
+//   }, []);
+
+//   const updateProfile = async (e: React.FormEvent) => {
+//     e.preventDefault();
+//     try {
+//       const token = localStorage.getItem('token');
+//       const userData = { full_name, lastName,phone_number, email, address, comment };
+
+//       console.log("Bu ID:", selectID);
+//       console.log("Bu token:", token);
+
+//       const { data } = await axios.put<any>(
+//         `${baseAPI}/userFur/edit-user/${selectID}`,
+//         userData,
+//         {
+//           headers: { Authorization: `Bearer ${token}` },
+//         }
+//       );
+
+//       if (data.success) {
+//         toast.success("Profil muvaffaqiyatli yangilandi!");
+//         setFull_name("");
+//         setLastName("");
+//         setPhone_number("");
+//         setEmail("");
+//         setAddress({
+//           country: '', street: '', city: '', apartmant: '', zip_code: ''
+//         });
+//         setComment("");
+//       }
+//     } catch (error: any) {
+//       toast.error(error.response?.data?.error?.msg || 'Xatolik yuz berdi.');
+//     }
+//   };
+
+//   return (
+//     <div style={{ paddingTop: "90px" }}>
+//       <form onSubmit={updateProfile}>
+//         <input
+//           type="text"
+//           placeholder="Full Name"
+//           value={full_name}
+//           onChange={(e) => setFull_name(e.target.value)}
+//         />
+//         <input
+//           type="text"
+//           placeholder="Last Name"
+//           value={lastName}
+//           onChange={(e) => setLastName(e.target.value)}
+//         />
+//         <input
+//           type="email"
+//           placeholder="Email"
+//           value={email}
+//           onChange={(e) => setEmail(e.target.value)}
+//         />
+//         <input
+//           type="text"
+//           placeholder="Phone Number"
+//           value={phone_number}
+//           onChange={(e) => setPhone_number(e.target.value)}
+//         />
+//         <input
+//           type="text"
+//           placeholder="Country"
+//           value={address.country}
+//           onChange={(e) => setAddress((prev) => ({ ...prev, country: e.target.value }))}
+//         />
+//         <input
+//           type="text"
+//           placeholder="City"
+//           value={address.city}
+//           onChange={(e) => setAddress((prev) => ({ ...prev, city: e.target.value }))}
+//         />
+//         <input
+//           type="text"
+//           placeholder="Street"
+//           value={address.street}
+//           onChange={(e) => setAddress((prev) => ({ ...prev, street: e.target.value }))}
+//         />
+//         <input
+//           type="text"
+//           placeholder="Apartment"
+//           value={address.apartmant}
+//           onChange={(e) => setAddress((prev) => ({ ...prev, apartmant: e.target.value }))}
+//         />
+//         <input
+//           type="text"
+//           placeholder="ZIP Code"
+//           value={address.zip_code}
+//           onChange={(e) => setAddress((prev) => ({ ...prev, zip_code: e.target.value }))}
+//         />
+//         <input
+//           type="text"
+//           placeholder="Comment"
+//           value={comment}
+//           onChange={(e) => setComment(e.target.value)}
+//         />
+//         <button type="submit">Update Profile</button>
+//       </form>
+//     </div>
+//   );
+// };
+
+// export default ProfilePersonal2page;
+
