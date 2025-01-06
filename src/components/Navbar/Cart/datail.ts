@@ -5,21 +5,6 @@ background-color: #F9F6F5;
 padding: 180px 0px 100px 0px;
 display: flex;
 justify-content: center;
-.cart_name {
-    position: absolute;
-    margin-top: -120px;
-    left: 45%;
-    top: 30%;
-    color: var(--main, #32324D);
-    font-feature-settings: 'liga' off, 'clig' off;
-    font-family: Prompt;
-    font-size: 30px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 38px; /* 126.667% */
-    letter-spacing: 3px;
-    text-transform: uppercase;
-}
 `;
 export const CartContainerWrapper = styled.div`
 display: flex;

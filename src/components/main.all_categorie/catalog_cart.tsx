@@ -279,7 +279,7 @@ export default function Ssofar(Props: Tname) {
                             src={item.images}
                             alt={`img-${ind + startIdx}`}
                             onLoad={() => {
-                              setTimeout(() => setImageVisible(true), 5000);
+                              setTimeout(() => setImageVisible(true), 100);
                             }}
                             onMouseOver={(e) => (e.currentTarget.src = item.images2)}
                             onMouseOut={(e) => (e.currentTarget.src = item.images)}

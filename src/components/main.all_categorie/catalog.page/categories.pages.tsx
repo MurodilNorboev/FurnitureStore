@@ -37,14 +37,14 @@ const SimpleSlider = (Props: Tname) => {
   const isMobaile1 = useMediaQuery('(max-width:840px)');
   const isMobile = useMediaQuery('(max-width:550px)');
   const [page, setPage] = useState<number>(1);
-  const [selectedLabel, setSelectedLabel] = useState<string | null>('storage');
+  const [selectedLabel, setSelectedLabel] = useState<string | null>('mirrors');
   const ITEMS_PER_PAGE = isMobile ? 4 : isMobaile1 ? 8 : isTablet ? 12 : 16;
-  const desiredLabels = ['mirrors', 'wall art', 'clocks', 'vases', 'storage', 'candles', 'Shelves', 'Plant Pots', 'Bathroom Accessories'];
+  const desiredLabels = ['mirrors', 'wall art', 'clocks', 'vases', 'candles', 'Shelves', 'Plant Pots', 'Bathroom Accessories'];
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setImageVisible(true);
-    }, 5000);  
+    }, 100);  
 
     return () => clearTimeout(timer);  
   }, []);
@@ -119,6 +119,7 @@ const SimpleSlider = (Props: Tname) => {
       </PagesName>
 
       <div>
+
         <TopContent className="TopContent">
           {Object.keys(groupedData).map((label) => (
             <BtnWrap2 onClick={() => handleLabelSelection(label)} key={label} className={selectedLabel === label ? 'active' : ''}>
@@ -127,7 +128,7 @@ const SimpleSlider = (Props: Tname) => {
                   <div className="catContainer">
                     <div className="cat_con_wrap">
                       {groupedData[label][0]?.images && (
-                        <img src={groupedData[label][0].images} alt={label} />
+                        <img src={groupedData[label][0].img} alt={label} />
                       )}
                     </div>
                     <h5>{label}</h5>
@@ -234,6 +235,7 @@ const SimpleSlider = (Props: Tname) => {
             />
           </StyledPagination>
         </div>
+
       </div>
     </TopContainer>
   );
