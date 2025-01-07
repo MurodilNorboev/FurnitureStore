@@ -321,7 +321,6 @@ const RegloginComponent = () => {
 
         <div className="loginis0">
           <input
-            style={{ width: "50%" }}
             type="text"
             placeholder="First Name"
             name="full_name"
@@ -329,7 +328,6 @@ const RegloginComponent = () => {
             required
           />
           <input
-            style={{ width: "50%" }}
             type="text"
             placeholder="Last Name"
             name="lastName"
@@ -391,7 +389,7 @@ const RegloginComponent = () => {
             required
           >
             <option value="" disabled>
-              -- Choose a country --
+              Choose a country
             </option>
             {countries.map((country, index) => (
               <option key={index} value={country}>

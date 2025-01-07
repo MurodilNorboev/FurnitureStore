@@ -60,8 +60,6 @@ const ProfilePersonal = ( Props: NameT) => {
           <h3>Home</h3><img src={home} alt="img" /><h4>{Props.name}</h4> 
         </PagesName>
 
-       <div className='cart_name'>Profile</div>
-
                 <Chescout_containerWrapper className="Chescout_containerWrapper">
                     
                  <ContainerP className='Right_Container'>

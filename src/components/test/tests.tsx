@@ -184,7 +184,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { baseAPI } from '../../utils/constanst';
 import { toast } from 'react-toastify';
-import MyCart from './datas';
 
 const MyComponent = () => {
   const [data, setData] = useState<any[]>([]);
@@ -239,7 +238,7 @@ const MyComponent = () => {
       ))}
 
       <h1>My cart</h1>
-      <MyCart carts={carts} setCarts={setCarts} />
+     
     </div>
   );
 };

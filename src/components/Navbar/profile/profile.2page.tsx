@@ -118,8 +118,6 @@ const ProfilePersonal2page = (Props: NameT) => {
           <h4>{Props.name}</h4>
         </PagesName>
 
-        <div className="cart_name">Profile</div>
-
         <Chescout_containerWrapper
           className="Chescout_containerWrapper"
           onSubmit={updateProfile}
