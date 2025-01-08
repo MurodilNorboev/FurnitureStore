@@ -27,7 +27,6 @@ const ProfilePersonal = ( Props: NameT) => {
   const [ active, setactive ] = useState(1);
   const [ aut, setAut ] = useState(false);
   const [profile, setProfile] = useState<any>(null);
-  console.log(profile);
   
 
   useEffect(() => {

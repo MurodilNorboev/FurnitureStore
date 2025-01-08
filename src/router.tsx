@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Router, Routes, useLocation } from "react-router-dom";
 import LoginComponent from "./components/Form/login";
 import RegloginComponent from "./components/Form/reglogin";
 import NavbareComponent from "./components/context/navbare";
@@ -26,6 +26,8 @@ import Ssofar from "./components/main.all_categorie/catalog_cart";
 import MyComponent from "./components/test/tests";
 import { useState } from "react";
 import MyCartCompoenent from "./components/Navbar/Cart/Cartss/Cart1";
+import DatailRoomComponent from "./components/filterDatail/filterData.Room";
+import RoomData from "./components/main.all_categorie/Room/room.data";
 
 export default function RouterComponent() {
   const [carts, setCarts] = useState<any[]>([]);
@@ -44,51 +46,22 @@ export default function RouterComponent() {
         <Route path="/regLogin" element={<RegloginComponent />} />
         <Route path="/" element={<MainComponent />} />
         <Route path="/stol/:label" element={<Ssofar name="furniture" />} />
-        <Route
-          path="/categorie"
-          element={<CatalogPagecomponent name="categorie" />}
-        />
+        <Route path="/stoll/:label" element={<RoomData name="furniture" />} />
+        <Route path="/categorie" element={<CatalogPagecomponent name="categorie" />} />
 
-        <Route
-          path="/stul/:id"
-          element={
-            <DatailComponent
-              names="furniture"
-              name="Armchair, fleece"
-              propse={true}
-            />
-          }
-        />
-        <Route
-          path="/stul2/:id"
-          element={
-            <DatailNavbarFilterComponent
-              names="furniture"
-              name="Armchair, fleece"
-              propse={true}
-            />
-          }
-        />
+        <Route path="/stul/:id" element={ <DatailComponent names="furniture" name="Armchair, fleece" propse={true} /> } />
+        <Route path="/stul2/:id" element={<DatailNavbarFilterComponent names="furniture" name="Armchair, fleece"propse={true}/> }/>
 
         <Route path="*" element={<ErrComponent />} />
         <Route path="/menu/:id" element={<DatailMenusID />} />
-        <Route
-          path="/menu-datail/:label"
-          element={<MenusDatailComponent name="New In" />}
-        />
+        <Route path="/menu-datail/:label" element={<MenusDatailComponent name="New In" />} />
 
-        <Route
-          path="/cart"
-          element={<MyCartCompoenent carts={carts} setCarts={setCarts}  />}
-        />
+        <Route path="/cart" element={<MyCartCompoenent carts={carts} setCarts={setCarts} />}/>
         <Route path="/chekout" element={<Checkout name="Checkout" />} />
         <Route path="/order" element={<OrderComponent name="Message" />} />
-
+        <Route path="/datailRoom/:label" element={<DatailRoomComponent name="profile" names="Room" propse={false} />} />
         <Route path="/profile" element={<ProfilePersonal name="profile" />} />
-        <Route
-          path="/profile2"
-          element={<ProfilePersonal2page name="profile" />}
-        />
+        <Route path="/profile2" element={<ProfilePersonal2page name="profile" />} />
         <Route
           path="/profilePassword"
           element={<ProfilePassword name="profile" />}
@@ -109,4 +82,4 @@ export default function RouterComponent() {
   );
 }
 
-// export default RouterComponent
+

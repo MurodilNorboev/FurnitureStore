@@ -236,9 +236,6 @@ const MyComponent = () => {
           <button onClick={() => handleAddCart(val._id, '1' )}>Add to Cart</button>
         </div>
       ))}
-
-      <h1>My cart</h1>
-     
     </div>
   );
 };

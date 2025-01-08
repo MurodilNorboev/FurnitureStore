@@ -40,7 +40,7 @@ const BasicMenu: React.FC = () => {
 
   useEffect(() => {
     if (!carts.length) fetchCartData();
-  }, [carts]);
+  }, []);
 
   const handleDeleteCart = async (cart_id: string, fur_id: string) => {
     try {

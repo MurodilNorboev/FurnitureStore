@@ -99,6 +99,7 @@ export type DataType = {
   Color: string;
   Styles: string;
   Feature: string;
+  categories?: string;
   label: string;
   name: string;
   img: string;

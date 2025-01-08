@@ -14,7 +14,6 @@ import { Navlink } from '../styles/LINK';
 import Carousel2 from '../Carousel/carousel2';
 import { motion } from 'framer-motion'; 
 import { DataType } from '../types/maintp';
-import { useParams } from 'react-router-dom';
 import { Data } from '../mock/mockDatail';
 
 const datatest = [
@@ -179,7 +178,7 @@ const MainComponent: React.FC = () => {
         transition={{ duration: 1 }}
         viewport={{ once: true }}
       >
-        <ShopBYroom />
+        <ShopBYroom  />
       </motion.div>
 
       <motion.div
@@ -281,5 +280,3 @@ const MainComponent: React.FC = () => {
 };
 
 export default MainComponent;
-
-

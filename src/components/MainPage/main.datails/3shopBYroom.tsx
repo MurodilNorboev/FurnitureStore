@@ -1,53 +1,86 @@
-import { useEffect, useState } from 'react';
-import '../../styles/maine.css';
-import { BtnWrap3 } from '../../styles/main';
-import { DataType } from '../../types/maintp';
-import { Data } from '../../mock/mockDatail';
-import { Navlink } from '../../styles/LINK';
+import { useEffect, useMemo, useState } from "react";
+import "../../styles/maine.css";
+import { BtnWrap3 } from "../../styles/main";
+import { Data } from "../../mock/mockDatail";
+import { Navlink } from "../../styles/LINK";
+import axios from "axios";
+import { baseAPI } from "../../../utils/constanst";
+import { toast } from "react-toastify";
 
-const ShopBYroom = () => {
-  const [label, setLabel] = useState<DataType[] | null>(null);
+const ShopBYroom: React.FC = () => {
+  const [data, setData] = useState<any[]>([]);
+  const [mock, setMock] = useState<any[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
+  const combinedData = useMemo(() => [...data, ...mock], [data, mock]);
+
+  const maxItems = 3;
+  const uniqueCategories = ["Bedroom", "Kitchen", "Bathroom"];
+  const takenCategories = new Set(); 
+  const filterSlice: any[] = [];
+
+  for (let i = 0; i < combinedData.length; i++) {
+    const item = combinedData[i];
+    if (
+      uniqueCategories.includes(item.categories) &&
+      !takenCategories.has(item.categories)
+    ) {
+      filterSlice.push(item);
+      takenCategories.add(item.categories); 
+      if (takenCategories.size === maxItems) break; 
+    }
+  }
 
   useEffect(() => {
-    const filterdata = Data.filter((i: DataType) => {
-      switch (i.label) {
-        case "Bedroom" : return i.id === 172;
-        case "Kitchen" : return i.id === 181;
-        case "Bathroom" : return i.id === 190;
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${baseAPI}/product/all`);
+        const resData = response.data.data;
+        setData(resData);
+      } catch (error: any) {
+        toast.error("Ma'lumotlarni olishda xato:", error);
       }
+    };
+    const mockData = Data.filter((i: any) => {
+      return [172, 181, 190].includes(i.id);
     });
-    setLabel(filterdata) 
-  }, [])
+    setMock(mockData);
+
+    fetchData();
+  }, []);
 
   return (
-   <>
-     <div className='imgc'>
-      <div className='wraps'>
-        <h2></h2>
-        <h4 className=''>shop by room</h4>
-      </div>
+    <>
+      <div className="imgc">
+        <div className="wraps">
+          <h4>shop by room</h4>
+        </div>
 
         <div className="image-slider-container">
           <div className="image-slider">
-            {label?.map((val, ind) => (
-              <BtnWrap3 className="shadov" key={`${val.id} || ${val.label}`}>
-                  <Navlink to={`/stol/${val.id && val.label}`}>
-                    <div className={val.label === "Kitchen" ? "image-item large-image" : "image-item"}>
+            {filterSlice
+              .filter((item) => !selectedCategory || item.categories === selectedCategory)
+              .map((val, ind) => (
+                <BtnWrap3 className="shadov" key={`${val.id} || ${val.label} || ${ind}`}>
+                  <Navlink to={`/stoll/${val.categories}`}>
+                    <div
+                      className={
+                        val.categories === "Kitchen"
+                          ? "image-item large-image"
+                          : "image-item"
+                      }
+                    >
                       <img src={val.images} alt="Image 1" />
-                      <h6></h6>
-                      <h5>{val.label}</h5>
+                      <h5>{val.categories}</h5>
                     </div>
                   </Navlink>
-              </BtnWrap3>
-            ))}
+                </BtnWrap3>
+              ))}
           </div>
         </div>
-
-    </div>
-   </>
+      </div>
+    </>
   );
 };
 
 export default ShopBYroom;
-
-

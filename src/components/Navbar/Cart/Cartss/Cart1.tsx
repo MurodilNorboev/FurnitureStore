@@ -69,13 +69,13 @@ const MyCartCompoenent = ({ carts, setCarts }: any) => {
       },
       {}
     );
-    setItemCosts(newItemCosts);
-    setTotalCost(
-      Object.values(newItemCosts).reduce(
-        (sum: number, cost: number) => sum + cost,
-        0
-      )
-    );
+    // setItemCosts(newItemCosts);
+    // setTotalCost(
+    //   Object.values(newItemCosts).reduce(
+    //     (sum: number, cost: number) => sum + cost,
+    //     0
+    //   )
+    // );
   };
 
   const updateCount = (id: string, isIncrement: boolean) => {

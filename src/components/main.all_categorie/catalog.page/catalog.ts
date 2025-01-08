@@ -5,6 +5,7 @@ background: var(--main, #F9F6F5);
 padding: 181px 30px 50px 30px;
 display: flex;
 justify-content: center;
+gap: 30px;
 align-items: start;
 .SortContainer {
   display: none;
@@ -182,7 +183,7 @@ export const ImageGrid = styled.div`
     padding: 5px;
   }
   @media (max-width: 5000px){
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
   @media (max-width: 1500px){
     grid-template-columns: repeat(3, 1fr);
