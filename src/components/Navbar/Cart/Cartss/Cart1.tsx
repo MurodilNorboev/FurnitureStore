@@ -43,7 +43,7 @@ const MyCartCompoenent = ({ carts, setCarts }: any) => {
 
   useEffect(() => {
     if (!carts.length) fetchCartData();
-  }, [carts, totalCost]);
+  }, []);
 
   const handleDeleteCart = async (cart_id: string, fur_id: string) => {
     try {
@@ -69,13 +69,13 @@ const MyCartCompoenent = ({ carts, setCarts }: any) => {
       },
       {}
     );
-    // setItemCosts(newItemCosts);
-    // setTotalCost(
-    //   Object.values(newItemCosts).reduce(
-    //     (sum: number, cost: number) => sum + cost,
-    //     0
-    //   )
-    // );
+    setItemCosts(newItemCosts);
+  
+    const total = Object.values(newItemCosts).reduce(
+      (sum: number, cost: number) => sum + cost,
+      0
+    );
+    setTotalCost(total);
   };
 
   const updateCount = (id: string, isIncrement: boolean) => {

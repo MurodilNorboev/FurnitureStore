@@ -83,7 +83,7 @@ import { AnimatedButton, BtnWrap, NavbarCon } from "../styles/navbar";
 import userimg from "../../assets/user.svg";
 import Menus_Icon from "../Drawer/menus";
 import MultiCarousel from "../Navbar/Cart/lupa";
-import BasicMenu from "../Navbar/Cart/cart";
+import BasicMenu from "../Navbar/Cart/hovercart/cart";
 import Tajriba from "../Navbar/dropdownmenus";
 import { Navlink } from "../styles/LINK";
 import { useEffect, useState } from "react";
@@ -173,7 +173,7 @@ const NavbareComponent = () => {
         </Navlink>
 
         <div>
-        <BasicMenu />
+          <BasicMenu />
         </div>
       </div>
     </NavbarCon>

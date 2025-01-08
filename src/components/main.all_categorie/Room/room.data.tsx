@@ -18,7 +18,7 @@ import Box from "@mui/joy/Box";
 import Checkbox from "@mui/joy/Checkbox";
 import home from "../../../assets/home.svg";
 import { Data } from "../../mock/mockDatail";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { Navlink } from "../../styles/LINK";
 import { DataType, Tname } from "../../types/maintp";
 import { SlaiderContainer } from "../categories";
@@ -30,10 +30,11 @@ import "../i.css";
 import { baseAPI } from "../../../utils/constanst";
 import axios from "axios";
 import { toast } from "react-toastify";
+import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
+import saveIcon from "../../../assets/saveIcon.svg";
 
 export default function RoomData(Props: Tname) {
-  const [datas, setDatas] = useState<any[]>([]);
-  const [carts, setCarts] = useState<any[]>([]);
+  const navigate = useNavigate();
   const ITEMS_PER_PAGE = 16;
   const [values, setValues] = useState([50, 1000]);
   const getCostNumber = (cost: string) =>
@@ -51,6 +52,9 @@ export default function RoomData(Props: Tname) {
     styles: "",
     feature: "",
   });
+  const [datas, setDatas] = useState<any[]>([]);
+  const [carts, setCarts] = useState<any[]>([]);
+  console.log(carts);
 
   const fetchData = async () => {
     try {
@@ -59,12 +63,11 @@ export default function RoomData(Props: Tname) {
       } = await axios.get(`${baseAPI}/product/all`);
       setDatas(data);
     } catch (error: any) {
-      console.log("Error fetching data:", error);
-      alert("Error fetching data:" + error);
+      toast.error("Error fetching data:", error);
     }
   };
 
-  const fetchDartData = async () => {
+  const fetchCartData = async () => {
     try {
       const { cartsData } = await (
         await fetch(`${baseAPI}/product/cart-count`)
@@ -73,30 +76,46 @@ export default function RoomData(Props: Tname) {
         ({ _id: cartID, furniture }: any) =>
           furniture.map((fur: any) => ({ ...fur, cartID }))
       );
+
+      const initialCounts = Object.fromEntries(
+        allFurniture.map((item: any) => [item._id, item.count || 1])
+      );
       setCarts(allFurniture);
     } catch (error: any) {
-      console.log("Error fetching cart data:", error);
-      alert("Error fetching cart data:" + error);
+      toast.error("Error fetching cart data:", error);
     }
   };
 
   useEffect(() => {
     fetchData();
-    fetchDartData();
+    fetchCartData();
   }, []);
 
   const handleAddCart = async (fur_id: string, user_id: string) => {
     try {
       const {
         data: { success },
-      } = await axios.post(`${baseAPI}/product/add-to-cart`, {
+      } = await axios.post(`${baseAPI}/product/order`, {
+        // user: { _id: user_id },
         user: { _id: "603d9f3f494f1c3a9c4f2345" },
-        user_id,
+        fur_id,
       });
-      if (success) fetchDartData();
+      if (success) fetchCartData();
     } catch (error) {
       console.error("Error adding to cart:", error);
-      alert("Error adding to cart:" + error);
+    }
+  };
+
+  const handleDeleteCart = async (cart_id: string, fur_id: string) => {
+    try {
+      const {
+        data: { success },
+      } = await axios.delete(
+        `${baseAPI}/product/cart/${cart_id}/furniture/${fur_id}`
+      );
+      if (success) fetchCartData();
+    } catch (error) {
+      console.error("Error deleting from cart:", error);
     }
   };
 
@@ -427,29 +446,69 @@ export default function RoomData(Props: Tname) {
               <ImageContainer
                 key={`${item.categories}-${item.id} || ${item._id} && ${ind}`}
               >
-                <Navlink to={`/stul/${item.id} || ${item._id}`}>
-                  <Imagecontent>
-                    <Imagecontent>
-                      <Image
-                        className="Image"
-                        src={item.images}
-                        alt={`img-${ind + startIdx}`}
-                        onLoad={() => {
-                          setTimeout(() => setImageVisible(true), 100);
+                <Imagecontent
+                  onClick={(e) => {
+                    const target = e.target as HTMLElement;
+
+                    if (!target.closest("button")) {
+                      navigate(`/stul/${item.id || item._id}`);
+                    }
+                  }}
+                >
+                  <Imagecontent >
+                    <Image
+                      className="Image"
+                      src={item.images}
+                      alt={`img-${ind + startIdx}`}
+                      onLoad={() => {
+                        setTimeout(() => setImageVisible(true), 100);
+                      }}
+                      onMouseOver={(e) => (e.currentTarget.src = item.images2)}
+                    />
+                    <div className="savebtnwrap" >
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+
+                          const isInCart = carts.find((cart) =>
+                            cart._id === item._id ? cart : null
+                          );
+                          const cartID = isInCart ? isInCart.cartID : null;
+
+                          if (!isInCart) {
+                            handleAddCart(item._id, "1");
+                          } else {
+                            handleDeleteCart(cartID, item._id);
+                          }
                         }}
-                        onMouseOver={(e) =>
-                          (e.currentTarget.src = item.images2)
-                        }
-                      />
-                      <h6></h6>
-                      <h5>{item.categories}</h5>
-                      <h4>{item.cost}</h4>
-                    </Imagecontent>
-                    <h6></h6>
-                    <h5>{item.categories}</h5>
-                    <h4>{item.cost}</h4>
+                      >
+                        {carts.find((cart) => cart._id === item._id) ? (
+                          <img
+                            className="saveIcon"
+                            style={{ border: "0px" }}
+                            src={saveIcon}
+                            alt=""
+                          />
+                        ) : (
+                          <TurnedInNotIcon
+                            style={{
+                              border: "none",
+                              width: "30px",
+                              height: "31px",
+                              color: carts.find((cart) => cart._id === item._id)
+                                ? "#DBA514"
+                                : "#DBA514",
+                            }}
+                          />
+                        )}
+                      </button>
+                    </div>
+
                   </Imagecontent>
-                </Navlink>
+                  <h6></h6>
+                  <h5>{item.categories}</h5>
+                  <h4>{item.cost}</h4>
+                </Imagecontent>
               </ImageContainer>
             ))
           ) : (
