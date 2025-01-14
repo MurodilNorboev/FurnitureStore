@@ -168,20 +168,24 @@ export const Container = styled.div`
   }
 `;
 export const LeftCon = styled.div`
-  background-color: #fff;
   max-width: 1000px;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 100vw;
-  padding: 50px;
+  .Content2 {
+    padding: 50px;
+    gap: 20px;
+    background-color: #fff;
+  }
   .empty-cart {
     color: var(--main, #32324d);
     font-feature-settings: "liga" off, "clig" off;
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
+    padding: 20px 0px;
     line-height: 20px; /* 125% */
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -353,7 +357,7 @@ export const RightCon = styled.div`
   max-width: 530px;
   border-top: 2px solid #dba514;
   width: 100%;
-  /* background-color: #FFF; */
+  background-color: #fff;
 `;
 export const Right_in_top = styled.div`
   max-height: 110px;
@@ -368,6 +372,59 @@ export const Right_in_top = styled.div`
     font-weight: 500;
     line-height: 30px; /* 125% */
     letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+`;
+export const Midl_id_con = styled.div`
+  margin-top: 40px 0px;
+  padding: 30px;
+  border-bottom: 1px solid #d1bcb2;
+
+  h3 {
+    color: var(--main, #32324d);
+    font-feature-settings: "liga" off, "clig" off;
+    font-family: Prompt;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px; /* 125% */
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .inputs {
+    font-weight: bold;
+    color: var(--dark, #ad8775);
+    font-feature-settings: "liga" off, "clig" off;
+    font-family: Prompt;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18px; /* 112.5% */
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .sariq {
+    font-weight: bold;
+    color: var(--dark, #ad8775);
+    font-feature-settings: "liga" off, "clig" off;
+    font-family: Prompt;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18px; /* 112.5% */
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .qora {
+    font-weight: bold;
+    color: var(--main, #32324d);
+    font-feature-settings: "liga" off, "clig" off;
+    font-family: Prompt;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px; /* 125% */
+    letter-spacing: 2px;
     text-transform: uppercase;
   }
 `;

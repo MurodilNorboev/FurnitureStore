@@ -253,6 +253,11 @@ export const Imagecontent = styled.div`
       transition: opacity 0.3s ease;
       background-color: transparent;
     }
+    .like {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
     .saveIcon {
       width: 30px;
       height: 30px;

@@ -1,13 +1,13 @@
 import { PagesName } from "../../main.all_categorie/catalog.page/catalog";
-import { 
-  Chescout_Bottom, 
-  Chescout_Top, 
-  Chescout_containerWrapper, 
-  Chescout_one, 
-  Container_Chescout, 
-  Containre_Chescout_Content, 
-  Content_chesckout 
-} from "../Cart/checkoutt";
+import {
+  Chescout_Bottom,
+  Chescout_Top,
+  Chescout_containerWrapper,
+  Chescout_one,
+  Container_Chescout,
+  Containre_Chescout_Content,
+  Content_chesckout,
+} from "../Cart/checkout/checkoutt";
 import home from "../../../assets/home.svg";
 import { DatailCart } from "../Cart/datail";
 import Checkbox from "@mui/joy/Checkbox";
@@ -28,19 +28,19 @@ const ProfilePersonal2page = (Props: NameT) => {
   const navigate = useNavigate();
   const [aut, setAut] = useState(false);
   const [active, setActive] = useState(1);
-  const [full_name, setFull_name] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone_number, setPhone_number] = useState('');
+  const [full_name, setFull_name] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone_number, setPhone_number] = useState("");
   const [address, setAddress] = useState({
-    country: '',
+    country: "",
     city: "",
     street: "",
     apartmant: "",
-    zip_code: ""
+    zip_code: "",
   });
-  const [comment, setComment] = useState('');
-  const [selectID, setSelectID] = useState('');
+  const [comment, setComment] = useState("");
+  const [selectID, setSelectID] = useState("");
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -61,7 +61,14 @@ const ProfilePersonal2page = (Props: NameT) => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      const userData = { full_name, lastName, phone_number, email, address, comment };
+      const userData = {
+        full_name,
+        lastName,
+        phone_number,
+        email,
+        address,
+        comment,
+      };
 
       console.log("Bu ID:", selectID);
       console.log("Bu token:", token);
@@ -81,14 +88,14 @@ const ProfilePersonal2page = (Props: NameT) => {
         setPhone_number("");
         setEmail("");
         setAddress({
-          country: '',
-          street: '',
-          city: '',
-          apartmant: '',
-          zip_code: ''
+          country: "",
+          street: "",
+          city: "",
+          apartmant: "",
+          zip_code: "",
         });
         setComment("");
-        navigate('/profile')
+        navigate("/profile");
       }
     } catch (error: any) {
       toast.error(error.response?.data?.error?.msg || "Xatolik yuz berdi.");
@@ -101,9 +108,9 @@ const ProfilePersonal2page = (Props: NameT) => {
   };
   const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const country = e.target.value;
-    setAddress({ ...address, country, city: ''});
+    setAddress({ ...address, country, city: "" });
   };
-  
+
   const handleCityChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const city = e.target.value;
     setAddress({ ...address, city });
@@ -184,7 +191,6 @@ const ProfilePersonal2page = (Props: NameT) => {
                       />
                     </div>
                   </Chescout_one>
-
                 </Chescout_Top>
 
                 <Chescout_Bottom>
@@ -197,7 +203,6 @@ const ProfilePersonal2page = (Props: NameT) => {
                 </div>
 
                 <Chescout_Top className="Chescout_Top">
-
                   <Chescout_one className="Chescout_one">
                     <div className="LasName_Con">
                       <select
@@ -219,10 +224,11 @@ const ProfilePersonal2page = (Props: NameT) => {
                         type="text"
                         placeholder="Street name"
                         value={address.street}
-                        onChange={(e) => setAddress({ ...address, street: e.target.value })}
+                        onChange={(e) =>
+                          setAddress({ ...address, street: e.target.value })
+                        }
                       />
                     </div>
-
                   </Chescout_one>
 
                   <Chescout_one className="Chescout_one">
@@ -233,13 +239,17 @@ const ProfilePersonal2page = (Props: NameT) => {
                         onChange={handleCityChange}
                         disabled={!address.country}
                       >
-                       <option value="">Select city</option>
-                       {address.country &&
-                         mockData.cities[mockData.countries.find((c: any) => c.name === address.country)?.id as '1' | '2']?.map((city: City) => (
-                           <option key={city.id} value={city.name}>
-                             {city.name}
-                           </option>
-                       ))}
+                        <option value="">Select city</option>
+                        {address.country &&
+                          mockData.cities[
+                            mockData.countries.find(
+                              (c: any) => c.name === address.country
+                            )?.id as "1" | "2"
+                          ]?.map((city: City) => (
+                            <option key={city.id} value={city.name}>
+                              {city.name}
+                            </option>
+                          ))}
                       </select>
                     </div>
                     <div className="LasName_Con_code">
@@ -247,17 +257,20 @@ const ProfilePersonal2page = (Props: NameT) => {
                         type="text"
                         placeholder="Apartment"
                         value={address.apartmant}
-                        onChange={(e) => setAddress({ ...address, apartmant: e.target.value })}
+                        onChange={(e) =>
+                          setAddress({ ...address, apartmant: e.target.value })
+                        }
                       />
                       <input
                         type="text"
                         placeholder="ZIP Code"
                         value={address.zip_code}
-                        onChange={(e) => setAddress({ ...address, zip_code: e.target.value })}
+                        onChange={(e) =>
+                          setAddress({ ...address, zip_code: e.target.value })
+                        }
                       />
                     </div>
                   </Chescout_one>
-
                 </Chescout_Top>
 
                 <Chescout_Bottom>
@@ -294,4 +307,3 @@ const ProfilePersonal2page = (Props: NameT) => {
 };
 
 export default ProfilePersonal2page;
-

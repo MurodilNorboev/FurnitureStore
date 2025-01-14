@@ -140,7 +140,6 @@ export default function Ssofar(Props: Tname) {
     }
   
     setData(filteredArr);
-    console.log("Filtered Data: ", filteredArr);
   };
 
   const filteredData = data.filter(item => item.label === label);

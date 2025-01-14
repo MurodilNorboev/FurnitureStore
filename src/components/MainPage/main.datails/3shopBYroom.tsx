@@ -15,9 +15,9 @@ const ShopBYroom: React.FC = () => {
   const combinedData = useMemo(() => [...data, ...mock], [data, mock]);
 
   const maxItems = 3;
-  const uniqueCategories = ["Bedroom", "Kitchen", "Bathroom"];
   const takenCategories = new Set(); 
   const filterSlice: any[] = [];
+  const uniqueCategories = ["Bedroom", "Kitchen", "Bathroom"];
 
   for (let i = 0; i < combinedData.length; i++) {
     const item = combinedData[i];

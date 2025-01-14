@@ -18,13 +18,8 @@ import Box from "@mui/joy/Box";
 import Checkbox from "@mui/joy/Checkbox";
 import home from "../../../assets/home.svg";
 import { Data } from "../../mock/mockDatail";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
-import { Navlink } from "../../styles/LINK";
 import { DataType, Tname } from "../../types/maintp";
 import { SlaiderContainer } from "../categories";
-import AspectRatio from "@mui/joy/AspectRatio";
-import Card from "@mui/joy/Card";
-import Typography from "@mui/joy/Typography";
 import Skeleton from "@mui/joy/Skeleton";
 import "../i.css";
 import { baseAPI } from "../../../utils/constanst";
@@ -32,6 +27,12 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
 import saveIcon from "../../../assets/saveIcon.svg";
+import { useNavigate, useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, AppDispatch } from "../../Redux/store";
+import { setCarts } from "../../Redux/cartsSlice";
+import like from "../../../assets/leki.2.svg";
+import like1 from "../../../assets/leki1.svg";
 
 export default function RoomData(Props: Tname) {
   const navigate = useNavigate();
@@ -53,8 +54,8 @@ export default function RoomData(Props: Tname) {
     feature: "",
   });
   const [datas, setDatas] = useState<any[]>([]);
-  const [carts, setCarts] = useState<any[]>([]);
-  console.log(carts);
+  const carts = useSelector((state: RootState) => state.carts.items);
+  const dispatch = useDispatch<AppDispatch>();
 
   const fetchData = async () => {
     try {
@@ -76,27 +77,17 @@ export default function RoomData(Props: Tname) {
         ({ _id: cartID, furniture }: any) =>
           furniture.map((fur: any) => ({ ...fur, cartID }))
       );
-
-      const initialCounts = Object.fromEntries(
-        allFurniture.map((item: any) => [item._id, item.count || 1])
-      );
-      setCarts(allFurniture);
+      dispatch(setCarts(allFurniture)); // Use Redux dispatch to set carts
     } catch (error: any) {
       toast.error("Error fetching cart data:", error);
     }
   };
-
-  useEffect(() => {
-    fetchData();
-    fetchCartData();
-  }, []);
 
   const handleAddCart = async (fur_id: string, user_id: string) => {
     try {
       const {
         data: { success },
       } = await axios.post(`${baseAPI}/product/order`, {
-        // user: { _id: user_id },
         user: { _id: "603d9f3f494f1c3a9c4f2345" },
         fur_id,
       });
@@ -114,8 +105,22 @@ export default function RoomData(Props: Tname) {
         `${baseAPI}/product/cart/${cart_id}/furniture/${fur_id}`
       );
       if (success) fetchCartData();
+      fetchData();
     } catch (error) {
       console.error("Error deleting from cart:", error);
+    }
+  };
+
+  const handleAddAndDelete = (e: React.MouseEvent, item: any) => {
+    e.stopPropagation();
+
+    const cartItem = carts.find((cart) => cart._id === item._id);
+    const cartID: any = cartItem ? cartItem.cartID : null;
+
+    if (!cartItem) {
+      handleAddCart(item._id, "1");
+    } else {
+      handleDeleteCart(cartID, item._id);
     }
   };
 
@@ -126,11 +131,6 @@ export default function RoomData(Props: Tname) {
   const handleSetClick = () => {
     setOpenModal(false);
   };
-
-  useEffect(() => {
-    setData(Data);
-    setDatas(Data);
-  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -157,10 +157,6 @@ export default function RoomData(Props: Tname) {
   const toggleSidebar = (open: boolean) => {
     setSidebarOpen(open);
   };
-
-  useEffect(() => {
-    toggleSidebar(true);
-  }, []);
 
   const handleChangePagination = (
     event: React.ChangeEvent<unknown>,
@@ -233,8 +229,20 @@ export default function RoomData(Props: Tname) {
     }
     setData(filteredArr);
     setDatas(filteredArr);
-    console.log("Filtered Data: ", filteredArr);
   };
+
+  useEffect(() => {
+    fetchData();
+    fetchCartData();
+    setData(Data);
+    setDatas(Data);
+    toggleSidebar(true);
+    fetchData();
+    fetchCartData();
+    setData(Data);
+    setDatas(Data);
+    toggleSidebar(true);
+  }, []);
 
   const filterdatas = [...datas, ...data].flat();
   const filteredData = filterdatas.filter(
@@ -451,11 +459,22 @@ export default function RoomData(Props: Tname) {
                     const target = e.target as HTMLElement;
 
                     if (!target.closest("button")) {
-                      navigate(`/stul/${item.id || item._id}`);
+                      const foundItem: any = displayedData;
+
+                      if (foundItem) {
+
+                        if (foundItem._id !== item._id) {
+                          navigate(`/datailRoom/${item._id}`);
+                        }
+                        else {
+                          navigate(`/datailRoom2/${item.id}`);
+                        }
+
+                      }
                     }
                   }}
                 >
-                  <Imagecontent >
+                  <Imagecontent>
                     <Image
                       className="Image"
                       src={item.images}
@@ -463,25 +482,17 @@ export default function RoomData(Props: Tname) {
                       onLoad={() => {
                         setTimeout(() => setImageVisible(true), 100);
                       }}
-                      onMouseOver={(e) => (e.currentTarget.src = item.images2)}
                     />
-                    <div className="savebtnwrap" >
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
 
-                          const isInCart = carts.find((cart) =>
-                            cart._id === item._id ? cart : null
-                          );
-                          const cartID = isInCart ? isInCart.cartID : null;
-
-                          if (!isInCart) {
-                            handleAddCart(item._id, "1");
-                          } else {
-                            handleDeleteCart(cartID, item._id);
-                          }
-                        }}
-                      >
+                    <div className="savebtnwrap">
+                      <button className="like">
+                      <img src={like1} alt="" style={{
+                              border: "none",
+                              width: "25px",
+                              height: "25px",
+                            }} />
+                      </button>
+                      <button onClick={(e) => handleAddAndDelete(e, item)}>
                         {carts.find((cart) => cart._id === item._id) ? (
                           <img
                             className="saveIcon"
@@ -495,15 +506,12 @@ export default function RoomData(Props: Tname) {
                               border: "none",
                               width: "30px",
                               height: "31px",
-                              color: carts.find((cart) => cart._id === item._id)
-                                ? "#DBA514"
-                                : "#DBA514",
+                              color: "#DBA514",
                             }}
                           />
                         )}
                       </button>
                     </div>
-
                   </Imagecontent>
                   <h6></h6>
                   <h5>{item.categories}</h5>
