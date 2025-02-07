@@ -23,84 +23,167 @@ import {
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import toast, { Toaster } from 'react-hot-toast';
-
+import toast, { Toaster } from "react-hot-toast";
+import styled from "styled-components";
 const MyCartCompoenent = () => {
-  const [value, setValue] = React.useState<string>("FEDEX"); // Shipping method uchun state
-  const [value2, setValue2] = React.useState<string>("CASH"); // Payment method uchun state
-  const navigate = useNavigate();
-  const [counts, setCounts] = useState<{ [key: string]: number }>({});
+  const navigate = useNavigate(); /// navigatsiya uchun
+  const [user, setUser] = useState<any[]>([]);
+  const [value, setValue] = React.useState<string>("FEDEX");
+  const [value2, setValue2] = React.useState<string>("CASH");
   const carts: any[] = useSelector((state: RootState) => state.carts.items);
   const dispatch = useDispatch<AppDispatch>();
-  const [editedItem, setEditedItem] = useState<any[] | any>([]);
   const [itemCost, setItemCost] = useState<any[]>([]);
-
-  const getCostNumber = (cost: string | number) =>
-    typeof cost === "string"
-      ? parseFloat(cost.replace("$", "").replace(/\s/g, "").trim())
-      : cost;
-
+  const [item_Data, setItem_Data] = useState<any[]>([]);
+  const [productID, setProductID] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(false); 
   const fetchCartData = async () => {
     try {
-      const { cartsData } = await (
-        await fetch(`${baseAPI}/product/cart-count`)
-      ).json();
-      const allFurniture = cartsData.flatMap(
-        ({ _id: cartID, furniture }: any) =>
-          furniture.map((fur: any) => ({
-            ...fur,
-            cartID, // cartID qo'shildi
-            cost: fur.cost || 0, // cost qo'shildi
-          }))
-      );
+      const response = await fetch(`${baseAPI}/product/cart-count`);
+      const { cartsData } = await response.json();
 
-      dispatch(setCarts(allFurniture));
+      // Initialize an empty object to store updated counts
+      const updatedCounts: { [key: string]: number } = {};
 
-      const initialCounts = Object.fromEntries(
-        allFurniture.map((item: any) => [item._id, item.count || 1])
+      // Loop through all carts and items to get the quantity
+      cartsData.forEach((cart: any) => {
+        if (cart.items && cart.items.length > 0) {
+          cart.items.forEach((item: any) => {
+            // Ensure the item has a valid quantity
+            if (item.quantity !== undefined && item.product) {
+              // Set the item_id with its corresponding quantity
+              updatedCounts[item.item_id] = item.quantity; // Ensure item_id is used here
+            }
+          });
+        }
+      });
+      const itemWidthTypes: any = [];
+
+      if (cartsData && cartsData[0].items.length > 0) {
+        cartsData[0].items.forEach((i: any) => {
+          itemWidthTypes.push({
+            widthType: i.widthType,
+            itemId: i.item_id,
+          });
+        });
+      }
+      setProductID(itemWidthTypes);
+      const filters = cartsData[0]?.items || [];
+      setItem_Data(
+        filters.map((item: any) => ({
+          ...item,
+          productDetails: item.product, // Attach product details
+          quantity: updatedCounts[item.item_id] || 0, // Use item_id for matching
+          totalCost: item.totalCost,
+        }))
       );
-      setCounts(initialCounts);
     } catch (error: any) {
-      toast.error("Error fetching cart data:", error);
+      toast.error("Error fetching cart data.");
     }
   };
+  const handleDeleteCart = async (furnitureId: any) => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      toast.error("No token found");
+      return;
+    }
 
-  const updateCount = (id: string, isIncrement: boolean) => {
-    const newCount = {
-      ...counts,
-      [id]: Math.max(1, (counts[id] || 0) + (isIncrement ? 1 : -1)),
-    };
-    setCounts(newCount);
-    dispatch(updateCartItemCount({ _id: id, count: newCount[id] }));
-  };
-
-  const handleDeleteCart = async (cart_id: string, fur_id: string) => {
     try {
-      const {
-        data: { success },
-      } = await axios.delete(
-        `${baseAPI}/product/cart/${cart_id}/furniture/${fur_id}`
+      const { data } = await axios.delete(
+        `${baseAPI}/product/delete`, // Cartni o'chirish URL
+        {
+          headers: { Authorization: `Bearer ${token}` }, // Tokenni yuborish
+          data: { furId: furnitureId },
+        }
       );
-      if (success) {
+
+      if (data.success) {
+        setItem_Data([]);
         fetchCartData(); // Cartni yangilash
-        fetchUpdatedCartData("some_fur_id", "603d9f3f494f1c3a9c4f2345"); // Yangilangan ma'lumotni olish
+        fetchUpdatedCartData(); // Cart ma'lumotlarini yangilash
       }
     } catch (error) {
-      console.error("Error deleting from cart:", error);
+      toast.error("Error deleting item from cart.");
     }
   };
-
-  const fetchUpdatedCartData = async (fur_id: string, user_id: string) => {
+  const updateCart = async () => {
     try {
+      const token = localStorage.getItem("token");
+      setIsLoading(true);
+      for (const item of item_Data) {
+        const response = await axios.post(
+          `${baseAPI}/product/update`,
+          {
+            fur_id: item.productDetails._id,
+            item_id: item.item_id,
+            quantity: item.quantity,
+          },
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        const a = response.data.datas        
+        setItemCost(a.items.length)
+      }
+      toast.success("Cart updated successfully");
+      fetchUpdatedCartData();
+    } catch (error: any) {
+      toast.error(
+        "Error updating cart: " +
+          (error.response?.data?.message || error.message)
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  const updateCount = (
+    itemId: string,
+    quantity: number,
+    isIncrement: boolean,
+    types: string // `types` endi string bo‘ldi
+  ) => {
+    const newQuantity: number = Math.max(1, quantity + (isIncrement ? 1 : -1));
+
+    // Update the quantity in item_Data state
+    const updatedItemData = item_Data.map((item) => {
+      if (item.item_id === itemId) {
+        let newTotalCost: any;
+
+        // Agarda `types` "max" bo‘lsa, bigCost bilan hisoblash
+        if (types === "max") {
+          newTotalCost = item.productDetails.bigCost * newQuantity;
+        }
+        // Agarda `types` "min" bo‘lsa, cost bilan hisoblash
+        else if (types === "min") {
+          newTotalCost = item.productDetails.cost * newQuantity;
+        }
+
+        // Return the updated item
+        return { ...item, quantity: newQuantity, totalCost: newTotalCost };
+      }
+      return item;
+    });
+
+    setItem_Data(updatedItemData);
+  };
+
+  /// cartdan update bolgan datalarni chiqarish
+  const fetchUpdatedCartData = async () => {
+    try {
+      const token = localStorage.getItem("token");
+
+      if (!user || user.length === 0) {
+        return;
+      }
+
       const { data } = await axios.get(
-        `${baseAPI}/product/carts?userId=${user_id}`
+        `${baseAPI}/product/get-updated/${user}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
 
       if (data.success && data.cart) {
         const cart = data.cart;
-        const cartTotalCost = cart.totalCost;
-
-        setEditedItem([cartTotalCost]); // editedItem ni yangilash
         const itemCosts: any = [];
 
         if (cart.items && cart.items.length > 0) {
@@ -109,61 +192,27 @@ const MyCartCompoenent = () => {
           });
         }
 
-        setItemCost(itemCosts); // itemCost ni yangilash
+        setItemCost(cart.subTotalCost);
         dispatch(setItemCosts(itemCosts));
       }
     } catch (error) {
       console.error("Error fetching updated cart data:", error);
     }
   };
-
-  const updateCart = async () => {
-    try {
-      const updates = carts.map((item: any) => ({
-        furnitureId: item._id,
-        quantity: counts[item._id] || 1,
-        totalCost: getCostNumber(item.cost) * (counts[item._id] || 0),
-      }));
-
-      let totalCostFromItems = 0;
-
-      for (const update of updates) {
-        const response = await axios.post(`${baseAPI}/product/checkout`, {
-          userId: "603d9f3f494f1c3a9c4f2345",
-          furnitureId: update.furnitureId,
-          quantity: update.quantity,
-          totalCost: update.totalCost,
-        });
-
-        if (!response.data.success) {
-          toast.error(`Failed to update item ${update.furnitureId}`);
-          return;
-        }
-
-        const cart = response.data.cart;
-
-        if (cart.items) {
-          totalCostFromItems += cart.items.reduce(
-            (sum: number, item: any) => sum + item.totalCost,
-            0
-          );
-        }
-      }
-      toast.success("Cart updated successfully");
-
-      // fetchUpdatedCartData funksiyasini chaqirib, yangilangan ma'lumotni olish
-      fetchUpdatedCartData("some_fur_id", "603d9f3f494f1c3a9c4f2345");
-    } catch (error: any) {
-      toast.error(
-        "Error updating cart: " + error.response?.data?.message || error.message
-      );
-      console.error(error);
-    }
-  };
-
   useEffect(() => {
-    fetchCartData();
-    fetchUpdatedCartData("some_fur_id", "603d9f3f494f1c3a9c4f2345");
+    const getUser = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const { data } = await axios.get(`${baseAPI}/userFur/me`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setUser(data.data._id);
+      } catch (error: any) {
+        toast.error("Error fetching user data:", error);
+      }
+    };
+
+    getUser();
   }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -175,30 +224,31 @@ const MyCartCompoenent = () => {
       setValue("SELF_PICKUP");
     }
   };
-
   const handleChange2 = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedPayment = event.target.value.trim(); // Tanlangan qiymatni olamiz
 
     if (selectedPayment === "cash on delivery") {
-      setValue2("CASH"); // Backend uchun mos keladigan qiymatni saqlaymiz
+      setValue2("CASH");
     } else {
       setValue2("VISA");
     }
   };
-
   const updateShippingAndPayment = async () => {
     try {
-      const response = await axios.post(`${baseAPI}/payment/update`, {
-        userId: "603d9f3f494f1c3a9c4f2345",
-        shippingMethod: value, // FEDEX yoki SELF_PICKUP
-        paymentMethod: value2, // CASH yoki VISA
-      });
+      const token = localStorage.getItem("token");
+      const response = await axios.post(
+        `${baseAPI}/payment/chescout`,
+        {
+          userId: user,
+          productId: productID[0].item.item_id,
+          shippingMethod: value, // FEDEX yoki SELF_PICKUP
+          paymentMethod: value2, // CASH yoki VISA
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
 
       if (response.data.success) {
-        console.log("Sent Data:", {
-          shippingMethod: value,
-          paymentMethod: value2,
-        });
+        toast.success("Shipping and Payment updated successfully");
       } else {
         toast.error("Failed to update Shipping and Payment!");
       }
@@ -209,6 +259,10 @@ const MyCartCompoenent = () => {
       );
     }
   };
+  useEffect(() => {
+    fetchCartData();
+    fetchUpdatedCartData();
+  }, []);
 
   return (
     <Container>
@@ -223,38 +277,66 @@ const MyCartCompoenent = () => {
       <div className="Wrapper">
         <LeftCon className="Containre_Chescout_Content">
           <div className="Content2">
-            {carts.length > 0 ? (
-              carts.map((val: any, ind: any) => {
-                const itemCost =
-                  getCostNumber(val.cost) * (counts[val._id] || 0);
+            {item_Data && item_Data.length > 0 ? (
+              item_Data.map((item: any, ind: any) => {
+                const { productDetails, quantity, totalCost } = item;
+
                 return (
                   <div className="Content" key={ind}>
-                    <img src={val.image} alt="" />
+                    <img src={productDetails.image} alt="product" />
                     <div className="info">
                       <div className="item1">
-                        <h5>{val.types}</h5>
-                        <h6>{val.Color}</h6>
+                        <h5>{productDetails.types}</h5>
+                        <h6>{item.setColors}</h6>
                         <h6>
-                          {val.Width} x {val.Hight}
+                          {productID[0].itemId === item.item_id &&
+                          productID[0].widthType === "max"
+                            ? productDetails.maxWidth +
+                              " x " +
+                              productDetails.maxHeight
+                            : productDetails.minWidth +
+                              " x " +
+                              productDetails.minHeight}
                         </h6>
                       </div>
-                      <div className="item2">{val.cost}</div>
+                      <div className="item2">
+                        {item.widthType === "max"
+                          ? item.product.bigCost
+                          : item.product.cost}
+                      </div>
+
                       <div className="item3">
-                        <button onClick={() => updateCount(val._id, false)}>
+                        <button
+                          onClick={() =>
+                            updateCount(
+                              item.item_id,
+                              quantity,
+                              false,
+                              item.widthType
+                            )
+                          }
+                        >
                           -
                         </button>
-                        <span>{counts[val._id]}</span>
-                        <button onClick={() => updateCount(val._id, true)}>
+                        <span>{quantity}</span>
+                        <button
+                          onClick={() =>
+                            updateCount(
+                              item.item_id,
+                              quantity,
+                              true,
+                              item.widthType
+                            )
+                          }
+                        >
                           +
                         </button>
                       </div>
                       <div className="item4">
-                        <span>${itemCost}</span>
+                        <span>${totalCost}</span> {/* hisoblangan narx */}
                       </div>
                       <div className="item5">
-                        <button
-                          onClick={() => handleDeleteCart(val.cartID, val._id)}
-                        >
+                        <button onClick={() => handleDeleteCart(item.item_id)}>
                           <img src={delet} alt="trash" />
                         </button>
                       </div>
@@ -274,14 +356,23 @@ const MyCartCompoenent = () => {
                 <input type="submit" value="Apply" className="inputSubmit" />
               </div>
               <div className="right">
-                <button
+                {/* <button
                   onClick={() => updateCart()}
                   style={{
-                    background: carts.length > 0 ? "#d1bcb2" : "#EDE4E0",
+                    background: carts?.length > 0 ? "#d1bcb2" : "#EDE4E0",
                   }}
-                  disabled={!(carts && carts.length > 0)}
+                  disabled={!(carts && carts?.length > 0)}
                 >
                   update cart
+                </button> */}
+                <button
+                  onClick={updateCart}
+                  style={{
+                    background: carts?.length > 0 ? "#d1bcb2" : "#EDE4E0",
+                  }}
+                  disabled={isLoading || !(carts && carts?.length > 0)}
+                >
+                  {isLoading ? "Updating..." : "Update Cart"}
                 </button>
               </div>
             </div>
@@ -303,18 +394,20 @@ const MyCartCompoenent = () => {
                 onChange={handleChange}
               >
                 <FormControlLabel
+                  disabled={itemCost.length === 0}
                   value="Fedex ($15)"
                   control={<Radio className="inputs" />}
-                  checked={itemCost.length > 0 && value === "FEDEX"}
+                  checked={value === "FEDEX"}
                   label="Fedex ($15)"
-                  className={itemCost.length > 0 && value === "FEDEX" ? "qora" : "sariq"}
+                  className={value === "FEDEX" ? "qora" : "sariq"}
                 />
                 <FormControlLabel
+                  disabled={itemCost.length === 0}
                   value="Self pickup (free)"
                   control={<Radio className="inputs" />}
-                  checked={itemCost.length > 0 && value === "SELF_PICKUP"}
+                  checked={value === "SELF_PICKUP"}
                   label="Self pickup (free)"
-                  className={itemCost.length > 0 && value === "SELF_PICKUP" ? "qora" : "sariq"}
+                  className={value === "SELF_PICKUP" ? "qora" : "sariq"}
                 />
               </RadioGroup>
 
@@ -327,18 +420,20 @@ const MyCartCompoenent = () => {
                 onChange={handleChange2}
               >
                 <FormControlLabel
+                  disabled={itemCost.length === 0}
                   value="cash on delivery"
                   control={<Radio className="inputs" />}
-                  checked={itemCost.length > 0 && value2 === "CASH"}
+                  checked={value2 === "CASH"}
                   label="cash on delivery"
                   color="primary"
-                  className={itemCost.length > 0 && value2 === "CASH" ? "qora" : "sariq"}
+                  className={value2 === "CASH" ? "qora" : "sariq"}
                 />
                 <FormControlLabel
+                  disabled={itemCost.length === 0}
                   value="male"
-                  className={itemCost.length > 0 && value2 === "VISA" ? "qora" : "sariq"}
+                  className={value2 === "VISA" ? "qora" : "sariq"}
                   control={<Radio className="inputs" />}
-                  checked={itemCost.length > 0 && value2 === "VISA"}
+                  checked={value2 === "VISA"}
                   label="Visa/mastercard"
                 />
               </RadioGroup>
@@ -348,32 +443,29 @@ const MyCartCompoenent = () => {
               <div className="bottom_wrape">
                 <div className="cost">
                   <h5>Delivery</h5>
-                  <h5>${itemCost.length > 0 && value === "FEDEX" ? 15 : 0}</h5>
+                  <h5>${value === "FEDEX" ? 15 : 0}</h5>{" "}
+                  {/* FEDEX bo'lsa $15 */}
                 </div>
                 <div className="cost">
                   <h5>subtotal</h5>
-                  <h5>${editedItem}</h5>
+                  <h5>${itemCost}</h5> {/* Subtotal */}
                 </div>
                 <div className="cost">
                   <h4>total</h4>
-                  <h4>
-                    $
-                    {itemCost.length > 0 && value === "FEDEX"
-                      ? +editedItem + 15
-                      : editedItem || 0}
-                  </h4>
+                  <h4>${value === "FEDEX" ? +itemCost + 15 : itemCost}</h4>{" "}
+                  {/* Total: Subtotal + Delivery */}
                 </div>
                 <div className="btn_wrape">
                   <button
                     onClick={() => {
-                      if (itemCost.length > 0) {
-                        toast.success('Order placed successfully');
+                      if (carts.length > 0) {
+                        toast.success("Order placed successfully");
                         setTimeout(() => {
                           updateShippingAndPayment();
                           navigate("/chekout");
                         }, 1000);
                       } else {
-                        toast.error('Please add items to your cart first');
+                        toast.error("Please add items to your cart first");
                       }
                     }}
                   >
@@ -389,5 +481,4 @@ const MyCartCompoenent = () => {
     </Container>
   );
 };
-
 export default MyCartCompoenent;

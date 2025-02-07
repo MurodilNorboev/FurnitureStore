@@ -97,6 +97,7 @@ const DatailNavbarFilterComponent: React.FC<Tnames> = ({ name }) => {
       y: Math.max(50, Math.min(e.clientY - top, 450)),  
     });
   };
+  
   return (
     <Container>
 
@@ -110,7 +111,7 @@ const DatailNavbarFilterComponent: React.FC<Tnames> = ({ name }) => {
          </PagesName>
       </div>
 
-      <div className='wrapper'>
+      {/* <div className='wrapper'>
         <div className='imgwrap1'>
         {data.map((val, ind) => (
           <div key={ind} className="imgswrap">
@@ -253,7 +254,7 @@ const DatailNavbarFilterComponent: React.FC<Tnames> = ({ name }) => {
             </div>
 
         </RightCon>
-      </div>
+      </div> */}
 
       <Datail_0_2>
         <Chescout_containerWrapper style={{maxWidth:"1270px"}}  className="Chescout_containerWrapper">

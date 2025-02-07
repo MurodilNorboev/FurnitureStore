@@ -1,27 +1,30 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
 interface CartItem {
   _id: string;
   cost: number;
+  bigCost: number;
   image: string;
   types: string;
   Color: string;
-  Width: number;
-  Hight: number;
+  ColorSet: any[];
+  minWidth: number;
+  maxWidth: number;
+  minHeight: number;
+  maxHeight: number;
   cartID: string;
-  furniture: string; 
+  setColors: string[]; // Ranglar
+  widthType: string;
+  furniture: string;
   user: {
     _id: string;
   };
 }
-
 interface CartState {
   items: CartItem[];
   counts: { [key: string]: number };
   itemCosts: { [key: string]: number };
   totalCost: number;
 }
-
 const initialState: CartState = {
   items: [],
   counts: {},
@@ -59,25 +62,40 @@ const cartSlice = createSlice({
         _id: action.payload._id,
         user: { _id: action.payload.user },
         furniture: action.payload.furniture,
-        cost: 0, // Qo'shimcha xususiyatlar
+        cost: 0, // Placeholder for cost, can be updated later
+        bigCost: 0,
         image: "",
         types: "",
         Color: "",
-        Width: 0,
-        Hight: 0,
+        ColorSet: [],
+        minWidth: 0,
+        maxWidth: 0,
+        minHeight: 0,
+        maxHeight: 0,
+        setColors: [],
+        widthType: "",
         cartID: "",
       });
     },
 
+    // **Delete Item from Cart**: Removes an item from the cart by ID
     deleteItemFromCart: (state, action: PayloadAction<string>) => {
       const idToDelete = action.payload;
-      state.items = state.items.filter(item => item._id !== idToDelete);
+      state.items = state.items.filter((item) => item._id !== idToDelete);
       delete state.counts[idToDelete];
       delete state.itemCosts[idToDelete];
     },
   },
 });
 
-export const { setCarts, addToCart, setCounts, setItemCosts, setTotalCost, updateCartItemCount, deleteItemFromCart } = cartSlice.actions;
+export const {
+  setCarts,
+  addToCart,
+  setCounts,
+  setItemCosts,
+  setTotalCost,
+  updateCartItemCount,
+  deleteItemFromCart,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;

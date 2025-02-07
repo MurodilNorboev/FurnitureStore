@@ -31,8 +31,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../../Redux/store";
 import { setCarts } from "../../Redux/cartsSlice";
-import like from "../../../assets/leki.2.svg";
-import like1 from "../../../assets/leki1.svg";
+import { addLike, removeLike } from "../../Redux/Like.Tests/slice";
 
 export default function RoomData(Props: Tname) {
   const navigate = useNavigate();
@@ -56,6 +55,76 @@ export default function RoomData(Props: Tname) {
   const [datas, setDatas] = useState<any[]>([]);
   const carts = useSelector((state: RootState) => state.carts.items);
   const dispatch = useDispatch<AppDispatch>();
+  const [user, setUser] = useState<string>("");
+  // likes
+  const [getLike, setLikes] = useState<any[]>([]);
+
+  const fetchDataLikes = async () => {
+    if (!user) return;
+
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(`${baseAPI}/likes/getlikes/${user}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await response.json();
+
+      if (data.success && data.data.length > 0) {
+        setLikes(data.data[0].furniture);
+      }
+    } catch (error: any) {
+      toast.error("Yoqtirgan mebellarni olishda xatolik:", error);
+    }
+  }; // get likelar
+
+  const handleLike = async (
+    e: React.MouseEvent<SVGSVGElement, MouseEvent>,
+    id: string
+  ) => {
+    e.preventDefault();
+    const token = localStorage.getItem("token");
+    if (!token) {
+      console.error("Token mavjud emas!");
+      return;
+    }
+
+    try {
+      const { data } = await axios.post(
+        `${baseAPI}/likes/like`,
+        { user: user, likeId: id },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      await fetchDataLikes();
+      setLikes((prevLikes) => [...prevLikes, data.like]);
+      dispatch(addLike(data.like));
+    } catch (error) {
+      console.error("Like qo'shishda xatolik:", error);
+    }
+  };
+
+  const handleDeleteLike = async (id: string) => {
+    try {
+      const token = localStorage.getItem("token");
+      const { data } = await axios.delete(`${baseAPI}/likes/likedelete/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      await fetchDataLikes();
+      // setLikes((prevLikes) => prevLikes.filter((like) => like._id !== id));
+      dispatch(removeLike(data.like));
+    } catch (error) {
+      console.error("Error in handleDeleteLike:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (user) {
+      fetchDataLikes();
+    }
+  }, [user]);
 
   const fetchData = async () => {
     try {
@@ -83,12 +152,30 @@ export default function RoomData(Props: Tname) {
     }
   };
 
+  useEffect(() => {
+    const ftechData = async () => {
+      const token = localStorage.getItem("token");
+      try {
+        const { data }: any = await axios.get(`${baseAPI}/userFur/me`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const filter = data.data;
+        const filter2 = filter._id;
+
+        setUser(filter2);
+      } catch (error: any) {
+        toast.error(error)
+      }
+    };
+    ftechData();
+  }, []);
+
   const handleAddCart = async (fur_id: string, user_id: string) => {
     try {
       const {
         data: { success },
       } = await axios.post(`${baseAPI}/product/order`, {
-        user: { _id: "603d9f3f494f1c3a9c4f2345" },
+        user: { _id: user },
         fur_id,
       });
       if (success) fetchCartData();
@@ -99,10 +186,16 @@ export default function RoomData(Props: Tname) {
 
   const handleDeleteCart = async (cart_id: string, fur_id: string) => {
     try {
+      const token = localStorage.getItem("token");
       const {
         data: { success },
       } = await axios.delete(
-        `${baseAPI}/product/cart/${cart_id}/furniture/${fur_id}`
+        `${baseAPI}/product/cart/${cart_id}/furniture/${fur_id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       if (success) fetchCartData();
       fetchData();
@@ -237,16 +330,16 @@ export default function RoomData(Props: Tname) {
     setData(Data);
     setDatas(Data);
     toggleSidebar(true);
-    fetchData();
     fetchCartData();
     setData(Data);
     setDatas(Data);
     toggleSidebar(true);
+    // fetchDataLikes();
   }, []);
 
   const filterdatas = [...datas, ...data].flat();
   const filteredData = filterdatas.filter(
-    (item) => item.categories === label && datas
+    (item) => item.types === label && datas
   );
   const totalPages = Math.ceil(filteredData.length / itemsPerPage);
   const startIdx = (page - 1) * itemsPerPage;
@@ -452,7 +545,7 @@ export default function RoomData(Props: Tname) {
           {displayedData.length > 0 ? (
             displayedData.map((item, ind) => (
               <ImageContainer
-                key={`${item.categories}-${item.id} || ${item._id} && ${ind}`}
+                key={`${item.types}-${item.id} || ${item._id} && ${ind}`}
               >
                 <Imagecontent
                   onClick={(e) => {
@@ -462,14 +555,11 @@ export default function RoomData(Props: Tname) {
                       const foundItem: any = displayedData;
 
                       if (foundItem) {
-
                         if (foundItem._id !== item._id) {
                           navigate(`/datailRoom/${item._id}`);
-                        }
-                        else {
+                        } else {
                           navigate(`/datailRoom2/${item.id}`);
                         }
-
                       }
                     }
                   }}
@@ -486,12 +576,43 @@ export default function RoomData(Props: Tname) {
 
                     <div className="savebtnwrap">
                       <button className="like">
-                      <img src={like1} alt="" style={{
-                              border: "none",
-                              width: "25px",
-                              height: "25px",
-                            }} />
+                        <svg
+                          onClick={(e) => {
+                            if (
+                              getLike &&
+                              getLike.some(
+                                (itemLike) => itemLike?._id === item?._id
+                              )
+                            ) {
+                              handleDeleteLike(item._id);
+                            } else {
+                              handleLike(e, item._id);
+                            }
+                          }}
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          width="30px"
+                          height="30px"
+                          style={{
+                            cursor: "pointer",
+                            fill: getLike?.some(
+                              (itemLike) => itemLike?._id === item._id
+                            )
+                              ? "#ffbb00"
+                              : "transparent",
+                            stroke: "#ffbb00",
+                            strokeWidth: getLike?.some(
+                              (itemLike) => itemLike?._id === item._id
+                            )
+                              ? "0"
+                              : "2",
+                            transition: "all 0.3s ease",
+                          }}
+                        >
+                          <path d="M12 21.35C12 21.35 4 13.28 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04 0.99 3.57 2.36L12 9l0.93-1.64C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 4.78-8 12.85-8 12.85z" />
+                        </svg>
                       </button>
+
                       <button onClick={(e) => handleAddAndDelete(e, item)}>
                         {carts.find((cart) => cart._id === item._id) ? (
                           <img
@@ -514,7 +635,7 @@ export default function RoomData(Props: Tname) {
                     </div>
                   </Imagecontent>
                   <h6></h6>
-                  <h5>{item.categories}</h5>
+                  <h5>{item.types}</h5>
                   <h4>{item.cost}</h4>
                 </Imagecontent>
               </ImageContainer>

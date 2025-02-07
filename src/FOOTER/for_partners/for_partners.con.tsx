@@ -5,6 +5,7 @@ import home from '../../assets/home.svg'
 import circlebtn from '../../assets/circlewhite.svg'
 import emailjs from "emailjs-com";
 import { Box } from "@mui/joy";
+import toast from 'react-hot-toast'
 
 const For_PartnerComponent = () => {
   const [text, setText] = React.useState(""); 
@@ -27,7 +28,7 @@ const For_PartnerComponent = () => {
       )
       .then(
         (result) => {
-          console.log(result.text);
+          toast.success(result.text);
           setText("");
           setEmail("");
           setQuestion("");

@@ -87,7 +87,7 @@ export const Containre_Chescout_Content = styled.div`
   background-color: #fff;
   max-width: 1000px;
   width: 100vw;
-  padding: 80px;
+  padding: 50px;
 `;
 export const Content_chesckout = styled.div`
   display: flex;

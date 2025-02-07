@@ -35,7 +35,6 @@ const ProfilePassword = (Props: NameT) => {
       try {
         const decodedToken: any = jwtDecode(token);
         setSelectID(decodedToken.id);
-        console.log("Token ichidan ID:", decodedToken.id);
       } catch (error) {
         toast.error("Token noto'g'ri yoki muddati o'tgan.");
       }
@@ -49,9 +48,6 @@ const ProfilePassword = (Props: NameT) => {
     try {
       const token = localStorage.getItem("token");
       const userData = { password };
-
-      console.log("Bu ID:", selectID);
-      console.log("Bu token:", token);
 
       const { data } = await axios.put<any>(
         `${baseAPI}/userFur/edit-user/${selectID}`,

@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setCarts,
-  deleteItemFromCart,
-} from "../../../Redux/cartsSlice";
+import { setCarts, deleteItemFromCart } from "../../../Redux/cartsSlice";
 import { AnimatedButton, BtnWrap } from "../../../styles/navbar";
 import cart from "../../../../assets/cart.svg";
 import { baseAPI } from "../../../../utils/constanst";
@@ -17,7 +14,6 @@ const BasicMenu: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
-
   const carts = useSelector((state: any) => state.cart.items);
 
   useEffect(() => {
@@ -30,11 +26,10 @@ const BasicMenu: React.FC = () => {
             ({ _id: cartID, furniture }: any) =>
               furniture.map((fur: any) => ({ ...fur, cartID }))
           );
-          
+
           dispatch(setCarts(allFurniture));
 
-          
-          const itemId = "your_item_id_here"; 
+          const itemId = "your_item_id_here";
           dispatch(deleteItemFromCart(itemId));
         } else {
           console.error("Error fetching cart data:", data.msg);
@@ -52,7 +47,7 @@ const BasicMenu: React.FC = () => {
       return acc + cart.furniture.length;
     }
     return acc;
-  }, 0);
+  }, carts.length);
 
   const handleMouseEnter = () => {
     setIsVisible(true);
@@ -66,7 +61,9 @@ const BasicMenu: React.FC = () => {
     <div style={{ position: "relative" }}>
       <BtnWrap onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         <AnimatedButton onClick={() => navigate("/cart")}>
-          <img src={cart} alt="" style={{ paddingBottom: "8px" }} />
+          <Badge color="warning" badgeContent={cartCount}>
+            <img src={cart} alt="" style={{ paddingBottom: "8px" }} />
+          </Badge>
         </AnimatedButton>
       </BtnWrap>
 

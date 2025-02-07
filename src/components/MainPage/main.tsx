@@ -15,6 +15,7 @@ import Carousel2 from '../Carousel/carousel2';
 import { motion } from 'framer-motion'; 
 import { DataType } from '../types/maintp';
 import { Data } from '../mock/mockDatail';
+import FullWidthTabs from './main.datails/Tabs/tabs';
 
 const datatest = [
   {
@@ -178,10 +179,11 @@ const MainComponent: React.FC = () => {
         transition={{ duration: 1 }}
         viewport={{ once: true }}
       >
-        <ShopBYroom  />
+        <FullWidthTabs />
+        {/* <ShopBYroom  /> */}
       </motion.div>
 
-      <motion.div
+      {/* <motion.div
       style={{overflow:"scroll",maxWidth:"1460px",width:"100%",padding:"0px 20px"}}
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -189,7 +191,7 @@ const MainComponent: React.FC = () => {
         viewport={{ once: true }}
       >
         <Room />
-      </motion.div>
+      </motion.div> */}
 
       <motion.div
         initial={{ opacity: 0, y: 50 }}

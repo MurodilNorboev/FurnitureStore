@@ -1,104 +1,196 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { DataType } from '../types/maintp';
-import { Data } from '../mock/mockDatail';
-import { Buttones, ContainerModalEnter, Contant, ModalContainer, ModalIMG, ModalMenus, ModalMenusWrap } from './dropodownstyle';
-import { Navlink } from '../styles/LINK';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useMemo, useState } from "react";
+import {
+  Buttones,
+  ContainerModalEnter,
+  Contant,
+  ModalContainer,
+  ModalIMG,
+  ModalMenus,
+  ModalMenusWrap,
+  PagesName,
+} from "./dropodownstyle";
+import { Navlink } from "../styles/LINK";
+import { baseAPI } from "../../utils/constanst";
+import { useNavigate } from "react-router-dom";
+import { Data2 } from "./dropdownTS";
 
 const DatailMenusID: React.FC = () => {
-  const [selectedItem, setSelectedItem] = useState<DataType | null>(null);
+  const navigate = useNavigate();
+  const [selectedItem, setSelectedItem] = useState<any | null>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [data, setData] = useState<DataType[]>([]);
+  const [BackendData, setBackendData] = useState<any[]>([]);
   const [isFiltered, setIsFiltered] = useState<string | null>(null);
 
-  useEffect(() => {
-    const filterdata = Data.filter((i: DataType) => {
-      switch (i.label) {
-        case "new in": return i.id === 1;
-        case "sofas": return i.id === 10;
-        case "table": return i.id === 28;
-        case "beds": return i.id === 46;
-        case "linghting": return i.id === 55;
-        case "kitchen": return i.id === 82;
-        case "storage": return i.id === 127;
-        default: return false;
-      }
+  // Backend ma'lumotlarini olish
+  const fetchData = async () => {
+    const token = localStorage.getItem("token");
+    try {
+      const response = await fetch(`${baseAPI}/product/all`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const resData = await response.json();
+      setBackendData(resData.data || []);
+    } catch (error: any) {
+      console.error("Ma'lumotlarni olishda xato:", error.message || error);
+    }
+  };
+
+  // Data2 va BackendData ni birlashtirish va guruhlash
+  const mergeAndSortData = (backendData: any[], Data2: any[]) => {
+    return Data2.map((item: any) => {
+      const matchingBackend = backendData.filter(
+        (backendItem: any) =>
+          backendItem.types === item.label || backendItem.types !== item.label
+      );
+
+      return {
+        types: item.types,
+        _id: item._id,
+        id: item.id,
+        label: item.label,
+        values: [item.value1, item.value2, item.value3],
+        backend: matchingBackend.map((b) => ({
+          SubCategories: b.SubCategories,
+          _id: b._id,
+        })),
+      };
     });
-    setData(filterdata);
+  };
+
+  const sortedDatas = useMemo(
+    () => mergeAndSortData(BackendData, Data2),
+    [BackendData]
+  );
+
+  useEffect(() => {
+    fetchData();
   }, []);
 
-  const handleEnter = (item: DataType) => {
+  const handleEnter = (item: any) => {
+    if (!item) {
+      console.warn("🚨 Warning: handleEnter ga noto'g'ri item kelyapti:", item);
+      return;
+    }
+
     setSelectedItem(item);
-    setShowModal(true); 
+    setShowModal(true);
+  };
+  const handleClose = () => {
+    setShowModal(false);
   };
 
-  const handleClose = () => {
-    setShowModal(false); 
+  const handleNavigate = (subCategory: string, id: string) => {
+    navigate(`/Items/${subCategory}/${id}`);
   };
+
+  const selectedItems =
+    selectedItem && typeof selectedItem === "object"
+      ? Array.isArray(selectedItem)
+        ? selectedItem
+        : [selectedItem]
+      : [selectedItem];
+
+  // 4. Ma'lumotlarni filter qilish
+  const filters = BackendData.filter((item: any) => {
+    const isSpecialOfferValid = ["Hot", "Popular"].includes(
+      item.SpecialOffers || ""
+    );
+
+    return (
+      selectedItems.some(
+        (selected: any) =>
+          selected?.label &&
+          selected.label.toLowerCase() === item.types.toLowerCase()
+      ) && isSpecialOfferValid
+    );
+  }).slice(-2);
 
   return (
     <>
-      {data.length > 0 ? (
+      {sortedDatas.length > 0 ? (
         <ContainerModalEnter onMouseLeave={handleClose}>
           <Contant className="grid2">
-            {data.map((item, ind) => (
-              <Navlink to={`/menu-datail/${item.id && item.label}`} key={ind}
-              >
-                <Buttones
-                  className={isFiltered === item.label ? "none" : "grid"}
-                  onMouseEnter={() => handleEnter(item)}
-                  style={{ cursor: 'pointer', marginBottom: '10px' }}
+            {sortedDatas.map((group, ind) => {
+              return (
+                <Navlink
+                  to={`/Test/${group.label}/${group?._id || group._id}`}
+                  key={ind}
                 >
-                  {item.label}
-                </Buttones>
-              </Navlink>
-            ))}
+                  <Buttones
+                    className={isFiltered === group?.label ? "none" : "grid"}
+                    onMouseEnter={() => handleEnter(group)}
+                    style={{ cursor: "pointer", marginBottom: "10px" }}
+                  >
+                    {group?.label}
+                  </Buttones>
+                </Navlink>
+              );
+            })}
           </Contant>
-
 
           {showModal && selectedItem && (
             <ModalContainer onMouseLeave={handleClose}>
               <ModalMenusWrap>
-
                 <ModalMenus>
-                 
-                    <div className='textwrap' onClick={handleClose}>
-                        <h5>{selectedItem.desc1}</h5>
-                        <h5>{selectedItem.desc2}</h5>
-                        <h5>{selectedItem.desc3}</h5>
-                        <h5>{selectedItem.desc4}</h5>
-                    </div>
+                  <div className="textwrap">
+                    {selectedItem.values.map((value: string, index: number) => (
+                      <h5
+                        key={index}
+                        onClick={() => {
+                          const match = selectedItem.backend.find(
+                            (b: any) => b.SubCategories === value
+                          );
+                          if (match) {
+                            handleNavigate(match.SubCategories, match._id);
+                          } else {
+                            console.error(`SubCategory "${value}" topilmadi.`);
+                          }
+                        }}
+                      >
+                        {value}
+                      </h5>
+                    ))}
+                  </div>
 
-                    <div className='textwrap' onClick={handleClose}>
-                        <h5>{selectedItem.desc5}</h5>
-                        <h5>{selectedItem.desc6}</h5>
-                        <h5>{selectedItem.desc7}</h5>
-                        <h5>{selectedItem.desc8}</h5>
-                      </div>
-                 
+                  <div className="textwrap"></div>
                 </ModalMenus>
 
                 <ModalIMG>
-                    <Navlink to={`/stul2/${selectedItem.id}`}>
-                      <div className='imgContainer' onClick={handleClose}>
-                          <img src={selectedItem.imgURL} alt={selectedItem.label} />
-                          <h6></h6>
-                          <h5>{selectedItem.label}</h5>
-                          <h4>{selectedItem.cost}</h4>
-                      </div>
-                    </Navlink>
-
-                    <Navlink to={`/stul2/${selectedItem.id}`}>
-                      <div className='imgContainer' onClick={handleClose}>
-                          <img src={selectedItem.img} alt={selectedItem.label} />
-                          <h6></h6>
-                          <h5>{selectedItem.label}</h5>
-                          <h4>{selectedItem.cost}</h4>
-                      </div>
-                    </Navlink>
-
+                  {filters.length > 0 &&
+                    filters.map((filterItem: any, index: number) => {
+                      return (
+                        <Navlink key={index} to={`/stul2/${filterItem.id}`}>
+                          <div className="imgContainer" onClick={handleClose}>
+                            {filterItem.SpecialOffers !== "All" && (
+                              <PagesName
+                                style={{
+                                  background:
+                                    filterItem.SpecialOffers === "Popular"
+                                      ? "#E59D49"
+                                      : "#F66",
+                                  marginRight:
+                                    filterItem.SpecialOffers === "Popular"
+                                      ? "-65px"
+                                      : "-100px",
+                                }}
+                              >
+                                {filterItem.SpecialOffers}
+                              </PagesName>
+                            )}
+                            <img
+                              src={filterItem.image || ""}
+                              alt={filterItem.Feature || ""}
+                            />
+                            <h6></h6>
+                            <h5>{filterItem.label}</h5>
+                            <h4>{filterItem.cost}</h4>
+                          </div>
+                        </Navlink>
+                      );
+                    })}
                 </ModalIMG>
-
               </ModalMenusWrap>
             </ModalContainer>
           )}
@@ -111,5 +203,3 @@ const DatailMenusID: React.FC = () => {
 };
 
 export default DatailMenusID;
-
-

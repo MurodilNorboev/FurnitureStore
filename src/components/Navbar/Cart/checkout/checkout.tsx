@@ -21,14 +21,17 @@ import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import { baseAPI } from "../../../../utils/constanst";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../../Redux/store";
+import { setItemCosts } from "../../../Redux/cartsSlice";
 interface NameT {
   name: string;
 }
 
 const Checkout = (Props: NameT) => {
   const navigate = useNavigate();
+  const [user, setUser] = useState<string>("");
   const [formdata, setFormdata] = useState({
-    userId: "603d9f3f494f1c3a9c4f2345",
     deliveryAddress: {
       country: "",
       city: "",
@@ -49,6 +52,24 @@ const Checkout = (Props: NameT) => {
   const [set, setSet] = useState<any[]>([]);
   const [setb, setsetb] = useState<any[]>([]);
 
+  const fetchUser = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const { data } = await axios.get(`${baseAPI}/userFur/me`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const filter = data.data;
+      const filter2 = filter._id;
+
+      setUser(filter2);
+    } catch (error: any) {
+      toast.error(error);
+    }
+  };
+
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -56,39 +77,41 @@ const Checkout = (Props: NameT) => {
   ) => {
     const { name, value } = e.target;
 
-    // Agar name 'deliveryAddress.' bilan boshlasa, deliveryAddressni yangilaymiz
     if (name.startsWith("deliveryAddress.")) {
-      const key = name.split(".")[1]; // deliveryAddress.country kabi
+      const key = name.split(".")[1];
       setFormdata((prev) => ({
         ...prev,
         deliveryAddress: {
           ...prev.deliveryAddress,
-          [key]: value, // yangi qiymatni yangilash
+          [key]: value,
         },
       }));
-    }
-    // Agar name 'userinfo.' bilan boshlasa, userinfo ni yangilaymiz
-    else if (name.startsWith("userinfo.")) {
-      const key = name.split(".")[1]; // userinfo.first_name kabi
+    } else if (name.startsWith("userinfo.")) {
+      const key = name.split(".")[1];
       setFormdata((prev) => ({
         ...prev,
         userinfo: {
           ...prev.userinfo,
-          [key]: value, // yangi qiymatni yangilash
+          [key]: value,
         },
       }));
-    }
-    // Boshqa umumiy inputlar uchun
-    else {
-      setFormdata((prev) => ({ ...prev, [name]: value })); // formning boshqa qismlarini yangilash
+    } else {
+      setFormdata((prev) => ({ ...prev, [name]: value }));
     }
   };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      const token = localStorage.getItem("token");
       const response = await axios.post(
-        `${baseAPI}/payment/create-order`,
-        formdata
+        `${baseAPI}/payment/create-order/${user}`,
+        formdata,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       if (response.data.success) {
         toast.success("Order created successfully!");
@@ -104,39 +127,58 @@ const Checkout = (Props: NameT) => {
   };
 
   useEffect(() => {
-    const userId1 = "603d9f3f494f1c3a9c4f2345";
-    const fetchCreatedData = async (userId: string, orderId: string) => {
+    const fetchData = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        toast.error("Token is missing, please login again.");
+        return;
+      }
+
       try {
-        const res = await fetch(`${baseAPI}/payment/cart/${userId1}`, {
+        const res = await fetch(`${baseAPI}/payment/get-checkout/${user}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
         });
         const data = await res.json();
+
+        console.log(data);
+
         const filter = data.cart;
         const filter2 = filter.items;
         const uniqueItems = filter2.filter(
           (value: any, index: any, self: any) =>
-            index === self.findIndex((t: any) => t.product._id === value.product._id)
+            index ===
+            self.findIndex((t: any) => t.product._id === value.product._id)
         );
-  
-        const totalCostSum = uniqueItems.reduce((acc: number, val: any) => acc + val.totalCost, 0);
-        const a: any = data.cart.totalCost;
-        const costs: any = a === a ? a : a - 15;
-        const costs2: any = a - costs;
 
+        const totalCostSum = uniqueItems.reduce(
+          (acc: number, val: any) => acc + val.totalCost,
+          0
+        );
+        // console.log(uniqueItems);
+
+        const a: any = filter.subTotalCost;
+        const costs: any = a === a ? a : a - 15;
+        const filter4: any = a - totalCostSum;
         setData(uniqueItems);
         setSet(a);
         setsetb(totalCostSum);
-        setTotal(costs2);
-  
+        setTotal(filter4);
       } catch (error: any) {
         toast.error("Error fetching order data: " + error.message);
       }
     };
-  
-    fetchCreatedData(userId1, "645d9f3f494f1c3a9c4f2345");
+
+    if (user) {
+      fetchData();
+    }
+  }, [user]);
+
+  useEffect(() => {
+    fetchUser();
   }, []);
 
   return (
@@ -297,31 +339,40 @@ const Checkout = (Props: NameT) => {
 
                 <div style={{ maxHeight: "230px", overflowY: "scroll" }}>
                   {Array.isArray(data) && data.length > 0 ? (
-                    data.map((val, ind) => (
-                      <Content key={ind}>
-                        <Datails>
-                          <Imag
-                            src={val.product.image}
-                            alt={val.product.discount}
-                          />
-                          <LeftDiv>
-                            <div className="item1">
-                              <h4>{val.product.types}</h4>
-                              <h6>{val.product.Color}</h6>
-                              <h6 className="nni">
-                                {val.product.Width} x {val.product.Hight}
-                              </h6>
-                            </div>
-                            <div className="item2">
-                              <h6>x{val.quantity}</h6> 
-                            </div>
-                            <div className="item3">
-                              <h6>${val.totalCost}</h6> 
-                            </div>
-                          </LeftDiv>
-                        </Datails>
-                      </Content>
-                    ))
+                    data.map((val, ind) => {
+                      let itemDimensions = "";
+
+                      if (val.widthType === "max") {
+                        itemDimensions =
+                          val.product.maxWidth + " x " + val.product.maxHeight;
+                      } else if (val.widthType === "min") {
+                        itemDimensions =
+                          val.product.minWidth + " x " + val.product.minHeight;
+                      }
+                      return (
+                        <Content key={ind}>
+                          <Datails>
+                            <Imag
+                              src={val.product.image}
+                              alt={val.product.discount}
+                            />
+                            <LeftDiv>
+                              <div className="item1">
+                                <h4>{val.product.types}</h4>
+                                <h6>{val.product.Color}</h6>
+                                <h6 className="nni">{itemDimensions}</h6>
+                              </div>
+                              <div className="item2">
+                                <h6>x{val.quantity}</h6>
+                              </div>
+                              <div className="item3">
+                                <h6>${val.totalCost}</h6>
+                              </div>
+                            </LeftDiv>
+                          </Datails>
+                        </Content>
+                      );
+                    })
                   ) : (
                     <div>No data</div>
                   )}
@@ -334,7 +385,7 @@ const Checkout = (Props: NameT) => {
                       <h5>${total}</h5>
                     </div>
                     <div className="cost">
-                      <h5>Delivery (Self Pickup)</h5>
+                      <h5>subtotal</h5>
                       <h5>${setb}</h5>
                     </div>
                     <div className="cost">

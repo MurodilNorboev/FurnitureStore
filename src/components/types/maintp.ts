@@ -92,6 +92,7 @@ export type Images = {
 export type DataType = {
   id: number;
   Popular: string;
+  SubCategories?: string;
   image?: string;
   new: string;
   HotNum: string;
@@ -100,6 +101,10 @@ export type DataType = {
   Color: string;
   Styles: string;
   Feature: string;
+  ItemName?: string;
+  value1?: string;
+  value2?: string;
+  value3?: string;
   categories?: string;
   label: string;
   name: string;

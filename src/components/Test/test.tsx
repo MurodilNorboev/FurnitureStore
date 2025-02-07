@@ -1,263 +1,499 @@
-import React, { useState, useEffect } from "react";
 import axios from "axios";
+import {
+  FormControlLabel,
+  FormGroup,
+  Pagination,
+  PaginationItem,
+} from "@mui/material";
+import Stack from "@mui/material/Stack";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { baseAPI } from "../../utils/constanst";
 import { toast } from "react-toastify";
-import YourComponent from "../Redux/testdatas";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState, AppDispatch } from "../Redux/store";
-import { setCarts, setItemCosts, updateCartItemCount } from "../Redux/cartsSlice";
+// import { RootState, AppDispatch } from "../Redux/store";
+import { Slider } from "@mui/joy";
+import Box from "@mui/joy/Box";
+import Checkbox from "@mui/joy/Checkbox";
+import Skeleton from "@mui/joy/Skeleton";
+import saveIcon from "../../assets/saveIcon.svg";
+import {
+  setCarts,
+  // addToCart,
+  setItemCosts,
+  updateCartItemCount,
+} from "../Redux/cartsSlice";
+import { useNavigate, useParams } from "react-router-dom";
+import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
+import { DataType } from "../types/maintp";
+import { addLike, removeLike } from "../Redux/Like.Tests/slice";
+import { Data } from "../mock/mockDatail";
+import {
+  Catalog_con,
+  Image,
+  ImageContainer,
+  Imagecontent,
+  ImageGrid,
+  SlaiderContainer,
+} from "../Likes/styles";
+import {
+  Saidbar,
+  SortContainer,
+} from "../main.all_categorie/catalog.page/catalog";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../Redux/store";
+// import CartList from "../Redux/features/cart/components/CartList";
 
-interface CartItem {
-  _id: string;
-  name: string;
-  cost: string | number;
-  categories: string;
-  cartID: string;
-  count: number;
-  carts: {
-    items: any[];
-  };
-}
 
-const MyComponent = () => {
-  const [counts, setCounts] = useState<{ [key: string]: number }>({});
-  const [totalCost, setTotalCost] = useState(0);
-  const [data, setData] = useState<CartItem[]>([]);
-  const carts: any[] = useSelector((state: RootState) => state.carts.items);
+
+
+
+const mockDatas: any = {
+  colors: [
+    { value: "orange" },
+    { value: "blue" },
+    { value: "dark gray" },
+    { value: "black" },
+    { value: "white" },
+    { value: "light beige" },
+  ],
+  styles: [
+    { value: "minimalist" },
+    { value: "eco style" },
+    { value: "glam" },
+    { value: "royal" },
+    { value: "pink rose" },
+    { value: "hi tech" },
+  ],
+  materials: [
+    { value: "metal" },
+    { value: "plastic" },
+    { value: "leather" },
+    { value: "marble" },
+    { value: "glass" },
+    { value: "rattan" },
+  ],
+};
+
+const NavDatail_Page = () => {
+  const navigate = useNavigate();
+  const [user, setUsers] = useState<any | null>(null);
+  const [data, setData] = useState<any[]>([]);
+  const [checkedFilters, setCheckedFilters] = useState<any>({
+    colors: [],
+    styles: [],
+    materials: [],
+  });
+  const [priceRange, setPriceRange] = useState<number[]>([50, 1000]);
+  const { _id, types } = useParams<any>();
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 12;
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  // like
+  const carts = useSelector((state: RootState) => state.cart.items) || [];
   const dispatch = useDispatch<AppDispatch>();
-  const [editedItem, setEditedItem] = useState<any[]>([]);
-  const [itemCost, setItemCost] = useState<any[]>([]);
+  const [getLike, setLikes] = useState<any[]>([]);
 
-  const getCostNumber = (cost: string | number) =>
-    typeof cost === "string"
-      ? parseFloat(cost.replace("$", "").replace(/\s/g, "").trim())
-      : cost; 
+  // like
+  const fetchDataLikes = async () => {
+    if (!user || user.length === 0) return user;
 
-  const fetchData = async () => {
     try {
-      const {
-        data: { data },
-      } = await axios.get(`${baseAPI}/product/all`);
-      setData(data);
-    } catch (error: any) {
-      toast.error("Error fetching data:", error);
-    }
-  };
-
-  const fetchCartData = async () => {
-    try {
-      const { cartsData } = await (await fetch(`${baseAPI}/product/cart-count`)).json();
-      const allFurniture = cartsData.flatMap(
-        ({ _id: cartID, furniture }: any) =>
-          furniture.map((fur: any) => ({
-            ...fur,
-            cartID, // cartID qo'shildi
-            cost: fur.cost || 0, // cost qo'shildi
-          }))
-      );
-
-      dispatch(setCarts(allFurniture));
-
-      const initialCounts = Object.fromEntries(
-        allFurniture.map((item: any) => [item._id, item.count || 1])
-      );
-      setCounts(initialCounts);
-      calculateTotalCost(allFurniture, initialCounts);
-    } catch (error: any) {
-      toast.error("Error fetching cart data:", error);
-    }
-  }; //
-
-  const calculateTotalCost = (
-    carts: CartItem[],
-    counts: { [key: string]: number }
-  ) => {
-    setTotalCost(
-      carts.reduce((sum: number, item) => {
-        const cost: number = getCostNumber(item.cost) * (counts[item._id] || 0);
-        return sum + cost;
-      }, 0)
-    );
-  }; //
-
-  const updateCount = (id: string, isIncrement: boolean) => {
-    const newCount = {
-      ...counts,
-      [id]: Math.max(1, (counts[id] || 0) + (isIncrement ? 1 : -1)),
-    };
-    setCounts(newCount);
-    calculateTotalCost(carts, newCount);
-    dispatch(updateCartItemCount({ _id: id, count: newCount[id] }));
-  }; //
-
-  const handleAddCart = async (fur_id: string, user_id: string) => {
-    try {
-      const {
-        data: { success },
-      } = await axios.post(`${baseAPI}/product/order`, {
-        user: { _id: user_id },
-        fur_id,
+      const token = localStorage.getItem("token");
+      const response = await fetch(`${baseAPI}/likes/getlikes/${user}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
       });
-      if (success) {
-        fetchCartData(); // Yangilangan ma'lumotlar bilan cartni qayta olish
-      }
-    } catch (error) {
-      console.error("Error adding to cart:", error);
-    }
-  };
+      const data = await response.json();
 
-  const handleDeleteCart = async (cart_id: string, fur_id: string) => {
-    try {
-      const {
-        data: { success },
-      } = await axios.delete(
-        `${baseAPI}/product/cart/${cart_id}/furniture/${fur_id}`
-      );
-      if (success) fetchCartData();
-    } catch (error) {
-      console.error("Error deleting from cart:", error);
-    }
-  };
-
-  // const handleDeleteCart = async (cart_id: string, fur_id: string) => {
-  //   try {
-  //     const {
-  //       data: { success },
-  //     } = await axios.delete(
-  //       `${baseAPI}/product/cart/${cart_id}/furniture/${fur_id}`
-  //     );
-  //     if (success) {
-  //       fetchCartData(); // Cartni yangilash
-  //       fetchUpdatedCartData("some_fur_id", "603d9f3f494f1c3a9c4f2345"); // Yangilangan ma'lumotni olish
-  //     }
-  //   } catch (error) {
-  //     console.error("Error deleting from cart:", error);
-  //   }
-  // };
-  
-  const fetchUpdatedCartData = async (fur_id: string, user_id: string) => {
-    try {
-      const { data } = await axios.get(`${baseAPI}/product/carts?userId=${user_id}`);
-  
-      if (data.success && data.cart) {
-        const cart = data.cart;
-        const cartTotalCost = cart.totalCost;
-  
-        setEditedItem([cartTotalCost]); // editedItem ni yangilash
-        const itemCosts: any = [];
-  
-        if (cart.items && cart.items.length > 0) {
-          cart.items.forEach((item: any) => {
-            itemCosts.push(item.totalCost);
-          });
-        }
-  
-        setItemCost(itemCosts); // itemCost ni yangilash
-        dispatch(setItemCosts(itemCosts));
+      if (data.success && data.data.length > 0) {
+        setLikes(data.data[0].furniture);
       }
-    } catch (error) {
-      console.error("Error fetching updated cart data:", error);
-    }
-  };
-  
-  const updateCart = async () => {
-    try {
-      const updates = carts.map((item: CartItem) => ({
-        furnitureId: item._id,
-        quantity: counts[item._id] || 1,
-        totalCost: getCostNumber(item.cost) * (counts[item._id] || 0),
-      }));
-  
-      let totalCostFromItems = 0;
-  
-      for (const update of updates) {
-        const response = await axios.post(`${baseAPI}/product/checkout`, {
-          userId: "603d9f3f494f1c3a9c4f2345", 
-          furnitureId: update.furnitureId,
-          quantity: update.quantity,
-          totalCost: update.totalCost,
-        });
-  
-        if (!response.data.success) {
-          toast.error(`Failed to update item ${update.furnitureId}`);
-          return;
-        }
-  
-        const cart = response.data.cart;
-  
-        if (cart.items) {
-          totalCostFromItems += cart.items.reduce(
-            (sum: number, item: any) => sum + item.totalCost,
-            0
-          );
-        }
-      }
-      toast.success("Cart updated successfully");
-  
-      // fetchUpdatedCartData funksiyasini chaqirib, yangilangan ma'lumotni olish
-      fetchUpdatedCartData("some_fur_id", "603d9f3f494f1c3a9c4f2345");
-  
     } catch (error: any) {
-      toast.error("Error updating cart: " + error.response?.data?.message || error.message);
-      console.error(error);
+      toast.error("Yoqtirgan mebellarni olishda xatolik:", error);
     }
   };
-  
+  const handleLike = async (
+    e: React.MouseEvent<SVGSVGElement, MouseEvent>,
+    id: string
+  ) => {
+    e.preventDefault();
+    const token = localStorage.getItem("token");
+    if (!token) {
+      console.error("Token mavjud emas!");
+      return;
+    }
+
+    try {
+      const { data } = await axios.post(
+        `${baseAPI}/likes/like`,
+        { user: user, likeId: id },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      await fetchDataLikes();
+      setLikes((prevLikes) => [...prevLikes, data.like]);
+      dispatch(addLike(data.like));
+    } catch (error) {
+      console.error("Like qo'shishda xatolik:", error);
+    }
+  };
+  const handleDeleteLike = async (id: string) => {
+    try {
+      const token = localStorage.getItem("token");
+      const { data } = await axios.delete(`${baseAPI}/likes/likedelete/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      await fetchDataLikes();
+      // setLikes((prevLikes) => prevLikes.filter((like) => like._id !== id));
+      dispatch(removeLike(data.like));
+    } catch (error) {
+      console.error("Error in handleDeleteLike:", error);
+    }
+  };
   useEffect(() => {
-    fetchData();
-    fetchCartData();
-    fetchUpdatedCartData("some_fur_id", "603d9f3f494f1c3a9c4f2345");
+    if (user) {
+      fetchDataLikes();
+    }
+  }, [user]);
+
+  /// cart
+  const fetchCartData = async () => {
+    if (!user) return;
+    const token = localStorage.getItem("token");
+
+    try {
+      const response = await axios.get(`${baseAPI}/product/order-get/${user}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      const items = response.data?.userId?.items ?? [];
+      dispatch(setCarts(items));
+    } catch (error) {
+      console.error("Cart fetch error:", error);
+    }
+  };
+
+  const handleAddCart = async (productId: string) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.post(
+        `${baseAPI}/product/order`,
+        {
+          user: user,
+          fur_id: productId,
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      const { success, userId } = response.data;
+      if (success && userId?.items) {
+        dispatch(setCarts(userId.items));
+        fetchCartData();
+      }
+    } catch (error: any) {
+      console.error(
+        "Error adding to cart:",
+        error.response ? error.response.data : error.message
+      );
+    }
+  };
+
+  // all datas
+  const getData = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const { data } = await axios.get(`${baseAPI}/product/all`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setData(data.data);
+      dispatch(setCarts(data.data));
+    } catch (error: any) {
+      toast.error("Error fetching product data:", error);
+    }
+  };
+  /// user in window sizes
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const { data } = await axios.get(`${baseAPI}/userFur/me`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setUsers(data.data._id);
+      } catch (error: any) {
+        toast.error("Error fetching user data:", error);
+      }
+    };
+
+    getUser();
+    getData();
+    setPriceRange([50, 10000]);
+
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1400);
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
-  
+
+  // checkbox
+  const handleCheckboxChange = (type: string, value: string) => {
+    setCheckedFilters((prev: any) => {
+      const updated = { ...prev };
+      if (updated[type].includes(value)) {
+        updated[type] = updated[type].filter((item: string) => item !== value);
+      } else {
+        updated[type].push(value);
+      }
+      return updated;
+    });
+  };
+
+  // slider
+  const handleSliderChange = (event: Event, newValue: number | number[]) => {
+    setPriceRange(newValue as number[]);
+  };
+
+  // filter
+  const SubFilter = data.filter((item) => {
+    if (item.types === types) return item;
+  });
+  const filteredData = SubFilter.filter((item: any) => {
+    const matchesColor =
+      checkedFilters.colors.length === 0 ||
+      checkedFilters.colors.includes(item.Color);
+
+    const matchesStyle =
+      checkedFilters.styles.length === 0 ||
+      checkedFilters.styles.includes(item.Styles);
+
+    const matchesMaterial =
+      checkedFilters.materials.length === 0 ||
+      checkedFilters.materials.includes(item.material);
+
+    const matchesPrice =
+      item.cost >= priceRange[0] && item.cost <= priceRange[1];
+
+    return matchesColor && matchesStyle && matchesMaterial && matchesPrice;
+  });
+
+  // Pagination logic
+  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+  const currentData = filteredData.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+  const handleChangePagination = (
+    event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
+    setCurrentPage(value);
+  };
+  const toggleSidebar = () => {
+    setIsSidebarOpen((prev) => !prev);
+  };
+
   return (
-    <div style={{ paddingTop: "90px" }}>
-      <h1>All Data</h1>
-      {data.map((val, ind) => (
-        <div key={ind} style={{ display: "flex", gap: "20px" }}>
-          {val.categories}
-          <button onClick={() => handleAddCart(val._id, "603d9f3f494f1c3a9c4f2345")}>
-            Add to Cart
-          </button>
-        </div>
-      ))}
+    <Catalog_con>
+      {/* Sort Button */}
+      <SortContainer className="SortContainer">
+        <button onClick={toggleSidebar} className="inputs">
+          Sort by
+        </button>
+        <button onClick={toggleSidebar} className="closeInputs">
+          close
+        </button>
+      </SortContainer>
 
-      <div style={{ marginTop: "50px" }}>
-        {carts.map((val: CartItem, ind: number) => {
-          const itemCost = getCostNumber(val.cost) * (counts[val._id] || 0);
-          return (
+      {/* Product List */}
+      <SlaiderContainer style={{ padding: "0px" }}>
+        <ImageGrid>
+          {currentData.length > 0 ? (
+            currentData.map((item, ind) => (
+              <ImageContainer
+                key={`${item.types}-${item.id} || ${item._id} && ${ind}`}
+              >
+                <Imagecontent
+                  onClick={(e) => {
+                    const target = e.target as HTMLElement;
+
+                    if (!target.closest("button")) {
+                      const foundItem: any = currentData;
+
+                      if (foundItem) {
+                        if (foundItem._id !== item._id) {
+                          navigate(`/datailRoom/${item._id}`);
+                        } else {
+                          navigate(`/datailRoom2/${item.id}`);
+                        }
+                      }
+                    }
+                  }}
+                >
+                  <Imagecontent>
+                    <Image
+                      className="Image"
+                      src={item.image}
+                      alt={`img-${ind}`}
+                    />
+
+                    <div className="savebtnwrap">
+                      <button className="like">
+                        <svg
+                          onClick={(e) => {
+                            if (
+                              getLike &&
+                              getLike.some(
+                                (itemLike) => itemLike?._id === item?._id
+                              )
+                            ) {
+                              handleDeleteLike(item._id);
+                            } else {
+                              handleLike(e, item._id);
+                            }
+                          }}
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          width="35px"
+                          height="35px"
+                          style={{
+                            cursor: "pointer",
+                            fill: getLike?.some(
+                              (itemLike) => itemLike?._id === item._id
+                            )
+                              ? "#ffbb00"
+                              : "transparent",
+                            stroke: "#ffbb00",
+                            strokeWidth: getLike?.some(
+                              (itemLike) => itemLike?._id === item._id
+                            )
+                              ? "0"
+                              : "2",
+                            transition: "all 0.3s ease",
+                          }}
+                        >
+                          <path d="M12 21.35C12 21.35 4 13.28 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04 0.99 3.57 2.36L12 9l0.93-1.64C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 4.78-8 12.85-8 12.85z" />
+                        </svg>
+                      </button>
+
+                      <button
+                        className="BtnAddCart"
+                        onClick={() => handleAddCart(item._id)}
+                      >
+                        add to cart
+                      </button>
+                    </div>
+                  </Imagecontent>
+                  <h6></h6>
+                  <h5>{item.Feature}</h5>
+                  <h4>{item.cost}</h4>
+                </Imagecontent>
+              </ImageContainer>
+            ))
+          ) : (
             <div
-              key={ind}
-              style={{ display: "flex", gap: "20px", alignItems: "center" }}
+              className="Errors"
+              style={{
+                textAlign: "center",
+                marginTop: "20px",
+                fontSize: "18px",
+                color: "red",
+              }}
             >
-              {val.categories} - ${itemCost}
-              <button onClick={() => updateCount(val._id, false)}>-</button>
-              <span>{counts[val._id]}</span>
-              <button onClick={() => updateCount(val._id, true)}>+</button>
-              <button onClick={() => handleDeleteCart(val.cartID, val._id)}>
-                Delete
-              </button>
+              hechnima yoq !
             </div>
-          );
-        })}
+          )}
+        </ImageGrid>
 
-        <h3>Total Cost: ${totalCost}</h3>
-        <button onClick={() => updateCart()}>Update Cart</button>
-      </div>
+        {/* Pagination */}
+        <Stack
+          spacing={1}
+          style={{
+            marginTop: "20px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Pagination
+            count={totalPages}
+            page={currentPage}
+            onChange={handleChangePagination}
+            renderItem={(item) => (
+              <PaginationItem
+                slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
+                {...item}
+              />
+            )}
+          />
+        </Stack>
+      </SlaiderContainer>
 
-      <h1>All Carts</h1>
-      <YourComponent cartLength={carts.length} />
-
-      <h1>Added Item</h1>
-      <p>{editedItem}</p>
-      {itemCost?.map((val, ind) => (
-  <div key={ind} style={{ display: "flex", gap: "20px" }}>
-    {val}
-  </div>
-))}
-
-
-    </div>
+      {/* /// saidbar  */}
+      <Saidbar
+        style={{
+          display: isSidebarOpen || !isMobile ? "block" : "none",
+          width: isMobile ? "100%" : "auto",
+        }}
+      >
+        <div className="cart_con a">
+          <h2>Price</h2>
+          <hr />
+          <Box sx={{ width: "100%" }}>
+            <Slider
+              value={priceRange}
+              onChange={handleSliderChange}
+              valueLabelDisplay="auto"
+              max={10000}
+              min={50}
+            />
+          </Box>
+          <div className="button_wrap aa">
+            <div className="btn_wrap">
+              <button>${priceRange[0]}</button>
+            </div>
+            <div className="btn_wrap">
+              <button>${priceRange[1]}</button>
+            </div>
+          </div>
+        </div>
+        <Box sx={{ display: "flex", flexWrap: "wrap", gap: 3, marginTop: 3 }}>
+          <div className="cart_con c">
+            {Object.keys(mockDatas).map((category: any) => (
+              <FormGroup key={category}>
+                <h3>{category}</h3>
+                {mockDatas[category].map((option: any) => (
+                  <FormControlLabel
+                    key={option.value}
+                    control={
+                      <Checkbox
+                        onChange={() =>
+                          handleCheckboxChange(category, option.value)
+                        }
+                        checked={checkedFilters[category].includes(
+                          option.value
+                        )}
+                      />
+                    }
+                    label={option.value}
+                  />
+                ))}
+              </FormGroup>
+            ))}
+          </div>
+        </Box>
+      </Saidbar>
+    </Catalog_con>
   );
 };
 
-export default MyComponent;
+export default NavDatail_Page;

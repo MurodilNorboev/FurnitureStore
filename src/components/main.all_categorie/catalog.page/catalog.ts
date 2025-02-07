@@ -259,8 +259,8 @@ export const Imagecontent = styled.div`
       justify-content: center;
     }
     .saveIcon {
-      width: 30px;
-      height: 30px;
+      width: 36px;
+      height: 36px;
       padding: 3.5px;
     }
     .saveIcon :hover {

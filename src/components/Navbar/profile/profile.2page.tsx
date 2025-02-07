@@ -48,7 +48,6 @@ const ProfilePersonal2page = (Props: NameT) => {
       try {
         const decodedToken: any = jwtDecode(token);
         setSelectID(decodedToken.id);
-        console.log("Token ichidan ID:", decodedToken.id);
       } catch (error) {
         toast.error("Token noto'g'ri yoki muddati o'tgan.");
       }
@@ -69,9 +68,6 @@ const ProfilePersonal2page = (Props: NameT) => {
         address,
         comment,
       };
-
-      console.log("Bu ID:", selectID);
-      console.log("Bu token:", token);
 
       const { data } = await axios.put<any>(
         `${baseAPI}/userFur/edit-user/${selectID}`,

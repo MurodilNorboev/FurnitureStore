@@ -10,6 +10,7 @@ import { AnimatedButton, BtnWrap } from '../components/styles/navbar'
 import { Navlink } from '../components/styles/LINK'
 import emailjs from "emailjs-com";
 import { Box } from "@mui/joy";
+import toast from 'react-hot-toast'
 
 const FooterComponent = () => {
   const [email, setEmail] = useState("");
@@ -28,11 +29,11 @@ const FooterComponent = () => {
       )
       .then(
         (result) => {
-          console.log(result.text);
+          toast.success(result.text);
           setEmail("");
         },
         (error) => {
-          console.error(error.text);
+          toast.error(error.text);
         }
       );
   };

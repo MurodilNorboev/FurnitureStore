@@ -28,7 +28,6 @@ const BlogdatailComponent = () => {
   const { id } = useParams();
   const [data, setdata] = useState<imgesTypes[] | null>(null);
   const parsenT = id ? parseInt(id): 0;
-  console.log('bu id' + id);
   
   const filter = data?.filter((i) => i.id === parsenT);
   useEffect(() => {setdata(imges)}, [])

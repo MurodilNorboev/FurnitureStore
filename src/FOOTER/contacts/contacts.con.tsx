@@ -7,6 +7,7 @@ import phone from '../../assets/phone.svg'
 import { useState } from 'react'
 import emailjs from "emailjs-com";
 import { Box } from "@mui/joy";
+import toast from 'react-hot-toast'
 
 const Contactcomponent = () => {
   const [text, setText] = useState(""); 
@@ -29,7 +30,7 @@ const Contactcomponent = () => {
       )
       .then(
         (result) => {
-          console.log(result.text);
+          toast.success(result.text);
           setText("");
           setEmail("");
           setQuestion("");

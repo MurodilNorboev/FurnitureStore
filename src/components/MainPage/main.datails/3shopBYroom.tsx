@@ -11,9 +11,7 @@ const ShopBYroom: React.FC = () => {
   const [data, setData] = useState<any[]>([]);
   const [mock, setMock] = useState<any[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-
   const combinedData = useMemo(() => [...data, ...mock], [data, mock]);
-
   const maxItems = 3;
   const takenCategories = new Set(); 
   const filterSlice: any[] = [];

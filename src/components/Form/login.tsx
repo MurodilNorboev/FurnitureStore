@@ -9,7 +9,6 @@ import axios from 'axios';
 import { baseAPI } from "../../utils/constanst";
 import { useNavigate } from "react-router-dom";
 
-
 interface LoginData {
   email: string;
   password: string;
@@ -43,9 +42,7 @@ const LoginComponent = () => {
       if (response.data.access_token) {
         localStorage.setItem('token', response.data.access_token); 
         navigate('/'); 
-      } else {
-        console.log('Token qaytarilmadi');
-      }
+      } 
     } catch (err) {
       console.error('Xatolik yuz berdi:', err);
     } 

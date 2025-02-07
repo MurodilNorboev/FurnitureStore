@@ -185,7 +185,7 @@ const DatailComponent: React.FC<Tnames> = ({ name }) => {
          </PagesName>
       </div>
 
-      <div className='wrapper'>
+      {/* <div className='wrapper'>
         <div className='imgwrap1'>
         {data.map((val, ind) => (
           <div key={ind} className="imgswrap">
@@ -329,7 +329,7 @@ const DatailComponent: React.FC<Tnames> = ({ name }) => {
 
         </RightCon>
 
-      </div>
+      </div> */}
 
       <Datail_0_2>
         {data.map((val, ind) => (

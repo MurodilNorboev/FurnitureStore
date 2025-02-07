@@ -2,7 +2,7 @@ import UNA from "../../assets/Logo.svg";
 import { AnimatedButton, BtnWrap, NavbarCon } from "../styles/navbar";
 import userimg from "../../assets/user.svg";
 import Menus_Icon from "../Drawer/menus";
-import MultiCarousel from "../Navbar/Cart/lupa";
+import MultiCarousel from "../Navbar/Cart/Search/lupa";
 import BasicMenu from "../Navbar/Cart/hovercart/cart";
 import Tajriba from "../Navbar/dropdownmenus";
 import { Navlink } from "../styles/LINK";
@@ -23,7 +23,6 @@ const NavbareComponent = () => {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
   const [counts, setCounts] = useState<{ [key: string]: number }>({});
-  const [totalCost, setTotalCost] = useState(0);
   const [data, setData] = useState<any[]>([]);
 
   const carts: any = useSelector((state: RootState) => state.carts.items); // Redux store'dan carts
@@ -39,21 +38,21 @@ const NavbareComponent = () => {
       toast.error("Error fetching data:", error);
     }
   };
-
   const fetchCartData = async () => {
     try {
-      const { cartsData } = await (
-        await fetch(`${baseAPI}/product/cart-count`)
-      ).json();
-      const allFurniture = cartsData.flatMap(
-        ({ _id: cartID, furniture }: any) =>
-          furniture.map((fur: any) => ({
-            ...fur,
-            cartID, // cartID qo'shildi
-            cost: fur.cost || 0, // cost qo'shildi
-          }))
-      );
+      const token = localStorage.getItem("token");
+      const { data } = await axios.get(`${baseAPI}/product/cart-count`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      // console.log(data);
 
+      const allFurniture = data.flatMap(({ _id: cartID, furniture }: any) =>
+        furniture.map((fur: any) => ({
+          ...fur,
+          cartID, // cartID qo'shildi
+          cost: fur.cost || 0, // cost qo'shildi
+        }))
+      );
       dispatch(setCarts(allFurniture));
 
       const initialCounts = Object.fromEntries(
@@ -72,11 +71,11 @@ const NavbareComponent = () => {
 
   const handleCopy = async (text: string) => {
     try {
-      await navigator.clipboard.writeText(text); // Matnni clipboardga nusxalash
-      setMessage("copied!"); // Xabarni ko'rsatish
-      setTimeout(() => setMessage(""), 2000); // Xabarni 2 sekunddan keyin tozalash
+      await navigator.clipboard.writeText(text);
+      setMessage("copied!");
+      setTimeout(() => setMessage(""), 2000);
     } catch (err) {
-      setMessage("Failed to copy text"); // Xatolik yuzaga kelsa
+      setMessage("Failed to copy text");
     }
   };
 
@@ -147,14 +146,14 @@ const NavbareComponent = () => {
         </Navlink>
 
         <div>
-          <Badge
+          {/* <Badge
             color="warning"
             badgeContent={
               carts.length === 0 ? null : <YourComponent cartLength={carts.length} />
             }
-          >
-            <BasicMenu />
-          </Badge>
+          > */}
+          <BasicMenu />
+          {/* </Badge> */}
         </div>
 
         <div>

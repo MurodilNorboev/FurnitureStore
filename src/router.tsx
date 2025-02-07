@@ -22,18 +22,17 @@ import BlogdatailComponent from "./FOOTER/blog/blog.datail";
 import DatailNavbarFilterComponent from "./components/filterDatail/filterData.Navbar";
 import DatailComponent from "./components/filterDatail/filterData2";
 import Ssofar from "./components/main.all_categorie/catalog_cart";
-import { useState } from "react";
 import MyCartCompoenent from "./components/Navbar/Cart/Cartss/Cart1";
-import DatailRoomComponent from "./components/filterDatail/filterData.Room";
+import DatailRoomComponent from "./components/filterDatail/Filter/filterData.Room";
 import RoomData from "./components/main.all_categorie/Room/room.data";
-import BasicMenu from "./components/Navbar/Cart/hovercart/cart";
-import LikesDatail from "./components/Likes/likes.datail";
-import MyComponent from "./components/Test/test";
+import LikesDatail from "./components/Likes/likes.container";
 import Payment from "./components/Navbar/Cart/Payment/payment";
 import Checkout from "./components/Navbar/Cart/checkout/checkout";
+import NavDatail_Page from "./components/main.all_categorie/Navbar.datail";
+import NavDatail_PageItems from "./components/main.all_categorie/Navbar.datailItems";
+import MyComponent from "./components/Test/test";
 
 export default function RouterComponent() {
-  const [carts, setCarts] = useState<any[]>([]);
   const loginin = useLocation();
   const filterCon =
     loginin.pathname === "/login" || loginin.pathname === "/regLogin";
@@ -75,7 +74,6 @@ export default function RouterComponent() {
             />
           }
         />
-
         <Route path="*" element={<ErrComponent />} />
         <Route path="/menu/:id" element={<DatailMenusID />} />
         <Route
@@ -116,7 +114,10 @@ export default function RouterComponent() {
         <Route path="/for_partners" element={<For_PartnerComponent />} />
         <Route path="/contacts" element={<Contactcomponent />} />
 
-        <Route path="/t" element={<MyComponent />} />
+        <Route path="/t/:types/:_id" element={<MyComponent />} />
+        <Route path="/Test/:types/:_id" element={<NavDatail_Page />} />
+
+        <Route path="/Items/:types/:_id" element={<NavDatail_PageItems />} />
       </Routes>
 
       {!filterCon && <FooterComponent />}
