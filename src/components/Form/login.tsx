@@ -96,12 +96,6 @@ const LoginComponent = () => {
 
         <div className="loginis3">
           <div className="chackbox1">
-            <input
-              className="intut"
-              type={"checkbox"}
-              name="checkbox"
-              onChange={handleChange}
-            />
             <label>Keep me logged in</label>
           </div>
           <h3 onClick={() => navigate("/forgot-password")}>Forget your password?</h3>

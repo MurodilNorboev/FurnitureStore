@@ -7,7 +7,7 @@ export const Container_Chescout = styled.div`
     box-shadow: 0px 10px 20px 0px rgba(209, 188, 178, 0.25);
   }
 `;
-export const Chescout_containerWrapper = styled.form`
+export const Chescout_containerWrapper = styled.div`
   display: flex;
   gap: 25px;
   .dropdown {
@@ -89,7 +89,7 @@ export const Containre_Chescout_Content = styled.div`
   width: 100vw;
   padding: 50px;
 `;
-export const Content_chesckout = styled.div`
+export const Content_chesckout = styled.form`
   display: flex;
   flex-direction: column;
   gap: 20px;

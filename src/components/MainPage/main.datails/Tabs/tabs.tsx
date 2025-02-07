@@ -111,7 +111,7 @@ const FullWidthTabs = () => {
                           ? "#E59D49"
                           : item.SpecialOffers === "Hot"
                           ? "#F66"
-                          : "#E59D49",
+                          : "#84BF56",
                     }}
                   >
                     {item.SpecialOffers}

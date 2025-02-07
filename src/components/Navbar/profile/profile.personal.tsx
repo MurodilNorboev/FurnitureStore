@@ -80,7 +80,7 @@ const ProfilePersonal = (Props: NameT) => {
   useEffect(() => {
     ftechData();
     if (user_id) {
-      fetchOrders();
+      // fetchOrders();
     }
   }, [user_id]);
 
