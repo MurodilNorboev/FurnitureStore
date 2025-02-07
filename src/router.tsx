@@ -31,6 +31,9 @@ import Checkout from "./components/Navbar/Cart/checkout/checkout";
 import NavDatail_Page from "./components/main.all_categorie/Navbar.datail";
 import NavDatail_PageItems from "./components/main.all_categorie/Navbar.datailItems";
 import MyComponent from "./components/Test/test";
+import VerifyOTP from "./components/Form/verify/verify.OTP";
+import ForgotPassword from "./components/Form/forgotPassword/forgot";
+import ResetPassword from "./components/Form/resetPassword/reset";
 
 export default function RouterComponent() {
   const loginin = useLocation();
@@ -47,6 +50,10 @@ export default function RouterComponent() {
         <Route path="/login" element={<LoginComponent />} />
         <Route path="/regLogin" element={<RegloginComponent />} />
         <Route path="/" element={<MainComponent />} />
+        <Route path="/verify" element={<VerifyOTP />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+
         <Route path="/stol/:label" element={<Ssofar name="furniture" />} />
         <Route path="/stoll/:label" element={<RoomData name="furniture" />} />
         <Route

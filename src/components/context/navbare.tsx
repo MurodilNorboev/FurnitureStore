@@ -8,66 +8,12 @@ import Tajriba from "../Navbar/dropdownmenus";
 import { Navlink } from "../styles/LINK";
 import axios from "axios";
 import { baseAPI } from "../../utils/constanst";
-import { useNavigate } from "react-router-dom";
-import Badge from "@mui/joy/Badge";
 import React, { useState, useEffect } from "react";
-import YourComponent from "../Redux/testdatas";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState, AppDispatch } from "../Redux/store";
-import { setCarts } from "../Redux/cartsSlice";
-import { toast } from "react-toastify";
 import IconCheckboxes from "../Likes/like";
 
 const NavbareComponent = () => {
   const [profile, setProfile] = useState<any>(null);
   const [message, setMessage] = useState("");
-  const navigate = useNavigate();
-  const [counts, setCounts] = useState<{ [key: string]: number }>({});
-  const [data, setData] = useState<any[]>([]);
-
-  const carts: any = useSelector((state: RootState) => state.carts.items); // Redux store'dan carts
-  const dispatch = useDispatch<AppDispatch>();
-
-  const fetchData = async () => {
-    try {
-      const {
-        data: { data },
-      } = await axios.get(`${baseAPI}/product/all`);
-      setData(data);
-    } catch (error: any) {
-      toast.error("Error fetching data:", error);
-    }
-  };
-  const fetchCartData = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      const { data } = await axios.get(`${baseAPI}/product/cart-count`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      // console.log(data);
-
-      const allFurniture = data.flatMap(({ _id: cartID, furniture }: any) =>
-        furniture.map((fur: any) => ({
-          ...fur,
-          cartID, // cartID qo'shildi
-          cost: fur.cost || 0, // cost qo'shildi
-        }))
-      );
-      dispatch(setCarts(allFurniture));
-
-      const initialCounts = Object.fromEntries(
-        allFurniture.map((item: any) => [item._id, item.count || 1])
-      );
-      setCounts(initialCounts);
-    } catch (error: any) {
-      toast.error("Error fetching cart data:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-    fetchCartData();
-  }, []);
 
   const handleCopy = async (text: string) => {
     try {
