@@ -85,6 +85,7 @@
     "@types/react-slick": "^0.23.13",
     "@types/testing-library__jest-dom": "^5.14.9",
     "@types/warning": "^3.0.3",
+    "nodemon": "^3.1.9",
     "typescript": "^4.9.5"
   },
   "proxy": "https://us1.locationiq.com"
