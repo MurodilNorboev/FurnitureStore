@@ -92,14 +92,7 @@ const NavbareComponent = () => {
         </Navlink>
 
         <div>
-          {/* <Badge
-            color="warning"
-            badgeContent={
-              carts.length === 0 ? null : <YourComponent cartLength={carts.length} />
-            }
-          > */}
           <BasicMenu />
-          {/* </Badge> */}
         </div>
 
         <div>

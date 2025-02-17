@@ -19,7 +19,6 @@ import BlogContainter from "./FOOTER/blog/blog.con";
 import For_PartnerComponent from "./FOOTER/for_partners/for_partners.con";
 import Contactcomponent from "./FOOTER/contacts/contacts.con";
 import BlogdatailComponent from "./FOOTER/blog/blog.datail";
-import DatailNavbarFilterComponent from "./components/filterDatail/filterData.Navbar";
 import DatailComponent from "./components/filterDatail/filterData2";
 import Ssofar from "./components/main.all_categorie/catalog_cart";
 import MyCartCompoenent from "./components/Navbar/Cart/Cartss/Cart1";
@@ -65,16 +64,6 @@ export default function RouterComponent() {
           path="/stul/:id"
           element={
             <DatailComponent
-              names="furniture"
-              name="Armchair, fleece"
-              propse={true}
-            />
-          }
-        />
-        <Route
-          path="/stul2/:id"
-          element={
-            <DatailNavbarFilterComponent
               names="furniture"
               name="Armchair, fleece"
               propse={true}

@@ -35,6 +35,7 @@ import Typography from "@mui/joy/Typography";
 import Skeleton from "@mui/joy/Skeleton";
 import toast from "react-hot-toast";
 import { baseAPI } from "../../../utils/constanst";
+import { useNavigate } from "react-router-dom";
 
 export const StyledPagination = styled(Stack)`
   margin-top: 20px;
@@ -46,6 +47,7 @@ export const StyledPagination = styled(Stack)`
 `;
 
 const SimpleSlider = (Props: Tname) => {
+  const navigate = useNavigate();
   const isTablet = useMediaQuery("(max-width:1200px)");
   const isMobaile1 = useMediaQuery("(max-width:840px)");
   const isMobile = useMediaQuery("(max-width:550px)");
@@ -147,19 +149,19 @@ const SimpleSlider = (Props: Tname) => {
     lowToHigh?: boolean;
     highToLow?: boolean;
   }) => {
-    let filteredArr = [...combinedData]; 
+    let filteredArr = [...combinedData];
 
     if (filter.popular === "Popular") {
       filteredArr = filteredArr.filter(
-        (item) => item.SpecialOffers?.toLowerCase() === "popular" 
+        (item) => item.SpecialOffers?.toLowerCase() === "popular"
       );
     } else if (filter.new === "New") {
       filteredArr = filteredArr.filter(
-        (item) => item.SpecialOffers?.toLowerCase() === "new" 
+        (item) => item.SpecialOffers?.toLowerCase() === "new"
       );
     } else if (filter.new === "New") {
       filteredArr = filteredArr.filter(
-        (item) => item.new.toLowerCase() === "new" 
+        (item) => item.new.toLowerCase() === "new"
       );
     }
 
@@ -196,7 +198,6 @@ const SimpleSlider = (Props: Tname) => {
     const endIdx = startIdx + ITEMS_PER_PAGE;
     return displayedData.slice(startIdx, endIdx);
   }, [displayedData, page, ITEMS_PER_PAGE]);
-
   const totalPages = Math.ceil(currentData.length / ITEMS_PER_PAGE);
   const startIdx = (page - 1) * ITEMS_PER_PAGE;
 
@@ -287,10 +288,20 @@ const SimpleSlider = (Props: Tname) => {
         <div>
           <SlaiderContainer className="SlaiderContainer">
             <ImageGrid>
-              {paginatedData.map((item: any, ind) => (
-                <ImageContainer key={item.id}>
-                  <Navlink to={`/stul/${item.id}`}>
-                    <Imagecontent>
+              {paginatedData.map((item: any, ind) => {
+                console.log(paginatedData);
+
+                return (
+                  <ImageContainer key={item.id}>
+                    <Imagecontent
+                      onClick={() => {
+                        if (item._id) {
+                          navigate(`/datailRoom/${item._id}`);
+                        } else {
+                          navigate(`/stul/${item.id}`);
+                        }
+                      }}
+                    >
                       <Image
                         onMouseOver={(e) =>
                           (e.currentTarget.src = item.images2 || item.image2)
@@ -308,9 +319,9 @@ const SimpleSlider = (Props: Tname) => {
                       </h5>
                       <h4>${item.cost}</h4>
                     </Imagecontent>
-                  </Navlink>
-                </ImageContainer>
-              ))}
+                  </ImageContainer>
+                );
+              })}
             </ImageGrid>
           </SlaiderContainer>
 

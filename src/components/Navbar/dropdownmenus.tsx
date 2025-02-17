@@ -161,7 +161,10 @@ const DatailMenusID: React.FC = () => {
                   {filters.length > 0 &&
                     filters.map((filterItem: any, index: number) => {
                       return (
-                        <Navlink key={index} to={`/stul2/${filterItem.id}`}>
+                        <Navlink
+                          key={index}
+                          to={`/datailRoom/${filterItem._id}`}
+                        >
                           <div className="imgContainer" onClick={handleClose}>
                             {filterItem.SpecialOffers !== "All" && (
                               <PagesName

@@ -38,9 +38,9 @@ export const Data2 = [
       value3: "Wall Lights",
     },
     {
-      label: "Kitchen",
-      value1: "Dining Chairs",
-      value2: "Bar Stools",
-      value3: "Kitchen Islands",
+      label: "Bathroom Accessories",
+      value1: "Shower Curtains",
+      value2: "Towel Racks",
+      value3: "Toilet Brushes",
     },
   ];
