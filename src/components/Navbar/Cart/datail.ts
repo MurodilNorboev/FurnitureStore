@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const DatailCart = styled.div`
+export const DatailCart = styled.form`
 background-color: #F9F6F5;
 padding: 180px 0px 100px 0px;
 display: flex;

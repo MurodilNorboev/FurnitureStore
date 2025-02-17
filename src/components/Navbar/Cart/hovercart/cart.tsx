@@ -19,12 +19,15 @@ const BasicMenu: React.FC = () => {
   useEffect(() => {
     const fetchCartData = async () => {
       try {
-        const response = await fetch(`${baseAPI}/product/cart-count`);
+        const token = localStorage.getItem("token");
+        const response = await fetch(`${baseAPI}/product/cart-count`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         const data = await response.json();
         if (data.success) {
           const allFurniture = data.cartsData.flatMap(
-            ({ _id: cartID, furniture }: any) =>
-              furniture.map((fur: any) => ({ ...fur, cartID }))
+            ({ _id: cartID, items }: any) =>
+              items.map((fur: any) => ({ ...fur, cartID }))
           );
 
           dispatch(setCarts(allFurniture));

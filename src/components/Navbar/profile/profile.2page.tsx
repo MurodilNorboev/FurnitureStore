@@ -114,7 +114,7 @@ const ProfilePersonal2page = (Props: NameT) => {
 
   return (
     <Container_Chescout>
-      <DatailCart>
+      <DatailCart onSubmit={updateProfile}>
         <PagesName style={{ marginLeft: "15px" }}>
           <h3>Home</h3>
           <img src={home} alt="img" />
@@ -123,7 +123,6 @@ const ProfilePersonal2page = (Props: NameT) => {
 
         <Chescout_containerWrapper
           className="Chescout_containerWrapper"
-          onSubmit={updateProfile}
         >
           <ContainerP className="Right_Container">
             <Content>

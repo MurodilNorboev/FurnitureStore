@@ -10,7 +10,7 @@ export const Container_Chescout = styled.div`
     box-shadow: 0px 10px 20px 0px rgba(209, 188, 178, 0.25);
   }
 `;
-export const Chescout_containerWrapper = styled.form`
+export const Chescout_containerWrapper = styled.div`
   display: flex;
   padding: 0px 50px;
   justify-content: space-between;
@@ -102,6 +102,24 @@ export const Containre_Chescout_Content = styled.div`
   width: 600px;
   margin: auto;
   padding: 50px;
+  .wraper {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    gap: 20px;
+    .imgContent {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      height: auto;
+      .images {
+        border: 1px solid #d1bcb2;
+        border-radius: 5px;
+        width: 170px;
+        height: 150px;
+      }
+    }
+  }
 `;
 export const Content_chesckout = styled.div`
   display: flex;
@@ -407,7 +425,7 @@ export const Bottom_Container = styled.div`
     }
   }
 `;
-export const DatailCart = styled.div`
+export const DatailCart = styled.form`
   padding: 180px 0px 100px 0px;
   width: 100%;
   gap: 30px;
@@ -464,7 +482,7 @@ export const Input = styled.input`
 
 export const SubmitButton = styled.button`
   padding: 12px;
-  background: var(--pastel, #D1BCB2);
+  background: var(--pastel, #d1bcb2);
   color: white;
   font-size: 16px;
   border: none;

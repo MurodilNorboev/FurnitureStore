@@ -38,7 +38,10 @@ const MyCartCompoenent = () => {
   const [isLoading, setIsLoading] = useState(false); 
   const fetchCartData = async () => {
     try {
-      const response = await fetch(`${baseAPI}/product/cart-count`);
+      const token = localStorage.getItem("token");
+      const response = await fetch(`${baseAPI}/product/cart-count`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       const { cartsData } = await response.json();
 
       // Initialize an empty object to store updated counts
@@ -62,7 +65,7 @@ const MyCartCompoenent = () => {
         cartsData[0].items.forEach((i: any) => {
           itemWidthTypes.push({
             widthType: i.widthType,
-            itemId: i.item_id,
+            itemId: i.product._id,
           });
         });
       }
@@ -76,6 +79,8 @@ const MyCartCompoenent = () => {
           totalCost: item.totalCost,
         }))
       );
+      
+      
     } catch (error: any) {
       toast.error("Error fetching cart data.");
     }
@@ -97,6 +102,8 @@ const MyCartCompoenent = () => {
       );
 
       if (data.success) {
+        // redux va Cartni yangilash
+        dispatch(setCarts(item_Data.filter((item) => item.item_id !== furnitureId)));
         setItem_Data([]);
         fetchCartData(); // Cartni yangilash
         fetchUpdatedCartData(); // Cart ma'lumotlarini yangilash
@@ -233,14 +240,15 @@ const MyCartCompoenent = () => {
       setValue2("VISA");
     }
   };
+  
   const updateShippingAndPayment = async () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        `${baseAPI}/payment/chescout`,
+        `${baseAPI}/checkout/checkouts`,
         {
           userId: user,
-          productId: productID[0].item.item_id,
+          productId: item_Data.map((item) => item.product._id),
           shippingMethod: value, // FEDEX yoki SELF_PICKUP
           paymentMethod: value2, // CASH yoki VISA
         },
@@ -459,7 +467,7 @@ const MyCartCompoenent = () => {
                   <button
                     onClick={() => {
                       if (carts.length > 0) {
-                        toast.success("Order placed successfully");
+                        // toast.success("Order placed successfully");
                         setTimeout(() => {
                           updateShippingAndPayment();
                           navigate("/chekout");

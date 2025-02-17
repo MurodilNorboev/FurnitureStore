@@ -21,17 +21,14 @@ import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import { baseAPI } from "../../../../utils/constanst";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../../Redux/store";
-import { setItemCosts } from "../../../Redux/cartsSlice";
 interface NameT {
   name: string;
 }
-
 const Checkout = (Props: NameT) => {
   const navigate = useNavigate();
   const [user, setUser] = useState<string>("");
   const [formdata, setFormdata] = useState({
+    userId: "",
     deliveryAddress: {
       country: "",
       city: "",
@@ -48,9 +45,7 @@ const Checkout = (Props: NameT) => {
     },
   });
   const [data, setData] = useState<any[]>([]);
-  const [total, setTotal] = useState<any[]>([]);
-  const [set, setSet] = useState<any[]>([]);
-  const [setb, setsetb] = useState<any[]>([]);
+  const [PAYMENT, SETPAYMENT] = useState<string>("");
 
   const fetchUser = async () => {
     try {
@@ -64,9 +59,13 @@ const Checkout = (Props: NameT) => {
       const filter = data.data;
       const filter2 = filter._id;
 
-      setUser(filter2);
+      setUser(filter2); // set the user id after fetching
+      setFormdata((prev) => ({
+        ...prev,
+        userId: filter2, // update userId in formdata
+      }));
     } catch (error: any) {
-      toast.error(error);
+      toast.error(error.message);
     }
   };
 
@@ -99,13 +98,12 @@ const Checkout = (Props: NameT) => {
       setFormdata((prev) => ({ ...prev, [name]: value }));
     }
   };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        `${baseAPI}/payment/create-order/${user}`,
+        `${baseAPI}/order/create-order`,
         formdata,
         {
           headers: {
@@ -116,7 +114,7 @@ const Checkout = (Props: NameT) => {
       if (response.data.success) {
         toast.success("Order created successfully!");
         setTimeout(() => {
-          navigate("/payment");
+          navigate(`/payment`);
         }, 1000);
       } else {
         toast.error("Failed to create order!");
@@ -135,7 +133,7 @@ const Checkout = (Props: NameT) => {
       }
 
       try {
-        const res = await fetch(`${baseAPI}/payment/get-checkout/${user}`, {
+        const res = await fetch(`${baseAPI}/checkout/get-checkout/${user}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -143,30 +141,10 @@ const Checkout = (Props: NameT) => {
           },
         });
         const data = await res.json();
-
-        console.log(data);
-
         const filter = data.cart;
         const filter2 = filter.items;
-        const uniqueItems = filter2.filter(
-          (value: any, index: any, self: any) =>
-            index ===
-            self.findIndex((t: any) => t.product._id === value.product._id)
-        );
-
-        const totalCostSum = uniqueItems.reduce(
-          (acc: number, val: any) => acc + val.totalCost,
-          0
-        );
-        // console.log(uniqueItems);
-
-        const a: any = filter.subTotalCost;
-        const costs: any = a === a ? a : a - 15;
-        const filter4: any = a - totalCostSum;
-        setData(uniqueItems);
-        setSet(a);
-        setsetb(totalCostSum);
-        setTotal(filter4);
+        setData(filter2);
+        SETPAYMENT(filter.shippingMethod);
       } catch (error: any) {
         toast.error("Error fetching order data: " + error.message);
       }
@@ -181,21 +159,24 @@ const Checkout = (Props: NameT) => {
     fetchUser();
   }, []);
 
+  // totalcosts
+  const totalCosts = data.reduce(
+    (acc: any, item: any) => acc + item.totalCost,
+    0
+  );
+
   return (
     <Container_Chescout>
       <Toaster position="top-right" />
 
-      <DatailCart>
+      <DatailCart onSubmit={handleSubmit}>
         <PagesName style={{ marginLeft: "15px" }}>
           <h3>Home</h3>
           <img src={home} alt="img" />
           <h4>{Props.name}</h4>
         </PagesName>
 
-        <Chescout_containerWrapper
-          onSubmit={handleSubmit}
-          className="Chescout_containerWrapper"
-        >
+        <Chescout_containerWrapper className="Chescout_containerWrapper">
           <Containre_Chescout_Content className="Containre_Chescout_Content">
             <Content_chesckout>
               <div className="h22">
@@ -285,6 +266,7 @@ const Checkout = (Props: NameT) => {
                     />
                   </div>
                 </Chescout_one>
+
                 <Chescout_one className="Chescout_one">
                   <div className="LasName_Con">
                     <select
@@ -322,6 +304,7 @@ const Checkout = (Props: NameT) => {
                   type="text"
                   name="deliveryAddress.comment"
                   placeholder="Your comment"
+                  value={formdata.deliveryAddress.comment}
                   onChange={handleChange}
                 />
               </Chescout_Bottom>
@@ -349,6 +332,7 @@ const Checkout = (Props: NameT) => {
                         itemDimensions =
                           val.product.minWidth + " x " + val.product.minHeight;
                       }
+
                       return (
                         <Content key={ind}>
                           <Datails>
@@ -359,7 +343,7 @@ const Checkout = (Props: NameT) => {
                             <LeftDiv>
                               <div className="item1">
                                 <h4>{val.product.types}</h4>
-                                <h6>{val.product.Color}</h6>
+                                <h6>{val.setColors}</h6>
                                 <h6 className="nni">{itemDimensions}</h6>
                               </div>
                               <div className="item2">
@@ -378,29 +362,36 @@ const Checkout = (Props: NameT) => {
                   )}
                 </div>
 
-                <Bottom_Container className="Bottom_Container">
-                  <div className="bottom_wrape">
-                    <div className="cost">
-                      <h5>Delivery (Self Pickup)</h5>
-                      <h5>${total}</h5>
-                    </div>
-                    <div className="cost">
-                      <h5>subtotal</h5>
-                      <h5>${setb}</h5>
-                    </div>
-                    <div className="cost">
-                      <h4>total</h4>
-                      <h4>${set}</h4>
-                    </div>
+                {data.map((val, ind) => {
+                  return (
+                    <Bottom_Container key={ind} className="Bottom_Container">
+                      <div className="bottom_wrape">
+                        <div className="cost">
+                          <h5>Delivery (Self Pickup)</h5>
+                          <h5>${val.widthType === "max" ? 10 : 15}</h5>
+                        </div>
+                        <div className="cost">
+                          <h5>subtotal</h5>
+                          <h5>${totalCosts}</h5>
+                        </div>
+                        <div className="cost">
+                          <h4>total</h4>
+                          <h4>
+                            $
+                            {PAYMENT === "FEDEX" ? totalCosts + 15 : totalCosts}
+                          </h4>
+                        </div>
 
-                    <div className="btn_wrape">
-                      <button type="submit">
-                        place order
-                        <img src="" alt="" />
-                      </button>
-                    </div>
-                  </div>
-                </Bottom_Container>
+                        <div className="btn_wrape">
+                          <button type="submit">
+                            place order
+                            <img src="" alt="" />
+                          </button>
+                        </div>
+                      </div>
+                    </Bottom_Container>
+                  );
+                })}
               </div>
             </Right_Container>
           </div>

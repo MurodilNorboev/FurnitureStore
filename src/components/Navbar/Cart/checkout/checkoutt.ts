@@ -89,7 +89,7 @@ export const Containre_Chescout_Content = styled.div`
   width: 100vw;
   padding: 50px;
 `;
-export const Content_chesckout = styled.form`
+export const Content_chesckout = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;

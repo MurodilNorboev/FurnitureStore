@@ -17,13 +17,17 @@ export default function MyCart_in() {
 
   const fetchCartData = async () => {
     try {
+      const token = localStorage.getItem("token");
       const { cartsData } = await (
-        await fetch(`${baseAPI}/product/cart-count`)
+        await fetch(`${baseAPI}/product/cart-count`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
       ).json();
       const allFurniture = cartsData.flatMap(
-        ({ _id: cartID, furniture }: any) =>
-          furniture.map((fur: any) => ({ ...fur, cartID }))
+        ({ _id: cartID, items }: any) =>
+          items.map((fur: any) => ({ ...fur, cartID }))
       );
+      
 
       const initialCounts = Object.fromEntries(
         allFurniture.map((item: any) => [item._id, item.count || 1])

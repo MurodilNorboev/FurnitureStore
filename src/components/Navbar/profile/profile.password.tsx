@@ -332,7 +332,7 @@ const ProfilePassword = (Props: any) => {
         <h4>{Props.name}</h4>
       </PagesName>
 
-      <DatailCart>
+      <DatailCart onSubmit={submitPassword}>
         <Chescout_containerWrapper className="Chescout_containerWrapper">
           <ContainerP className="Right_Container">
             <Content>
@@ -349,7 +349,7 @@ const ProfilePassword = (Props: any) => {
 
           <Containre_Chescout_Content className="Containre_Chescout_Content">
             <Contents active={active === 1}>
-              <Content_chesckout onSubmit={submitPassword}>
+              <Content_chesckout>
                 <Chescout_Bottom>
                   <input
                     className="labelvs"
