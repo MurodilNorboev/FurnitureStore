@@ -114,7 +114,7 @@ const Carousel2: React.FC<Images> = (props) => {
           {allSlides.map((_, index) => (
             <Dot
               key={index}
-              active={index === currentIndex}
+              $active={index === currentIndex}
               onClick={() => goToSlide(index)}
             />
           ))}

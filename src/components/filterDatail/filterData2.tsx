@@ -470,7 +470,7 @@ const DatailComponent: React.FC<Tnames> = ({ name }) => {
            onMouseEnter={() => setIsHovered(true)} 
            onMouseLeave={() => setIsHovered(false)} 
          >
-           <CarouselTrack slideIndex={slideIndex} slidesToShow={slidesToShow} className='CarouselTrack'>
+           <CarouselTrack $slideIndex={slideIndex} $slidesToShow={slidesToShow} className='CarouselTrack'>
              <>
            {datas?.map((val, ind) => (
                <CarouselItem key={ind}>

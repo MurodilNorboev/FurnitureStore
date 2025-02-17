@@ -132,12 +132,12 @@ transform: translateX(-50%);
 display: flex;
 gap: 10px;
 `;
-export const Dots = styled.button<{ active: boolean }>`
+export const Dots = styled.button<{ $active: boolean }>`
 width: 10px;
 height: 10px;
 border-radius: 50%;
-background-color: ${({ active }) =>
-  active ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.6)'};
+background-color: ${({ $active }) =>
+  $active ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.6)'};
 border: none;
 cursor: pointer;
 transition: background-color 0.3s ease;
@@ -631,12 +631,12 @@ background-color: transparent;
     width: 100%;
   }
 `;
-export const CarouselTrack = styled.div<{ slideIndex: number, slidesToShow: number}>`
+export const CarouselTrack = styled.div<{ $slideIndex: number; $slidesToShow: number }>`
   display: flex;
   height: auto;
   padding: 5px 0px;
   transition: transform 0.5s ease;
-  transform: ${({ slideIndex, slidesToShow }) => `translateX(-${(slideIndex * 100) / slidesToShow}%)`};
+  transform: ${({ $slideIndex, $slidesToShow }) => `translateX(-${($slideIndex * 100) / $slidesToShow}%)`};
   background-color: transparent;
   width: 100%;
 `;
@@ -721,11 +721,11 @@ width: 100%;
         }
     }
 `;
-export const Dot = styled.div<{ active: boolean }>`
+export const Dot = styled.div<{ $active: boolean }>`
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background-color: ${({ active }) => (active ? 'black' : 'lightgray')};
+  background-color: ${({ $active }) => ($active ? 'black' : 'lightgray')};
   /* margin: 0 5px; */
   cursor: pointer;
   transition: background-color 0.3s;

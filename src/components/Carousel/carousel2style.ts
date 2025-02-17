@@ -112,12 +112,12 @@ transform: translateX(-50%);
 display: flex;
 gap: 10px;
 `;
-export const Dot = styled.button<{ active: boolean }>`
+export const Dot = styled.button<{ $active: boolean }>`
 width: 10px;
 height: 10px;
 border-radius: 50%;
-background-color: ${({ active }) =>
-  active ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.6)'};
+background-color: ${({ $active }) =>
+  $active ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.6)'};
 border: none;
 cursor: pointer;
 transition: background-color 0.3s ease;

@@ -126,11 +126,11 @@ const ProfilePersonal2page = (Props: NameT) => {
         >
           <ContainerP className="Right_Container">
             <Content>
-              <Tab active={active === 1} onClick={() => setActive(1)}>
+              <Tab $active={active === 1} onClick={() => setActive(1)}>
                 Personal
               </Tab>
               <div onClick={() => setAut(true)}>
-                <Tab active={active === 2} onClick={() => setActive(2)}>
+                <Tab $active={active === 2} onClick={() => setActive(2)}>
                   Logout
                 </Tab>
               </div>
@@ -138,7 +138,7 @@ const ProfilePersonal2page = (Props: NameT) => {
           </ContainerP>
 
           <Containre_Chescout_Content className="Containre_Chescout_Content">
-            <Contents active={active === 1}>
+            <Contents $active={active === 1}>
               <Content_chesckout>
                 <div className="h22">
                   <h2>personal info</h2>
@@ -287,7 +287,7 @@ const ProfilePersonal2page = (Props: NameT) => {
               </BottomBtn>
             </Contents>
 
-            <Contents active={active === 2}>
+            <Contents $active={active === 2}>
               {aut && (
                 <div>
                   <button onClick={logaut}>Logout ?</button>

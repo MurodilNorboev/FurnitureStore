@@ -120,7 +120,7 @@ return (
         onMouseEnter={() => setIsHovered(true)} 
         onMouseLeave={() => setIsHovered(false)} 
       >
-        <CarouselTrack slideIndex={slideIndex} slidesToShow={slidesToShow} className='CarouselTrack'>
+        <CarouselTrack $slideIndex={slideIndex} $slidesToShow={slidesToShow} className='CarouselTrack'>
           <>
         {data?.map((val, ind) => (
             <CarouselItem key={ind}>

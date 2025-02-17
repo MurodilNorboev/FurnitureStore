@@ -200,7 +200,14 @@ const Payment = () => {
                         : val.product.maxWidth + " x " + val.product.maxHeight;
                     return (
                       <Content key={ind}>
-                        <Datails style={{ borderTop: ( ind === 0 ? "1px solid #d1bcb2" : "0px solid #d1bcb2") }}>
+                        <Datails
+                          style={{
+                            borderTop:
+                              ind === 0
+                                ? "1px solid #d1bcb2"
+                                : "0px solid #d1bcb2",
+                          }}
+                        >
                           <Imag
                             src={val.product.image}
                             alt={val.product.discount}

@@ -13,9 +13,10 @@ import {
   buttons,
 } from "./tabsStyles";
 import { Navlink } from "../../../styles/LINK";
+import loading from "../../../../assets/loading.image.gif";
 
 const FullWidthTabs = () => {
-  const [active, setActive] = useState(0); // Default "All"
+  const [$active, setActive] = useState(0); // Default "All"
   const [data, setData] = useState<any[]>([]);
   const [filteredData, setFilteredData] = useState<any[]>([]);
 
@@ -90,7 +91,7 @@ const FullWidthTabs = () => {
         {buttons.map((button) => (
           <TabButton
             key={button.id}
-            active={active === button.id}
+            $active={$active === button.id}
             onClick={() => handleTabClick(button.id, button.filter || "All")}
           >
             {button.label}
@@ -100,8 +101,8 @@ const FullWidthTabs = () => {
 
       <ImageGrid>
         {filteredData.map((item: any, ind) => (
-          <ImageContainer key={item.id}>
-            <Navlink to={`/datailRoom/${item._id}`} key={ind}>
+          <ImageContainer key={item.id | ind}>
+            <Navlink to={`/datailRoom/${item._id}`}>
               <Imagecontent>
                 {item.SpecialOffers !== "All" && (
                   <PagesName
@@ -125,9 +126,10 @@ const FullWidthTabs = () => {
                     (e.currentTarget.src = item.images || item.image)
                   }
                   className="Image h"
-                  src={item.images || item.image}
+                  src={item.images || item.image || loading}
                   alt={`img-${ind}`}
                 />
+
                 <h6></h6>
                 <h5
                   style={{

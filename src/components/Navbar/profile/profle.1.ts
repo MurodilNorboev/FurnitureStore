@@ -259,7 +259,7 @@ export const BottomBtn = styled.div`
   }
 `;
 /// acrive button
-export const Tab = styled.div<{ active: boolean }>`
+export const Tab = styled.div<{ $active: boolean }>`
   width: auto;
   padding-bottom: 10px;
   margin-bottom: 20px;
@@ -273,15 +273,15 @@ export const Tab = styled.div<{ active: boolean }>`
   text-transform: uppercase;
 
   ${(props) =>
-    props.active &&
+    props.$active &&
     `
 font-wight: bold;
 color: #32324D;
 border-bottom: 2px solid #DBA514;
 `}
 `;
-export const Contents = styled.div<{ active: boolean }>`
-  display: ${(props) => (props.active ? "block" : "none")};
+export const Contents = styled.div<{ $active: boolean }>`
+  display: ${(props) => (props.$active ? "block" : "none")};
 `;
 
 // orders

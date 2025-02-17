@@ -24,14 +24,14 @@ export const ButtonContainer = styled.div`
   justify-content: center;
   margin-bottom: 30px;
 `;
-export const TabButton = styled.button<{ active: boolean }>`
+export const TabButton = styled.button<{ $active: boolean }>`
   padding: 5px 20px;
   border: none;
   font-size: 16px;
   cursor: pointer;
-  color: ${(props) => (props.active ? "#32324D" : "#AD8775")};
+  color: ${(props) => (props.$active ? "#32324D" : "#AD8775")};
   border-bottom: 3px solid
-    ${(props) => (props.active ? "#DBA514" : "transparent")};
+    ${(props) => (props.$active ? "#DBA514" : "transparent")};
   transition: all 0.3s ease-in-out;
   background-color: transparent;
 
