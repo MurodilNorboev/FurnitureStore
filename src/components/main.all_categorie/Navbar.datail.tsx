@@ -35,6 +35,7 @@ import saveIcon from "../../assets/saveIcon.svg";
 const mockDatas: any = {
   colors: [
     { value: "orange" },
+    { value: "green" },
     { value: "blue" },
     { value: "dark gray" },
     { value: "black" },
