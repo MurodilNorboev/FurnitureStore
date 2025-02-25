@@ -103,7 +103,7 @@ const Data2 = [
   },
 ];
 
-const NavDatail_Page = () => {
+const NavDatail_PageItems = () => {
   const navigate = useNavigate();
   const [user, setUsers] = useState<any[]>([]);
   const [data, setData] = useState<any[]>([]);
@@ -303,7 +303,7 @@ const NavDatail_Page = () => {
 
     getUser();
     getData();
-    setPriceRange([50, 1000]);
+    setPriceRange([50, 10000]);
 
     const handleResize = () => {
       setIsMobile(window.innerWidth < 1400);
@@ -356,15 +356,19 @@ const NavDatail_Page = () => {
     const matchesPrice =
       item.cost >= priceRange[0] && item.cost <= priceRange[1];
 
+      console.log('types:', types);
+      console.log('item.SubCategories:', item.SubCategories);
+      console.log('checkedFilters:', checkedFilters);
+      console.log('priceRange:', priceRange);
     return matchesColor && matchesStyle && matchesMaterial && matchesPrice;
   });
-
-  // Pagination logic
+  
   const totalPages = Math.ceil(filteredData.length / itemsPerPage);
   const currentData = filteredData.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
+
   const handleChangePagination = (
     event: React.ChangeEvent<unknown>,
     value: number
@@ -539,7 +543,7 @@ const NavDatail_Page = () => {
               value={priceRange}
               onChange={handleSliderChange}
               valueLabelDisplay="auto"
-              max={1000}
+              max={10000}
               min={50}
             />
           </Box>
@@ -582,4 +586,4 @@ const NavDatail_Page = () => {
   );
 };
 
-export default NavDatail_Page;
+export default NavDatail_PageItems;

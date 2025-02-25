@@ -31,6 +31,7 @@ import { AppDispatch, RootState } from "../Redux/store";
 import { setCarts } from "../Redux/cartsSlice";
 import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
 import saveIcon from "../../assets/saveIcon.svg";
+import { PagesName } from "../Navbar/dropodownstyle";
 
 const mockDatas: any = {
   colors: [
@@ -68,7 +69,7 @@ const NavDatail_Page = () => {
     styles: [],
     materials: [],
   });
-  const [priceRange, setPriceRange] = useState<number[]>([50, 1000]);
+  const [priceRange, setPriceRange] = useState<number[]>([50, 10000]);
   const { _id, types } = useParams<any>();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12;
@@ -247,7 +248,7 @@ const NavDatail_Page = () => {
 
     getUser();
     getData();
-    setPriceRange([50, 1000]);
+    setPriceRange([50, 10000]);
 
     const handleResize = () => {
       setIsMobile(window.innerWidth < 1400);
@@ -482,7 +483,7 @@ const NavDatail_Page = () => {
               value={priceRange}
               onChange={handleSliderChange}
               valueLabelDisplay="auto"
-              max={1000}
+              max={10000}
               min={50}
             />
           </Box>

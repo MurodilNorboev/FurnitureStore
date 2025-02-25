@@ -142,6 +142,8 @@ const DatailMenusID: React.FC = () => {
                           const match = selectedItem.backend.find(
                             (b: any) => b.SubCategories === value
                           );
+                          // console.log(match, selectedItem)
+                          
                           if (match) {
                             handleNavigate(match.SubCategories, match._id);
                           } else {
