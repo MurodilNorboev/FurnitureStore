@@ -21,6 +21,7 @@ import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import { baseAPI } from "../../../../utils/constanst";
 import { useNavigate } from "react-router-dom";
+import FadeLoader from "react-spinners/FadeLoader";
 interface NameT {
   name: string;
 }
@@ -176,6 +177,7 @@ const Checkout = (Props: NameT) => {
           <h4>{Props.name}</h4>
         </PagesName>
 
+        {data.length > 0 ? (
         <Chescout_containerWrapper className="Chescout_containerWrapper">
           <Containre_Chescout_Content className="Containre_Chescout_Content">
             <Content_chesckout>
@@ -251,7 +253,7 @@ const Checkout = (Props: NameT) => {
                       value={formdata.deliveryAddress.country}
                       required
                     >
-                      <option value="Uzbekiston">Uzbekiston</option>
+                      <option value="Uzbekiston">Select Country</option>
                       <option value="South Korea">South Korea</option>
                     </select>
                   </div>
@@ -276,7 +278,7 @@ const Checkout = (Props: NameT) => {
                       value={formdata.deliveryAddress.city}
                       required
                     >
-                      <option value="Tashkent">Tashkent</option>
+                      <option value="Tashkent">Select City</option>
                       <option value="Seoul">Seoul</option>
                     </select>
                   </div>
@@ -396,6 +398,9 @@ const Checkout = (Props: NameT) => {
             </Right_Container>
           </div>
         </Chescout_containerWrapper>
+        ) : (
+          <FadeLoader loading={true} color="#d5ad75" />
+        )}
       </DatailCart>
     </Container_Chescout>
   );

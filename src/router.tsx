@@ -8,7 +8,6 @@ import ErrComponent from "./components/error/err";
 import ProfilePersonal from "./components/Navbar/profile/profile.personal";
 import ProfilePersonal2page from "./components/Navbar/profile/profile.2page";
 import ProfilePassword from "./components/Navbar/profile/profile.password";
-import MainComponent from "./components/MainPage/main";
 import DatailMenusID from "./components/Navbar/dropdownmenus";
 import MenusDatailComponent from "./components/Navbar/menus/menus.datail";
 import OrderComponent from "./components/Navbar/Cart/Orders/order";
@@ -32,12 +31,12 @@ import NavDatail_PageItems from "./components/main.all_categorie/Navbar.datailIt
 import VerifyOTP from "./components/Form/verify/verify.OTP";
 import ForgotPassword from "./components/Form/forgotPassword/forgot";
 import ResetPassword from "./components/Form/resetPassword/reset";
+import MainComponent from "./components/MainPage/main";
 
 export default function RouterComponent() {
   const loginin = useLocation();
   const filterCon =
     loginin.pathname === "/login" || loginin.pathname === "/regLogin";
-
   return (
     <>
       <ScrollToTop />

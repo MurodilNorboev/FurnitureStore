@@ -25,6 +25,7 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import toast, { Toaster } from "react-hot-toast";
 import styled from "styled-components";
+import FadeLoader from "react-spinners/FadeLoader";
 const MyCartCompoenent = () => {
   const navigate = useNavigate(); /// navigatsiya uchun
   const [user, setUser] = useState<any[]>([]);
@@ -35,7 +36,7 @@ const MyCartCompoenent = () => {
   const [itemCost, setItemCost] = useState<any[]>([]);
   const [item_Data, setItem_Data] = useState<any[]>([]);
   const [productID, setProductID] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(false); 
+  const [isLoading, setIsLoading] = useState(false);
   const fetchCartData = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -79,8 +80,6 @@ const MyCartCompoenent = () => {
           totalCost: item.totalCost,
         }))
       );
-      
-      
     } catch (error: any) {
       toast.error("Error fetching cart data.");
     }
@@ -103,7 +102,9 @@ const MyCartCompoenent = () => {
 
       if (data.success) {
         // redux va Cartni yangilash
-        dispatch(setCarts(item_Data.filter((item) => item.item_id !== furnitureId)));
+        dispatch(
+          setCarts(item_Data.filter((item) => item.item_id !== furnitureId))
+        );
         setItem_Data([]);
         fetchCartData(); // Cartni yangilash
         fetchUpdatedCartData(); // Cart ma'lumotlarini yangilash
@@ -128,8 +129,8 @@ const MyCartCompoenent = () => {
             headers: { Authorization: `Bearer ${token}` },
           }
         );
-        const a = response.data.datas        
-        setItemCost(a.items.length)
+        const a = response.data.datas;
+        setItemCost(a.items.length);
       }
       toast.success("Cart updated successfully");
       fetchUpdatedCartData();
@@ -240,7 +241,7 @@ const MyCartCompoenent = () => {
       setValue2("VISA");
     }
   };
-  
+
   const updateShippingAndPayment = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -281,7 +282,7 @@ const MyCartCompoenent = () => {
       </PagesName>
 
       <Toaster position="top-right" />
-
+      {item_Data.length > 0 ? (
       <div className="Wrapper">
         <LeftCon className="Containre_Chescout_Content">
           <div className="Content2">
@@ -359,20 +360,11 @@ const MyCartCompoenent = () => {
             )}
 
             <div className="bottomContent">
-              <div className="left">
+              {/* <div className="left">
                 <input type="text" className="inputText" />
                 <input type="submit" value="Apply" className="inputSubmit" />
-              </div>
+              </div> */}
               <div className="right">
-                {/* <button
-                  onClick={() => updateCart()}
-                  style={{
-                    background: carts?.length > 0 ? "#d1bcb2" : "#EDE4E0",
-                  }}
-                  disabled={!(carts && carts?.length > 0)}
-                >
-                  update cart
-                </button> */}
                 <button
                   onClick={updateCart}
                   style={{
@@ -467,7 +459,6 @@ const MyCartCompoenent = () => {
                   <button
                     onClick={() => {
                       if (carts.length > 0) {
-                        // toast.success("Order placed successfully");
                         setTimeout(() => {
                           updateShippingAndPayment();
                           navigate("/chekout");
@@ -486,7 +477,11 @@ const MyCartCompoenent = () => {
           </div>
         </RightCon>
       </div>
+      ) : (
+         <FadeLoader loading={true} color="#d5ad75" />
+      )}
     </Container>
   );
 };
 export default MyCartCompoenent;
+

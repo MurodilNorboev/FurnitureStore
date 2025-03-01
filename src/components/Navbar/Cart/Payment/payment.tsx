@@ -41,6 +41,7 @@ import {
 } from "./style";
 import Button from "@mui/joy/Button";
 import SvgIcon from "@mui/joy/SvgIcon";
+import FadeLoader from "react-spinners/FadeLoader";
 const VisuallyHiddenInput = styled("input")`
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
@@ -187,200 +188,223 @@ const Payment = () => {
           <img src={home} alt="img" />
           {/* <h4>{Props.name}</h4> */}
         </PagesName>
-
-        <Chescout_containerWrapper className="Chescout_containerWrapper">
-          {PMETHOD === "VISA" ? (
-            <div className="chescoutWrapper">
-              <Containre_Chescout_Content className="Containre_Chescout_Content">
-                {Array.isArray(data) && data.length > 0 ? (
-                  data.map((val, ind) => {
-                    const widthTypes =
-                      val.widthType === "min"
-                        ? val.product.minWidth + " x " + val.product.minHeight
-                        : val.product.maxWidth + " x " + val.product.maxHeight;
-                    return (
-                      <Content key={ind}>
-                        <Datails
-                          style={{
-                            borderTop:
-                              ind === 0
-                                ? "1px solid #d1bcb2"
-                                : "0px solid #d1bcb2",
-                          }}
-                        >
-                          <Imag
-                            src={val.product.image}
-                            alt={val.product.discount}
-                          />
-                          <LeftDiv>
-                            <div className="item1">
-                              <h4>{val.product.types}</h4>
-                              <h6>{val.setColors}</h6>
-                              <h6 className="nni">{widthTypes}</h6>
-                            </div>
-                            <div className="item2">
-                              <h6>x{val.quantity}</h6>
-                            </div>
-                            <div className="item3">
-                              <h6>${val.totalCost}</h6>
-                            </div>
-                          </LeftDiv>
-                        </Datails>
-                      </Content>
-                    );
-                  })
-                ) : (
-                  <div>No data</div>
-                )}
-              </Containre_Chescout_Content>
-            </div>
-          ) : (
-            <div className="chescoutWrapper">
-              <Containre_Chescout_Content className="Containre_Chescout_Content">
-                <div className="wraper">
-                  <div className="imgContent">
-                    <img
-                      className="images"
-                      src={
-                        form.checkImg ||
-                        "https://us.123rf.com/450wm/avaicon/avaicon2202/avaicon220200138/181341773-ic%C3%B4ne-d-image-signe-et-symbole-de-la-galerie-de-photos-ic%C3%B4ne-d-image.jpg?ver=6"
-                      }
-                      alt="Image"
-                    />
-                    <Button
-                      style={{ border: "1px solid #d1bcb2" }}
-                      component="label"
-                      role={undefined}
-                      tabIndex={-1}
-                      variant="outlined"
-                      color="neutral"
-                      startDecorator={
-                        <SvgIcon>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth={1.5}
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
-                            />
-                          </svg>
-                        </SvgIcon>
-                      }
-                    >
-                      Upload Check
-                      <VisuallyHiddenInput
-                        type="file"
-                        name="checkImg" // Update fieldName with the relevant field
-                        onChange={(e) => uploadFile(e, "checkImg")} // Update fieldName with the relevant field
-                      />
-                    </Button>
-                  </div>
-                  <p>
-                    Please pay the total amount shown in TOTAL through your
-                    phone, bank, or ATM. Then, upload the payment confirmation
-                    by clicking 'Upload Check'. After uploading, click 'Confirm
-                    Payment'. <br /> Once confirmed, we will prepare and ship
-                    your product soon. For assistance, feel free to contact us.
-                  </p>
-                </div>
-              </Containre_Chescout_Content>
-            </div>
-          )}
-
-          <div
-            style={{ width: "100%", display: "flex", justifyContent: "center" }}
-          >
-            {data.length > 0 && (
-              <Right_Container className="Right_Container">
-                <div className="nn">
-                  <Top_Container>
-                    <h2>Cart totals</h2>
-                  </Top_Container>
-                  {PMETHOD === "CASH" && (
-                    <div style={{ maxHeight: "230px", overflowY: "scroll" }}>
-                      {data.map((val, ind) => {
-                        let ItemDimensions = "";
-                        if (val.widthType === "max") {
-                          ItemDimensions =
-                            val.product.maxWidth +
+        {data.length > 0 ? (
+          <Chescout_containerWrapper className="Chescout_containerWrapper">
+            {PMETHOD === "VISA" ? (
+              <div className="chescoutWrapper">
+                <Containre_Chescout_Content className="Containre_Chescout_Content">
+                  {Array.isArray(data) && data.length > 0 ? (
+                    data.map((val, ind) => {
+                      const widthTypes =
+                        val.widthType === "min"
+                          ? val.product.minWidth + " x " + val.product.minHeight
+                          : val.product.maxWidth +
                             " x " +
                             val.product.maxHeight;
-                        } else if (val.widthType == "min") {
-                          ItemDimensions =
-                            val.product.minWidth +
-                            " x " +
-                            val.product.minHeight;
-                        }
-                        return (
-                          <Content key={ind}>
-                            <Datails>
-                              <Imag
-                                src={val.product.image}
-                                alt={val.product.discount}
-                              />
-                              <LeftDiv>
-                                <div className="item1">
-                                  <h4>{val.product.types}</h4>
-                                  <h6>{val.setColors}</h6>
-                                  <h6 className="nni">{ItemDimensions}</h6>
-                                </div>
-                                <div className="item2">
-                                  <h6>x{val.quantity}</h6>
-                                </div>
-                                <div className="item3">
-                                  <h6>${val.totalCost}</h6>
-                                </div>
-                              </LeftDiv>
-                            </Datails>
-                          </Content>
-                        );
-                      })}
-                    </div>
+                      return (
+                        <Content key={ind}>
+                          <Datails
+                            style={{
+                              borderTop:
+                                ind === 0
+                                  ? "1px solid #d1bcb2"
+                                  : "0px solid #d1bcb2",
+                            }}
+                          >
+                            <Imag
+                              src={val.product.image}
+                              alt={val.product.discount}
+                            />
+                            <LeftDiv>
+                              <div className="item1">
+                                <h4>{val.product.types}</h4>
+                                <h6>{val.setColors}</h6>
+                                <h6 className="nni">{widthTypes}</h6>
+                              </div>
+                              <div className="item2">
+                                <h6>x{val.quantity}</h6>
+                              </div>
+                              <div className="item3">
+                                <h6>${val.totalCost}</h6>
+                              </div>
+                            </LeftDiv>
+                          </Datails>
+                        </Content>
+                      );
+                    })
+                  ) : (
+                    <div>No data</div>
                   )}
-                  <Bottom_Container className="Bottom_Container">
-                    <div className="bottom_wrape">
-                      <div className="cost">
-                        <h5>Delivery (Self Pickup)</h5>
-                        <h5>${SMETHOD === "FEDEX" ? 15 : 0}</h5>
-                      </div>
-                      <div className="cost">
-                        <h5>subtotal</h5>
-                        <h5>
-                          ${data.reduce((acc, val) => acc + val.totalCost, 0)}
-                        </h5>{" "}
-                        {/* Jami subtotalni hisoblash */}
-                      </div>
-                      <div className="cost">
-                        <h4>total</h4>
-                        <h4>
-                          $
-                          {SMETHOD === "FEDEX"
-                            ? data.reduce(
-                                (acc, val) => acc + val.totalCost,
-                                0
-                              ) + 15
-                            : data.reduce((acc, val) => acc + val.totalCost, 0)}
-                        </h4>
-                      </div>
-
-                      <div className="btn_wrape">
-                        <button type="submit">
-                          Confirm Payment
-                          <img src="" alt="" />
-                        </button>
-                      </div>
+                </Containre_Chescout_Content>
+              </div>
+            ) : (
+              <div className="chescoutWrapper">
+                <Containre_Chescout_Content className="Containre_Chescout_Content">
+                  <div className="wraper">
+                    <div className="imgContent">
+                      <img
+                        className="images"
+                        src={
+                          form.checkImg ||
+                          "https://us.123rf.com/450wm/avaicon/avaicon2202/avaicon220200138/181341773-ic%C3%B4ne-d-image-signe-et-symbole-de-la-galerie-de-photos-ic%C3%B4ne-d-image.jpg?ver=6"
+                        }
+                        alt="Image"
+                      />
+                      <Button
+                        style={{ border: "1px solid #d1bcb2" }}
+                        component="label"
+                        role={undefined}
+                        tabIndex={-1}
+                        variant="outlined"
+                        color="neutral"
+                        startDecorator={
+                          <SvgIcon>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth={1.5}
+                              stroke="currentColor"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
+                              />
+                            </svg>
+                          </SvgIcon>
+                        }
+                      >
+                        Upload Check
+                        <VisuallyHiddenInput
+                          type="file"
+                          name="checkImg" // Update fieldName with the relevant field
+                          onChange={(e) => uploadFile(e, "checkImg")} // Update fieldName with the relevant field
+                        />
+                      </Button>
                     </div>
-                  </Bottom_Container>
-                </div>
-              </Right_Container>
+                    <p>
+                      Please pay the total amount shown in TOTAL through your
+                      phone, bank, or ATM. Then, upload the payment confirmation
+                      by clicking 'Upload Check'. After uploading, click
+                      'Confirm Payment'. <br /> Once confirmed, we will prepare
+                      and ship your product soon. For assistance, feel free to
+                      contact us.
+                    </p>
+                  </div>
+                </Containre_Chescout_Content>
+              </div>
             )}
+
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              {data.length > 0 && (
+                <Right_Container className="Right_Container">
+                  <div className="nn">
+                    <Top_Container>
+                      <h2>Cart totals</h2>
+                    </Top_Container>
+                    {PMETHOD === "CASH" && (
+                      <div style={{ maxHeight: "230px", overflowY: "scroll" }}>
+                        {data.map((val, ind) => {
+                          let ItemDimensions = "";
+                          if (val.widthType === "max") {
+                            ItemDimensions =
+                              val.product.maxWidth +
+                              " x " +
+                              val.product.maxHeight;
+                          } else if (val.widthType == "min") {
+                            ItemDimensions =
+                              val.product.minWidth +
+                              " x " +
+                              val.product.minHeight;
+                          }
+                          return (
+                            <Content key={ind}>
+                              <Datails>
+                                <Imag
+                                  src={val.product.image}
+                                  alt={val.product.discount}
+                                />
+                                <LeftDiv>
+                                  <div className="item1">
+                                    <h4>{val.product.types}</h4>
+                                    <h6>{val.setColors}</h6>
+                                    <h6 className="nni">{ItemDimensions}</h6>
+                                  </div>
+                                  <div className="item2">
+                                    <h6>x{val.quantity}</h6>
+                                  </div>
+                                  <div className="item3">
+                                    <h6>${val.totalCost}</h6>
+                                  </div>
+                                </LeftDiv>
+                              </Datails>
+                            </Content>
+                          );
+                        })}
+                      </div>
+                    )}
+                    <Bottom_Container className="Bottom_Container">
+                      <div className="bottom_wrape">
+                        <div className="cost">
+                          <h5>Delivery (Self Pickup)</h5>
+                          <h5>${SMETHOD === "FEDEX" ? 15 : 0}</h5>
+                        </div>
+                        <div className="cost">
+                          <h5>subtotal</h5>
+                          <h5>
+                            ${data.reduce((acc, val) => acc + val.totalCost, 0)}
+                          </h5>{" "}
+                          {/* Jami subtotalni hisoblash */}
+                        </div>
+                        <div className="cost">
+                          <h4>total</h4>
+                          <h4>
+                            $
+                            {SMETHOD === "FEDEX"
+                              ? data.reduce(
+                                  (acc, val) => acc + val.totalCost,
+                                  0
+                                ) + 15
+                              : data.reduce(
+                                  (acc, val) => acc + val.totalCost,
+                                  0
+                                )}
+                          </h4>
+                        </div>
+
+                        <div className="btn_wrape">
+                          <button type="submit">
+                            Confirm Payment
+                            <img src="" alt="" />
+                          </button>
+                        </div>
+                      </div>
+                    </Bottom_Container>
+                  </div>
+                </Right_Container>
+              )}
+            </div>
+          </Chescout_containerWrapper>
+        ) : (
+          <div
+            style={{
+              width: "100%",
+              height: "auto",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <FadeLoader loading={true} color="#d5ad75" />
           </div>
-        </Chescout_containerWrapper>
+        )}
       </DatailCart>
     </Container_Chescout>
   );

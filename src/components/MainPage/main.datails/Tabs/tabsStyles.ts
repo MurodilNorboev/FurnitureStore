@@ -20,6 +20,7 @@ export const Container = styled.div`
 `;
 export const ButtonContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   justify-content: center;
   margin-bottom: 30px;

@@ -33,7 +33,7 @@ export const Chescout_containerWrapper = styled.div`
       max-width: 1000px;
       width: 78.2vw;
     }
-    .dropdown {
+    .LasName_Con {
       max-width: 1000px;
       width: 78.2vw;
       position: none;
@@ -162,7 +162,8 @@ export const Chescout_one = styled.div`
     }
     select {
       padding: 12px 15px;
-      width: 380px;
+      /* width: 380px; */
+      width: 100%;
       border: 1px solid #d1bcb2;
       color: var(--dark-grey, #666);
       font-feature-settings: "liga" off, "clig" off;

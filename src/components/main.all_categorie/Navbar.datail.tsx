@@ -32,6 +32,7 @@ import { setCarts } from "../Redux/cartsSlice";
 import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
 import saveIcon from "../../assets/saveIcon.svg";
 import { PagesName } from "../Navbar/dropodownstyle";
+import FadeLoader from "react-spinners/FadeLoader";
 
 const mockDatas: any = {
   colors: [
@@ -322,194 +323,217 @@ const NavDatail_Page = () => {
   };
 
   return (
-    <Catalog_con>
-      {/* Sort Button */}
-      <SortContainer className="SortContainer">
-        <button onClick={toggleSidebar} className="closeInputs">
-          {isSidebarOpen ? "Close" : "Sort"}
-        </button>
-      </SortContainer>
+    <>
+      {currentData.length > 0 ? (
+        <Catalog_con>
+          {/* Sort Button */}
+          <SortContainer className="SortContainer">
+            <button onClick={toggleSidebar} className="closeInputs">
+              {isSidebarOpen ? "Close" : "Sort"}
+            </button>
+          </SortContainer>
 
-      {/* Product List */}
-      <SlaiderContainer style={{ padding: "0px" }}>
-        <ImageGrid>
-          {currentData.length > 0 ? (
-            currentData.map((item, ind) => (
-              <ImageContainer
-                key={`${item.types}-${item.id} || ${item._id} && ${ind}`}
-              >
-                <Imagecontent
-                  onClick={(e) => {
-                    const target = e.target as HTMLElement;
+          {/* Product List */}
+          <SlaiderContainer style={{ padding: "0px 40px" }}>
+            <ImageGrid>
+              {currentData.length > 0 ? (
+                currentData.map((item, ind) => (
+                  <ImageContainer
+                    key={`${item.types}-${item.id} || ${item._id} && ${ind}`}
+                  >
+                    <Imagecontent
+                      onClick={(e) => {
+                        const target = e.target as HTMLElement;
 
-                    if (!target.closest("button")) {
-                      const foundItem: any = currentData;
+                        if (!target.closest("button")) {
+                          const foundItem: any = currentData;
 
-                      if (foundItem) {
-                        if (foundItem._id !== item._id) {
-                          navigate(`/datailRoom/${item._id}`);
-                        } else {
-                          navigate(`/datailRoom2/${item.id}`);
+                          if (foundItem) {
+                            if (foundItem._id !== item._id) {
+                              navigate(`/datailRoom/${item._id}`);
+                            } else {
+                              navigate(`/datailRoom2/${item.id}`);
+                            }
+                          }
                         }
-                      }
-                    }
+                      }}
+                    >
+                      <Imagecontent
+                        className="imgwrap"
+                        style={{
+                          width: "100%",
+                        }}
+                      >
+                        <Image
+                          className="Image"
+                          src={item.image}
+                          alt={`img-${ind}`}
+                        />
+
+                        <div className="savebtnwrap">
+                          <button className="like">
+                            <svg
+                              onClick={(e) => {
+                                if (
+                                  getLike &&
+                                  getLike.some(
+                                    (itemLike) => itemLike?._id === item?._id
+                                  )
+                                ) {
+                                  handleDeleteLike(item._id);
+                                } else {
+                                  handleLike(e, item._id);
+                                }
+                              }}
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                              width="35px"
+                              height="35px"
+                              style={{
+                                cursor: "pointer",
+                                fill: getLike?.some(
+                                  (itemLike) => itemLike?._id === item._id
+                                )
+                                  ? "#ffbb00"
+                                  : "transparent",
+                                stroke: "#ffbb00",
+                                strokeWidth: getLike?.some(
+                                  (itemLike) => itemLike?._id === item._id
+                                )
+                                  ? "0"
+                                  : "2",
+                                transition: "all 0.3s ease",
+                              }}
+                            >
+                              <path d="M12 21.35C12 21.35 4 13.28 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04 0.99 3.57 2.36L12 9l0.93-1.64C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 4.78-8 12.85-8 12.85z" />
+                            </svg>
+                          </button>
+                        </div>
+                      </Imagecontent>
+                      <h6></h6>
+                      <h5>{item.Feature}</h5>
+                      <h4>${item.cost}</h4>
+                    </Imagecontent>
+                  </ImageContainer>
+                ))
+              ) : (
+                <div
+                  className="Errors"
+                  style={{
+                    textAlign: "center",
+                    marginTop: "20px",
+                    fontSize: "18px",
+                    color: "red",
                   }}
                 >
-                  <Imagecontent
-                    className="imgwrap"
-                    style={{
-                      width: "100%",
-                    }}
-                  >
-                    <Image
-                      className="Image"
-                      src={item.image}
-                      alt={`img-${ind}`}
-                    />
+                  hechnima yoq !
+                </div>
+              )}
+            </ImageGrid>
 
-                    <div className="savebtnwrap">
-                      <button className="like">
-                        <svg
-                          onClick={(e) => {
-                            if (
-                              getLike &&
-                              getLike.some(
-                                (itemLike) => itemLike?._id === item?._id
-                              )
-                            ) {
-                              handleDeleteLike(item._id);
-                            } else {
-                              handleLike(e, item._id);
-                            }
-                          }}
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          width="35px"
-                          height="35px"
-                          style={{
-                            cursor: "pointer",
-                            fill: getLike?.some(
-                              (itemLike) => itemLike?._id === item._id
-                            )
-                              ? "#ffbb00"
-                              : "transparent",
-                            stroke: "#ffbb00",
-                            strokeWidth: getLike?.some(
-                              (itemLike) => itemLike?._id === item._id
-                            )
-                              ? "0"
-                              : "2",
-                            transition: "all 0.3s ease",
-                          }}
-                        >
-                          <path d="M12 21.35C12 21.35 4 13.28 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04 0.99 3.57 2.36L12 9l0.93-1.64C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 4.78-8 12.85-8 12.85z" />
-                        </svg>
-                      </button>
-                    </div>
-                  </Imagecontent>
-                  <h6></h6>
-                  <h5>{item.Feature}</h5>
-                  <h4>${item.cost}</h4>
-                </Imagecontent>
-              </ImageContainer>
-            ))
-          ) : (
-            <div
-              className="Errors"
+            {/* Pagination */}
+            <Stack
+              spacing={1}
               style={{
-                textAlign: "center",
                 marginTop: "20px",
-                fontSize: "18px",
-                color: "red",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
               }}
             >
-              hechnima yoq !
-            </div>
-          )}
-        </ImageGrid>
+              <Pagination
+                count={totalPages}
+                page={currentPage}
+                onChange={handleChangePagination}
+                renderItem={(item) => (
+                  <PaginationItem
+                    slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
+                    {...item}
+                  />
+                )}
+              />
+            </Stack>
+          </SlaiderContainer>
 
-        {/* Pagination */}
-        <Stack
-          spacing={1}
+          {/* /// saidbar  */}
+          <Saidbar
+            style={{
+              display: isSidebarOpen || !isMobile ? "block" : "none",
+              width: isMobile ? "100%" : "350px",
+              position: isMobile ? "absolute" : "relative",
+              top: "34%",
+            }}
+          >
+            <div className="cart_con a">
+              <h2>Price</h2>
+              <hr />
+              <div
+                style={{ width: mobile ? "100%" : isMobile ? "50%" : "100%" }}
+              >
+                <Box>
+                  <Slider
+                    value={priceRange}
+                    onChange={handleSliderChange}
+                    valueLabelDisplay="auto"
+                    max={10000}
+                    min={20}
+                  />
+                </Box>
+                <div
+                  className="button_wrap aa"
+                  style={{
+                    width: mobile ? "100%" : isMobile ? "150px" : "100%",
+                  }}
+                >
+                  <div className="btn_wrap">
+                    <button>${priceRange[0]}</button>
+                  </div>
+                  <div className="btn_wrap">
+                    <button>${priceRange[1]}</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <Box
+              sx={{ display: "flex", flexWrap: "wrap", gap: 3, marginTop: 3 }}
+            >
+              {Object.keys(mockDatas).map((category: any) => (
+                <FormGroup key={category} style={{ flex: 1 }}>
+                  <h3>{category}</h3>
+                  {mockDatas[category].map((option: any) => (
+                    <FormControlLabel
+                      key={option.value}
+                      control={
+                        <Checkbox
+                          onChange={() =>
+                            handleCheckboxChange(category, option.value)
+                          }
+                          checked={checkedFilters[category].includes(
+                            option.value
+                          )}
+                        />
+                      }
+                      label={option.value}
+                    />
+                  ))}
+                </FormGroup>
+              ))}
+            </Box>
+          </Saidbar>
+        </Catalog_con>
+      ) : (
+        <Catalog_con
           style={{
-            marginTop: "20px",
+            height: "100vh",
             display: "flex",
-            justifyContent: "center",
             alignItems: "center",
+            justifyContent: "center",
           }}
         >
-          <Pagination
-            count={totalPages}
-            page={currentPage}
-            onChange={handleChangePagination}
-            renderItem={(item) => (
-              <PaginationItem
-                slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
-                {...item}
-              />
-            )}
-          />
-        </Stack>
-      </SlaiderContainer>
-
-      {/* /// saidbar  */}
-      <Saidbar
-        style={{
-          display: isSidebarOpen || !isMobile ? "block" : "none",
-          width: isMobile ? "100%" : "350px",
-          position: isMobile ? "absolute" : "relative",
-          top: "34%",
-        }}
-      >
-        <div className="cart_con a">
-          <h2>Price</h2>
-          <hr />
-          <div style={{ width: mobile ? "100%" : isMobile ? "50%" : "100%" }}>
-            <Box>
-              <Slider
-                value={priceRange}
-                onChange={handleSliderChange}
-                valueLabelDisplay="auto"
-                max={10000}
-                min={20}
-              />
-            </Box>
-            <div
-              className="button_wrap aa"
-              style={{ width: mobile ? "100%" : isMobile ? "150px" : "100%" }}
-            >
-              <div className="btn_wrap">
-                <button>${priceRange[0]}</button>
-              </div>
-              <div className="btn_wrap">
-                <button>${priceRange[1]}</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <Box sx={{ display: "flex", flexWrap: "wrap", gap: 3, marginTop: 3 }}>
-          {Object.keys(mockDatas).map((category: any) => (
-            <FormGroup key={category} style={{ flex: 1 }}>
-              <h3>{category}</h3>
-              {mockDatas[category].map((option: any) => (
-                <FormControlLabel
-                  key={option.value}
-                  control={
-                    <Checkbox
-                      onChange={() =>
-                        handleCheckboxChange(category, option.value)
-                      }
-                      checked={checkedFilters[category].includes(option.value)}
-                    />
-                  }
-                  label={option.value}
-                />
-              ))}
-            </FormGroup>
-          ))}
-        </Box>
-      </Saidbar>
-    </Catalog_con>
+          <FadeLoader loading={true} color="#d5ad75" />
+        </Catalog_con>
+      )}
+    </>
   );
 };
 

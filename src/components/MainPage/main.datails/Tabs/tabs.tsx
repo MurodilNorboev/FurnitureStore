@@ -14,6 +14,7 @@ import {
 } from "./tabsStyles";
 import { Navlink } from "../../../styles/LINK";
 import loading from "../../../../assets/loading.image.gif";
+import FadeLoader from "react-spinners/FadeLoader";
 
 const FullWidthTabs = () => {
   const [$active, setActive] = useState(0); // Default "All"
@@ -100,51 +101,55 @@ const FullWidthTabs = () => {
       </ButtonContainer>
 
       <ImageGrid>
-        {filteredData.map((item: any, ind) => (
-          <ImageContainer key={item.id | ind}>
-            <Navlink to={`/datailRoom/${item._id}`}>
-              <Imagecontent>
-                {item.SpecialOffers !== "All" && (
-                  <PagesName
+        {filteredData.length > 0 ? (
+          filteredData.map((item: any, ind) => (
+            <ImageContainer key={item.id | ind}>
+              <Navlink to={`/datailRoom/${item._id}`}>
+                <Imagecontent>
+                  {item.SpecialOffers !== "All" && (
+                    <PagesName
+                      style={{
+                        background:
+                          item.SpecialOffers === "Popular"
+                            ? "#E59D49"
+                            : item.SpecialOffers === "Hot"
+                            ? "#F66"
+                            : "#84BF56",
+                      }}
+                    >
+                      {item.SpecialOffers}
+                    </PagesName>
+                  )}
+                  <Image
+                    onMouseOver={(e) =>
+                      (e.currentTarget.src = item.images2 || item.image2)
+                    }
+                    onMouseOut={(e) =>
+                      (e.currentTarget.src = item.images || item.image)
+                    }
+                    className="Image h"
+                    src={item.images || item.image || loading}
+                    alt={`img-${ind}`}
+                  />
+  
+                  <h6></h6>
+                  <h5
                     style={{
-                      background:
-                        item.SpecialOffers === "Popular"
-                          ? "#E59D49"
-                          : item.SpecialOffers === "Hot"
-                          ? "#F66"
-                          : "#84BF56",
+                      overflow: "scroll",
+                      maxWidth: "200px",
+                      maxHeight: "20px",
                     }}
                   >
-                    {item.SpecialOffers}
-                  </PagesName>
-                )}
-                <Image
-                  onMouseOver={(e) =>
-                    (e.currentTarget.src = item.images2 || item.image2)
-                  }
-                  onMouseOut={(e) =>
-                    (e.currentTarget.src = item.images || item.image)
-                  }
-                  className="Image h"
-                  src={item.images || item.image || loading}
-                  alt={`img-${ind}`}
-                />
-
-                <h6></h6>
-                <h5
-                  style={{
-                    overflow: "scroll",
-                    maxWidth: "200px",
-                    maxHeight: "20px",
-                  }}
-                >
-                  {item.Feature}
-                </h5>
-                <h4>${item.cost}</h4>
-              </Imagecontent>
-            </Navlink>
-          </ImageContainer>
-        ))}
+                    {item.Feature}
+                  </h5>
+                  <h4>${item.cost}</h4>
+                </Imagecontent>
+              </Navlink>
+            </ImageContainer>
+          ))
+        ) : (
+          <FadeLoader loading={true} color="#d5ad75" />
+        )}
       </ImageGrid>
     </Container>
   );

@@ -53,13 +53,11 @@ import { pink } from "@mui/material/colors";
 import Radio from "@mui/material/Radio";
 import { addLike, removeLike } from "../../Redux/Like.Tests/slice";
 import toast from "react-hot-toast";
+import FadeLoader from "react-spinners/FadeLoader";
 
 const filters = {};
 const DatailRoomComponent: React.FC<Tnames> = ({ name }) => {
   const [datas, setdatas] = useState<datatestT[] | null>(null);
-  useEffect(() => {
-    setdatas(datatest);
-  }, []);
   const [slideIndex, setSlideIndex] = useState<number>(0);
   const [slidesToShow, setSlidesToShow] = useState<number>(4);
   const [isHovered, setIsHovered] = useState<boolean>(false);
@@ -147,7 +145,9 @@ const DatailRoomComponent: React.FC<Tnames> = ({ name }) => {
       console.error("Error in handleDeleteLike:", error);
     }
   };
+
   useEffect(() => {
+    setdatas(datatest);
     if (user) {
       fetchDataLikes();
     }
@@ -197,7 +197,6 @@ const DatailRoomComponent: React.FC<Tnames> = ({ name }) => {
   const handleQuantityChange = (increment: boolean) => {
     setQuantity((prev) => (increment ? prev + 1 : Math.max(1, prev - 1)));
   };
-
   const handleAddCart = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -220,40 +219,6 @@ const DatailRoomComponent: React.FC<Tnames> = ({ name }) => {
     } catch (error) {
       console.error("Error adding to cart:", error);
     }
-  };
-
-  /// slider window size function
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth <= 550) {
-        setSlidesToShow(1);
-      } else if (window.innerWidth <= 768) {
-        setSlidesToShow(2);
-      } else if (window.innerWidth <= 1024) {
-        setSlidesToShow(3);
-      } else {
-        setSlidesToShow(4);
-      }
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-  // / slider next button function
-  const nextSlide = () => {
-    setSlideIndex(
-      (prevIndex) => (prevIndex + 1) % (totalSlides - slidesToShow + 1)
-    );
-  };
-  // slider prev button function
-  const prevSlide = () => {
-    setSlideIndex(
-      (prevIndex) =>
-        (prevIndex - 1 + totalSlides - slidesToShow + 1) %
-        (totalSlides - slidesToShow + 1)
-    );
   };
 
   /// zoom function
@@ -280,6 +245,8 @@ const DatailRoomComponent: React.FC<Tnames> = ({ name }) => {
     });
   };
 
+  console.log(datass);
+
   return (
     <Container>
       {/* /// Pages Names */}
@@ -297,319 +264,327 @@ const DatailRoomComponent: React.FC<Tnames> = ({ name }) => {
         </PagesName>
       </div>
 
-      {/* Container 1 */}
-      <div className="wrapper">
-        {/* //// zoom container..  */}
-        <div className="imgwrap1">
-          {/* /// left zoom items */}
+      {/* / Container 1 */}
+      {datass.length > 0 ? (
+        <div className="wrapper">
+          {/* //// zoom container..  */}
+          <div className="imgwrap1">
+            {/* /// left zoom items */}
 
-          {combinendData.map((val: any, ind: any) => (
-            <div
-              key={`${val.types} || ${val.id} || ${val._id} && ${ind}`}
-              className="imgswrap"
-            >
-              <Tab
-                $active={activeTab === 1}
-                onMouseEnter={() => setActiveTab(1)}
-                className="imgs"
+            {combinendData.map((val: any, ind: any) => (
+              <div
+                key={`${val.types} || ${val.id} || ${val._id} && ${ind}`}
+                className="imgswrap"
               >
-                <img src={val.image || val.image} alt={`Image for Tab 1`} />
-              </Tab>
-              <Tab
-                $active={activeTab === 2}
-                onMouseEnter={() => setActiveTab(2)}
-                className="imgs"
-              >
-                <img src={val.image1} alt={`Image for Tab 2`} />
-              </Tab>
-              <Tab
-                $active={activeTab === 3}
-                onMouseEnter={() => setActiveTab(3)}
-                className="imgs"
-              >
-                <img src={val.image2} alt={`Image for Tab 3`} />
-              </Tab>
-              <Tab
-                $active={activeTab === 4}
-                onMouseEnter={() => setActiveTab(4)}
-                className="imgs"
-              >
-                <img src={val.image3} alt={`Image for Tab 4`} />
-              </Tab>
-              <Tab
-                $active={activeTab === 5}
-                onMouseEnter={() => setActiveTab(5)}
-                className="imgs"
-              >
-                <Iframe
-                  src={val.videos1}
-                  title={`Video for Tab 5`}
-                  style={{ pointerEvents: "none" }}
-                />
-              </Tab>
-            </div>
-          ))}
-
-          {/* // zoom Item !!!! */}
-          <div className="imageWrapperWrap">
-            <ImageWrapper
-              onMouseEnter={() => setIsHovering(true)}
-              onMouseLeave={() => setIsHovering(false)}
-              onMouseMove={handleMouseMove}
-            >
-              {combinendData.map((val, ind) => (
-                <div key={`${val.types}-${val.id} || ${val._id} && ${ind}`}>
-                  {activeTab === 1 && val.image && (
-                    <Image
-                      src={val.image}
-                      alt="Zoomable"
-                      width={600}
-                      height={500}
-                    />
-                  )}
-                  {activeTab === 2 && val.image1 && (
-                    <Image
-                      src={val.image1}
-                      alt="Zoomable"
-                      width={600}
-                      height={500}
-                    />
-                  )}
-                  {activeTab === 3 && val.image2 && (
-                    <Image
-                      src={val.image2}
-                      alt="Zoomable"
-                      width={600}
-                      height={500}
-                    />
-                  )}
-                  {activeTab === 4 && val.image3 && (
-                    <Image
-                      src={val.image3}
-                      alt="Zoomable"
-                      width={600}
-                      height={500}
-                    />
-                  )}
-                  {activeTab === 5 && val.videos1 && (
-                    <Iframe
-                      src={val.videos1}
-                      title="Zoomable"
-                      width={600}
-                      height={500}
-                    />
-                  )}
-                </div>
-              ))}
-
-              {isHovering && activeTab !== 5 && isZoomEnabled && (
-                <Lens x={cursorPos.x} y={cursorPos.y} />
-              )}
-            </ImageWrapper>
-          </div>
-        </div>
-
-        {/* //// Right zoom Hover Container .. */}
-        <div className="zoomConWrap">
-          {isHovering &&
-            datass.map((val, ind) => (
-              <Content
-                className="Content"
-                key={val.id}
-                $active={
-                  activeTab === 1 ||
-                  activeTab === 2 ||
-                  activeTab === 3 ||
-                  activeTab === 4
-                }
-              >
-                {activeTab === 1 && val.image && isZoomEnabled && (
-                  <ZoomedContainer
-                    x={cursorPos.x}
-                    y={cursorPos.y}
-                    bgImage={val.image}
-                    className="ZoomedContainer"
+                <Tab
+                  $active={activeTab === 1}
+                  onMouseEnter={() => setActiveTab(1)}
+                  className="imgs"
+                >
+                  <img src={val.image || val.image} alt={`Image for Tab 1`} />
+                </Tab>
+                <Tab
+                  $active={activeTab === 2}
+                  onMouseEnter={() => setActiveTab(2)}
+                  className="imgs"
+                >
+                  <img src={val.image1} alt={`Image for Tab 2`} />
+                </Tab>
+                <Tab
+                  $active={activeTab === 3}
+                  onMouseEnter={() => setActiveTab(3)}
+                  className="imgs"
+                >
+                  <img src={val.image2} alt={`Image for Tab 3`} />
+                </Tab>
+                <Tab
+                  $active={activeTab === 4}
+                  onMouseEnter={() => setActiveTab(4)}
+                  className="imgs"
+                >
+                  <img src={val.image3} alt={`Image for Tab 4`} />
+                </Tab>
+                {/* <Tab
+                  $active={activeTab === 5}
+                  onMouseEnter={() => setActiveTab(5)}
+                  className="imgs"
+                >
+                  <Iframe
+                    src={val.videos1}
+                    title={`Video for Tab 5`}
+                    style={{ pointerEvents: "none" }}
                   />
-                )}
-                {activeTab === 2 && val.image1 && isZoomEnabled && (
-                  <ZoomedContainer
-                    x={cursorPos.x}
-                    y={cursorPos.y}
-                    bgImage={val.image1}
-                    className="ZoomedContainer"
-                  />
-                )}
-                {activeTab === 3 && val.image2 && isZoomEnabled && (
-                  <ZoomedContainer
-                    x={cursorPos.x}
-                    y={cursorPos.y}
-                    bgImage={val.image2}
-                    className="ZoomedContainer"
-                  />
-                )}
-                {activeTab === 4 && val.image3 && isZoomEnabled && (
-                  <ZoomedContainer
-                    x={cursorPos.x}
-                    y={cursorPos.y}
-                    bgImage={val.image3}
-                    className="ZoomedContainer"
-                  />
-                )}
-              </Content>
+                </Tab> */}
+              </div>
             ))}
-        </div>
 
-        {/* /// Right container...  */}
-        <RightCon className="RightCon">
-          <div className="right_cart">
-            <div className="wrap_text">
-              <h6></h6>
-              <h3>cesil micro velvet chair</h3>
-              <div className="str">
-                <img src={star1} alt="" />
-                <img src={star1} alt="" />
-                <img src={star1} alt="" />
-                <img src={star1} alt="" />
-                <img src={star} alt="" />
-                <h5>3 reviews</h5>
-              </div>
-            </div>
-          </div>
-
-          <div className="right_cart">
-            <div className="midl_wrap">
-              <div className="div1">
-                <div className="h2">Color</div>
-                <div className="imgwrapmini">
-                  {datass[0]?.ColorSet?.[0]
-                    ?.split(", ")
-                    .map((color: string) => (
-                      <Radio
-                        key={color}
-                        checked={selectedColor === color}
-                        style={{ color }}
-                        onChange={() => setSelectedColor(color)}
+            {/* // zoom Item !!!! */}
+            <div className="imageWrapperWrap">
+              <ImageWrapper
+                onMouseEnter={() => setIsHovering(true)}
+                onMouseLeave={() => setIsHovering(false)}
+                onMouseMove={handleMouseMove}
+              >
+                {combinendData.map((val, ind) => (
+                  <div key={`${val.types}-${val.id} || ${val._id} && ${ind}`}>
+                    {activeTab === 1 && val.image && (
+                      <Image
+                        src={val.image}
+                        alt="Zoomable"
+                        width={600}
+                        height={500}
                       />
-                    ))}
-                </div>
-              </div>
-              <div className="div1">
-                <div className="h2">Dimensions</div>
-                <div className="img_wrap_colorCon">
-                  {["min", "max"].map((type) => (
-                    <button
-                      key={type}
-                      onClick={() => setWidthType(type as "min" | "max")}
-                      className={widthType === type ? "texte1" : "texte1"}
-                      style={{
-                        border: "none",
-                        color: widthType === type ? "#DBA514" : "#D1BCB2",
-                        boxShadow:
-                          widthType === type
-                            ? "0px 10px 20px 0px rgba(209, 188, 178, 0.25)"
-                            : "none",
-                      }}
-                    >
-                      {type === "min"
-                        ? `W:${datass[0]?.minWidth} х H:${datass[0]?.minHeight} cm`
-                        : `W:${datass[0]?.maxWidth} х H:${datass[0]?.maxHeight} cm`}
-                    </button>
-                  ))}
-                </div>
-              </div>
-              <div className="div1">
-                <div className="h2">Quantity</div>
-                <div className="img_wrap_colorCon">
-                  <IconButton
-                    className="buttons"
-                    onClick={() => handleQuantityChange(false)}
-                  >
-                    -
-                  </IconButton>
-                  <span className="p_count">{quantity}</span>
-                  <IconButton
-                    className="buttons"
-                    onClick={() => handleQuantityChange(true)}
-                  >
-                    +
-                  </IconButton>
-                </div>
-              </div>
+                    )}
+                    {activeTab === 2 && val.image1 && (
+                      <Image
+                        src={val.image1}
+                        alt="Zoomable"
+                        width={600}
+                        height={500}
+                      />
+                    )}
+                    {activeTab === 3 && val.image2 && (
+                      <Image
+                        src={val.image2}
+                        alt="Zoomable"
+                        width={600}
+                        height={500}
+                      />
+                    )}
+                    {activeTab === 4 && val.image3 && (
+                      <Image
+                        src={val.image3}
+                        alt="Zoomable"
+                        width={600}
+                        height={500}
+                      />
+                    )}
+                    {activeTab === 5 && val.videos1 && (
+                      <Iframe
+                        src={val.videos1}
+                        title="Zoomable"
+                        width={600}
+                        height={500}
+                      />
+                    )}
+                  </div>
+                ))}
+
+                {isHovering && activeTab !== 5 && isZoomEnabled && (
+                  <Lens x={cursorPos.x} y={cursorPos.y} />
+                )}
+              </ImageWrapper>
             </div>
           </div>
 
-          <div className="right_cart">
-            <div className="bottom_Con bottom2">
-              <div className="cost">
-                <div className={widthType === "min" ? "h3" : "h2"}>
-                  ${datass[0]?.cost}
-                </div>
-              </div>
-              <div className="row_line"></div>
-              <div className="cost">
-                <div className={widthType === "max" ? "h3" : "h2"}>
-                  ${datass[0]?.bigCost}
+          {/* //// Right zoom Hover Container .. */}
+          <div className="zoomConWrap">
+            {isHovering &&
+              datass.map((val, ind) => (
+                <Content
+                  className="Content"
+                  key={val.id}
+                  $active={
+                    activeTab === 1 ||
+                    activeTab === 2 ||
+                    activeTab === 3 ||
+                    activeTab === 4
+                  }
+                >
+                  {activeTab === 1 && val.image && isZoomEnabled && (
+                    <ZoomedContainer
+                      x={cursorPos.x}
+                      y={cursorPos.y}
+                      bgImage={val.image}
+                      className="ZoomedContainer"
+                    />
+                  )}
+                  {activeTab === 2 && val.image1 && isZoomEnabled && (
+                    <ZoomedContainer
+                      x={cursorPos.x}
+                      y={cursorPos.y}
+                      bgImage={val.image1}
+                      className="ZoomedContainer"
+                    />
+                  )}
+                  {activeTab === 3 && val.image2 && isZoomEnabled && (
+                    <ZoomedContainer
+                      x={cursorPos.x}
+                      y={cursorPos.y}
+                      bgImage={val.image2}
+                      className="ZoomedContainer"
+                    />
+                  )}
+                  {activeTab === 4 && val.image3 && isZoomEnabled && (
+                    <ZoomedContainer
+                      x={cursorPos.x}
+                      y={cursorPos.y}
+                      bgImage={val.image3}
+                      className="ZoomedContainer"
+                    />
+                  )}
+                </Content>
+              ))}
+          </div>
+
+          {/* /// Right container...  */}
+          <RightCon className="RightCon">
+            <div className="right_cart">
+              <div className="wrap_text">
+                <h6></h6>
+                <h3>cesil micro velvet chair</h3>
+                <div className="str">
+                  <img src={star1} alt="" />
+                  <img src={star1} alt="" />
+                  <img src={star1} alt="" />
+                  <img src={star1} alt="" />
+                  <img src={star} alt="" />
+                  <h5>3 reviews</h5>
                 </div>
               </div>
             </div>
-            <div className="bottom_Con">
-              {combinendData.map((val, ind) => {
-                return (
-                  <div
-                    className="cons_btn"
-                    key={`${val.id} || ${val._id} || ${ind}`}
-                  >
-                    <button onClick={handleAddCart}>Add to cart</button>
+
+            <div className="right_cart">
+              <div className="midl_wrap">
+                <div className="div1">
+                  <div className="h2">Color</div>
+                  <div className="imgwrapmini">
+                    {datass[0]?.ColorSet?.flatMap((colorString: string) =>
+                      colorString
+                        .split(", ")
+                        .map((color: string) => (
+                          <Radio
+                            key={color}
+                            checked={selectedColor === color}
+                            style={{ color }}
+                            onChange={() => setSelectedColor(color)}
+                          />
+                        ))
+                    )}
                   </div>
-                );
-              })}
-              <div className="cons_btn_like">
-                {datass.map((item, ind) => {
-                  return (
-                    <button key={ind} className="like">
-                      <svg
-                        onClick={(e) => {
-                          if (
-                            getLike &&
-                            getLike.some(
-                              (itemLike) => itemLike?._id === item?._id
-                            )
-                          ) {
-                            handleDeleteLike(item._id);
-                          } else {
-                            handleLike(e, item._id);
-                          }
-                        }}
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        width="35px"
-                        height="35px"
+                </div>
+                <div className="div1">
+                  <div className="h2">Dimensions</div>
+                  <div className="img_wrap_colorCon">
+                    {["min", "max"].map((type) => (
+                      <button
+                        key={type}
+                        onClick={() => setWidthType(type as "min" | "max")}
+                        className={widthType === type ? "texte1" : "texte1"}
                         style={{
-                          cursor: "pointer",
-                          fill: getLike?.some(
-                            (itemLike) => itemLike?._id === item._id
-                          )
-                            ? "#ffbb00"
-                            : "transparent",
-                          stroke: "#ffbb00",
-                          strokeWidth: getLike?.some(
-                            (itemLike) => itemLike?._id === item._id
-                          )
-                            ? "0"
-                            : "2",
-                          transition: "all 0.3s ease",
+                          border: "none",
+                          color: widthType === type ? "#DBA514" : "#D1BCB2",
+                          boxShadow:
+                            widthType === type
+                              ? "0px 10px 20px 0px rgba(209, 188, 178, 0.25)"
+                              : "none",
                         }}
                       >
-                        <path d="M12 21.35C12 21.35 4 13.28 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04 0.99 3.57 2.36L12 9l0.93-1.64C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 4.78-8 12.85-8 12.85z" />
-                      </svg>
-                    </button>
-                  );
-                })}
+                        {type === "min"
+                          ? `W:${datass[0]?.minWidth} х H:${datass[0]?.minHeight} cm`
+                          : `W:${datass[0]?.maxWidth} х H:${datass[0]?.maxHeight} cm`}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <div className="div1">
+                  <div className="h2">Quantity</div>
+                  <div className="img_wrap_colorCon">
+                    <IconButton
+                      className="buttons"
+                      onClick={() => handleQuantityChange(false)}
+                    >
+                      -
+                    </IconButton>
+                    <span className="p_count">{quantity}</span>
+                    <IconButton
+                      className="buttons"
+                      onClick={() => handleQuantityChange(true)}
+                    >
+                      +
+                    </IconButton>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </RightCon>
-      </div>
+
+            <div className="right_cart">
+              <div className="bottom_Con bottom2">
+                <div className="cost">
+                  <div className={widthType === "min" ? "h3" : "h2"}>
+                    ${datass[0]?.cost}
+                  </div>
+                </div>
+                <div className="row_line"></div>
+                <div className="cost">
+                  <div className={widthType === "max" ? "h3" : "h2"}>
+                    ${datass[0]?.bigCost}
+                  </div>
+                </div>
+              </div>
+              <div className="bottom_Con">
+                {combinendData.map((val, ind) => {
+                  return (
+                    <div
+                      className="cons_btn"
+                      key={`${val.id} || ${val._id} || ${ind}`}
+                    >
+                      <button onClick={handleAddCart}>Add to cart</button>
+                    </div>
+                  );
+                })}
+                <div className="cons_btn_like">
+                  {datass.map((item, ind) => {
+                    return (
+                      <button key={ind} className="like">
+                        <svg
+                          onClick={(e) => {
+                            if (
+                              getLike &&
+                              getLike.some(
+                                (itemLike) => itemLike?._id === item?._id
+                              )
+                            ) {
+                              handleDeleteLike(item._id);
+                            } else {
+                              handleLike(e, item._id);
+                            }
+                          }}
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          width="35px"
+                          height="35px"
+                          style={{
+                            cursor: "pointer",
+                            fill: getLike?.some(
+                              (itemLike) => itemLike?._id === item._id
+                            )
+                              ? "#ffbb00"
+                              : "transparent",
+                            stroke: "#ffbb00",
+                            strokeWidth: getLike?.some(
+                              (itemLike) => itemLike?._id === item._id
+                            )
+                              ? "0"
+                              : "2",
+                            transition: "all 0.3s ease",
+                          }}
+                        >
+                          <path d="M12 21.35C12 21.35 4 13.28 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04 0.99 3.57 2.36L12 9l0.93-1.64C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 4.78-8 12.85-8 12.85z" />
+                        </svg>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </RightCon>
+        </div>
+      ) : (
+        <div className="wrapper">
+          <FadeLoader loading={true} color="#d5ad75" />
+        </div>
+      )}
 
       {/* Container 2 */}
       <Datail_0_2>
@@ -730,56 +705,6 @@ const DatailRoomComponent: React.FC<Tnames> = ({ name }) => {
           </Chescout_containerWrapper>
         ))}
       </Datail_0_2>
-
-      {/* Container 3 */}
-      {/* <Datail_2>
-        <DotsContainer className="DotsContainer" style={{ marginTop: "0px" }}>
-          <div>
-            <h2>you may also like</h2>
-          </div>
-          <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
-            <div className="bottom">
-              <IconButton onClick={prevSlide} className="name">
-                ❮
-              </IconButton>
-            </div>
-
-            <div className="bottom">
-              <IconButton onClick={nextSlide} className="name">
-                ❯
-              </IconButton>
-            </div>
-          </div>
-        </DotsContainer>
-        <CarouselContainer
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          <CarouselTrack
-            $slideIndex={slideIndex}
-            $slidesToShow={slidesToShow}
-            className="CarouselTrack"
-          >
-            <>
-              {datas?.map((val, ind) => (
-                <CarouselItem key={ind}>
-                  <BtnWrap4>
-                    <Carouselimgwrapp>
-                      <img src={val.img} alt="" />
-                      <h6></h6>
-                      <h5>{val.text}</h5>
-                      <div style={{ display: "flex", alignItems: "center" }}>
-                        <h4>{val.cost}</h4>
-                        <h3></h3>
-                      </div>
-                    </Carouselimgwrapp>
-                  </BtnWrap4>
-                </CarouselItem>
-              ))}
-            </>
-          </CarouselTrack>
-        </CarouselContainer>
-      </Datail_2> */}
 
       {/* Container 4 */}
       <Datail_3>
