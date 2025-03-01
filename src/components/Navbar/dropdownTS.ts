@@ -13,12 +13,12 @@ export const Data2 = [
       value2: "Dining Tables",
       value3: "Console Tables",
     },
-    {
-      label: "New In",
-      value1: "Modern Designs",
-      value2: "Limited Edition",
-      value3: "Eco-Friendly Furniture",
-    },
+    // {
+    //   label: "New In",
+    //   value1: "Modern Designs",
+    //   value2: "Limited Edition",
+    //   value3: "Eco-Friendly Furniture",
+    // },
     {
       label: "Storage",
       value1: "Wardrobes",

@@ -24,7 +24,8 @@ import { motion } from "framer-motion";
 import { DataType } from "../types/maintp";
 import { Data } from "../mock/mockDatail";
 import FullWidthTabs from "./main.datails/Tabs/tabs";
-
+import MainLoading from "../Loading/main/main.loading";
+import "../Loading/main/style.css";
 const datatest = [
   {
     img: "https://cdn.shopify.com/s/files/1/0781/8425/1702/files/Micadoni-MIC_3S_192_F1_DIANA1-1_1920x1437_crop_center.jpg?v=1728635185",
@@ -82,15 +83,16 @@ interface datatestT {
   seil: string;
 }
 
-const MainComponent: React.FC = () => {
+const MainContent: React.FC = () => {
   const [data, setdata] = useState<datatestT[] | null>(null);
-  useEffect(() => {
-    setdata(datatest);
-  }, []);
   const [slideIndex, setSlideIndex] = useState<number>(0);
   const [slidesToShow, setSlidesToShow] = useState<any>(4);
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const totalSlides = 6;
+
+  useEffect(() => {
+    setdata(datatest);
+  }, []);
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 550) {
@@ -311,4 +313,4 @@ const MainComponent: React.FC = () => {
   );
 };
 
-export default MainComponent;
+export default MainContent;

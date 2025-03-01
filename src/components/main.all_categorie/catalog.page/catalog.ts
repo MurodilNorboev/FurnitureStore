@@ -67,6 +67,7 @@ export const Catalog_con = styled.div`
       display: grid;
       grid-template-areas: "a a";
     }
+    /* width: fit-content; */
   }
   @media screen and (max-width: 480px) {
     .b {
@@ -85,7 +86,7 @@ export const Saidbar = styled.div`
   display: flex;
   flex-direction: column;
   padding: 40px;
-  width: 300px;
+  width: 350px;
   gap: 50px;
   .cart_con {
     width: 100%;

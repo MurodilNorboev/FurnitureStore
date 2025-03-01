@@ -112,11 +112,12 @@ const NavDatail_PageItems = () => {
     styles: [],
     materials: [],
   });
-  const [priceRange, setPriceRange] = useState<number[]>([50, 1000]);
+  const [priceRange, setPriceRange] = useState<number[]>([20, 1000]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12;
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [mobile, setMobile] = useState(false);
   // like
   const carts = useSelector((state: RootState) => state.carts.items);
   const dispatch = useDispatch<AppDispatch>();
@@ -213,80 +214,6 @@ const NavDatail_PageItems = () => {
     }
   }, [user]);
 
-  /// cart
-  const fetchCartData = async () => {
-    try {
-      const { cartsData } = await (
-        await fetch(`${baseAPI}/product/cart-count`)
-      ).json();
-      const allFurniture = cartsData.flatMap(
-        ({ _id: cartID, furniture }: any) =>
-          furniture.map((fur: any) => ({ ...fur, cartID }))
-      );
-
-      dispatch(setCarts(allFurniture));
-    } catch (error: any) {
-      toast.error("Error fetching cart data:", error);
-    }
-  };
-  const handleAddCart = async (fur_id: string, userId: string) => {
-    try {
-      const token = localStorage.getItem("token");
-      if (!token) throw new Error("Token mavjud emas!");
-
-      const response = await axios.post(
-        `${baseAPI}/product/order`,
-        {
-          user: { _id: user },
-          fur_id,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`, // To'g'ri joylashuv
-          },
-        }
-      );
-
-      const { success } = response.data;
-
-      if (success) fetchCartData();
-    } catch (error) {
-      console.error("Error adding to cart:", error);
-    }
-  };
-  const handleDeleteCart = async (cart_id: string, fur_id: string) => {
-    try {
-      const token = localStorage.getItem("token");
-      const {
-        data: { success },
-      } = await axios.delete(
-        `${baseAPI}/product/cart/${cart_id}/furniture/${fur_id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      if (success) fetchCartData();
-      getData();
-    } catch (error) {
-      console.error("Error deleting from cart:", error);
-    }
-  };
-  const handleAddAndDelete = (e: React.MouseEvent, item: any) => {
-    e.stopPropagation();
-
-    const cartItem: any = carts.find((cart) => cart._id === item._id);
-    const cartID: any = cartItem ? cartItem.cartID : null;
-
-    if (!cartItem) {
-      handleAddCart(item._id, "1");
-    } else {
-      handleDeleteCart(cartID, item._id);
-    }
-  };
-
   /// get zapros va ekran size oqilishi
   useEffect(() => {
     const getUser = async () => {
@@ -303,10 +230,11 @@ const NavDatail_PageItems = () => {
 
     getUser();
     getData();
-    setPriceRange([50, 10000]);
+    setPriceRange([20, 10000]);
 
     const handleResize = () => {
       setIsMobile(window.innerWidth < 1400);
+      setMobile(window.innerWidth < 600);
     };
 
     window.addEventListener("resize", handleResize);
@@ -356,13 +284,13 @@ const NavDatail_PageItems = () => {
     const matchesPrice =
       item.cost >= priceRange[0] && item.cost <= priceRange[1];
 
-      console.log('types:', types);
-      console.log('item.SubCategories:', item.SubCategories);
-      console.log('checkedFilters:', checkedFilters);
-      console.log('priceRange:', priceRange);
+    console.log("types:", types);
+    console.log("item.SubCategories:", item.SubCategories);
+    console.log("checkedFilters:", checkedFilters);
+    console.log("priceRange:", priceRange);
     return matchesColor && matchesStyle && matchesMaterial && matchesPrice;
   });
-  
+
   const totalPages = Math.ceil(filteredData.length / itemsPerPage);
   const currentData = filteredData.slice(
     (currentPage - 1) * itemsPerPage,
@@ -383,11 +311,8 @@ const NavDatail_PageItems = () => {
     <Catalog_con>
       {/* Sort Button */}
       <SortContainer className="SortContainer">
-        <button onClick={toggleSidebar} className="inputs">
-          Sort by
-        </button>
         <button onClick={toggleSidebar} className="closeInputs">
-          close
+          {isSidebarOpen ? "Close" : "Sort"}
         </button>
       </SortContainer>
 
@@ -416,7 +341,11 @@ const NavDatail_PageItems = () => {
                     }
                   }}
                 >
-                  <Imagecontent>
+                  <Imagecontent
+                    style={{
+                      width: "100%",
+                    }}
+                  >
                     <Image
                       className="Image"
                       src={item.image}
@@ -461,31 +390,11 @@ const NavDatail_PageItems = () => {
                           <path d="M12 21.35C12 21.35 4 13.28 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04 0.99 3.57 2.36L12 9l0.93-1.64C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 4.78-8 12.85-8 12.85z" />
                         </svg>
                       </button>
-
-                      <button onClick={(e) => handleAddAndDelete(e, item)}>
-                        {carts.find((cart) => cart._id === item._id) ? (
-                          <img
-                            className="saveIcon"
-                            style={{ border: "0px" }}
-                            src={saveIcon}
-                            alt=""
-                          />
-                        ) : (
-                          <TurnedInNotIcon
-                            sx={{
-                              border: "none",
-                              width: "36.01px",
-                              height: "35px",
-                              color: "#DBA514",
-                            }}
-                          />
-                        )}
-                      </button>
                     </div>
                   </Imagecontent>
                   <h6></h6>
                   <h5>{item.Feature}</h5>
-                  <h4>{item.cost}</h4>
+                  <h4>${item.cost}</h4>
                 </Imagecontent>
               </ImageContainer>
             ))
@@ -532,54 +441,57 @@ const NavDatail_PageItems = () => {
       <Saidbar
         style={{
           display: isSidebarOpen || !isMobile ? "block" : "none",
-          width: isMobile ? "100%" : "auto",
+          width: isMobile ? "100%" : "350px",
+          position: isMobile ? "absolute" : "relative",
+          top: "34%",
         }}
       >
         <div className="cart_con a">
           <h2>Price</h2>
           <hr />
-          <Box sx={{ width: "100%" }}>
-            <Slider
-              value={priceRange}
-              onChange={handleSliderChange}
-              valueLabelDisplay="auto"
-              max={10000}
-              min={50}
-            />
-          </Box>
-          <div className="button_wrap aa">
-            <div className="btn_wrap">
-              <button>${priceRange[0]}</button>
-            </div>
-            <div className="btn_wrap">
-              <button>${priceRange[1]}</button>
+          <div style={{ width: mobile ? "100%" : isMobile ? "50%" : "100%" }}>
+            <Box>
+              <Slider
+                value={priceRange}
+                onChange={handleSliderChange}
+                valueLabelDisplay="auto"
+                max={10000}
+                min={20}
+              />
+            </Box>
+            <div
+              className="button_wrap aa"
+              style={{ width: mobile ? "100%" : isMobile ? "150px" : "100%" }}
+            >
+              <div className="btn_wrap">
+                <button>${priceRange[0]}</button>
+              </div>
+              <div className="btn_wrap">
+                <button>${priceRange[1]}</button>
+              </div>
             </div>
           </div>
         </div>
         <Box sx={{ display: "flex", flexWrap: "wrap", gap: 3, marginTop: 3 }}>
-          <div className="cart_con c">
-            {Object.keys(mockDatas).map((category: any) => (
-              <FormGroup key={category}>
-                <h3>{category}</h3>
-                {mockDatas[category].map((option: any) => (
-                  <FormControlLabel
-                    key={option.value}
-                    control={
-                      <Checkbox
-                        onChange={() =>
-                          handleCheckboxChange(category, option.value)
-                        }
-                        checked={checkedFilters[category].includes(
-                          option.value
-                        )}
-                      />
-                    }
-                    label={option.value}
-                  />
-                ))}
-              </FormGroup>
-            ))}
-          </div>
+          {Object.keys(mockDatas).map((category: any) => (
+            <FormGroup key={category} style={{ flex: 1 }}>
+              <h3>{category}</h3>
+              {mockDatas[category].map((option: any) => (
+                <FormControlLabel
+                  key={option.value}
+                  control={
+                    <Checkbox
+                      onChange={() =>
+                        handleCheckboxChange(category, option.value)
+                      }
+                      checked={checkedFilters[category].includes(option.value)}
+                    />
+                  }
+                  label={option.value}
+                />
+              ))}
+            </FormGroup>
+          ))}
         </Box>
       </Saidbar>
     </Catalog_con>
