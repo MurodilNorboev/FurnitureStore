@@ -40,7 +40,7 @@ const MainLoading = () => {
 
   return (
     <div>
-      <div className="container wrapper">
+      <div className="container wrapper" >
         {Array.from({ length: 9 }).map((_, ind) => (
           <div className="box" key={ind}></div>
         ))}

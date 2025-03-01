@@ -16,10 +16,10 @@
     rotate: 45deg;
     gap: 5px;
     .box {
-        background-color: #65Cdef;
+        background-color: #32324D;
         width: 30px;
         height: 30px;
-        box-shadow: 0 0 15px #65Cde4;
+        box-shadow: 0 0 15px #373752;
     }
 }
 

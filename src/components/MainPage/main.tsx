@@ -100,7 +100,7 @@ const MainComponent: React.FC = () => {
       localStorage.setItem("hasVisited", "true");
       setTimeout(() => {
         setLoading(false);
-      }, 10000); // Animatsiya davomiyligi
+      }, 10000);
     }
   }, []);
 
