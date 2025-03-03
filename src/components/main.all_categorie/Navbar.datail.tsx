@@ -70,6 +70,7 @@ const NavDatail_Page = () => {
     styles: [],
     materials: [],
   });
+  const [loading, setLoading] = useState(false);
   const [priceRange, setPriceRange] = useState<number[]>([20, 10000]);
   const { _id, types } = useParams<any>();
   const [currentPage, setCurrentPage] = useState(1);
@@ -145,6 +146,8 @@ const NavDatail_Page = () => {
     if (user) {
       fetchDataLikes();
     }
+    setTimeout(() => setLoading(true), 5000);
+    setLoading(false);
   }, [user]);
 
   /// cart
@@ -324,7 +327,7 @@ const NavDatail_Page = () => {
 
   return (
     <>
-      {currentData.length > 0 ? (
+      {loading ? (
         <Catalog_con>
           <PagesName>
             <h3 onClick={() => navigate("/")}>Home</h3>
@@ -427,12 +430,16 @@ const NavDatail_Page = () => {
                   className="Errors"
                   style={{
                     textAlign: "center",
+                    display: "flex",
+                    width: "100%",
+                    justifyContent: "center",
+                    alignItems: "center",
                     marginTop: "20px",
                     fontSize: "18px",
-                    color: "red",
+                    position: "relative",
                   }}
                 >
-                  hechnima yoq !
+                  There are no products here!
                 </div>
               )}
             </ImageGrid>
@@ -441,10 +448,11 @@ const NavDatail_Page = () => {
             <Stack
               spacing={1}
               style={{
-                marginTop: "20px",
+                marginTop: "30px",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
+                position: "relative",
               }}
             >
               <Pagination

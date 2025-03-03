@@ -70,6 +70,7 @@ const NavDatail_PageItems = () => {
     styles: [],
     materials: [],
   });
+  const [loading, setLoading] = useState(false);
   const [priceRange, setPriceRange] = useState<number[]>([20, 1000]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12;
@@ -170,6 +171,8 @@ const NavDatail_PageItems = () => {
     if (user) {
       fetchDataLikes();
     }
+    setTimeout(() => setLoading(true), 5000);
+    setLoading(false);
   }, [user]);
 
   /// get zapros va ekran size oqilishi
@@ -267,7 +270,7 @@ const NavDatail_PageItems = () => {
 
   return (
     <>
-      {currentData.length > 0 ? (
+      {loading ? (
         <Catalog_con>
           <PagesName>
             <h3 onClick={() => navigate('/')}>Home</h3>
