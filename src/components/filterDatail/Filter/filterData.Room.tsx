@@ -34,7 +34,7 @@ import star from "../../../assets/Star.svg";
 import star1 from "../../../assets/Star (1).svg";
 import home from "../../../assets/home.svg";
 import circle3 from "../../../assets/leftwhite.svg";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { baseAPI } from "../../../utils/constanst";
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -57,11 +57,9 @@ import FadeLoader from "react-spinners/FadeLoader";
 
 const filters = {};
 const DatailRoomComponent: React.FC<Tnames> = ({ name }) => {
+  const navigate = useNavigate();
   const [datas, setdatas] = useState<datatestT[] | null>(null);
-  const [slideIndex, setSlideIndex] = useState<number>(0);
-  const [slidesToShow, setSlidesToShow] = useState<number>(4);
-  const [isHovered, setIsHovered] = useState<boolean>(false);
-
+  
   const [activeTab, setActiveTab] = useState(1);
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
@@ -252,15 +250,15 @@ const DatailRoomComponent: React.FC<Tnames> = ({ name }) => {
       {/* /// Pages Names */}
       <div style={{ display: "flex", width: "100%", justifyContent: "center" }}>
         <PagesName>
-          <h3>Home</h3>
+          <h3 onClick={() => navigate('/')}>Home</h3>
           <img src={home} alt="Home icon" />
-          <h3>
             {datass.map((val, ind) => (
-              <div key={val.id || ind}>{val.label}</div>
+              <h3 key={val.id || ind} onClick={() => {
+                navigate(`/Test/${val.types}/${val?._id || val._id}`)
+              }}>{val.types}</h3>
             ))}
-          </h3>
           <img src={home} alt="Home icon" />
-          <h4>{name}</h4>
+          <h4>Datail</h4>
         </PagesName>
       </div>
 

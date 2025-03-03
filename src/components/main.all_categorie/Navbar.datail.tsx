@@ -16,6 +16,7 @@ import {
   ImageContainer,
   ImageGrid,
   Imagecontent,
+  PagesName,
   Saidbar,
   SortContainer,
 } from "./catalog.page/catalog";
@@ -31,7 +32,6 @@ import { AppDispatch, RootState } from "../Redux/store";
 import { setCarts } from "../Redux/cartsSlice";
 import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
 import saveIcon from "../../assets/saveIcon.svg";
-import { PagesName } from "../Navbar/dropodownstyle";
 import FadeLoader from "react-spinners/FadeLoader";
 
 const mockDatas: any = {
@@ -326,6 +326,12 @@ const NavDatail_Page = () => {
     <>
       {currentData.length > 0 ? (
         <Catalog_con>
+          <PagesName>
+            <h3 onClick={() => navigate("/")}>Home</h3>
+            <img src={home} alt="Home icon" />
+            {currentData.length > 0 && <h4>{currentData[0].types}</h4>}
+          </PagesName>
+
           {/* Sort Button */}
           <SortContainer className="SortContainer">
             <button onClick={toggleSidebar} className="closeInputs">

@@ -30,6 +30,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import toast from "react-hot-toast";
+import { Button } from "@mui/joy";
 
 const ProfilePersonal = (Props: NameT) => {
   const navigate = useNavigate();
@@ -88,7 +89,7 @@ const ProfilePersonal = (Props: NameT) => {
     <Container_Chescout>
       <DatailCart>
         <PagesName style={{ marginLeft: "15px" }}>
-          <h3>Home</h3>
+          <h3 onClick={() => navigate("/")}>Home</h3>
           <img src={home} alt="img" />
           <h4>{Props.name}</h4>
         </PagesName>
@@ -273,7 +274,9 @@ const ProfilePersonal = (Props: NameT) => {
             <Contents $active={active === 2}>
               {aut && (
                 <div>
-                  <button onClick={logaut}>logaut ?</button>
+                  <Button color="neutral" onClick={logaut}>
+                    logaut ?
+                  </Button>
                 </div>
               )}
             </Contents>
@@ -347,7 +350,7 @@ const ProfilePersonal = (Props: NameT) => {
                                 " x " +
                                 item.product.minHeight;
                             }
-                            
+
                             return (
                               <div key={itemIndex} className="itemContainer">
                                 <img src={filterImage.product.image} alt="" />

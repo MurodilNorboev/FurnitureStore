@@ -27,58 +27,51 @@ export const Modal = ({ imgSrc, onClose }: { imgSrc: string, onClose: () => void
 const datatest = [
   {
     id: 1,
-    img: 'https://www.imgcomfort.com/dk/-/media/imgsite/category/nseries/diecut/n050namsos25sperspectivet410blkaluleg.png?la=da&h=423&w=749&mw=790&hash=30A03E1527A369B14E14C785AAC2564C',
+    img: 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRc4pnwZFPQJ1d3p3mZh_S6PvKU9xHbmVhN-aXG6n6i2cBXqPMw',
     text: 'ebro bedside table',
     cost: '$250',
     seil: 'ebro bedside table'
   },
   {
     id: 2,
-    img: 'https://cdn.shopify.com/s/files/1/0781/8425/1702/files/Micadoni-MIC_3S_192_F1_DIANA1-1_1920x1437_crop_center.jpg?v=1728635185',
+    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Jama_Masjid_-_In_the_Noon.jpg/1200px-Jama_Masjid_-_In_the_Noon.jpg',
     text: 'Tirado chair',
     cost: '$280',
     seil: 'ebro bedside table',
   },
   {
     id: 3,
-    img: 'https://cdn.shopify.com/s/files/1/0781/8425/1702/files/Micadoni-MIC_3S_192_F1_DIANA1-1_1920x1437_crop_center.jpg?v=1728635185',
+    img: 'https://www.salutbyebye.com/wp-content/uploads/2020/02/arche-port-blanc-roche-percee.jpg',
     text: 'caleido lamp',
     cost: '$355',
     seil: 'ebro bedside table',
   },
   {
     id: 4,
-    img: 'https://cdn.shopify.com/s/files/1/0781/8425/1702/files/Micadoni-MIC_3S_192_F1_DIANA1-1_1920x1437_crop_center.jpg?v=1728635185',
+    img: 'https://www.salutbyebye.com/wp-content/uploads/2020/03/rochefort-en-terre.jpg',
     text: 'caleido lamp',
     cost: '$240',
     seil: 'ebro bedside table',
   },
   {
     id: 5,
-    img: 'https://cdn.shopify.com/s/files/1/0781/8425/1702/files/Micadoni-MIC_3S_192_F1_DIANA1-1_1920x1437_crop_center.jpg?v=1728635185',
+    img: 'https://www.salutbyebye.com/wp-content/uploads/2020/03/roscoff-bretagne.jpg',
     text: 'emmi set',
     cost: '$200',
     seil: 'ebro bedside table',
   },
   {
     id: 6,
-    img: 'https://cdn.shopify.com/s/files/1/0781/8425/1702/files/Micadoni-MIC_3S_192_F1_DIANA1-1_1920x1437_crop_center.jpg?v=1728635185',
+    img: 'https://lifeinmadinah.wordpress.com/wp-content/uploads/2015/08/al_masjid_al_nabawi-1440x900.jpg?w=640',
     text: 'textiles',
     cost: '$260',
     seil: 'ebro bedside table',
   },
   {
     id: 7,
-    img: 'https://cdn.shopify.com/s/files/1/0781/8425/1702/files/Micadoni-MIC_3S_192_F1_DIANA1-1_1920x1437_crop_center.jpg?v=1728635185',
+    img: 'https://media.licdn.com/dms/image/v2/C5612AQFpHl-P5B52yA/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1549991766865?e=2147483647&v=beta&t=fz-7k0C9RV6-Zc3r0YRYxlduYtsW3F90lEywv54XmWY',
     text: 'Sofas set',
     cost: '$230',
-    seil: 'ebro bedside table',
-  },
-  {
-    id: 8,
-    img: 'https://cdn.shopify.com/s/files/1/0781/8425/1702/files/Micadoni-MIC_3S_192_F1_DIANA1-1_1920x1437_crop_center.jpg?v=1728635185',
-    text: 'beds set',
-    cost: '$210',
     seil: 'ebro bedside table',
   },
 ];
@@ -108,7 +101,7 @@ const AboutComponent = () => {
   const [slidesToShow, setSlidesToShow] = useState<number>(3); 
   const [isHovered, setIsHovered] = useState<boolean>(false); 
 
-  const totalSlides = 8; 
+  const totalSlides = 7; 
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 550) {
@@ -155,7 +148,7 @@ return (
       <AboutContent>
         <div className='about'><h1>About</h1></div>
         <div className='imgwrap'>
-          <img src="https://scontent.ficn3-3.fna.fbcdn.net/v/t1.6435-9/119049245_2711115725779940_4780711629906655890_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=3a1ebe&_nc_ohc=NjRqnW_LlwEQ7kNvgGHaN8a&_nc_zt=23&_nc_ht=scontent.ficn3-3.fna&_nc_gid=AKgmG0i2HZYZxtlK6tTlWx-&oh=00_AYAzzuu9FukPbPUaRSkjOEoKnrzY_ItaLFIpFpr15GP_Kw&oe=675EB744" alt="" />
+          <img src="https://images.cdn.inspogroup.net/0XbrysNuRMmLDw6MnFEYm6MFMuRBQVa3lX0UNMRhuY0/aHR0c/DovL3/N0eW1hZ2F6aW5lLndwZW5naW5lLmNvbS93cC1jb250ZW50L3VwbG9hZHMvMjAyMS8wMy9SWl9IT1JfY29sbG92LWhvbWUtZGVzaWduLTRfalFMNEpDUzk4LXVuc3BsYXNoLmpwZw" alt="" />
         </div>
       </AboutContent>
 

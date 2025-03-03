@@ -19,6 +19,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { baseAPI } from "../../../utils/constanst";
 import { City, mockData, Street } from "./mock";
+import { Button } from "@mui/joy";
 
 interface NameT {
   name: string;
@@ -116,9 +117,11 @@ const ProfilePersonal2page = (Props: NameT) => {
     <Container_Chescout>
       <DatailCart onSubmit={updateProfile}>
         <PagesName style={{ marginLeft: "15px" }}>
-          <h3>Home</h3>
+          <h3 onClick={() => navigate('/')}>Home</h3>
           <img src={home} alt="img" />
-          <h4>{Props.name}</h4>
+          <h3 onClick={() => navigate('/profile')}>{Props.name}</h3>
+          <img src={home} alt="img" />
+          <h4>personal info</h4>
         </PagesName>
 
         <Chescout_containerWrapper
@@ -290,7 +293,7 @@ const ProfilePersonal2page = (Props: NameT) => {
             <Contents $active={active === 2}>
               {aut && (
                 <div>
-                  <button onClick={logaut}>Logout ?</button>
+                 <Button color="neutral"  onClick={logaut}>Logout</Button>
                 </div>
               )}
             </Contents>

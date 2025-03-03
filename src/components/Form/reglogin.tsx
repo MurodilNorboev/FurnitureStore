@@ -162,7 +162,7 @@ const RegloginComponent = () => {
           <div style={{ position: 'relative' }}>
             <input
               type={showPassword ? "text" : "password"}
-              placeholder="Your password"
+              placeholder="Use !, numbers & A-Z"
               name="password"
               onChange={handleChange}
               required

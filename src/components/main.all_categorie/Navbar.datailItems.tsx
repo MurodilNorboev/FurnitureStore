@@ -16,6 +16,7 @@ import {
   ImageContainer,
   ImageGrid,
   Imagecontent,
+  PagesName,
   Saidbar,
   SortContainer,
 } from "./catalog.page/catalog";
@@ -59,50 +60,6 @@ const mockDatas: any = {
     { value: "rattan" },
   ],
 };
-const Data2 = [
-  {
-    label: "Sofa",
-    value1: "Sectional Sofas",
-    value2: "Sleeper Sofas",
-    value3: "Recliner Sofas",
-  },
-  {
-    label: "Table",
-    value1: "Coffee Tables",
-    value2: "Dining Tables",
-    value3: "Console Tables",
-  },
-  {
-    label: "New In",
-    value1: "Modern Designs",
-    value2: "Limited Edition",
-    value3: "Eco-Friendly Furniture",
-  },
-  {
-    label: "Storage",
-    value1: "Wardrobes",
-    value2: "Bookshelves",
-    value3: "TV Stands",
-  },
-  {
-    label: "Beds",
-    value1: "King Size Beds",
-    value2: "Queen Size Beds",
-    value3: "Bunk Beds",
-  },
-  {
-    label: "Lighting",
-    value1: "Ceiling Lights",
-    value2: "Table Lamps",
-    value3: "Wall Lights",
-  },
-  {
-    label: "Kitchen",
-    value1: "Dining Chairs",
-    value2: "Bar Stools",
-    value3: "Kitchen Islands",
-  },
-];
 
 const NavDatail_PageItems = () => {
   const navigate = useNavigate();
@@ -312,6 +269,12 @@ const NavDatail_PageItems = () => {
     <>
       {currentData.length > 0 ? (
         <Catalog_con>
+          <PagesName>
+            <h3 onClick={() => navigate('/')}>Home</h3>
+            <img src={home} alt="Home icon" />
+            {currentData.length > 0 && <h4>{currentData[0].types}</h4>}
+          </PagesName>
+
           {/* Sort Button */}
           <SortContainer className="SortContainer">
             <button onClick={toggleSidebar} className="closeInputs">

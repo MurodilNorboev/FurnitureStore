@@ -19,6 +19,7 @@ import { jwtDecode } from "jwt-decode";
 import toast, { Toaster } from "react-hot-toast";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import styled from "styled-components";
+import { Button } from "@mui/joy";
 
 const ProfilePassword = (Props: any) => {
   const navigate = useNavigate();
@@ -106,9 +107,11 @@ const ProfilePassword = (Props: any) => {
       <Toaster position="top-right" />
 
       <PagesName style={{ marginLeft: "15px" }}>
-        <h3>Home</h3>
+        <h3 onClick={() => navigate('/')}>Home</h3>
         <img src={home} alt="img" />
-        <h4>{Props.name}</h4>
+        <h3 onClick={() => navigate('/profile')}>{Props.name}</h3>
+        <img src={home} alt="img" />
+        <h4>change password</h4>
       </PagesName>
 
       <DatailCart onSubmit={submitPassword}>
@@ -250,7 +253,7 @@ const ProfilePassword = (Props: any) => {
             <Contents $active={active === 2}>
               {aut && (
                 <div>
-                  <button onClick={logaut}>Logout ?</button>
+                  <Button color="neutral"  onClick={logaut}>Logout</Button>
                 </div>
               )}
             </Contents>

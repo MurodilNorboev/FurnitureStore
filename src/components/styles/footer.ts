@@ -68,6 +68,9 @@ justify-content: center;
     display: flex;
     align-items: start;
     justify-content: space-between;
+    a {
+        text-decoration: none;
+    }
 } .footer_3 {
     display: flex;
     max-width: 522px;

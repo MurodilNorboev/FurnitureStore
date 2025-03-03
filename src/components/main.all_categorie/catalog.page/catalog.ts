@@ -328,6 +328,7 @@ export const PagesName = styled.div`
   display: flex;
   align-items: center;
   h3 {
+    cursor: pointer;
     margin-bottom: -0%;
     color: var(--dark, #ad8775);
     font-feature-settings: "liga" off, "clig" off;
@@ -344,6 +345,7 @@ export const PagesName = styled.div`
     height: 10px;
   }
   h4 {
+    cursor: pointer;
     margin-bottom: -0%;
     color: var(--main, #32324d);
     font-feature-settings: "liga" off, "clig" off;

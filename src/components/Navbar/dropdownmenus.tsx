@@ -142,8 +142,6 @@ const DatailMenusID: React.FC = () => {
                           const match = selectedItem.backend.find(
                             (b: any) => b.SubCategories === value
                           );
-                          // console.log(match, selectedItem)
-                          
                           if (match) {
                             handleNavigate(match.SubCategories, match._id);
                           } else {
@@ -190,7 +188,7 @@ const DatailMenusID: React.FC = () => {
                             />
                             <h6></h6>
                             <h5>{filterItem.label}</h5>
-                            <h4>{filterItem.cost}</h4>
+                            <h4>${filterItem.cost}</h4>
                           </div>
                         </Navlink>
                       );

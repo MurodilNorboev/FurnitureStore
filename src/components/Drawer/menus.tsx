@@ -1,5 +1,4 @@
 import { Box, Button, ButtonGroup, Divider, Drawer, List } from "@mui/material";
-import * as React from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import { AnimatedButton, BtnWrap } from "../styles/navbar";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -7,10 +6,74 @@ import { DataType } from "../types/maintp";
 import { Data } from "../mock/mockDatail";
 import { Navlink } from "../styles/LINK";
 
+import React, { useEffect, useMemo, useState } from "react";
+import { Buttones } from "../Navbar/dropodownstyle";
+import { baseAPI } from "../../utils/constanst";
+import { useNavigate } from "react-router-dom";
+import { Data2 } from "../Navbar/dropdownTS";
+
 type Anchor = "left" | "right";
 
 export default function Menus_Icon() {
   const [data, setData] = React.useState<DataType[]>([]);
+  const navigate = useNavigate();
+  const [BackendData, setBackendData] = useState<any[]>([]);
+  const [isFiltered, setIsFiltered] = useState<string | null>(null);
+
+  // Backend ma'lumotlarini olish
+  const fetchData = async () => {
+    const token = localStorage.getItem("token");
+    try {
+      const response = await fetch(`${baseAPI}/product/all`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const resData = await response.json();
+      setBackendData(resData.data || []);
+    } catch (error: any) {
+      console.error("Ma'lumotlarni olishda xato:", error.message || error);
+    }
+  };
+
+  // Data2 va BackendData ni birlashtirish va guruhlash
+  const mergeAndSortData = (backendData: any[], Data2: any[]) => {
+    return Data2.map((item: any) => {
+      const matchingBackend = backendData.filter(
+        (backendItem: any) =>
+          backendItem.types === item.label || backendItem.types !== item.label
+      );
+
+      return {
+        types: item.types,
+        _id: item._id,
+        id: item.id,
+        label: item.label,
+        values: [item.value1, item.value2, item.value3],
+        backend: matchingBackend.map((b) => ({
+          SubCategories: b.SubCategories,
+          _id: b._id,
+        })),
+      };
+    });
+  };
+
+  const sortedDatas = useMemo(
+    () => mergeAndSortData(BackendData, Data2),
+    [BackendData]
+  );
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const handleEnter = (item: any) => {
+    if (!item) {
+      console.warn("🚨 Warning: handleEnter ga noto'g'ri item kelyapti:", item);
+      return;
+    }
+  };
+
   React.useEffect(() => {
     const filterdata = Data.filter((i: DataType) => {
       switch (i.label) {
@@ -76,11 +139,21 @@ export default function Menus_Icon() {
             justifyContent: "center",
           }}
         >
-          {data.map((val, ind) => (
-            <Navlink to={`/menu-datail/${val.id && val.label}`} key={ind}>
-              <BtnWrap>
+          {sortedDatas.map((group, ind) => (
+            <Navlink
+              to={`/Test/${group.label}/${group?._id || group._id}`}
+              key={ind}
+            >
+              <BtnWrap
+                style={{
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  maxWidth: "200px",
+                }}
+              >
                 <AnimatedButton>
-                  {val.label}
+                  {group?.label}
                   <KeyboardArrowDownIcon className="icon" />
                 </AnimatedButton>
               </BtnWrap>
