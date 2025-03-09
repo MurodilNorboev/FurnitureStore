@@ -59,7 +59,7 @@ const filters = {};
 const DatailRoomComponent: React.FC<Tnames> = ({ name }) => {
   const navigate = useNavigate();
   const [datas, setdatas] = useState<datatestT[] | null>(null);
-  
+
   const [activeTab, setActiveTab] = useState(1);
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
@@ -199,7 +199,10 @@ const DatailRoomComponent: React.FC<Tnames> = ({ name }) => {
   const handleAddCart = async () => {
     try {
       const token = localStorage.getItem("token");
-      if (!token) throw new Error("Token mavjud emas!");
+      if (!token) {
+        toast.error("Token is not found!");
+        return navigate("/login");
+      }
 
       const response = await axios.post(
         `${baseAPI}/product/order`,
@@ -251,13 +254,18 @@ const DatailRoomComponent: React.FC<Tnames> = ({ name }) => {
       {/* /// Pages Names */}
       <div style={{ display: "flex", width: "100%", justifyContent: "center" }}>
         <PagesName>
-          <h3 onClick={() => navigate('/')}>Home</h3>
+          <h3 onClick={() => navigate("/")}>Home</h3>
           <img src={home} alt="Home icon" />
-            {datass.map((val, ind) => (
-              <h3 key={val.id || ind} onClick={() => {
-                navigate(`/Test/${val.types}/${val?._id || val._id}`)
-              }}>{val.types}</h3>
-            ))}
+          {datass.map((val, ind) => (
+            <h3
+              key={val.id || ind}
+              onClick={() => {
+                navigate(`/Test/${val.types}/${val?._id || val._id}`);
+              }}
+            >
+              {val.types}
+            </h3>
+          ))}
           <img src={home} alt="Home icon" />
           <h4>Datail</h4>
         </PagesName>

@@ -193,7 +193,7 @@ const ProfilePersonal = (Props: NameT) => {
                           <input type="text" placeholder="Country" />
                           <h6>
                             {profile ? (
-                              <>{profile.data.address.country}</>
+                              <>{profile?.data?.address?.country}</>
                             ) : (
                               <div>-</div>
                             )}
@@ -203,7 +203,7 @@ const ProfilePersonal = (Props: NameT) => {
                           <input type="text" placeholder="Town/city" />
                           <h6>
                             {profile ? (
-                              <>{profile.data.address.city}</>
+                              <>{profile?.data?.address?.city}</>
                             ) : (
                               <div>-</div>
                             )}
@@ -213,7 +213,7 @@ const ProfilePersonal = (Props: NameT) => {
                           <input type="text" placeholder="Appartment" />
                           <h6>
                             {profile ? (
-                              <>{profile.data.address.apartmant}</>
+                              <>{profile?.data?.address?.apartmant}</>
                             ) : (
                               <div>-</div>
                             )}
@@ -225,7 +225,7 @@ const ProfilePersonal = (Props: NameT) => {
                           <input type="text" placeholder="ZIP Code" />
                           <h6>
                             {profile ? (
-                              <div>{profile.data.address.zip_code}</div>
+                              <div>{profile?.data?.address?.zip_code}</div>
                             ) : (
                               <div>-</div>
                             )}
@@ -235,7 +235,7 @@ const ProfilePersonal = (Props: NameT) => {
                           <input type="text" placeholder="Comment" />
                           <h6>
                             {profile ? (
-                              <div>{profile.data.comment}</div>
+                              <div>{profile?.data?.comment}</div>
                             ) : (
                               <div>-</div>
                             )}
@@ -247,7 +247,7 @@ const ProfilePersonal = (Props: NameT) => {
                       <input type="text" placeholder="Street" />
                       <h6>
                         {profile ? (
-                          <div>{profile.data.address.street}</div>
+                          <div>{profile?.data?.address?.street}</div>
                         ) : (
                           <div>-</div>
                         )}
