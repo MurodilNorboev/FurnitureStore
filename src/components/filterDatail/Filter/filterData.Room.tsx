@@ -115,7 +115,7 @@ const DatailRoomComponent: React.FC<Tnames> = ({ name }) => {
     if (!token) {
       // console.error("Token mavjud emas!");
       toast.error("Token is not found!");
-      return;
+      return navigate("/login");
     }
 
     try {
