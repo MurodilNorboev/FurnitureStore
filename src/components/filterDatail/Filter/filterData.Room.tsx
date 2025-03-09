@@ -113,7 +113,8 @@ const DatailRoomComponent: React.FC<Tnames> = ({ name }) => {
     e.preventDefault();
     const token = localStorage.getItem("token");
     if (!token) {
-      console.error("Token mavjud emas!");
+      // console.error("Token mavjud emas!");
+      toast.error("Token is not found!");
       return;
     }
 
